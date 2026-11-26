@@ -16,25 +16,6 @@
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.14);
     }
-    .chess-board {
-      display: grid;
-      grid-template-columns: repeat(8, minmax(0, 1fr));
-      border: 2px solid #f472b6;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .chess-cell {
-      aspect-ratio: 1 / 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: clamp(1.1rem, 3vw, 1.8rem);
-      cursor: pointer;
-      user-select: none;
-    }
-    .chess-light { background: #e2e8f0; color: #0f172a; }
-    .chess-dark { background: #475569; color: #ffffff; }
-    .chess-selected { outline: 3px solid #ec4899; background: #fbcfe8 !important; color: #0f172a !important; }
     @keyframes countPulse {
       0% { transform: scale(0.85); opacity: 0.5; }
       60% { transform: scale(1.12); opacity: 1; }
@@ -52,7 +33,10 @@
         חינם לגמרי • 18+
       </span>
     </div>
-    <div class="flex items-center gap-3">
+    <div class="flex flex-wrap items-center gap-2.5">
+      <span id="header-stats" class="hidden text-xs font-bold bg-amber-500/20 border border-amber-400/40 text-amber-200 px-3 py-1 rounded-full">
+        רמה 1 • 0 נק׳ • 0 נצ׳ / 0 הפס׳
+      </span>
       <span id="user-badge" class="hidden text-sm text-slate-200 bg-slate-800 px-3 py-1 rounded-full"></span>
       <button id="logout-btn" type="button" class="hidden bg-rose-600 hover:bg-rose-500 text-sm px-4 py-1.5 rounded-lg">התנתק</button>
     </div>
@@ -94,7 +78,6 @@
           </button>
         </div>
 
-        <!-- כרטיס פרופיל מוצג (מוצג בצורה מסודרת ומכובדת לאחר שמירה) -->
         <div id="profile-summary-card" class="hidden bg-slate-900/80 border border-pink-500/30 rounded-2xl p-6 space-y-6">
           <div class="flex flex-col sm:flex-row items-center gap-6">
             <img id="summary-avatar" src="https://api.dicebear.com/9.x/avataaars/svg?seed=TopLove" alt="תמונת פרופיל"
@@ -125,7 +108,6 @@
           </div>
         </div>
 
-        <!-- טופס פרופיל ושאלון היכרות (נעלם לאחר שמירה) -->
         <form id="profile-form" class="space-y-6">
           <div class="flex flex-col md:flex-row items-center gap-6 bg-slate-900/75 p-5 rounded-2xl border border-slate-700">
             <img id="prof-avatar-preview" src="https://api.dicebear.com/9.x/avataaars/svg?seed=TopLove" alt="תמונת פרופיל"
@@ -180,12 +162,12 @@
           </div>
 
           <div class="bg-slate-900/70 p-4 rounded-2xl border border-slate-800 space-y-2.5">
-            <label class="block text-sm font-bold text-pink-300">מה אתה אוהב לעשות? (בחירה חופשית — לא חובה)</label>
+            <label class="block text-sm font-bold text-pink-300">מה אתה אוהב לעשות? (לא חובה)</label>
             <div id="likes-options" class="flex flex-wrap gap-2"></div>
           </div>
 
           <div class="bg-slate-900/70 p-4 rounded-2xl border border-slate-800 space-y-2.5">
-            <label class="block text-sm font-bold text-indigo-300">מה התחביבים שלך? (בחירה חופשית — לא חובה)</label>
+            <label class="block text-sm font-bold text-indigo-300">מה התחביבים שלך? (לא חובה)</label>
             <div id="hobbies-options" class="flex flex-wrap gap-2"></div>
           </div>
 
@@ -203,13 +185,12 @@
             </button>
           </div>
         </form>
+      </div><div id="tab-users" class="tab-content hidden max-w-4xl mx-auto glass rounded-2xl p-6 space-y-4">
+        <h2 class="text-xl font-bold">👥 משתמשים אמיתיים במערכת</h2>
+        <div id="real-users-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
       </div>
 
-      <div id="tab-users" class="tab-content hidden max-w-4xl mx-auto glass rounded-2xl p-6 space-y-4">
-        <h2 class="text-xl font-bold">👥 משתמשים אמיתיים במערכת</h2>
-        <p class="text-xs text-slate-300">כאן מופיעים משתמשים שנרשמו למערכת. אפשר לפתוח שיחה אישית או לעבור למשחקים.</p>
-        <div id="real-users-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-      </div><div id="tab-chat" class="tab-content hidden max-w-5xl mx-auto glass rounded-2xl p-6 space-y-5">
+      <div id="tab-chat" class="tab-content hidden max-w-5xl mx-auto glass rounded-2xl p-6 space-y-5">
         <div class="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-3">
           <h3 class="text-sm font-bold text-pink-300">➕ פתיחת חדר שיחה חדש (עד 50 משתתפים בחדר)</h3>
           <form id="create-room-form" class="flex flex-col sm:flex-row gap-2.5">
@@ -223,7 +204,7 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
           <div class="space-y-2">
-            <h3 class="text-sm font-bold text-slate-200">🗂️ חדרי שיחה פתוחים (מקס׳ 50 משתתפים)</h3>
+            <h3 class="text-sm font-bold text-slate-200">🗂️ חדרי שיחה (מקס׳ 50 משתתפים)</h3>
             <div id="rooms-list" class="space-y-2 max-h-96 overflow-y-auto"></div>
           </div>
 
@@ -257,74 +238,113 @@
           </div>
         </div>
       </div><div id="tab-games" class="tab-content hidden space-y-6">
-        <div class="flex flex-wrap gap-2 justify-center">
-          <button type="button" data-game="ttt" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-pink-600">1. איקס עיגול ⏱️</button>
-          <button type="button" data-game="rps" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">2. אבן נייר מספריים ⏱️</button>
-          <button type="button" data-game="chess" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">3. שחמט ⏱️</button>
-          <button type="button" data-game="memory" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">4. זיכרון ⏱️</button>
-          <button type="button" data-game="number" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">5. ניחוש מספר 🎯</button>
+        <div class="glass rounded-2xl p-4 sm:p-5 border border-amber-400/30 space-y-4">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+            <div class="bg-slate-900/85 rounded-xl p-3 border border-slate-700">
+              <div class="text-xs text-slate-400">רמה נוכחית</div>
+              <div id="stat-level" class="text-xl font-extrabold text-pink-300 mt-0.5">רמה 1</div>
+            </div>
+            <div class="bg-slate-900/85 rounded-xl p-3 border border-slate-700">
+              <div class="text-xs text-slate-400">נקודות</div>
+              <div id="stat-points" class="text-xl font-extrabold text-amber-300 mt-0.5">0</div>
+            </div>
+            <div class="bg-slate-900/85 rounded-xl p-3 border border-slate-700">
+              <div class="text-xs text-slate-400">ניצחונות</div>
+              <div id="stat-wins" class="text-xl font-extrabold text-emerald-300 mt-0.5">0</div>
+            </div>
+            <div class="bg-slate-900/85 rounded-xl p-3 border border-slate-700">
+              <div class="text-xs text-slate-400">הפסדים</div>
+              <div id="stat-losses" class="text-xl font-extrabold text-rose-300 mt-0.5">0</div>
+            </div>
+          </div>
+
+          <div class="bg-slate-950/70 rounded-xl p-3.5 border border-indigo-500/25 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <span class="text-xl">🎁</span>
+              <div>
+                <div class="text-xs font-bold text-indigo-200">ארון פרסים ותגמולים (תצוגה מקדימה)</div>
+                <div class="text-[11px] text-slate-400">הפרסים הסופיים ייקבעו בהמשך — בינתיים צוברים רמות ונקודות</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-xs">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300">🥉 פרס רמה 1</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300">🥈 פרס רמה 3</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300">🥇 פרס רמה 5</span>
+            </div>
+          </div>
         </div>
 
-        <!-- 1. איקס עיגול עם חדרים שאנשים פותחים ונכנסים/יוצאים + טיימר -->
-        <div id="game-ttt" class="game-panel max-w-3xl mx-auto glass rounded-2xl p-6 space-y-5">
+        <div class="flex flex-wrap gap-2 justify-center">
+          <button type="button" data-game="ttt" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-pink-600">1. איקס עיגול (100+ חדרים)</button>
+          <button type="button" data-game="rps" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">2. אבן נייר מספריים</button>
+          <button type="button" data-game="memory" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">3. זיכרון קשה (50+ חדרים • עד 6)</button>
+          <button type="button" data-game="number" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">4. ניחוש מספר</button>
+        </div>
+
+        <div id="game-ttt" class="game-panel max-w-4xl mx-auto glass rounded-2xl p-6 space-y-5">
           <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
             <div>
-              <h3 class="text-xl font-bold">📦 איקס עיגול — חדרים פעילים</h3>
-              <p class="text-xs text-slate-300">פתח חדר שממתין לשחקן נוסף, או היכנס וצא מחדרים קיימים</p>
+              <h3 class="text-xl font-bold">📦 איקס עיגול — חדרים פעילים (100 חדרים)</h3>
+              <p class="text-xs text-slate-300">לחץ על חדר פנוי כדי להיכנס ולהמתין שמישהו ילחץ להצטרף מולך</p>
             </div>
-            <div class="flex items-center gap-2">
+            <div class="flex flex-wrap items-center gap-2">
               <span id="ttt-timer" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 border border-amber-400/40 text-amber-200">⏱️ 00:30</span>
-              <button type="button" id="ttt-create-room" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500">+ פתח חדר איקס עיגול</button>
+              <button type="button" id="ttt-add-room" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500">+ הוסף חדר נוסף</button>
               <button type="button" id="ttt-leave-room" class="hidden px-3 py-1.5 rounded-xl text-xs font-semibold bg-rose-600 hover:bg-rose-500">צא מהחדר</button>
             </div>
           </div>
 
-          <div id="ttt-rooms-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5"></div>
+          <div id="ttt-rooms-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2 max-h-56 overflow-y-auto p-1"></div>
 
           <div class="bg-slate-950/75 border border-amber-500/25 rounded-2xl p-4 space-y-4">
             <div class="grid grid-cols-3 items-center gap-2 text-center">
               <div class="flex flex-col items-center gap-1">
-                <img id="ttt-p1-img" src="https://api.dicebear.com/9.x/avataaars/svg?seed=TTT1" alt="" class="w-12 h-12 rounded-full border-2 border-amber-400 bg-slate-800" />
-                <span id="ttt-p1-name" class="text-xs font-bold">ממתין...</span>
-                <span class="text-[10px] text-amber-300">❌</span>
+                <div class="w-12 h-12 rounded-full border-2 border-amber-400 bg-slate-800 flex items-center justify-center text-lg">❌</div>
+                <span id="ttt-p1-name" class="text-xs font-bold text-slate-300">ריק</span>
               </div>
-              <div id="ttt-board" class="grid grid-cols-3 gap-1.5 bg-amber-950/70 p-2.5 rounded-xl border border-amber-700/60"></div>
+              <div id="ttt-board" class="grid grid-cols-3 gap-1.5 bg-amber-950/70 p-2.5 rounded-xl border border-amber-700/60 max-w-[220px] w-full mx-auto"></div>
               <div class="flex flex-col items-center gap-1">
-                <img id="ttt-p2-img" src="https://api.dicebear.com/9.x/avataaars/svg?seed=TTT2" alt="" class="w-12 h-12 rounded-full border-2 border-pink-400 bg-slate-800 opacity-60" />
-                <span id="ttt-p2-name" class="text-xs font-bold text-slate-400">ממתין לשחקן...</span>
-                <span class="text-[10px] text-pink-300">⭕</span>
+                <div class="w-12 h-12 rounded-full border-2 border-pink-400 bg-slate-800 flex items-center justify-center text-lg">⭕</div>
+                <span id="ttt-p2-name" class="text-xs font-bold text-slate-400">ממתין לכניסה...</span>
               </div>
             </div>
-            <div class="flex items-center justify-between gap-2">
-              <p id="ttt-status" class="text-sm text-pink-200">בחר או פתח חדר איקס עיגול</p>
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <p id="ttt-status" class="text-sm text-pink-200">לחץ על אחד החדרים למעלה כדי להיכנס</p>
               <button type="button" id="ttt-reset" class="text-xs bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-600">איפוס לוח</button>
             </div>
           </div>
         </div>
 
-        <!-- 2. אבן נייר ומספריים: שתי דמויות מול זו, ספירה עד 3 + טיימר -->
         <div id="game-rps" class="game-panel hidden max-w-2xl mx-auto glass rounded-2xl p-6 space-y-4 text-center">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <h3 class="text-xl font-bold">✂️ אבן נייר מספריים</h3>
-            <span id="rps-timer" class="px-3 py-1 rounded-full text-xs font-bold bg-pink-500/20 border border-pink-400/40 text-pink-200">⏱️ 00:15</span>
+            <div class="flex items-center gap-2">
+              <span id="rps-timer" class="px-3 py-1 rounded-full text-xs font-bold bg-pink-500/20 border border-pink-400/40 text-pink-200">⏱️ 00:15</span>
+              <button type="button" id="rps-join-btn" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500">
+                היכנס לשחק
+              </button>
+              <button type="button" id="rps-leave-btn" class="hidden px-3 py-1.5 rounded-xl text-xs font-semibold bg-rose-600 hover:bg-rose-500">
+                צא מהמשחק
+              </button>
+            </div>
           </div>
 
           <div class="grid grid-cols-3 items-center gap-3 bg-slate-950/70 border border-white/10 rounded-2xl p-4">
             <div class="flex flex-col items-center gap-1.5">
-              <img id="rps-left-img" src="https://api.dicebear.com/9.x/avataaars/svg?seed=LeftRPS" alt="" class="w-16 h-16 rounded-full border-2 border-pink-400 bg-slate-800" />
-              <span id="rps-left-name" class="text-xs font-bold">דמות 1</span>
+              <div id="rps-left-avatar" class="w-14 h-14 rounded-full border-2 border-pink-400 bg-slate-800 flex items-center justify-center text-xl">🪑</div>
+              <span id="rps-left-name" class="text-xs font-bold text-slate-400">מושב 1 פנוי</span>
               <div id="rps-left-sign" class="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-700 flex items-center justify-center text-3xl">✊</div>
             </div>
 
             <div class="flex flex-col items-center justify-center gap-1">
               <span class="text-xs text-slate-400">ספירה:</span>
               <div id="rps-count-num" class="text-3xl font-extrabold text-pink-300 count-anim">1 • 2 • 3</div>
-              <span id="rps-round-phase" class="text-xs text-indigo-200">עומדים זה מול זה</span>
+              <span id="rps-round-phase" class="text-xs text-indigo-200">ממתין לשני שחקנים</span>
             </div>
 
             <div class="flex flex-col items-center gap-1.5">
-              <img id="rps-right-img" src="https://api.dicebear.com/9.x/avataaars/svg?seed=RightRPS" alt="" class="w-16 h-16 rounded-full border-2 border-indigo-400 bg-slate-800" />
-              <span id="rps-right-name" class="text-xs font-bold">דמות 2</span>
+              <div id="rps-right-avatar" class="w-14 h-14 rounded-full border-2 border-indigo-400 bg-slate-800 flex items-center justify-center text-xl">🪑</div>
+              <span id="rps-right-name" class="text-xs font-bold text-slate-400">מושב 2 פנוי</span>
               <div id="rps-right-sign" class="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-700 flex items-center justify-center text-3xl">✊</div>
             </div>
           </div>
@@ -334,52 +354,39 @@
             <button type="button" data-rps="paper" class="rps-choice px-5 py-3 rounded-xl bg-slate-800 hover:bg-pink-600 text-base font-semibold">📄 נייר</button>
             <button type="button" data-rps="scissors" class="rps-choice px-5 py-3 rounded-xl bg-slate-800 hover:bg-pink-600 text-base font-semibold">✂️ מספריים</button>
           </div>
-          <p id="rps-result" class="text-sm text-pink-200 bg-slate-900 p-3.5 rounded-xl">בחר אבן, נייר או מספריים — הדמויות יספרו עד 3</p>
-        </div>
-
-        <!-- 3. שחמט + טיימר -->
-        <div id="game-chess" class="game-panel hidden max-w-lg mx-auto glass rounded-2xl p-6 text-center space-y-4">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <h3 class="text-xl font-bold">♟️ שחמט</h3>
-            <div class="flex items-center gap-2">
-              <span id="chess-timer" class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 border border-indigo-400/40 text-indigo-200">⏱️ 03:00</span>
-              <button type="button" id="chess-reset" class="text-xs bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-600">אפס לוח</button>
+          <p id="rps-result" class="text-sm text-pink-200 bg-slate-900 p-3.5 rounded-xl">לחץ "היכנס לשחק" והמתן ששחקן נוסף ילחץ להיכנס מולך</p>
+        </div><div id="game-memory" class="game-panel hidden max-w-4xl mx-auto glass rounded-2xl p-6 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
+            <div>
+              <h3 class="text-xl font-bold">💎 זיכרון קשה — 50 חדרים (עד 6 שחקנים בחדר)</h3>
+              <p class="text-xs text-slate-300">לוח 6×6 מאתגר עם אימוג'ים דומים — עד 6 שחקנים מתחרים על נקודות באותו חדר</p>
             </div>
-          </div>
-          <p id="chess-turn" class="text-sm text-pink-200">תור: לבן</p>
-          <div id="chess-board" class="chess-board"></div>
-        </div>
-
-        <!-- 4. משחק זיכרון מתקדם עם לוחות מגוונים, יותר אימוג'ים וטיימר -->
-        <div id="game-memory" class="game-panel hidden max-w-2xl mx-auto glass rounded-2xl p-6 text-center space-y-4">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <h3 class="text-xl font-bold">💎 זיכרון מתקדם</h3>
             <div class="flex flex-wrap items-center gap-2">
-              <select id="memory-size" class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-xs">
-                <option value="16">לוח 4x4 (8 זוגות)</option>
-                <option value="24">לוח 6x4 (12 זוגות — קשה יותר)</option>
-                <option value="36">לוח 6x6 (18 זוגות — אתגר)</option>
-              </select>
-              <span id="memory-timer" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 border border-emerald-400/40 text-emerald-200">⏱️ 01:15</span>
-              <button type="button" id="memory-reset" class="text-xs bg-pink-600 px-3 py-1.5 rounded-lg font-semibold">ערבב מחדש</button>
+              <span id="memory-timer" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 border border-emerald-400/40 text-emerald-200">⏱️ 02:00</span>
+              <button type="button" id="memory-leave-room" class="hidden px-3 py-1.5 rounded-xl text-xs font-semibold bg-rose-600 hover:bg-rose-500">צא מהחדר</button>
+              <button type="button" id="memory-reset" class="text-xs bg-pink-600 px-3.5 py-1.5 rounded-xl font-semibold">ערבב לוח</button>
             </div>
           </div>
-          <div id="memory-grid" class="grid grid-cols-4 gap-2 max-w-xl mx-auto"></div>
-          <p id="memory-status" class="text-sm text-pink-200"></p>
+
+          <div id="memory-rooms-grid" class="grid grid-cols-2 sm:grid-cols-5 md:grid-cols-10 gap-1.5 max-h-40 overflow-y-auto p-1"></div>
+
+          <div id="memory-players-board" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 bg-slate-950/75 p-3 rounded-xl border border-white/10 text-xs"></div>
+
+          <div id="memory-grid" class="grid grid-cols-6 gap-2 max-w-xl mx-auto"></div>
+          <p id="memory-status" class="text-sm text-center text-pink-200">בחר אחד מ-50 חדרי הזיכרון כדי להצטרף (עד 6 שחקנים)</p>
         </div>
 
-        <!-- 5. ניחוש מספר עם חדרים, טווח מותאם ומנהל חדר שבוחר מספר בשקט -->
         <div id="game-number" class="game-panel hidden max-w-2xl mx-auto glass rounded-2xl p-6 space-y-4">
           <div class="border-b border-white/10 pb-3">
             <h3 class="text-xl font-bold">🎯 ניחוש מספר — חדרים ומנהל חדר</h3>
-            <p class="text-xs text-slate-300">פתח חדר עם טווח מספרים (למשל 100, 1000 או 1500), מנהל החדר בוחר מספר בשקט והשאר מנחשים</p>
+            <p class="text-xs text-slate-300">פתח חדר עם טווח מספרים, מנהל החדר קובע מספר בשקט והמשתתפים מנחשים</p>
           </div>
 
           <form id="num-create-room-form" class="flex flex-col sm:flex-row gap-2.5 bg-slate-900/75 p-3.5 rounded-xl border border-slate-700">
             <input type="text" id="num-room-name" required placeholder="שם חדר ניחוש מספר..."
               class="flex-1 px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-sm" />
             <input type="number" id="num-room-max" min="50" max="10000" value="1000" required
-              class="w-32 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-sm text-center" />
+              class="w-32 px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-sm text-center" />
             <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500">
               פתח חדר
             </button>
@@ -387,16 +394,15 @@
 
           <div id="num-rooms-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5"></div>
 
-          <div id="num-active-panel" class="bg-slate-950/75 border border-indigo-500/30 rounded-2xl p-4 space-y-4">
+          <div class="bg-slate-950/75 border border-indigo-500/30 rounded-2xl p-4 space-y-4">
             <div class="flex flex-wrap items-center justify-between gap-2">
-              <div id="num-room-header" class="font-bold text-sm text-pink-200">חדר ברירת מחדל (1–1,000)</div>
-              <div id="num-host-badge" class="text-xs px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-200">מנהל חדר: אתה</div>
+              <div id="num-room-header" class="font-bold text-sm text-pink-200"></div>
+              <div id="num-host-badge" class="text-xs px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-200"></div>
             </div>
 
-            <!-- אזור מנהל החדר לבחירת מספר בשקט -->
             <div class="bg-slate-900/90 border border-amber-500/30 rounded-xl p-3.5 space-y-2">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-amber-300">🤫 בחירת מספר סודי על ידי מנהל החדר (נשמר בשקט)</span>
+                <span class="text-xs font-bold text-amber-300">🤫 בחירת מספר סודי על ידי מנהל החדר (בשקט)</span>
                 <button type="button" id="num-toggle-secret" class="text-xs text-slate-300 underline">הצג/הסתר למנהל</button>
               </div>
               <div class="flex flex-wrap gap-2 items-center">
@@ -406,10 +412,9 @@
                   קבע מספר סודי
                 </button>
               </div>
-              <p id="num-secret-status" class="text-xs text-emerald-300">עדיין לא נקבע מספר סודי — אפשר גם ללחוץ "קבע מספר סודי" כדי שהמערכת תגריל בשקט.</p>
+              <p id="num-secret-status" class="text-xs text-emerald-300"></p>
             </div>
 
-            <!-- אזור ניחוש של המשתתפים ובדיקת המחשב -->
             <div class="space-y-2.5">
               <div class="flex flex-wrap gap-2 items-center">
                 <input type="number" id="num-guess-input" placeholder="הכנס ניחוש..."
@@ -458,10 +463,39 @@
       country: "", city: "", education: "", bio: "",
       likes: [], hobbies: [],
       avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=TopLove",
-      profileCompleted: false
+      profileCompleted: false,
+      points: 0,
+      wins: 0,
+      losses: 0
     };
 
-    function renderQuestionnaireOptions() {
+    function getLevel(pts) {
+      return Math.floor((pts || 0) / 100) + 1;
+    }
+
+    function renderStats() {
+      const lvl = getLevel(me.points);
+      $("stat-level").textContent = `רמה ${lvl}`;
+      $("stat-points").textContent = String(me.points || 0);
+      $("stat-wins").textContent = String(me.wins || 0);
+      $("stat-losses").textContent = String(me.losses || 0);
+      $("header-stats").textContent = `רמה ${lvl} • ${me.points || 0} נק׳ • ${me.wins || 0} נצ׳ / ${me.losses || 0} הפס׳`;
+      localStorage.setItem("toplove_session", JSON.stringify(me));
+    }
+
+    async function awardWin(pts = 25) {
+      me.wins = (me.wins || 0) + 1;
+      me.points = (me.points || 0) + pts;
+      renderStats();
+      try { if (me.uid) await setDoc(doc(db, "users", me.uid), { points: me.points, wins: me.wins }, { merge: true }); } catch {}
+    }
+
+    async function awardLoss(pts = 5) {
+      me.losses = (me.losses || 0) + 1;
+      me.points = (me.points || 0) + pts;
+      renderStats();
+      try { if (me.uid) await setDoc(doc(db, "users", me.uid), { points: me.points, losses: me.losses }, { merge: true }); } catch {}
+    }function renderQuestionnaireOptions() {
       $("likes-options").innerHTML = likesChoices.map((item) => {
         const active = me.likes.includes(item);
         return `<button type="button" data-like="${item}" class="px-3 py-1.5 rounded-full text-xs border transition ${active ? "bg-pink-600 border-pink-400 text-white" : "bg-slate-950 border-slate-700 text-slate-300"}">${item}</button>`;
@@ -500,27 +534,20 @@
         if (me.gender) metaParts.push(me.gender);
         if (me.age) metaParts.push(`גיל ${me.age}`);
         $("summary-age-gender").textContent = metaParts.join(" • ") || "18+";
-
         const locParts = [me.country, me.city].filter(Boolean);
         $("summary-location").textContent = locParts.length ? `📍 ${locParts.join(", ")}` : "";
         $("summary-bio").textContent = me.bio || "";
-
         $("summary-likes").innerHTML = me.likes.length
           ? me.likes.map((l) => `<span class="px-2.5 py-1 rounded-full bg-pink-500/20 border border-pink-400/30">${l}</span>`).join("")
           : `<span class="text-slate-400">לא נבחרו פריטים</span>`;
-
         $("summary-hobbies").innerHTML = me.hobbies.length
           ? me.hobbies.map((h) => `<span class="px-2.5 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30">${h}</span>`).join("")
           : `<span class="text-slate-400">לא נבחרו תחביבים</span>`;
-
         $("summary-education").textContent = me.education || "לא צוינה השכלה";
       }
     }
 
-    $("edit-profile-btn").onclick = () => {
-      me.profileCompleted = false;
-      applyProfileViewMode();
-    };
+    $("edit-profile-btn").onclick = () => { me.profileCompleted = false; applyProfileViewMode(); };
 
     function switchTab(tabName) {
       document.querySelectorAll(".tab-btn").forEach((b) => {
@@ -536,9 +563,14 @@
       Object.assign(me, session);
       me.likes = Array.isArray(session.likes) ? session.likes : [];
       me.hobbies = Array.isArray(session.hobbies) ? session.hobbies : [];
+      me.points = Number(session.points) || 0;
+      me.wins = Number(session.wins) || 0;
+      me.losses = Number(session.losses) || 0;
+
       $("auth-section").classList.add("hidden");
       $("app-section").classList.remove("hidden");
       $("user-badge").classList.remove("hidden");
+      $("header-stats").classList.remove("hidden");
       $("logout-btn").classList.remove("hidden");
       $("user-badge").textContent = `${me.name || me.email.split("@")[0]} • ${me.age || 18}`;
 
@@ -550,9 +582,8 @@
       $("prof-education").value = me.education || "";
       $("prof-bio").value = me.bio || "";
       $("prof-avatar-preview").src = me.avatar;
-      $("rps-left-img").src = me.avatar;
-      $("rps-left-name").textContent = me.name || "אתה";
 
+      renderStats();
       renderQuestionnaireOptions();
       applyProfileViewMode();
       switchTab("profile");
@@ -579,40 +610,25 @@
         uid, email, name: email.split("@")[0] || "משתמש", gender: "", age,
         country: "", city: "", education: "", bio: "", likes: [], hobbies: [],
         avatar: `https://api.dicebear.com/9.x/avataaars/svg?seed=${encodeURIComponent(uid)}`,
-        profileCompleted: false
+        profileCompleted: false, points: 0, wins: 0, losses: 0
       };
       localStorage.setItem("toplove_session", JSON.stringify(session));
       try { await setDoc(doc(db, "users", uid), { ...session, updatedAt: serverTimestamp() }, { merge: true }); } catch {}
       openApp(session);
     };
 
-    $("logout-btn").onclick = () => {
-      localStorage.removeItem("toplove_session");
-      location.reload();
-    };
-
-    document.querySelectorAll(".tab-btn").forEach((btn) => {
-      btn.onclick = () => switchTab(btn.dataset.tab);
-    });
+    $("logout-btn").onclick = () => { localStorage.removeItem("toplove_session"); location.reload(); };
+    document.querySelectorAll(".tab-btn").forEach((btn) => { btn.onclick = () => switchTab(btn.dataset.tab); });
 
     $("prof-avatar-file").onchange = (e) => {
       const f = e.target.files?.[0];
       if (!f) return;
       const rd = new FileReader();
-      rd.onload = () => {
-        me.avatar = String(rd.result);
-        $("prof-avatar-preview").src = me.avatar;
-        $("rps-left-img").src = me.avatar;
-      };
+      rd.onload = () => { me.avatar = String(rd.result); $("prof-avatar-preview").src = me.avatar; };
       rd.readAsDataURL(f);
     };
-
     $("prof-avatar-url").oninput = (e) => {
-      if (e.target.value.trim()) {
-        me.avatar = e.target.value.trim();
-        $("prof-avatar-preview").src = me.avatar;
-        $("rps-left-img").src = me.avatar;
-      }
+      if (e.target.value.trim()) { me.avatar = e.target.value.trim(); $("prof-avatar-preview").src = me.avatar; }
     };
 
     $("profile-form").onsubmit = async (e) => {
@@ -624,7 +640,6 @@
         return;
       }
       $("profile-error").classList.add("hidden");
-
       me.name = $("prof-name").value.trim() || me.name || "משתמש";
       me.gender = $("prof-gender").value;
       me.age = ageVal;
@@ -636,9 +651,7 @@
 
       localStorage.setItem("toplove_session", JSON.stringify(me));
       $("user-badge").textContent = `${me.name} • ${me.age}`;
-      $("rps-left-name").textContent = me.name;
       try { await setDoc(doc(db, "users", me.uid), { ...me, updatedAt: serverTimestamp() }, { merge: true }); } catch {}
-
       applyProfileViewMode();
       $("save-feedback").classList.remove("opacity-0");
       setTimeout(() => $("save-feedback").classList.add("opacity-0"), 1500);
@@ -648,26 +661,20 @@
     function subscribeUsers() {
       onSnapshot(collection(db, "users"), (snap) => {
         allUsers = snap.docs.map((d) => ({ id: d.id, ...d.data() })).filter((u) => u.id !== me.uid);
-        if (allUsers[0]) {
-          $("rps-right-img").src = allUsers[0].avatar || `https://api.dicebear.com/9.x/avataaars/svg?seed=${allUsers[0].id}`;
-          $("rps-right-name").textContent = allUsers[0].name || "שחקן 2";
-        }
         $("real-users-grid").innerHTML = allUsers.length
           ? allUsers.map((u) => {
               const loc = [u.country, u.city].filter(Boolean).join(", ");
-              return `
-                <div class="bg-slate-900/80 border border-slate-700 rounded-xl p-4 flex flex-col justify-between gap-3">
-                  <div class="flex items-center gap-3">
-                    <img src="${u.avatar || "https://api.dicebear.com/9.x/avataaars/svg?seed=" + u.id}" alt="" class="w-12 h-12 rounded-full object-cover border border-pink-500" />
-                    <div>
-                      <div class="font-bold text-sm">${u.name || "משתמש"}</div>
-                      <div class="text-xs text-slate-300">${[u.gender, u.age ? "גיל " + u.age : "", loc].filter(Boolean).join(" • ")}</div>
-                    </div>
+              return `<div class="bg-slate-900/80 border border-slate-700 rounded-xl p-4 flex flex-col justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <img src="${u.avatar || "https://api.dicebear.com/9.x/avataaars/svg?seed=" + u.id}" alt="" class="w-12 h-12 rounded-full object-cover border border-pink-500" />
+                  <div>
+                    <div class="font-bold text-sm">${u.name || "משתמש"} • רמה ${getLevel(u.points)}</div>
+                    <div class="text-xs text-slate-300">${[u.gender, u.age ? "גיל " + u.age : "", loc].filter(Boolean).join(" • ")}</div>
                   </div>
-                  <p class="text-xs text-slate-400">${u.bio || (u.hobbies?.length ? "תחביבים: " + u.hobbies.join(", ") : "אין תיאור")}</p>
-                  <button type="button" data-dm-user="${u.id}" class="w-full py-1.5 rounded-lg text-xs font-semibold bg-pink-600">שיחה אישית</button>
                 </div>
-              `;
+                <p class="text-xs text-slate-400">${u.bio || "אין תיאור"}</p>
+                <button type="button" data-dm-user="${u.id}" class="w-full py-1.5 rounded-lg text-xs font-semibold bg-pink-600">שיחה אישית</button>
+              </div>`;
             }).join("")
           : `<p class="text-xs text-slate-400 col-span-full">עדיין אין משתמשים אחרים רשומים במערכת.</p>`;
 
@@ -676,9 +683,7 @@
             const other = allUsers.find((x) => x.id === btn.dataset.dmUser);
             if (!other) return;
             const dmId = "dm_" + [me.uid, other.id].sort().join("_");
-            if (!chatRooms.some((r) => r.id === dmId)) {
-              chatRooms.unshift({ id: dmId, topic: `שיחה עם ${other.name || "משתמש"}`, members: [me.uid, other.id] });
-            }
+            if (!chatRooms.some((r) => r.id === dmId)) chatRooms.unshift({ id: dmId, topic: `שיחה עם ${other.name || "משתמש"}`, members: [me.uid, other.id] });
             activeRoomId = dmId;
             switchTab("chat");
             renderRooms();
@@ -687,7 +692,6 @@
       });
     }
 
-    // --- חדרי שיחה (10 חדרים קיימים + פתיחת חדרים, עד 50 משתתפים והקלטות קוליות) ---
     const chatRooms = [
       { id: "r-general", topic: "כללי וצ׳אט פתוח", members: [] },
       { id: "r-music", topic: "מוזיקה, פלייליסטים והופעות", members: [] },
@@ -700,8 +704,7 @@
       { id: "r-humor", topic: "בדיחות, ממים וצחוקים", members: [] },
       { id: "r-night", topic: "ציפורי לילה ושיחות מאוחרות", members: [] }
     ];
-    let activeRoomId = chatRooms[0].id;
-    let unsubMsgs = null;
+    let activeRoomId = chatRooms[0].id, unsubMsgs = null;
 
     function ensureUserInRoom(room) {
       room.members = Array.isArray(room.members) ? room.members : [];
@@ -718,15 +721,13 @@
       unsubMsgs = onSnapshot(q, (snap) => {
         const msgs = snap.docs.map((d) => d.data());
         $("chat-messages").innerHTML = msgs.length
-          ? msgs.map((m) => {
-              if (m.audioData) {
-                return `<div class="bg-slate-800 px-3 py-2 rounded-xl text-sm space-y-1">
+          ? msgs.map((m) => m.audioData
+              ? `<div class="bg-slate-800 px-3 py-2 rounded-xl text-sm space-y-1">
                   <div class="text-xs font-bold text-amber-300">🎤 ${m.from || "משתמש"} (הקלטה קולית)</div>
                   <audio controls src="${m.audioData}" class="w-full max-w-xs h-8"></audio>
-                </div>`;
-              }
-              return `<div class="bg-slate-800 px-3 py-2 rounded-xl text-sm"><strong class="text-pink-300">${m.from || "משתמש"}:</strong> ${m.text || ""}</div>`;
-            }).join("")
+                </div>`
+              : `<div class="bg-slate-800 px-3 py-2 rounded-xl text-sm"><strong class="text-pink-300">${m.from || "משתמש"}:</strong> ${m.text || ""}</div>`
+            ).join("")
           : `<p class="text-xs text-slate-400">אין עדיין הודעות בחדר הזה.</p>`;
       });
     }
@@ -744,10 +745,7 @@
         b.onclick = () => {
           const target = chatRooms.find((r) => r.id === b.dataset.room);
           if (!target) return;
-          if (!ensureUserInRoom(target)) {
-            alert(`החדר מלא (מקסימום ${MAX_ROOM_USERS} משתתפים).`);
-            return;
-          }
+          if (!ensureUserInRoom(target)) { alert(`החדר מלא (מקסימום ${MAX_ROOM_USERS} משתתפים).`); return; }
           activeRoomId = target.id;
           renderRooms();
         };
@@ -778,14 +776,10 @@
       const txt = $("chat-input").value.trim();
       if (!txt) return;
       $("chat-input").value = "";
-      await addDoc(collection(db, "rooms", activeRoomId, "messages"), {
-        from: me.name || "משתמש", text: txt, createdAt: serverTimestamp()
-      });
+      await addDoc(collection(db, "rooms", activeRoomId, "messages"), { from: me.name || "משתמש", text: txt, createdAt: serverTimestamp() });
     };
 
-    // הקלטת הודעה קולית בחדר שיחה
-    let mediaRecorder = null;
-    let audioChunks = [];
+    let mediaRecorder = null, audioChunks = [];
     $("record-voice-btn").onclick = async () => {
       if (mediaRecorder && mediaRecorder.state === "recording") {
         mediaRecorder.stop();
@@ -794,10 +788,7 @@
         $("voice-status").textContent = "שולח הקלטה...";
         return;
       }
-      if (!navigator.mediaDevices?.getUserMedia) {
-        $("voice-status").textContent = "הדפדפן לא תומך בהקלטה קולית.";
-        return;
-      }
+      if (!navigator.mediaDevices?.getUserMedia) { $("voice-status").textContent = "הדפדפן לא תומך בהקלטה קולית."; return; }
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         audioChunks = [];
@@ -808,11 +799,7 @@
           const blob = new Blob(audioChunks, { type: "audio/webm" });
           const reader = new FileReader();
           reader.onloadend = async () => {
-            await addDoc(collection(db, "rooms", activeRoomId, "messages"), {
-              from: me.name || "משתמש",
-              audioData: String(reader.result),
-              createdAt: serverTimestamp()
-            });
+            await addDoc(collection(db, "rooms", activeRoomId, "messages"), { from: me.name || "משתמש", audioData: String(reader.result), createdAt: serverTimestamp() });
             $("voice-status").textContent = "ההקלטה נשלחה לחדר!";
           };
           reader.readAsDataURL(blob);
@@ -821,14 +808,9 @@
         $("record-voice-btn").textContent = "⏹️ עצור ושלח הקלטה";
         $("record-voice-btn").classList.replace("bg-amber-600", "bg-rose-600");
         $("voice-status").textContent = "מקליט כעת...";
-      } catch {
-        $("voice-status").textContent = "לא ניתנה הרשאה למיקרופון.";
-      }
-    };
-
-    // --- מעבר בין המשחקים + טיימרים ---
-    const timerIntervals = {};
-    function startCountdown(key, seconds, elId, onExpireText) {
+      } catch { $("voice-status").textContent = "לא ניתנה הרשאה למיקרופון."; }
+    };const timerIntervals = {};
+    function startCountdown(key, seconds, elId, onExpire) {
       if (timerIntervals[key]) clearInterval(timerIntervals[key]);
       let rem = seconds;
       const paint = () => {
@@ -842,10 +824,8 @@
         if (rem <= 0) {
           clearInterval(timerIntervals[key]);
           if ($(elId)) $(elId).textContent = "⏱️ 00:00";
-          if (onExpireText) onExpireText();
-        } else {
-          paint();
-        }
+          if (onExpire) onExpire();
+        } else paint();
       }, 1000);
     }
 
@@ -859,73 +839,60 @@
         });
         document.querySelectorAll(".game-panel").forEach((p) => p.classList.add("hidden"));
         $(`game-${g}`).classList.remove("hidden");
-
         if (g === "ttt") startCountdown("ttt", 30, "ttt-timer");
         if (g === "rps") startCountdown("rps", 15, "rps-timer");
-        if (g === "chess") startCountdown("chess", 180, "chess-timer");
-        if (g === "memory") startCountdown("memory", 75, "memory-timer", () => {
-          $("memory-status").textContent = "הזמן נגמר! לחץ על 'ערבב מחדש' לסיבוב נוסף.";
-        });
+        if (g === "memory") startCountdown("memory", 120, "memory-timer");
       };
     });
 
-    // 1. איקס עיגול עם חדרים שניתן לפתוח, להיכנס אליהם ולצאת מהם
-    let tttRooms = [
-      { id: "ttt-1", title: "חדר מחסן #1", host: "דניאל", guest: null, board: Array(9).fill(""), turn: "X" },
-      { id: "ttt-2", title: "חדר מהיר #2", host: "נועה", guest: null, board: Array(9).fill(""), turn: "X" }
-    ];
+    const tttRooms = Array.from({ length: 100 }, (_, i) => ({
+      id: `ttt-room-${i + 1}`, num: i + 1, p1: null, p2: null, board: Array(9).fill(""), turn: "X", scored: false
+    }));
     let activeTttRoomId = null;
 
-    function renderTttRoomsList() {
+    function renderTttRooms() {
       $("ttt-rooms-grid").innerHTML = tttRooms.map((r) => {
-        const isCurrent = r.id === activeTttRoomId;
-        const playersLabel = r.guest ? `${r.host} מול ${r.guest}` : `ממתין לשחקן (מארח: ${r.host})`;
-        return `<button type="button" data-ttt-room="${r.id}" class="text-right p-3 rounded-xl border text-xs transition ${isCurrent ? "bg-pink-600/30 border-pink-400" : "bg-slate-900/80 border-slate-700 hover:border-pink-400/50"}">
-          <div class="font-bold">📦 ${r.title}</div>
-          <div class="text-slate-300 mt-0.5">${playersLabel}</div>
+        const isSel = r.id === activeTttRoomId;
+        const count = (r.p1 ? 1 : 0) + (r.p2 ? 1 : 0);
+        const label = count === 0 ? "חדר ריק" : count === 1 ? "ממתין לשחקן 2" : "2/2 פעיל";
+        return `<button type="button" data-ttt-room="${r.id}" class="text-right p-2 rounded-xl border text-[11px] transition ${isSel ? "bg-pink-600/35 border-pink-400" : count === 0 ? "bg-slate-900/75 border-slate-700 hover:border-emerald-400" : "bg-slate-900/95 border-amber-500/40"}">
+          <div class="font-bold">חדר #${r.num}</div>
+          <div class="text-slate-300 truncate">${label}</div>
         </button>`;
       }).join("");
 
       document.querySelectorAll("[data-ttt-room]").forEach((b) => {
         b.onclick = () => {
-          const room = tttRooms.find((x) => x.id === b.dataset.tttRoom);
-          if (!room) return;
-          if (room.host !== me.name && !room.guest) {
-            room.guest = me.name || "שחקן 2";
+          const r = tttRooms.find((x) => x.id === b.dataset.tttRoom);
+          if (!r) return;
+          const myLabel = me.name || "שחקן";
+          if (r.p1 !== myLabel && r.p2 !== myLabel) {
+            if (!r.p1) r.p1 = myLabel;
+            else if (!r.p2) r.p2 = myLabel;
+            else { alert("החדר מלא (2/2 שחקנים). בחר חדר אחר."); return; }
           }
-          activeTttRoomId = room.id;
+          activeTttRoomId = r.id;
           $("ttt-leave-room").classList.remove("hidden");
           startCountdown("ttt", 30, "ttt-timer");
-          renderTttRoomsList();
+          renderTttRooms();
           renderTttBoard();
         };
       });
     }
 
-    $("ttt-create-room").onclick = () => {
-      const id = `ttt-${Date.now()}`;
-      const r = {
-        id,
-        title: `חדר של ${me.name || "משתמש"}`,
-        host: me.name || "משתמש",
-        guest: null,
-        board: Array(9).fill(""),
-        turn: "X"
-      };
-      tttRooms.unshift(r);
-      activeTttRoomId = id;
-      $("ttt-leave-room").classList.remove("hidden");
-      startCountdown("ttt", 30, "ttt-timer");
-      renderTttRoomsList();
-      renderTttBoard();
+    $("ttt-add-room").onclick = () => {
+      const nextNum = tttRooms.length + 1;
+      tttRooms.push({ id: `ttt-room-${nextNum}`, num: nextNum, p1: null, p2: null, board: Array(9).fill(""), turn: "X", scored: false });
+      renderTttRooms();
     };
 
     $("ttt-leave-room").onclick = () => {
-      const room = tttRooms.find((x) => x.id === activeTttRoomId);
-      if (room && room.guest === (me.name || "שחקן 2")) room.guest = null;
+      const r = tttRooms.find((x) => x.id === activeTttRoomId);
+      const myLabel = me.name || "שחקן";
+      if (r) { if (r.p1 === myLabel) r.p1 = null; if (r.p2 === myLabel) r.p2 = null; }
       activeTttRoomId = null;
       $("ttt-leave-room").classList.add("hidden");
-      renderTttRoomsList();
+      renderTttRooms();
       renderTttBoard();
     };
 
@@ -936,196 +903,225 @@
     }
 
     function renderTttBoard() {
-      const room = tttRooms.find((x) => x.id === activeTttRoomId);
-      const board = room ? room.board : Array(9).fill("");
-      $("ttt-p1-name").textContent = room ? room.host : "ממתין...";
-      $("ttt-p2-name").textContent = room?.guest ? room.guest : "ממתין לשחקן...";
-      $("ttt-p2-img").classList.toggle("opacity-60", !room?.guest);
-
+      const r = tttRooms.find((x) => x.id === activeTttRoomId);
+      const board = r ? r.board : Array(9).fill("");
+      $("ttt-p1-name").textContent = r?.p1 || "מושב 1 ריק";
+      $("ttt-p2-name").textContent = r?.p2 || "ממתין לשחקן 2...";
       const el = $("ttt-board");
       el.innerHTML = "";
       const win = checkTttWin(board);
+      const canMove = Boolean(r && r.p1 && r.p2 && !win);
+
       board.forEach((cell, idx) => {
         const btn = document.createElement("button");
         btn.type = "button";
-        btn.disabled = !room || Boolean(cell) || Boolean(win);
-        btn.className = "aspect-square rounded-lg bg-amber-900/90 border border-amber-500/40 text-xl font-bold flex items-center justify-center";
+        btn.disabled = !canMove || Boolean(cell);
+        btn.className = "aspect-square rounded-lg bg-amber-900/90 border border-amber-500/40 text-lg font-bold flex items-center justify-center disabled:opacity-60";
         btn.textContent = cell === "X" ? "❌" : cell === "O" ? "⭕" : "";
-        btn.onclick = () => {
-          if (!room || board[idx] || win) return;
-          board[idx] = room.turn;
-          room.turn = room.turn === "X" ? "O" : "X";
+        btn.onclick = async () => {
+          if (!canMove || board[idx]) return;
+          board[idx] = r.turn;
+          const resultNow = checkTttWin(board);
+          if (resultNow && !r.scored) {
+            r.scored = true;
+            const myLabel = me.name || "שחקן";
+            if ((resultNow === "X" && r.p1 === myLabel) || (resultNow === "O" && r.p2 === myLabel)) await awardWin(25);
+            else if (resultNow === "X" || resultNow === "O") await awardLoss(5);
+          }
+          r.turn = r.turn === "X" ? "O" : "X";
           startCountdown("ttt", 30, "ttt-timer");
           renderTttBoard();
+          renderTttRooms();
         };
         el.appendChild(btn);
       });
 
-      if (!room) {
-        $("ttt-status").textContent = "בחר חדר קיים או פתח חדר חדש כדי לשחק";
-      } else if (win === "DRAW") {
-        $("ttt-status").textContent = "תיקו! אפשר ללחוץ על איפוס לוח";
-      } else if (win) {
-        $("ttt-status").textContent = `ניצחון ל-${win === "X" ? "❌ (" + room.host + ")" : "⭕ (" + (room.guest || "אורח") + ")"}!`;
-      } else {
-        $("ttt-status").textContent = `בחדר "${room.title}" — תור ${room.turn === "X" ? "❌" : "⭕"}`;
-      }
+      if (!r) $("ttt-status").textContent = "לחץ על אחד מ-100 החדרים כדי להיכנס";
+      else if (!r.p1 || !r.p2) $("ttt-status").textContent = `נמצא בחדר #${r.num} — ממתין שחקן נוסף שייכנס מולך`;
+      else if (win === "DRAW") $("ttt-status").textContent = `תיקו בחדר #${r.num}!`;
+      else if (win) $("ttt-status").textContent = `המנצח בחדר #${r.num}: ${win === "X" ? r.p1 : r.p2} 🎉`;
+      else $("ttt-status").textContent = `חדר #${r.num} • תור ${r.turn === "X" ? r.p1 + " (❌)" : r.p2 + " (⭕)"}`;
     }
 
     $("ttt-reset").onclick = () => {
-      const room = tttRooms.find((x) => x.id === activeTttRoomId);
-      if (!room) return;
-      room.board = Array(9).fill("");
-      room.turn = "X";
+      const r = tttRooms.find((x) => x.id === activeTttRoomId);
+      if (!r) return;
+      r.board = Array(9).fill(""); r.turn = "X"; r.scored = false;
       startCountdown("ttt", 30, "ttt-timer");
       renderTttBoard();
     };
-    renderTttRoomsList();
+    renderTttRooms();
     renderTttBoard();
 
-    // 2. אבן נייר מספריים — שתי דמויות מול זו שסופרות עד 3
-    let rpsBusy = false;
+    let rpsSeat1 = null, rpsSeat2 = null, rpsBusy = false;
+    function syncRpsSeatsUI() {
+      $("rps-left-name").textContent = rpsSeat1 || "מושב 1 פנוי";
+      $("rps-right-name").textContent = rpsSeat2 || "מושב 2 פנוי";
+      $("rps-left-avatar").textContent = rpsSeat1 ? "🧑" : "🪑";
+      $("rps-right-avatar").textContent = rpsSeat2 ? "🧑" : "🪑";
+      const myLabel = me.name || "שחקן";
+      const inGame = rpsSeat1 === myLabel || rpsSeat2 === myLabel;
+      $("rps-join-btn").classList.toggle("hidden", inGame);
+      $("rps-leave-btn").classList.toggle("hidden", !inGame);
+      const ready = Boolean(rpsSeat1 && rpsSeat2);
+      document.querySelectorAll(".rps-choice").forEach((b) => { b.disabled = !ready || rpsBusy; b.classList.toggle("opacity-50", !ready || rpsBusy); });
+      $("rps-round-phase").textContent = ready ? "שני שחקנים מוכנים!" : "ממתין לשחקן נוסף שילחץ להיכנס";
+    }
+
+    $("rps-join-btn").onclick = () => {
+      const myLabel = me.name || "שחקן";
+      if (!rpsSeat1) rpsSeat1 = myLabel;
+      else if (!rpsSeat2 && rpsSeat1 !== myLabel) rpsSeat2 = myLabel;
+      else { alert("שני המקומות תפוסים כרגע."); return; }
+      syncRpsSeatsUI();
+    };
+
+    $("rps-leave-btn").onclick = () => {
+      const myLabel = me.name || "שחקן";
+      if (rpsSeat1 === myLabel) rpsSeat1 = null;
+      if (rpsSeat2 === myLabel) rpsSeat2 = null;
+      syncRpsSeatsUI();
+    };
+
     document.querySelectorAll(".rps-choice").forEach((btn) => {
-      btn.onclick = () => {
-        if (rpsBusy) return;
-        rpsBusy = true;
+      btn.onclick = async () => {
+        if (!rpsSeat1 || !rpsSeat2 || rpsBusy) return;
+        rpsBusy = true; syncRpsSeatsUI();
         startCountdown("rps", 15, "rps-timer");
         const opts = ["rock", "paper", "scissors"];
         const labels = { rock: "🪨 אבן", paper: "📄 נייר", scissors: "✂️ מספריים" };
         const signs = { rock: "🪨", paper: "📄", scissors: "✂️" };
-        const p1 = btn.dataset.rps;
-        const p2 = opts[Math.floor(Math.random() * 3)];
+        const p1Choice = btn.dataset.rps;
+        const p2Choice = opts[Math.floor(Math.random() * 3)];
+        $("rps-left-sign").textContent = "✊"; $("rps-right-sign").textContent = "✊";
+        const seq = ["1", "2", "3!"]; let i = 0;
+        $("rps-count-num").textContent = seq[0]; $("rps-round-phase").textContent = "סופרים עד 3...";
 
-        $("rps-left-sign").textContent = "✊";
-        $("rps-right-sign").textContent = "✊";
-        const seq = ["1", "2", "3!"];
-        let i = 0;
-        $("rps-count-num").textContent = seq[0];
-        $("rps-round-phase").textContent = "סופרים עד 3...";
-
-        const iv = setInterval(() => {
+        const iv = setInterval(async () => {
           i += 1;
-          if (i < seq.length) {
-            $("rps-count-num").textContent = seq[i];
-          } else {
+          if (i < seq.length) $("rps-count-num").textContent = seq[i];
+          else {
             clearInterval(iv);
-            $("rps-left-sign").textContent = signs[p1];
-            $("rps-right-sign").textContent = signs[p2];
-            $("rps-round-phase").textContent = "נחשף!";
-            let out = "תיקו!";
-            if ((p1 === "rock" && p2 === "scissors") || (p1 === "paper" && p2 === "rock") || (p1 === "scissors" && p2 === "paper")) {
-              out = `${$("rps-left-name").textContent} ניצח/ה! 🎉`;
-            } else if (p1 !== p2) {
-              out = `${$("rps-right-name").textContent} ניצח/ה! 🎉`;
+            $("rps-left-sign").textContent = signs[p1Choice]; $("rps-right-sign").textContent = signs[p2Choice];
+            $("rps-round-phase").textContent = "חשיפה!";
+            let msg = "תיקו!";
+            if ((p1Choice === "rock" && p2Choice === "scissors") || (p1Choice === "paper" && p2Choice === "rock") || (p1Choice === "scissors" && p2Choice === "paper")) {
+              msg = `${rpsSeat1} ניצח/ה! 🎉`;
+              if (rpsSeat1 === (me.name || "שחקן")) await awardWin(20);
+            } else if (p1Choice !== p2Choice) {
+              msg = `${rpsSeat2} ניצח/ה! 🎉`;
+              if (rpsSeat1 === (me.name || "שחקן")) await awardLoss(5);
             }
-            $("rps-result").textContent = `${labels[p1]} מול ${labels[p2]} — ${out}`;
-            rpsBusy = false;
+            $("rps-result").textContent = `${labels[p1Choice]} מול ${labels[p2Choice]} — ${msg}`;
+            rpsBusy = false; syncRpsSeatsUI();
           }
-        }, 450);
+        }, 420);
       };
     });
-
-    // 3. שחמט
-    const initChess = () => [
-      ["♜","♞","♝","♛","♚","♝","♞","♜"],
-      ["♟","♟","♟","♟","♟","♟","♟","♟"],
-      ["","","","","","","",""],
-      ["","","","","","","",""],
-      ["","","","","","","",""],
-      ["","","","","","","",""],
-      ["♙","♙","♙","♙","♙","♙","♙","♙"],
-      ["♖","♘","♗","♕","♔","♗","♘","♖"]
-    ];
-    let chessBoard = initChess(), chessSel = null, chessTurn = "לבן";
-    function renderChess() {
-      const el = $("chess-board");
-      el.innerHTML = "";
-      $("chess-turn").textContent = `תור: ${chessTurn}`;
-      chessBoard.forEach((row, r) => {
-        row.forEach((piece, c) => {
-          const cell = document.createElement("div");
-          const isLight = (r + c) % 2 === 0;
-          const isSel = chessSel && chessSel[0] === r && chessSel[1] === c;
-          cell.className = `chess-cell ${isLight ? "chess-light" : "chess-dark"} ${isSel ? "chess-selected" : ""}`;
-          cell.textContent = piece;
-          cell.onclick = () => {
-            if (!chessSel) {
-              if (piece) { chessSel = [r, c]; renderChess(); }
-            } else {
-              const [sr, sc] = chessSel;
-              if (sr !== r || sc !== c) {
-                chessBoard[r][c] = chessBoard[sr][sc];
-                chessBoard[sr][sc] = "";
-                chessTurn = chessTurn === "לבן" ? "שחור" : "לבן";
-              }
-              chessSel = null;
-              renderChess();
-            }
-          };
-          el.appendChild(cell);
-        });
-      });
-    }
-    $("chess-reset").onclick = () => {
-      chessBoard = initChess(); chessSel = null; chessTurn = "לבן";
-      startCountdown("chess", 180, "chess-timer");
-      renderChess();
-    };
-    renderChess();
-
-    // 4. זיכרון עם לוחות מגוונים ויותר אימוג'ים
-    const allEmojis = ["💜","🔥","⭐","🌹","💎","⚡","🎯","🍀","🦄","🍕","🎸","🚀","🌊","🦊","👑","🍩","🌙","🎲"];
+    syncRpsSeatsUI();const memRooms = Array.from({ length: 50 }, (_, i) => ({ id: `mem-room-${i + 1}`, num: i + 1, players: [], turnIdx: 0 }));
+    let activeMemRoomId = null;
+    const hardEmojis = ["😀","😃","😄","😁","😆","😅","🙂","🙃","😉","😊","😇","🥰","😍","🤩","😘","😗","😚","😙"];
     let memCards = [], memFlipped = [], memMatched = new Set();
-    function initMemory() {
-      const total = Number($("memory-size").value) || 16;
-      const pairsCount = total / 2;
-      const chosen = allEmojis.slice(0, pairsCount);
-      memCards = [...chosen, ...chosen].sort(() => Math.random() - 0.5);
-      memFlipped = [];
-      memMatched = new Set();
-      $("memory-grid").className = total === 16 ? "grid grid-cols-4 gap-2 max-w-md mx-auto" : "grid grid-cols-6 gap-2 max-w-xl mx-auto";
-      $("memory-status").textContent = `מצא את כל ${pairsCount} הזוגות לפני שהזמן נגמר!`;
-      startCountdown("memory", total === 16 ? 75 : total === 24 ? 105 : 140, "memory-timer", () => {
-        $("memory-status").textContent = "הזמן נגמר! לחץ על 'ערבב מחדש'.";
-      });
-      renderMemory();
+
+    function buildHardMemoryBoard() {
+      memCards = [...hardEmojis, ...hardEmojis].sort(() => Math.random() - 0.5);
+      memFlipped = []; memMatched = new Set();
+      startCountdown("memory", 120, "memory-timer", () => { $("memory-status").textContent = "הזמן נגמר! לחץ 'ערבב לוח' להתחלה חדשה."; });
+      renderMemoryGrid();
     }
-    function renderMemory() {
-      const g = $("memory-grid");
-      g.innerHTML = "";
+
+    function renderMemRooms() {
+      $("memory-rooms-grid").innerHTML = memRooms.map((r) => {
+        const isSel = r.id === activeMemRoomId;
+        return `<button type="button" data-mem-room="${r.id}" class="p-1.5 rounded-lg border text-[10px] font-bold transition ${isSel ? "bg-pink-600/35 border-pink-400" : "bg-slate-900/80 border-slate-700 hover:border-emerald-400"}">
+          <div>חדר ${r.num}</div>
+          <div class="text-slate-300 font-normal">${r.players.length}/6</div>
+        </button>`;
+      }).join("");
+
+      document.querySelectorAll("[data-mem-room]").forEach((b) => {
+        b.onclick = () => {
+          const r = memRooms.find((x) => x.id === b.dataset.memRoom);
+          if (!r) return;
+          const myLabel = me.name || "שחקן";
+          if (!r.players.some((p) => p.name === myLabel)) {
+            if (r.players.length >= 6) { alert("החדר מלא (מקסימום 6 שחקנים)."); return; }
+            r.players.push({ name: myLabel, score: 0 });
+          }
+          activeMemRoomId = r.id;
+          $("memory-leave-room").classList.remove("hidden");
+          buildHardMemoryBoard(); renderMemRooms(); renderMemPlayersBoard();
+        };
+      });
+    }
+
+    $("memory-leave-room").onclick = () => {
+      const r = memRooms.find((x) => x.id === activeMemRoomId);
+      const myLabel = me.name || "שחקן";
+      if (r) r.players = r.players.filter((p) => p.name !== myLabel);
+      activeMemRoomId = null;
+      $("memory-leave-room").classList.add("hidden");
+      renderMemRooms(); renderMemPlayersBoard();
+    };
+
+    function renderMemPlayersBoard() {
+      const r = memRooms.find((x) => x.id === activeMemRoomId);
+      const slots = Array.from({ length: 6 }, (_, idx) => r?.players[idx] || null);
+      $("memory-players-board").innerHTML = slots.map((p, idx) => {
+        const isTurn = r && r.players.length > 0 && (r.turnIdx % r.players.length) === idx && p;
+        return `<div class="p-2 rounded-lg border ${isTurn ? "bg-pink-600/25 border-pink-400" : "bg-slate-900 border-slate-800"}">
+          <div class="font-bold truncate">${p ? p.name : `מושב ${idx + 1} פנוי`}</div>
+          <div class="text-amber-300">${p ? `${p.score} נק׳` : "ממתין לשחקן"}</div>
+        </div>`;
+      }).join("");
+    }
+
+    function renderMemoryGrid() {
+      const g = $("memory-grid"); g.innerHTML = "";
       memCards.forEach((sym, i) => {
         const show = memFlipped.includes(i) || memMatched.has(i);
         const btn = document.createElement("button");
         btn.type = "button";
-        btn.className = "aspect-square rounded-xl bg-slate-900 border border-slate-700 text-xl flex items-center justify-center";
+        btn.className = "aspect-square rounded-xl bg-slate-900 border border-slate-700 text-xl flex items-center justify-center hover:border-pink-400";
         btn.textContent = show ? sym : "❓";
-        btn.onclick = () => {
+        btn.onclick = async () => {
           if (show || memFlipped.length === 2) return;
-          memFlipped.push(i);
-          renderMemory();
+          memFlipped.push(i); renderMemoryGrid();
           if (memFlipped.length === 2) {
             const [a, b] = memFlipped;
+            const r = memRooms.find((x) => x.id === activeMemRoomId);
             if (memCards[a] === memCards[b]) {
-              memMatched.add(a); memMatched.add(b);
-              memFlipped = [];
-              if (memMatched.size === memCards.length) $("memory-status").textContent = "כל הכבוד! השלמת את כל הלוח 🎉";
-              renderMemory();
+              memMatched.add(a); memMatched.add(b); memFlipped = [];
+              if (r && r.players.length) {
+                const curP = r.players[r.turnIdx % r.players.length];
+                curP.score += 10;
+                if (curP.name === (me.name || "שחקן")) await awardWin(10);
+              }
+              if (memMatched.size === memCards.length) $("memory-status").textContent = "כל 18 הזוגות נמצאו! 🎉";
+              renderMemPlayersBoard(); renderMemoryGrid();
             } else {
-              setTimeout(() => { memFlipped = []; renderMemory(); }, 650);
+              setTimeout(() => {
+                memFlipped = [];
+                if (r && r.players.length) r.turnIdx = (r.turnIdx + 1) % r.players.length;
+                renderMemPlayersBoard(); renderMemoryGrid();
+              }, 700);
             }
           }
         };
         g.appendChild(btn);
       });
+      if (activeMemRoomId) {
+        const r = memRooms.find((x) => x.id === activeMemRoomId);
+        $("memory-status").textContent = `חדר זיכרון #${r.num} • ${r.players.length}/6 שחקנים • תור ${r.players[r.turnIdx % r.players.length]?.name || ""}`;
+      }
     }
-    $("memory-size").onchange = initMemory;
-    $("memory-reset").onclick = initMemory;
-    initMemory();
 
-    // 5. ניחוש מספר עם חדרים, טווח מותאם ומנהל חדר שבוחר מספר בשקט
+    $("memory-reset").onclick = buildHardMemoryBoard;
+    renderMemRooms(); renderMemPlayersBoard(); buildHardMemoryBoard();
+
     let numRooms = [
       { id: "nr-1", name: "חדר עד 1,000", maxNum: 1000, hostName: "מנהל החדר", secret: null, guesses: [] },
-      { id: "nr-2", name: "אתגר עד 1,500", maxNum: 1500, hostName: "מנהל החדר", secret: null, guesses: [] }
+      { id: "nr-2", name: "חדר עד 1,500", maxNum: 1500, hostName: "מנהל החדר", secret: null, guesses: [] }
     ];
     let activeNumRoomId = numRooms[0].id;
 
@@ -1136,7 +1132,6 @@
           <div class="text-slate-300 mt-0.5">טווח: 1 עד ${r.maxNum.toLocaleString()} • מנהל: ${r.hostName}</div>
         </button>
       `).join("");
-
       document.querySelectorAll("[data-num-room]").forEach((b) => {
         b.onclick = () => { activeNumRoomId = b.dataset.numRoom; renderNumRooms(); renderActiveNumRoom(); };
       });
@@ -1146,13 +1141,11 @@
       const r = numRooms.find((x) => x.id === activeNumRoomId) || numRooms[0];
       $("num-room-header").textContent = `${r.name} (טווח: 1 עד ${r.maxNum.toLocaleString()})`;
       $("num-host-badge").textContent = `מנהל חדר: ${r.hostName}`;
-      $("num-guess-input").min = 1;
-      $("num-guess-input").max = r.maxNum;
+      $("num-guess-input").min = 1; $("num-guess-input").max = r.maxNum;
       $("num-secret-input").value = r.secret !== null ? String(r.secret) : "";
       $("num-secret-status").textContent = r.secret !== null
-        ? "✓ מספר סודי נקבע בשקט לחדר זה! המשתתפים יכולים לנחש."
-        : "עדיין לא נקבע מספר סודי — הזן מספר בשקט או לחץ 'קבע מספר סודי' להגרלה שקטה.";
-
+        ? "✓ מספר סודי נקבע בשקט! אפשר לנחש."
+        : "טרם נקבע מספר סודי — הזן מספר בשקט או לחץ 'קבע מספר סודי'.";
       $("num-guesses-log").innerHTML = r.guesses.map((g) =>
         `<div class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 flex justify-between">
           <span><strong>${g.player}</strong> ניחש <strong>${g.value}</strong></span>
@@ -1166,12 +1159,9 @@
       const name = $("num-room-name").value.trim();
       const maxNum = Math.max(10, Number($("num-room-max").value) || 1000);
       if (!name) return;
-      const newRoom = { id: `nr-${Date.now()}`, name, maxNum, hostName: me.name || "מנהל החדר", secret: null, guesses: [] };
-      numRooms.unshift(newRoom);
-      activeNumRoomId = newRoom.id;
-      $("num-room-name").value = "";
-      renderNumRooms();
-      renderActiveNumRoom();
+      const nr = { id: `nr-${Date.now()}`, name, maxNum, hostName: me.name || "מנהל החדר", secret: null, guesses: [] };
+      numRooms.unshift(nr); activeNumRoomId = nr.id; $("num-room-name").value = "";
+      renderNumRooms(); renderActiveNumRoom();
     };
 
     $("num-toggle-secret").onclick = () => {
@@ -1181,45 +1171,38 @@
     $("num-set-secret-btn").onclick = () => {
       const r = numRooms.find((x) => x.id === activeNumRoomId) || numRooms[0];
       const typed = Number($("num-secret-input").value);
-      const chosen = (typed >= 1 && typed <= r.maxNum)
-        ? typed
-        : Math.floor(Math.random() * r.maxNum) + 1;
-      r.secret = chosen;
+      r.secret = (typed >= 1 && typed <= r.maxNum) ? typed : Math.floor(Math.random() * r.maxNum) + 1;
       r.guesses = [];
-      $("num-guess-feedback").textContent = "מספר סודי עודכן בשקט! אפשר להתחיל לנחש.";
+      $("num-guess-feedback").textContent = "מספר סודי נקבע בשקט! התחילו לנחש.";
       renderActiveNumRoom();
     };
 
-    $("num-guess-btn").onclick = () => {
+    $("num-guess-btn").onclick = async () => {
       const r = numRooms.find((x) => x.id === activeNumRoomId) || numRooms[0];
-      if (r.secret === null) {
-        r.secret = Math.floor(Math.random() * r.maxNum) + 1;
-      }
+      if (r.secret === null) r.secret = Math.floor(Math.random() * r.maxNum) + 1;
       const val = Number($("num-guess-input").value);
       if (!val || val < 1 || val > r.maxNum) {
         $("num-guess-feedback").textContent = `הכנס מספר בין 1 ל-${r.maxNum.toLocaleString()}.`;
         return;
       }
-      let hit = false;
-      let msg = "";
+      let hit = false, msg = "";
       if (val === r.secret) {
-        hit = true;
-        msg = "ניחש נכון! 🎉";
+        hit = true; msg = "ניחש נכון! 🎉";
         $("num-guess-feedback").textContent = `🎉 בול! ${me.name || "שחקן"} ניחש את המספר ${r.secret}!`;
+        await awardWin(30);
       } else if (val < r.secret) {
-        msg = "נמוך מהמספר (לא נכון)";
-        $("num-guess-feedback").textContent = `המספר ${val} נמוך מהמספר הסודי — נסה מספר גבוה יותר ⬆️`;
+        msg = "נמוך מדי (לא נכון)";
+        $("num-guess-feedback").textContent = `המספר ${val} נמוך מהמספר הסודי ⬆️`;
       } else {
-        msg = "גבוה מהמספר (לא נכון)";
-        $("num-guess-feedback").textContent = `המספר ${val} גבוה מהמספר הסודי — נסה מספר נמוך יותר ⬇️`;
+        msg = "גבוה מדי (לא נכון)";
+        $("num-guess-feedback").textContent = `המספר ${val} גבוה מהמספר הסודי ⬇️`;
       }
       r.guesses.unshift({ player: me.name || "משתמש", value: val, hit, msg });
       $("num-guess-input").value = "";
       renderActiveNumRoom();
     };
 
-    renderNumRooms();
-    renderActiveNumRoom();
+    renderNumRooms(); renderActiveNumRoom();
 
     const savedSession = localStorage.getItem("toplove_session");
     if (savedSession) {

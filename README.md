@@ -36,6 +36,10 @@
       color: #67e8f9;
       text-shadow: 0 0 12px rgba(103, 232, 249, 0.7);
     }
+    .round-table-ring {
+      background: radial-gradient(circle, rgba(15,23,42,0.92) 34%, rgba(236,72,153,0.14) 35%, rgba(15,23,42,0.88) 72%);
+      border: 2px solid rgba(251, 191, 36, 0.35);
+    }
     @keyframes countPulse {
       0% { transform: scale(0.85); opacity: 0.5; }
       60% { transform: scale(1.12); opacity: 1; }
@@ -83,6 +87,7 @@
 
         <div class="text-xs text-slate-200 bg-slate-900/85 p-3.5 rounded-xl border border-slate-800 space-y-1">
           <div id="modal-meta"></div>
+          <div id="modal-looking-for" class="text-pink-200"></div>
           <div id="modal-habits"></div>
           <div id="modal-pets-info" class="text-amber-200"></div>
           <div id="modal-education"></div>
@@ -112,6 +117,14 @@
           class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-left" />
         <input type="number" id="auth-age" required min="18" max="80" placeholder="גיל (18–80)"
           class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700" />
+        <div>
+          <label class="block text-xs text-slate-300 mb-1">את מי אתה / את מחפשת?</label>
+          <select id="auth-looking-for" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm">
+            <option value="אישה">אישה</option>
+            <option value="גבר">גבר</option>
+            <option value="אחר">אחר</option>
+          </select>
+        </div>
         <div class="relative">
           <input type="password" id="auth-password" required minlength="6" placeholder="סיסמה (מינימום 6 תווים)" dir="ltr"
             class="w-full px-4 py-2.5 pl-11 rounded-xl bg-slate-900 border border-slate-700 text-left" />
@@ -127,7 +140,7 @@
     <section id="app-section" class="hidden space-y-6">
       <div class="flex flex-wrap gap-2.5 justify-center">
         <button type="button" data-tab="profile" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold bg-pink-600 text-white">1. הפרופיל שלי</button>
-        <button type="button" data-tab="users" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold glass text-slate-300">2. משתמשים, מרחק וגיל 👥</button>
+        <button type="button" data-tab="users" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold glass text-slate-300">2. משתמשים ודפדוף הכרויות 💘</button>
         <button type="button" data-tab="chat" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold glass text-slate-300">3. חדרי שיחה 💬</button>
         <button type="button" data-tab="games" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold glass text-slate-300">4. משחקים, טופ-100 וטופ-5 🎮</button>
       </div><div id="tab-profile" class="tab-content max-w-6xl mx-auto glass rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
@@ -154,6 +167,7 @@
                 <h3 id="summary-name" class="text-2xl font-extrabold"></h3>
                 <p id="summary-tagline" class="text-sm text-pink-200 font-medium"></p>
                 <p id="summary-age-gender-loc" class="text-xs text-indigo-200"></p>
+                <p id="summary-looking-for" class="text-xs text-pink-300 font-semibold"></p>
                 <p id="summary-habits" class="text-xs text-emerald-200"></p>
                 <p id="summary-pets" class="text-xs text-amber-200"></p>
                 <p id="summary-bio" class="text-sm text-slate-300 pt-1"></p>
@@ -185,7 +199,7 @@
                   class="w-28 h-28 rounded-2xl object-cover bg-slate-800" />
               </div>
               <div class="w-full space-y-3">
-                <label class="block text-sm font-semibold text-pink-300">בחירת תמונות מהמכשיר (מחליף את תמונת ברירת המחדל)</label>
+                <label class="block text-sm font-semibold text-pink-300">בחירת תמונות מהמכשיר (מחליף את תמונת ברירת המחדל מיידית)</label>
                 <input type="file" id="prof-avatar-file" accept="image/*" multiple
                   class="block w-full text-xs text-slate-300 file:ml-3 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:bg-pink-600 hover:file:bg-pink-500 file:text-white file:font-bold cursor-pointer" />
                 <div id="prof-photos-thumbs" class="flex flex-wrap gap-2"></div>
@@ -230,18 +244,26 @@
                 </button>
               </div>
             </div>
-          </div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+          </div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3.5">
             <div>
               <label class="block text-xs text-slate-300 mb-1">שם משתמש</label>
               <input type="text" id="prof-name" placeholder="שם משתמש"
                 class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm" />
             </div>
             <div>
-              <label class="block text-xs text-slate-300 mb-1">מין</label>
+              <label class="block text-xs text-slate-300 mb-1">אני</label>
               <select id="prof-gender" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm">
                 <option value="">לא צוין</option>
                 <option value="גבר">גבר</option>
                 <option value="אישה">אישה</option>
+                <option value="אחר">אחר</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs text-slate-300 mb-1">את מי אתה / את מחפשת?</label>
+              <select id="prof-looking-for" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm">
+                <option value="אישה">אישה</option>
+                <option value="גבר">גבר</option>
                 <option value="אחר">אחר</option>
               </select>
             </div>
@@ -290,16 +312,15 @@
             </div>
           </div>
 
-          <div class="bg-slate-900/75 p-4 rounded-2xl border border-slate-800 space-y-3">
-            <div class="text-sm font-bold text-amber-300">🐾 בעלי חיים (אופציונלי)</div>
+          <div class="bg-slate-900/75 p-4 rounded-2xl border border-amber-500/25 space-y-3">
+            <div class="text-sm font-bold text-amber-300">🐾 בעלי חיים (שאלה נפרדת — אופציונלי)</div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               <div>
-                <label class="block text-xs text-slate-300 mb-1">האם יש לך בעלי חיים?</label>
+                <label class="block text-xs text-slate-300 mb-1">האם יש לך בעלי חיים או אין?</label>
                 <select id="prof-has-pets" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm">
                   <option value="">לא צוין</option>
-                  <option value="יש לי בעלי חיים">יש לי בעלי חיים</option>
-                  <option value="אין לי בעלי חיים">אין לי בעלי חיים</option>
-                  <option value="יש לי ואני אוהב/ת גם עוד">יש לי ואני אוהב/ת גם עוד</option>
+                  <option value="יש לי בעלי חיים">🐾 יש לי בעלי חיים</option>
+                  <option value="אין לי בעלי חיים">🚫 אין לי בעלי חיים</option>
                 </select>
               </div>
               <div>
@@ -319,13 +340,13 @@
             </div>
           </div>
 
-          <div class="bg-slate-900/70 p-4 rounded-2xl border border-slate-800 space-y-2.5">
-            <label class="block text-sm font-bold text-indigo-300">🎯 תחביבים — סדרות, סרטים, טיולים, מוזיקה ועוד (לא חובה)</label>
+          <div class="bg-slate-900/70 p-4 rounded-2xl border border-indigo-500/25 space-y-2.5">
+            <label class="block text-sm font-bold text-indigo-300">🎯 תחביבים ומה אוהב/ת לעשות — סדרות, טיולים, טיולי שטח עם ג׳יפים, טיולי רכבים ועוד (לא חובה)</label>
             <div id="hobbies-options" class="flex flex-wrap gap-2"></div>
           </div>
 
           <div>
-            <label class="block text-xs text-slate-300 mb-1">תיאור קצר (לא חובה)</label>
+            <label class="block text-xs text-slate-300 mb-1">ספר על עצמך (לא חובה)</label>
             <textarea id="prof-bio" rows="2" placeholder="ספר/י על עצמך..."
               class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm"></textarea>
           </div>
@@ -338,15 +359,44 @@
             </button>
           </div>
         </form>
-      </div><div id="tab-users" class="tab-content hidden max-w-6xl mx-auto glass rounded-2xl p-6 space-y-5">
+      </div><div id="tab-users" class="tab-content hidden max-w-6xl mx-auto glass rounded-2xl p-6 space-y-6">
         <div class="flex flex-wrap items-center justify-between gap-2">
-          <h2 class="text-2xl font-bold">👥 משתמשים, מרחק, גילאים והודעות אישיות</h2>
+          <h2 class="text-2xl font-bold">💘 דפדוף הכרויות, משתמשים והודעות אישיות</h2>
           <span id="following-count-badge" class="text-xs px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/40 text-indigo-200">
             עוקב אחרי 0 משתמשים
           </span>
         </div>
 
-        <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+        <div class="bg-slate-900/85 border border-pink-500/35 rounded-2xl p-5 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h3 class="text-base font-extrabold text-pink-300">🃏 דפדוף הכרויות מותאם למי שאת/ה מחפש/ת</h3>
+            <span id="match-deck-counter" class="text-xs text-slate-300"></span>
+          </div>
+          <div id="match-deck-card" class="bg-slate-950/90 border border-slate-800 rounded-2xl p-4 sm:p-5"></div>
+          <div class="flex flex-wrap items-center justify-center gap-3">
+            <button type="button" id="deck-skip-btn" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 border border-slate-600">
+              ⏭️ דלג להבא
+            </button>
+            <button type="button" id="deck-like-btn" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500">
+              💖 שלח לב והודעה
+            </button>
+            <button type="button" id="deck-follow-btn" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-500">
+              ➕ עקוב
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-4 grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+          <div>
+            <label class="block text-slate-300 mb-1">העדפת חיפוש (את מי מחפשים):</label>
+            <select id="filter-looking-for" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700">
+              <option value="preferred">לפי מה שבחרתי ("את מי אני מחפש/ת")</option>
+              <option value="all">כולם</option>
+              <option value="אישה">נשים</option>
+              <option value="גבר">גברים</option>
+              <option value="אחר">אחר</option>
+            </select>
+          </div>
           <div>
             <label class="block text-slate-300 mb-1">מרחק ממני:</label>
             <select id="filter-distance" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700">
@@ -464,7 +514,7 @@
           <button type="button" data-game="rps" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">2. אבן נייר מספריים (100+ חדרים)</button>
           <button type="button" data-game="memory" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">3. זיכרון (8×8, 10×10, 30×30)</button>
           <button type="button" data-game="number" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">4. ניחוש מספר (עד 50 בחדר)</button>
-          <button type="button" data-game="roulette" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">5. רולטה רוסית (6 מושבים)</button>
+          <button type="button" data-game="roulette" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">5. רולטה רוסית (שולחן עגול אוטומטי)</button>
         </div>
 
         <div id="game-ttt" class="game-panel max-w-6xl mx-auto glass rounded-2xl p-6 space-y-5">
@@ -712,8 +762,8 @@
         <div id="game-roulette" class="game-panel hidden max-w-6xl mx-auto glass rounded-2xl p-6 space-y-5">
           <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
             <div>
-              <h3 class="text-xl font-bold">🔫 רולטה רוסית — שולחן עגול של 6 מושבים (6 כדורים)</h3>
-              <p class="text-xs text-slate-300">האקדח מסתובב אל המושב • מי שנורה חווה קונפטי ולא ממשיך עד סוף הסיבוב • השורד האחרון זוכה בכדור זהב ← מחסנית ← אקדח ← מתנה גדולה</p>
+              <h3 class="text-xl font-bold">🔫 רולטה רוסית — שולחן עגול של 6 מושבים (סיבוב אקדח אוטומטי)</h3>
+              <p class="text-xs text-slate-300">אנשים מצטרפים לשולחן העגול והמחשב מסובב לבד את האקדח שבמרכז כל כמה שניות ויורה על מי שהוא מכוון אליו עם קונפטי</p>
             </div>
             <div class="flex flex-wrap items-center gap-2">
               <button type="button" id="rr-join-btn" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-pink-600 hover:bg-pink-500">כנס לשולחן</button>
@@ -732,18 +782,13 @@
             <div class="lg:col-span-2 bg-slate-950/80 border border-amber-500/30 rounded-2xl p-5 space-y-4">
               <div id="rr-seats-ring" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
 
-              <div class="flex flex-col items-center justify-center py-4 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-3 relative overflow-hidden">
-                <div id="rr-confetti-banner" class="hidden text-sm font-extrabold text-amber-300 animate-bounce">🎉🎊 בום קונפטי! ירייה! 🎊🎉</div>
+              <div class="round-table-ring rounded-full w-64 h-64 mx-auto flex flex-col items-center justify-center p-4 text-center space-y-2 shadow-2xl">
+                <div id="rr-confetti-banner" class="hidden text-xs font-extrabold text-amber-300 animate-bounce">🎉🎊 בום קונפטי! 🎊🎉</div>
                 <div id="rr-gun-spinner" class="text-5xl transition-transform duration-500 select-none">🔫</div>
-                <div id="rr-aimed-label" class="text-xs font-bold text-pink-200">האקדח מכוון למושב #1</div>
-                <div class="flex flex-wrap gap-2.5 justify-center">
-                  <button type="button" id="rr-spin-btn" class="px-4 py-2 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-500">🔄 סובב אקדח</button>
-                  <button type="button" id="rr-pull-btn" class="px-5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500">💥 לחץ על ההדק</button>
-                  <button type="button" id="rr-new-round-btn" class="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500">🔁 סיבוב חדש</button>
-                </div>
+                <div id="rr-aimed-label" class="text-xs font-bold text-pink-200">המחשב מסובב אוטומטית...</div>
               </div>
 
-              <p id="rr-status" class="text-sm text-center text-pink-200 bg-slate-900 p-3 rounded-xl">בחר מושב ולחץ "כנס לשולחן"</p>
+              <p id="rr-status" class="text-sm text-center text-pink-200 bg-slate-900 p-3 rounded-xl">לחץ "כנס לשולחן" — שחקנים מצטרפים והמחשב מסובב ויורה אוטומטית כל כמה שניות</p>
             </div>
 
             <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-3.5 flex flex-col justify-between space-y-2.5">
@@ -805,11 +850,11 @@
     }
 
     const hobbiesChoices = [
-      "📺 לראות סדרות ובינג׳", "🎬 קולנוע וסרטים", "🥾 טיולים", "🏋️ ספורט וכושר",
-      "📷 צילום", "🍳 בישול ואפייה", "🎮 גיימינג", "📚 קריאה",
-      "💃 ריקוד", "🎸 נגינה", "🎨 ציור ואמנות", "🚴 רכיבת אופניים",
-      "🏕️ קמפינג", "🧘 יוגה ומדיטציה", "🐶 גידול חיות מחמד", "✈️ נסיעות לחו״ל",
-      "♟️ משחקי אסטרטגיה", "🌱 גינון", "🎤 שירה וקריוקי", "🎶 הופעות ומוזיקה"
+      "📺 לראות סדרות ובינג׳", "🎬 קולנוע וסרטים", "🥾 טיולים", "🚙 טיולי שטח עם ג׳יפים",
+      "🚗 טיולי רכבים ונסיעות", "🏕️ קמפינג בטבע", "🏋️ ספורט וכושר", "📷 צילום",
+      "🍳 בישול ואפייה", "🎮 גיימינג", "📚 קריאה", "💃 ריקוד",
+      "🎸 נגינה", "🎨 ציור ואמנות", "🚴 רכיבת אופניים", "🧘 יוגה ומדיטציה",
+      "✈️ נסיעות לחו״ל", "♟️ משחקי אסטרטגיה", "🎤 שירה וקריוקי", "🎶 הופעות ומוזיקה"
     ];let weekStartTs = Number(localStorage.getItem("toplove_week_start") || Date.now());
     if (!localStorage.getItem("toplove_week_start")) localStorage.setItem("toplove_week_start", String(weekStartTs));
 
@@ -831,13 +876,22 @@
     }
     checkWeeklyAutoReset();
 
+    const sampleCandidates = [
+      { uid: "c-maya", name: "מאיה", gender: "אישה", lookingFor: "גבר", age: 27, location: "תל אביב", distanceKm: 12, tagline: "אוהבת סדרות וטיולי שטח 🚙", bio: "מחפשת חיבור אמיתי וצחוקים.", hobbies: ["📺 לראות סדרות ובינג׳", "🚙 טיולי שטח עם ג׳יפים", "🥾 טיולים"], hasPets: "יש לי בעלי חיים", favPet: "כלב", otherPetText: "", banner: "bg-sunset", nameStyle: "name-roseGold" },
+      { uid: "c-noa", name: "נועה", gender: "אישה", lookingFor: "גבר", age: 30, location: "חיפה", distanceKm: 18, tagline: "קפה, סרטים וטיולי רכבים 🚗", bio: "אוהבת לגלות מקומות חדשים.", hobbies: ["🎬 קולנוע וסרטים", "🚗 טיולי רכבים ונסיעות", "🎶 הופעות ומוזיקה"], hasPets: "יש לי בעלי חיים", favPet: "חתול", otherPetText: "", banner: "bg-aurora", nameStyle: "name-rainbow" },
+      { uid: "c-tamar", name: "תמר", gender: "אישה", lookingFor: "גבר", age: 25, location: "כרמיאל", distanceKm: 6, tagline: "טבע, קמפינג וסדרות מתח 🏕️", bio: "חובבת שטח ושקט טוב.", hobbies: ["🏕️ קמפינג בטבע", "📺 לראות סדרות ובינג׳", "🥾 טיולים"], hasPets: "אין לי בעלי חיים", favPet: "אחר", otherPetText: "ארנב", banner: "bg-emeraldLux", nameStyle: "name-neon" },
+      { uid: "c-daniel", name: "דניאל", gender: "גבר", lookingFor: "אישה", age: 29, location: "הרצליה", distanceKm: 14, tagline: "טיולי שטח עם ג׳יפים ומוזיקה 🚙", bio: "אוהב נסיעות, ים ושיחות עמוקות.", hobbies: ["🚙 טיולי שטח עם ג׳יפים", "🚗 טיולי רכבים ונסיעות", "🎸 נגינה"], hasPets: "יש לי בעלי חיים", favPet: "כלב", otherPetText: "", banner: "bg-royal", nameStyle: "name-rainbow" },
+      { uid: "c-omer", name: "עומר", gender: "גבר", lookingFor: "אישה", age: 32, location: "כרמיאל", distanceKm: 5, tagline: "סדרות, בישול וטיולים בצפון 🥾", bio: "איש של פשטות ואנרגיות טובות.", hobbies: ["📺 לראות סדרות ובינג׳", "🍳 בישול ואפייה", "🥾 טיולים"], hasPets: "אין לי בעלי חיים", favPet: "חתול", otherPetText: "", banner: "bg-sunset", nameStyle: "name-roseGold" },
+      { uid: "c-roni", name: "רוני", gender: "אישה", lookingFor: "גבר", age: 26, location: "רמת גן", distanceKm: 16, tagline: "טיולי רכבים, צילום וסדרות 📷", bio: "מחפשת בן זוג שכיף לטייל איתו.", hobbies: ["🚗 טיולי רכבים ונסיעות", "📷 צילום", "📺 לראות סדרות ובינג׳"], hasPets: "יש לי בעלי חיים", favPet: "כלב", otherPetText: "", banner: "bg-aurora", nameStyle: "name-rainbow" }
+    ];
+
     const gameNames = {
       ttt: "איקס עיגול", rps: "אבן נייר מספריים",
       memory: "משחק הזיכרון", number: "ניחוש מספר", roulette: "רולטה רוסית"
     };
 
     const me = {
-      uid: "", email: "", name: "", gender: "", age: 18,
+      uid: "", email: "", name: "", gender: "", lookingFor: "אישה", age: 18,
       location: "", distanceKm: 15, smoking: "", alcohol: "", education: "",
       hasPets: "", favPet: "", otherPetText: "",
       tagline: "", banner: "bg-aurora", nameStyle: "name-rainbow", bio: "",
@@ -933,8 +987,11 @@
     function formatPetLine(p) {
       const parts = [];
       if (p.hasPets) parts.push(p.hasPets);
-      if (p.favPet === "אחר") parts.push(p.otherPetText ? `אוהב/ת: ${p.otherPetText}` : "אוהב/ת: אחר");
-      else if (p.favPet) parts.push(`אוהב/ת: ${p.favPet}`);
+      if (p.favPet === "אחר") parts.push(p.otherPetText ? `מעדיף/ה: ${p.otherPetText}` : "מעדיף/ה: אחר");
+      else if (p.favPet) {
+        const icon = p.favPet === "חתול" ? "🐱" : p.favPet === "כלב" ? "🐶" : "✨";
+        parts.push(`מעדיף/ה: ${icon} ${p.favPet}`);
+      }
       return parts.length ? `🐾 ${parts.join(" • ")}` : "";
     }
 
@@ -955,7 +1012,8 @@
       $("modal-name").className = `text-2xl font-extrabold ${person.nameStyle || ""}`;
       $("modal-name").textContent = person.name || "משתמש";
       $("modal-tagline").textContent = person.tagline || "";
-      $("modal-meta").textContent = [person.gender, person.age ? `גיל ${person.age}` : "", person.location, person.distanceKm !== undefined ? `${person.distanceKm} ק״מ ממך` : ""].filter(Boolean).join(" • ");
+      $("modal-meta").textContent = [person.gender ? `אני: ${person.gender}` : "", person.age ? `גיל ${person.age}` : "", person.location, person.distanceKm !== undefined ? `${person.distanceKm} ק״מ ממך` : ""].filter(Boolean).join(" • ");
+      $("modal-looking-for").textContent = person.lookingFor ? `💘 מחפש/ת: ${person.lookingFor}` : "";
       $("modal-habits").textContent = [person.smoking ? `🚬 ${person.smoking}` : "", person.alcohol ? `🍷 ${person.alcohol}` : ""].filter(Boolean).join(" • ");
       $("modal-pets-info").textContent = formatPetLine(person);
       $("modal-education").textContent = person.education ? `🎓 השכלה: ${person.education}` : "";
@@ -1071,7 +1129,8 @@
         $("summary-name").className = `text-2xl font-extrabold ${me.nameStyle || ""}`;
         $("summary-name").textContent = me.name || "משתמש";
         $("summary-tagline").textContent = me.tagline || "";
-        $("summary-age-gender-loc").textContent = [me.gender, me.age ? `גיל ${me.age}` : "", me.location, me.distanceKm !== undefined ? `${me.distanceKm} ק״מ` : ""].filter(Boolean).join(" • ");
+        $("summary-age-gender-loc").textContent = [me.gender ? `אני: ${me.gender}` : "", me.age ? `גיל ${me.age}` : "", me.location, me.distanceKm !== undefined ? `${me.distanceKm} ק״מ` : ""].filter(Boolean).join(" • ");
+        $("summary-looking-for").textContent = me.lookingFor ? `💘 מחפש/ת: ${me.lookingFor}` : "";
         $("summary-habits").textContent = [me.smoking ? `🚬 ${me.smoking}` : "", me.alcohol ? `🍷 ${me.alcohol}` : ""].filter(Boolean).join(" • ");
         $("summary-pets").textContent = formatPetLine(me);
         $("summary-bio").textContent = me.bio || "";
@@ -1105,8 +1164,8 @@
       $("auth-section").classList.add("hidden"); $("app-section").classList.remove("hidden");
       $("user-badge").classList.remove("hidden"); $("logout-btn").classList.remove("hidden");
       $("user-badge").textContent = `${me.name || me.email.split("@")[0]} • ${me.age || 18}`;
-      $("prof-name").value = me.name || ""; $("prof-gender").value = me.gender || ""; $("prof-age").value = me.age || 18;
-      $("prof-location").value = me.location || ""; $("prof-distance").value = me.distanceKm ?? 15;
+      $("prof-name").value = me.name || ""; $("prof-gender").value = me.gender || ""; $("prof-looking-for").value = me.lookingFor || "אישה";
+      $("prof-age").value = me.age || 18; $("prof-location").value = me.location || ""; $("prof-distance").value = me.distanceKm ?? 15;
       $("prof-smoking").value = me.smoking || ""; $("prof-alcohol").value = me.alcohol || "";
       $("prof-education").value = me.education || ""; $("prof-has-pets").value = me.hasPets || "";
       $("prof-fav-pet").value = me.favPet || ""; $("prof-other-pet-text").value = me.otherPetText || "";
@@ -1121,12 +1180,12 @@
 
     $("auth-form").onsubmit = async (e) => {
       e.preventDefault();
-      const email = $("auth-email").value.trim().toLowerCase(), age = Number($("auth-age").value);
+      const email = $("auth-email").value.trim().toLowerCase(), age = Number($("auth-age").value), lookingFor = $("auth-looking-for").value || "אישה";
       if (!age || age < 18 || age > 80) { $("auth-error").textContent = "כניסה מותרת לגילאי 18 עד 80 בלבד."; $("auth-error").classList.remove("hidden"); return; }
       $("auth-error").classList.add("hidden");
       const uid = "u_" + email.replace(/[^a-z0-9]/g, "_");
       const session = {
-        uid, email, name: email.split("@")[0] || "משתמש", gender: "", age, location: "ישראל", distanceKm: 10,
+        uid, email, name: email.split("@")[0] || "משתמש", gender: "", lookingFor, age, location: "ישראל", distanceKm: 10,
         smoking: "", alcohol: "", education: "", hasPets: "", favPet: "", otherPetText: "",
         tagline: "", banner: "bg-aurora", nameStyle: "name-rainbow", bio: "",
         hobbies: [], photos: [], following: [], avatar: "", hasCustomPhoto: false, profileCompleted: false,
@@ -1150,13 +1209,8 @@
     $("prof-avatar-file").onchange = (e) => {
       const files = Array.from(e.target.files || []);
       if (!files.length) return;
-      me.photos = [];
-      me.hasCustomPhoto = true;
-      files.forEach((f) => {
-        const rd = new FileReader();
-        rd.onload = () => { me.photos.push(String(rd.result)); me.avatar = me.photos[0]; renderPhotoThumbs(); };
-        rd.readAsDataURL(f);
-      });
+      me.photos = []; me.hasCustomPhoto = true;
+      files.forEach((f) => { const rd = new FileReader(); rd.onload = () => { me.photos.push(String(rd.result)); me.avatar = me.photos[0]; renderPhotoThumbs(); }; rd.readAsDataURL(f); });
     };
     $("prof-banner").onchange = (e) => { me.banner = e.target.value; renderPhotoThumbs(); };
 
@@ -1166,8 +1220,8 @@
       if (ageVal < 18 || ageVal > 80) { $("profile-error").textContent = "הגיל חייב להיות בין 18 ל-80."; $("profile-error").classList.remove("hidden"); return; }
       $("profile-error").classList.add("hidden");
       Object.assign(me, {
-        name: $("prof-name").value.trim() || me.name || "משתמש", gender: $("prof-gender").value, age: ageVal,
-        location: $("prof-location").value.trim(), distanceKm: Number($("prof-distance").value) || 0,
+        name: $("prof-name").value.trim() || me.name || "משתמש", gender: $("prof-gender").value, lookingFor: $("prof-looking-for").value || "אישה",
+        age: ageVal, location: $("prof-location").value.trim(), distanceKm: Number($("prof-distance").value) || 0,
         smoking: $("prof-smoking").value, alcohol: $("prof-alcohol").value, education: $("prof-education").value.trim(),
         hasPets: $("prof-has-pets").value, favPet: $("prof-fav-pet").value, otherPetText: $("prof-other-pet-text").value.trim(),
         tagline: $("prof-tagline").value.trim(), banner: $("prof-banner").value, bio: $("prof-bio").value.trim(),
@@ -1176,24 +1230,79 @@
       localStorage.setItem("toplove_session", JSON.stringify(me));
       $("user-badge").textContent = `${me.name} • ${me.age}`;
       try { await setDoc(doc(db, "users", me.uid), { ...me, updatedAt: serverTimestamp() }, { merge: true }); } catch {}
-      applyProfileViewMode(); renderGameStatsAndTop5(currentGameKey);
+      applyProfileViewMode(); renderGameStatsAndTop5(currentGameKey); renderRealUsers();
       $("save-feedback").classList.remove("opacity-0"); setTimeout(() => $("save-feedback").classList.add("opacity-0"), 1500);
     };
 
-    let allUsers = [];
+    let allUsers = [], deckIdx = 0;
+
+    function getCombinedCandidates() {
+      const merged = [...allUsers];
+      for (const sc of sampleCandidates) if (!merged.some((x) => (x.uid || x.id) === sc.uid)) merged.push({ id: sc.uid, ...sc });
+      return merged;
+    }
+
+    function getPreferredGenderFilter() {
+      const sel = $("filter-looking-for").value;
+      if (sel === "preferred") return me.lookingFor || "all";
+      return sel;
+    }
+
+    function renderMatchDeck(pool) {
+      const targetGender = getPreferredGenderFilter();
+      const deckPool = targetGender && targetGender !== "all" ? pool.filter((u) => u.gender === targetGender) : pool;
+      if (!deckPool.length) {
+        $("match-deck-counter").textContent = "0 פרופילים";
+        $("match-deck-card").innerHTML = `<p class="text-xs text-slate-400 text-center py-4">אין כרגע פרופילים מתאימים לבחירה הזו.</p>`;
+        return;
+      }
+      deckIdx = deckIdx % deckPool.length;
+      const cur = deckPool[deckIdx];
+      $("match-deck-counter").textContent = `פרופיל ${deckIdx + 1} מתוך ${deckPool.length} • מחפש/ת: ${targetGender === "all" ? "הכל" : targetGender}`;
+      const avBox = cur.avatar ? `<img src="${cur.avatar}" alt="" class="w-20 h-20 rounded-2xl object-cover border-2 border-pink-400 shrink-0" />`
+        : `<div class="w-20 h-20 rounded-2xl bg-slate-800 border-2 border-pink-400 flex items-center justify-center text-3xl shrink-0">👤</div>`;
+      $("match-deck-card").innerHTML = `<div class="flex flex-col sm:flex-row items-center gap-4">
+        ${avBox}
+        <div class="space-y-1 text-center sm:text-right flex-1">
+          <div class="font-extrabold text-lg ${cur.nameStyle || ""}">${cur.name} • גיל ${cur.age || 25}</div>
+          <div class="text-xs text-pink-200">${cur.gender || ""} • ${cur.location || ""} • ${cur.distanceKm ?? 0} ק״מ</div>
+          <div class="text-xs text-amber-200">${formatPetLine(cur)}</div>
+          <div class="text-xs text-slate-300">${cur.bio || cur.tagline || ""}</div>
+        </div>
+      </div>`;
+
+      $("deck-skip-btn").onclick = () => { deckIdx = (deckIdx + 1) % deckPool.length; renderMatchDeck(pool); };
+      $("deck-like-btn").onclick = async () => {
+        const targetId = cur.uid || cur.id, dmId = "dm_" + [me.uid, targetId].sort().join("_");
+        if (!chatRooms.some((r) => r.id === dmId)) chatRooms.unshift({ id: dmId, topic: `שיחה אישית עם ${cur.name}`, code: "", members: [me.uid, targetId] });
+        try { await addDoc(collection(db, "rooms", dmId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar || "", text: `💖 ${me.name || "משתמש"} שלח/ה לך לב והודעה בדפדוף ההכרויות!`, createdAt: serverTimestamp() }); } catch {}
+        activeRoomId = dmId; joinedRoomId = dmId; switchTab("chat"); renderRooms();
+      };
+      $("deck-follow-btn").onclick = () => {
+        const targetId = cur.uid || cur.id; me.following = me.following || [];
+        if (!me.following.includes(targetId)) me.following.push(targetId);
+        deckIdx = (deckIdx + 1) % deckPool.length; renderMatchDeck(pool); renderRealUsers();
+      };
+    }
+
     function renderRealUsers() {
       $("following-count-badge").textContent = `עוקב אחרי ${(me.following || []).length} משתמשים`;
+      const pool = getCombinedCandidates(), targetGender = getPreferredGenderFilter();
       const maxDist = $("filter-distance").value, minAge = Number($("filter-min-age").value) || 18, maxAge = Number($("filter-max-age").value) || 80;
-      const filtered = allUsers.filter((u) => {
+      const filtered = pool.filter((u) => {
         const uAge = Number(u.age) || 18, uDist = Number(u.distanceKm ?? 0);
-        return uAge >= minAge && uAge <= maxAge && (maxDist === "all" || uDist <= Number(maxDist));
+        const genderOk = !targetGender || targetGender === "all" || u.gender === targetGender;
+        return genderOk && uAge >= minAge && uAge <= maxAge && (maxDist === "all" || uDist <= Number(maxDist));
       });
+      renderMatchDeck(pool);
+
       $("real-users-grid").innerHTML = filtered.length
-        ? filtered.map((u) => {
+        ? filtered.map((u, idx) => {
+            const uid = u.uid || u.id || `cand-${idx}`;
             const gPoints = Object.values(u.gameStats || {}).reduce((acc, s) => acc + (Number(s.points) || 0), 0);
-            const lvl = getLevel(gPoints), isF = (me.following || []).includes(u.id);
-            const avHtml = u.avatar ? `<img src="${u.avatar}" alt="" data-open-user="${u.id}" class="w-14 h-14 rounded-xl object-cover border-2 border-slate-900 bg-slate-800 cursor-pointer shrink-0" />`
-              : `<div data-open-user="${u.id}" class="w-14 h-14 rounded-xl border-2 border-slate-900 bg-slate-800 flex items-center justify-center text-xl cursor-pointer shrink-0">👤</div>`;
+            const lvl = getLevel(gPoints), isF = (me.following || []).includes(uid);
+            const avHtml = u.avatar ? `<img src="${u.avatar}" alt="" data-open-user="${uid}" class="w-14 h-14 rounded-xl object-cover border-2 border-slate-900 bg-slate-800 cursor-pointer shrink-0" />`
+              : `<div data-open-user="${uid}" class="w-14 h-14 rounded-xl border-2 border-slate-900 bg-slate-800 flex items-center justify-center text-xl cursor-pointer shrink-0">👤</div>`;
             return `<div class="bg-slate-900/85 border border-slate-700 rounded-2xl overflow-hidden flex flex-col justify-between">
               <div>
                 <div class="h-14 ${u.banner || "bg-aurora"}"></div>
@@ -1201,7 +1310,7 @@
                   <div class="flex items-end gap-3">
                     ${avHtml}
                     <div>
-                      <div data-open-user="${u.id}" class="font-bold text-sm cursor-pointer hover:underline ${u.nameStyle || ""}">${u.name || "משתמש"}</div>
+                      <div data-open-user="${uid}" class="font-bold text-sm cursor-pointer hover:underline ${u.nameStyle || ""}">${u.name || "משתמש"}</div>
                       <div class="text-[11px] text-amber-300">רמה ${lvl} • ${u.age || 18} • ${u.distanceKm ?? 0} ק״מ</div>
                     </div>
                   </div>
@@ -1209,25 +1318,26 @@
                 </div>
               </div>
               <div class="px-4 pb-4 flex gap-2">
-                <button type="button" data-follow-user="${u.id}" class="flex-1 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600">${isF ? "✓ עוקב" : "➕ עקוב"}</button>
-                <button type="button" data-dm-user="${u.id}" class="flex-1 py-1.5 rounded-lg text-xs font-semibold bg-pink-600">הודעה אישית</button>
+                <button type="button" data-follow-user="${uid}" class="flex-1 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600">${isF ? "✓ עוקב" : "➕ עקוב"}</button>
+                <button type="button" data-dm-user="${uid}" class="flex-1 py-1.5 rounded-lg text-xs font-semibold bg-pink-600">הודעה אישית</button>
               </div>
             </div>`;
           }).join("")
-        : `<p class="text-xs text-slate-400 col-span-full">אין משתמשים התואמים לסינון המרחק והגיל שנבחר.</p>`;
+        : `<p class="text-xs text-slate-400 col-span-full">אין משתמשים התואמים לסינון שנבחר.</p>`;
 
-      document.querySelectorAll("[data-open-user]").forEach((el) => { el.onclick = () => { const f = allUsers.find((x) => x.id === el.dataset.openUser); if (f) openUserModal(f); }; });
+      document.querySelectorAll("[data-open-user]").forEach((el) => { el.onclick = () => { const f = pool.find((x) => (x.uid || x.id) === el.dataset.openUser); if (f) openUserModal(f); }; });
       document.querySelectorAll("[data-follow-user]").forEach((btn) => { btn.onclick = () => { const id = btn.dataset.followUser; me.following = me.following || []; me.following = me.following.includes(id) ? me.following.filter((x) => x !== id) : [...me.following, id]; renderRealUsers(); }; });
       document.querySelectorAll("[data-dm-user]").forEach((btn) => {
         btn.onclick = () => {
-          const other = allUsers.find((x) => x.id === btn.dataset.dmUser); if (!other) return;
-          const dmId = "dm_" + [me.uid, other.id].sort().join("_");
-          if (!chatRooms.some((r) => r.id === dmId)) chatRooms.unshift({ id: dmId, topic: `שיחה אישית עם ${other.name || "משתמש"}`, code: "", members: [me.uid, other.id] });
+          const other = pool.find((x) => (x.uid || x.id) === btn.dataset.dmUser); if (!other) return;
+          const otherId = other.uid || other.id, dmId = "dm_" + [me.uid, otherId].sort().join("_");
+          if (!chatRooms.some((r) => r.id === dmId)) chatRooms.unshift({ id: dmId, topic: `שיחה אישית עם ${other.name || "משתמש"}`, code: "", members: [me.uid, otherId] });
           activeRoomId = dmId; joinedRoomId = dmId; switchTab("chat"); renderRooms();
         };
       });
     }
 
+    $("filter-looking-for").onchange = () => { deckIdx = 0; renderRealUsers(); };
     $("filter-distance").onchange = renderRealUsers;
     $("filter-min-age").oninput = renderRealUsers;
     $("filter-max-age").oninput = renderRealUsers;
@@ -1438,11 +1548,7 @@
     $("ttt-join-room").onclick = () => {
       const r = tttRooms.find((x) => x.id === selectedTttRoomId); if (!r) return;
       const myLabel = me.name || "שחקן";
-      if (r.p1 !== myLabel && r.p2 !== myLabel) {
-        if (!r.p1) r.p1 = myLabel;
-        else if (!r.p2) { r.p2 = myLabel; r.p2Sym = r.p1Sym === "X" ? "O" : "X"; }
-        else { alert("השולחן מלא (2/2 שחקנים)."); return; }
-      }
+      if (r.p1 !== myLabel && r.p2 !== myLabel) { if (!r.p1) r.p1 = myLabel; else if (!r.p2) { r.p2 = myLabel; r.p2Sym = r.p1Sym === "X" ? "O" : "X"; } else { alert("השולחן מלא (2/2 שחקנים)."); return; } }
       joinedTttRoomId = r.id; $("ttt-leave-room").classList.remove("hidden"); startCountdown("ttt", 30, "ttt-timer"); renderTttRooms(); renderTttBoard();
     };
 
@@ -1772,12 +1878,13 @@
 
     renderNumRooms(); renderActiveNumRoom();
 
+    const botPool = ["אורן", "ליאן", "איתי", "שיר", "יונתן", "הילה"];
     const rrTable = {
-      seats: Array.from({ length: 6 }, (_, i) => ({ seatNum: i + 1, name: null, alive: true })),
+      seats: Array.from({ length: 6 }, (_, i) => ({ seatNum: i + 1, name: null, isBot: false, alive: true })),
       chamberIndex: 0, bulletChamber: Math.floor(Math.random() * 6),
       aimedSeatIdx: 0, roundOver: false, chat: []
     };
-    let joinedRr = false;
+    let joinedRr = false, rrAutoTimer = null;
 
     function renderRrRewardsUI() {
       $("rr-gold-balls").textContent = String(me.rrRewards.goldBalls || 0);
@@ -1791,7 +1898,7 @@
       renderRoomChatLog("rr-room-chat-log", rrTable.chat || []);
       $("rr-seats-ring").innerHTML = rrTable.seats.map((s, idx) => {
         const isAimed = idx === rrTable.aimedSeatIdx;
-        const badge = !s.name ? "מושב פנוי" : s.alive ? "💚 חי בסיבוב" : "🎊 נורה (קונפטי)";
+        const badge = !s.name ? "מושב פנוי" : s.alive ? "💚 חי בשולחן" : "🎊 נורה (קונפטי)";
         return `<div class="p-3 rounded-xl border text-xs ${isAimed ? "bg-amber-500/20 border-amber-400" : !s.alive ? "bg-rose-950/50 border-rose-700/50 opacity-70" : "bg-slate-900 border-slate-700"}">
           <div class="font-bold">מושב #${s.seatNum}: ${s.name || "ריק"}</div>
           <div class="text-[11px] mt-0.5">${badge}</div>
@@ -1800,54 +1907,52 @@
       $("rr-aimed-label").textContent = `האקדח מכוון למושב #${rrTable.aimedSeatIdx + 1} (${rrTable.seats[rrTable.aimedSeatIdx]?.name || "פנוי"})`;
     }
 
-    $("rr-join-btn").onclick = () => {
-      const myLabel = me.name || "שחקן", free = rrTable.seats.find((s) => !s.name);
-      if (!rrTable.seats.some((s) => s.name === myLabel)) {
-        if (!free) { alert("כל 6 המושבים בשולחן העגול תפוסים."); return; }
-        free.name = myLabel; free.alive = true;
+    function seedBotsToRrTable() {
+      let botIdx = 0;
+      for (const s of rrTable.seats) {
+        if (!s.name && botIdx < 3) {
+          s.name = `${botPool[botIdx % botPool.length]} (אורח)`;
+          s.isBot = true;
+          s.alive = true;
+          botIdx += 1;
+        }
       }
-      joinedRr = true; $("rr-leave-btn").classList.remove("hidden"); renderRrTable();
-    };
+    }
 
-    $("rr-leave-btn").onclick = () => {
-      const myLabel = me.name || "שחקן";
-      rrTable.seats.forEach((s) => { if (s.name === myLabel) { s.name = null; s.alive = true; } });
-      joinedRr = false; $("rr-leave-btn").classList.add("hidden");
-      if (rrTable.seats.every((s) => !s.name)) {
-        rrTable.chamberIndex = 0; rrTable.bulletChamber = Math.floor(Math.random() * 6);
-        rrTable.aimedSeatIdx = 0; rrTable.roundOver = false; rrTable.chat = [];
+    async function runAutoSpinAndFire() {
+      if (!joinedRr) return;
+      if (rrTable.roundOver) {
+        rrTable.seats.forEach((s) => { if (s.name) s.alive = true; });
+        rrTable.chamberIndex = 0;
+        rrTable.bulletChamber = Math.floor(Math.random() * 6);
+        rrTable.roundOver = false;
       }
-      renderRrTable();
-    };
 
-    $("rr-spin-btn").onclick = () => {
-      if (!joinedRr) { alert('לחץ קודם על "כנס לשולחן".'); return; }
+      const freeSeat = rrTable.seats.find((s) => !s.name);
+      if (freeSeat && Math.random() < 0.45) {
+        const used = new Set(rrTable.seats.map((x) => x.name).filter(Boolean));
+        const cand = botPool.map((n) => `${n} (אורח)`).find((n) => !used.has(n));
+        if (cand) { freeSeat.name = cand; freeSeat.isBot = true; freeSeat.alive = true; }
+      }
+
       const aliveIndices = rrTable.seats.map((s, idx) => (s.name && s.alive ? idx : -1)).filter((i) => i >= 0);
-      if (!aliveIndices.length) return;
+      if (aliveIndices.length < 2) { renderRrTable(); return; }
+
       rrTable.aimedSeatIdx = aliveIndices[Math.floor(Math.random() * aliveIndices.length)];
-      rrTable.chamberIndex = Math.floor(Math.random() * 6);
-      $("rr-gun-spinner").style.transform = `rotate(${(rrTable.aimedSeatIdx + 1) * 60}deg)`;
-      $("rr-confetti-banner").classList.add("hidden");
-      $("rr-status").textContent = `האקדח הסתובב וכוון למושב #${rrTable.aimedSeatIdx + 1}!`;
-      renderRrTable();
-    };
+      $("rr-gun-spinner").style.transform = `rotate(${(rrTable.aimedSeatIdx + 1) * 60 + Math.floor(Math.random() * 30)}deg)`;
 
-    $("rr-pull-btn").onclick = async () => {
-      if (!joinedRr || rrTable.roundOver) return;
-      const seat = rrTable.seats[rrTable.aimedSeatIdx];
-      if (!seat || !seat.name || !seat.alive) { $("rr-status").textContent = "בחר/סובב למושב פעיל שחי בסיבוב."; return; }
-
-      const isShot = rrTable.chamberIndex === rrTable.bulletChamber;
+      const targetSeat = rrTable.seats[rrTable.aimedSeatIdx];
+      const shotFired = rrTable.chamberIndex === rrTable.bulletChamber;
       rrTable.chamberIndex = (rrTable.chamberIndex + 1) % 6;
 
-      if (isShot) {
-        seat.alive = false;
+      if (shotFired) {
+        targetSeat.alive = false;
         $("rr-confetti-banner").classList.remove("hidden");
-        $("rr-status").textContent = `🎉 בום קונפטי! האקדח ירה על ${seat.name} (מושב #${seat.seatNum}) — אינו ממשיך עד סוף הסיבוב!`;
-        if (seat.name === (me.name || "שחקן")) await awardGameLoss("roulette", 5);
+        $("rr-status").textContent = `🎉 בום קונפטי! האקדח ירה אוטומטית על ${targetSeat.name} (מושב #${targetSeat.seatNum}) — אינו ממשיך עד סוף הסיבוב!`;
+        if (targetSeat.name === (me.name || "שחקן")) await awardGameLoss("roulette", 5);
       } else {
         $("rr-confetti-banner").classList.add("hidden");
-        $("rr-status").textContent = `😅 קליק! ${seat.name} (מושב #${seat.seatNum}) שרד את התא הזה!`;
+        $("rr-status").textContent = `🎲 האקדח כוון אוטומטית למושב #${targetSeat.seatNum} (${targetSeat.name}) — כדור סרק, ממשיכים!`;
       }
 
       const survivors = rrTable.seats.filter((s) => s.name && s.alive);
@@ -1864,14 +1969,37 @@
         }
       }
       renderRrTable();
+    }
+
+    function startRrAutoLoop() {
+      if (rrAutoTimer) clearInterval(rrAutoTimer);
+      rrAutoTimer = setInterval(runAutoSpinAndFire, 2800);
+    }
+
+    $("rr-join-btn").onclick = () => {
+      const myLabel = me.name || "שחקן", free = rrTable.seats.find((s) => !s.name);
+      if (!rrTable.seats.some((s) => s.name === myLabel)) {
+        if (!free) { alert("כל 6 המושבים בשולחן העגול תפוסים."); return; }
+        free.name = myLabel; free.isBot = false; free.alive = true;
+      }
+      seedBotsToRrTable();
+      joinedRr = true; $("rr-leave-btn").classList.remove("hidden");
+      $("rr-status").textContent = "הצטרפת לשולחן העגול! המחשב מסובב ויורה אוטומטית כל כמה שניות...";
+      renderRrTable(); startRrAutoLoop();
     };
 
-    $("rr-new-round-btn").onclick = () => {
-      rrTable.seats.forEach((s) => { if (s.name) s.alive = true; });
-      rrTable.chamberIndex = 0; rrTable.bulletChamber = Math.floor(Math.random() * 6);
-      rrTable.aimedSeatIdx = 0; rrTable.roundOver = false;
+    $("rr-leave-btn").onclick = () => {
+      const myLabel = me.name || "שחקן";
+      rrTable.seats.forEach((s) => { if (s.name === myLabel) { s.name = null; s.isBot = false; s.alive = true; } });
+      joinedRr = false; $("rr-leave-btn").classList.add("hidden");
+      if (rrAutoTimer) { clearInterval(rrAutoTimer); rrAutoTimer = null; }
+      if (rrTable.seats.every((s) => !s.name || s.isBot)) {
+        rrTable.seats.forEach((s) => { s.name = null; s.isBot = false; s.alive = true; });
+        rrTable.chamberIndex = 0; rrTable.bulletChamber = Math.floor(Math.random() * 6);
+        rrTable.aimedSeatIdx = 0; rrTable.roundOver = false; rrTable.chat = [];
+      }
       $("rr-confetti-banner").classList.add("hidden");
-      $("rr-status").textContent = "סיבוב חדש ברולטה הרוסית התחיל!";
+      $("rr-status").textContent = "יצאת מהשולחן העגול.";
       renderRrTable();
     };
 

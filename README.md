@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TopLove</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>body {
+  <style>
+    body {
       background: radial-gradient(circle at top right, #3b0764, #0f172a 55%, #020617);
       color: #f8fafc;
       min-height: 100vh;
@@ -14,7 +15,8 @@
       background: rgba(15, 23, 42, 0.72);
       backdrop-filter: blur(14px);
       border: 1px solid rgba(255, 255, 255, 0.12);
-    }.bg-aurora { background: linear-gradient(135deg, #ec4899, #8b5cf6, #06b6d4); }
+    }
+    .bg-aurora { background: linear-gradient(135deg, #ec4899, #8b5cf6, #06b6d4); }
     .bg-sunset { background: linear-gradient(135deg, #f97316, #ec4899, #9333ea); }
     .bg-ocean  { background: linear-gradient(135deg, #0284c7, #14b8a6, #2563eb); }
     .bg-gold   { background: linear-gradient(135deg, #f59e0b, #eab308, #d97706); }
@@ -78,20 +80,21 @@
         </div>
         <button type="submit" class="w-full py-3 rounded-xl font-bold text-sm bg-pink-600 hover:bg-pink-500">כניסה לאתר</button>
       </form>
-    </section><section id="app-section" class="hidden space-y-6">
+    </section>
+
+    <section id="app-section" class="hidden space-y-6">
       <nav class="flex flex-wrap gap-2">
         <button type="button" data-tab="users" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold bg-pink-600 text-white">💘 הכרויות וגולשים</button>
         <button type="button" data-tab="chat" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold glass text-slate-300">💬 חדרי צ׳אט</button>
         <button type="button" data-tab="games" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold glass text-slate-300">🎮 משחקים ודירוג</button>
         <button type="button" data-tab="profile" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold glass text-slate-300">✨ הפרופיל שלי</button>
-      </nav>
-
-      <div id="tab-users" class="tab-content space-y-6">
+      </nav><div id="tab-users" class="tab-content space-y-6">
         <div class="glass rounded-3xl p-5 space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <h2 class="text-lg font-extrabold">סינון ודפדוף פרופילים</h2>
             <span id="following-count-badge" class="text-xs px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-200">עוקב אחרי 0 משתמשים</span>
-          </div><div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-xs">
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-xs">
             <select id="filter-looking-for" class="px-3 py-2 rounded-xl bg-slate-950 border border-slate-700">
               <option value="preferred">לפי ההעדפה שלי</option>
               <option value="all">הכל</option>
@@ -122,7 +125,9 @@
           </div>
         </div>
         <div id="real-users-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-      </div><div id="tab-chat" class="tab-content hidden">
+      </div>
+
+      <div id="tab-chat" class="tab-content hidden">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
           <div class="lg:col-span-4 glass rounded-3xl p-4 space-y-4">
             <h2 class="text-base font-extrabold">חדרי שיחה</h2>
@@ -238,7 +243,8 @@
               <div id="rps-right-name" class="text-xs font-bold"></div>
               <div id="rps-right-sign" class="text-4xl">✊</div>
             </div>
-          </div><div class="flex justify-center gap-3">
+          </div>
+          <div class="flex justify-center gap-3">
             <button type="button" data-rps="rock" class="rps-choice px-4 py-2.5 rounded-xl bg-slate-800 text-sm font-bold">🪨 אבן</button>
             <button type="button" data-rps="paper" class="rps-choice px-4 py-2.5 rounded-xl bg-slate-800 text-sm font-bold">📄 נייר</button>
             <button type="button" data-rps="scissors" class="rps-choice px-4 py-2.5 rounded-xl bg-slate-800 text-sm font-bold">✂️ מספריים</button>
@@ -293,7 +299,8 @@
             <input id="num-room-name" type="text" placeholder="שם חדר ניחושים..." class="flex-1 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
             <input id="num-room-max" type="number" min="10" value="1000" class="w-28 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
             <button type="submit" class="px-4 py-2 rounded-xl bg-indigo-600 text-xs font-bold">+ חדר</button>
-          </form><div class="grid grid-cols-1 md:grid-cols-2 gap-3 p-3 rounded-2xl bg-slate-950/70 border border-slate-800 text-xs">
+          </form>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 p-3 rounded-2xl bg-slate-950/70 border border-slate-800 text-xs">
             <div class="space-y-2">
               <div id="num-secret-status" class="text-amber-300 font-semibold"></div>
               <div class="flex gap-2">
@@ -332,7 +339,8 @@
             <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">📦 מחסניות: <strong id="rr-magazines">0</strong></div>
             <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">🔫 אקדחים: <strong id="rr-pistols">0</strong></div>
             <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">🎁 פרסי על: <strong id="rr-grand-gifts">0</strong></div>
-          </div><div id="rr-confetti-banner" class="hidden p-3 rounded-2xl bg-amber-500/20 border border-amber-400 text-center text-xs font-extrabold text-amber-200">🎊 בום קונפטי! 🎊</div>
+          </div>
+          <div id="rr-confetti-banner" class="hidden p-3 rounded-2xl bg-amber-500/20 border border-amber-400 text-center text-xs font-extrabold text-amber-200">🎊 בום קונפטי! 🎊</div>
           <div class="flex items-center justify-between gap-3 p-3 rounded-2xl bg-slate-950/70 border border-slate-800 text-xs">
             <span id="rr-aimed-label" class="font-bold text-amber-300"></span>
             <div id="rr-gun-spinner" class="text-2xl transition-transform duration-500">🔫</div>
@@ -359,7 +367,8 @@
           <div id="summary-banner" class="h-36 bg-aurora p-5 flex items-start justify-between">
             <span id="summary-level-badge" class="px-3 py-1 rounded-full bg-slate-950/70 text-xs font-bold"></span>
             <span id="summary-likes-badge" class="px-3 py-1 rounded-full bg-slate-950/70 text-xs font-bold"></span>
-          </div><div class="px-5 pb-5 space-y-4">
+          </div>
+          <div class="px-5 pb-5 space-y-4">
             <div class="flex flex-wrap items-end justify-between gap-4 -mt-12">
               <div class="flex items-end gap-3">
                 <img id="summary-avatar" src="" alt="" class="hidden w-24 h-24 rounded-2xl object-cover border-4 border-slate-900 bg-slate-800 cursor-pointer" />
@@ -376,7 +385,8 @@
                 <button id="summary-prev-photo" type="button" class="px-3 py-1.5 rounded-xl bg-slate-800 text-xs">◀</button>
                 <button id="summary-next-photo" type="button" class="px-3 py-1.5 rounded-xl bg-slate-800 text-xs">▶</button>
               </div>
-            </div><div id="summary-photos-strip" class="flex gap-2 overflow-x-auto"></div>
+            </div>
+            <div id="summary-photos-strip" class="flex gap-2 overflow-x-auto"></div>
             <div id="summary-quick-pills" class="flex flex-wrap gap-2 text-xs"></div>
             <p id="summary-bio" class="text-sm text-slate-200 bg-slate-950/60 p-3.5 rounded-2xl border border-white/10"></p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
@@ -400,7 +410,8 @@
               <input id="prof-avatar-file" type="file" accept="image/*" multiple class="text-xs text-slate-300" />
               <div id="prof-photos-thumbs" class="flex flex-wrap gap-2"></div>
             </div>
-          </div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
             <input id="prof-name" type="text" placeholder="שם מלא" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
             <input id="prof-nickname" type="text" placeholder="כינוי" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
             <select id="prof-gender" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700">
@@ -433,7 +444,8 @@
               <option value="חתול">חתול</option>
               <option value="אחר">אחר</option>
             </select>
-          </div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
             <input id="prof-pet-name" type="text" placeholder="שם חיית המחמד" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
             <div id="prof-other-pet-wrap" class="hidden">
               <input id="prof-other-pet-text" type="text" placeholder="פרט חיית מחמד אחרת..." class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
@@ -446,13 +458,13 @@
               <option value="bg-ocean">רקע אוקיינוס</option>
               <option value="bg-gold">רקע זהב</option>
             </select>
-          </div>
-          <div class="flex flex-wrap gap-2 text-xs">
+          </div><div class="flex flex-wrap gap-2 text-xs">
             <button type="button" data-style="name-rainbow" class="style-pick-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-pink-400 font-bold name-rainbow">קשת</button>
             <button type="button" data-style="name-neon" class="style-pick-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 font-bold name-neon">ניאון</button>
             <button type="button" data-style="name-royal" class="style-pick-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 font-bold name-royal">מלכותי</button>
           </div>
-          <textarea id="prof-bio" rows="3" placeholder="ספר/י על עצמך..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs"></textarea><div class="space-y-2 text-xs">
+          <textarea id="prof-bio" rows="3" placeholder="ספר/י על עצמך..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs"></textarea>
+          <div class="space-y-2 text-xs">
             <div class="font-bold text-emerald-300">טיולים</div>
             <div id="trips-options" class="flex flex-wrap gap-1.5"></div>
             <div class="font-bold text-purple-300">בילוי לילי</div>
@@ -464,7 +476,9 @@
         </form>
       </div>
     </section>
-  </main><div id="user-modal" class="hidden fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4">
+  </main>
+
+  <div id="user-modal" class="hidden fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4">
     <div class="glass rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto space-y-4">
       <div id="modal-banner" class="h-32 bg-aurora relative p-4 flex justify-between items-start">
         <span id="modal-level-badge" class="px-3 py-1 rounded-full bg-slate-950/75 text-xs font-bold"></span>
@@ -474,7 +488,8 @@
         <h3 id="modal-name" class="text-2xl font-extrabold"></h3>
         <p id="modal-tagline" class="text-xs text-pink-200"></p>
         <p id="modal-meta" class="text-xs text-slate-300"></p>
-        <img id="modal-main-photo" src="" alt="" class="hidden w-full h-56 object-cover rounded-2xl border border-white/15" /><div class="flex items-center justify-between gap-2">
+        <img id="modal-main-photo" src="" alt="" class="hidden w-full h-56 object-cover rounded-2xl border border-white/15" />
+        <div class="flex items-center justify-between gap-2">
           <button id="modal-prev-photo" type="button" class="px-3 py-1 rounded-lg bg-slate-800 text-xs">◀</button>
           <div id="modal-gallery" class="flex gap-2 overflow-x-auto"></div>
           <button id="modal-next-photo" type="button" class="px-3 py-1 rounded-lg bg-slate-800 text-xs">▶</button>
@@ -490,7 +505,8 @@
         </div>
         <p id="modal-bio" class="text-xs text-slate-300 bg-slate-950/60 p-3 rounded-xl"></p>
         <div id="modal-tags" class="flex flex-wrap gap-1.5 text-xs"></div>
-        <p id="modal-action-msg" class="text-xs text-emerald-300 font-semibold"></p><div class="flex flex-wrap gap-2">
+        <p id="modal-action-msg" class="text-xs text-emerald-300 font-semibold"></p>
+        <div class="flex flex-wrap gap-2">
           <button id="modal-like-btn" type="button" class="px-3 py-2 rounded-xl bg-slate-800 text-xs font-bold">👍 לייק</button>
           <button id="modal-heart-btn" type="button" class="px-3 py-2 rounded-xl bg-pink-600 text-xs font-bold">💖 לב</button>
           <button id="modal-follow-btn" type="button" class="px-3 py-2 rounded-xl bg-indigo-600 text-xs font-bold">➕ עקוב</button>
@@ -515,22 +531,15 @@
     const hasRealFirebaseConfig = Boolean(firebaseConfig.apiKey && !firebaseConfig.apiKey.startsWith("YOUR_"));
     const fbApp = hasRealFirebaseConfig ? initializeApp(firebaseConfig) : null;
     const auth = fbApp ? getAuth(fbApp) : null;
-    const db = fbApp ? getFirestore(fbApp) : null;const $ = (id) => document.getElementById(id);
-    const MAX_ROOM_USERS = 50;
+    const db = fbApp ? getFirestore(fbApp) : null;
+    const $ = (id) => document.getElementById(id);
 
     function escapeHtml(val) {
-      return String(val ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
+      return String(val ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
     }
-
     function safeUrl(url) {
       const s = String(url ?? "").trim();
-      if (s.startsWith("data:image/") || s.startsWith("data:audio/") || s.startsWith("https://") || s.startsWith("http://")) return s;
-      return "";
+      return (s.startsWith("data:image/") || s.startsWith("data:audio/") || s.startsWith("https://") || s.startsWith("http://")) ? s : "";
     }
 
     const gameNames = { ttt: "איקס עיגול", rps: "אבן נייר מספריים", memory: "משחק זיכרון", number: "ניחוש מספר", roulette: "רולטה רוסית" };
@@ -558,47 +567,440 @@
         roulette: { points: 0, wins: 0, losses: 0, played: 0 }
       }
     };
-    let currentGameKey = "ttt", allUsers = [], deckIdx = 0;
-    function getLevel(pts) { return Math.max(1, Math.floor((Number(pts) || 0) / 50) + 1); }
-    function syncHeaderUserBadge() {
-      $("user-badge").textContent = `${me.name || (me.email ? me.email.split("@")[0] : "משתמש")} • ${me.age || 18}`;
-      const av = safeUrl(me.avatar || (me.photos && me.photos[0]) || "");
-      $("header-avatar-slot").innerHTML = av ? `<img src="${escapeHtml(av)}" alt="" class="w-full h-full object-cover" />` : "👤";
-    }const defaultRooms = [
+    let currentGameKey = "ttt", allUsers = [], deckIdx = 0, modalPhotos = [], modalPhotoIdx = 0;
+    const defaultRooms = [
       { id: "r-general", topic: "כללי וצ׳אט פתוח", code: "", members: [] },
       { id: "r-dating", topic: "היכרויות, דייטים ושיחות", code: "", members: [] },
       { id: "r-gaming", topic: "גיימינג ומשחקי רשת", code: "", members: [] }
     ];
-    let chatRooms = [...defaultRooms], activeRoomId = defaultRooms[0].id, joinedRoomId = null, unsubMsgs = null, unsubRooms = null;
+    let chatRooms = [...defaultRooms], activeRoomId = defaultRooms[0].id, joinedRoomId = null, unsubMsgs = null, unsubRooms = null, unsubUsers = null;
 
+    function getLevel(pts) { return Math.max(1, Math.floor((Number(pts) || 0) / 50) + 1); }
+    function getRewardLabel(i) { return i === 0 ? "🥇 מקום 1" : i === 1 ? "🥈 מקום 2" : i === 2 ? "🥉 מקום 3" : "🎖️ טופ-100"; }
+    function upsertPlayerBoard(gameKey, name, st) {
+      const points = Number(st?.points) || 0;
+      if ((Number(st?.played) || 0) < 1) return;
+      const cleanName = escapeHtml(name || "שחקן");
+      const idx = gameLeaderboards[gameKey].findIndex((x) => x.name === cleanName);
+      const item = { name: cleanName, points, level: getLevel(points) };
+      if (idx >= 0) gameLeaderboards[gameKey][idx] = item; else gameLeaderboards[gameKey].push(item);
+      gameLeaderboards[gameKey].sort((a, b) => b.points - a.points);
+      gameLeaderboards[gameKey] = gameLeaderboards[gameKey].slice(0, 100);
+    }
+    function renderGameStatsAndTop5(gameKey = currentGameKey) {
+      currentGameKey = gameKey;
+      const st = me.gameStats[gameKey] || { points: 0, wins: 0, losses: 0, played: 0 };
+      upsertPlayerBoard(gameKey, me.name || "שחקן", st);
+      $("stat-game-level").textContent = `רמה ${getLevel(st.points)}`;
+      $("stat-game-name").textContent = gameNames[gameKey];
+      $("stat-game-points").textContent = String(st.points);
+      $("stat-game-wins").textContent = String(st.wins);
+      $("stat-game-losses").textContent = String(st.losses);
+      $("rr-gold-balls").textContent = String(me.rrRewards.goldBalls || 0);
+      $("rr-magazines").textContent = String(me.rrRewards.magazines || 0);
+      $("rr-pistols").textContent = String(me.rrRewards.pistols || 0);
+      $("rr-grand-gifts").textContent = String(me.rrRewards.grandGifts || 0);
+      const list = gameLeaderboards[gameKey] || [];
+      $("top100-count-badge").textContent = `${list.length} / 100`;
+      $("top5-title").textContent = `🏅 טופ-5 ב${gameNames[gameKey]}`;
+      $("top5-board").innerHTML = list.length ? list.slice(0, 5).map((p, i) => `<div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800"><div class="font-bold truncate">${i + 1}. ${escapeHtml(p.name)}</div><div class="text-pink-300">רמה ${p.level} • ${p.points} נק׳</div><div class="text-[11px] text-amber-300">${escapeHtml(getRewardLabel(i))}</div></div>`).join("") : `<p class="text-slate-400 col-span-full">שחק משחק אחד לפחות כדי להיכנס לדירוג.</p>`;
+      if (me.uid) localStorage.setItem("toplove_session", JSON.stringify(me));
+    }
+    async function awardGameWin(gameKey, pts) {
+      me.gameStats[gameKey].played += 1; me.gameStats[gameKey].wins += 1; me.gameStats[gameKey].points += pts;
+      renderGameStatsAndTop5(gameKey);
+      try { if (db && me.uid) await setDoc(doc(db, "users", me.uid), { gameStats: me.gameStats, rrRewards: me.rrRewards }, { merge: true }); } catch {}
+    }
+    async function awardGameLoss(gameKey, pts = 5) {
+      me.gameStats[gameKey].played += 1; me.gameStats[gameKey].losses += 1; me.gameStats[gameKey].points += pts;
+      renderGameStatsAndTop5(gameKey);
+      try { if (db && me.uid) await setDoc(doc(db, "users", me.uid), { gameStats: me.gameStats, rrRewards: me.rrRewards }, { merge: true }); } catch {}
+    }function formatPetLine(p) {
+      const parts = [];
+      if (p.hasPets) parts.push(escapeHtml(p.hasPets));
+      if (p.favPet === "אחר") parts.push(p.otherPetText ? `מעדיף/ה: ${escapeHtml(p.otherPetText)}` : "מעדיף/ה: אחר");
+      else if (p.favPet) parts.push(`מעדיף/ה: ${escapeHtml(p.favPet)}`);
+      if (p.petName) parts.push(`שם: ${escapeHtml(p.petName)}`);
+      return parts.length ? `🐾 ${parts.join(" • ")}` : "";
+    }
+    function updateModalPhotoView() {
+      if (!modalPhotos.length) { $("modal-main-photo").classList.add("hidden"); $("modal-gallery").innerHTML = ""; return; }
+      const src = safeUrl(modalPhotos[modalPhotoIdx]);
+      if (src) { $("modal-main-photo").src = src; $("modal-main-photo").classList.remove("hidden"); }
+      $("modal-gallery").innerHTML = modalPhotos.map((u, i) => `<img src="${escapeHtml(u)}" alt="" data-mphoto="${i}" class="w-12 h-12 rounded-lg object-cover border cursor-pointer ${i === modalPhotoIdx ? "border-pink-400" : "border-slate-700"}" />`).join("");
+      $("modal-gallery").querySelectorAll("[data-mphoto]").forEach((img) => { img.onclick = () => { modalPhotoIdx = Number(img.dataset.mphoto) || 0; updateModalPhotoView(); }; });
+    }
+    function openUserModal(person) {
+      const gPoints = Object.values(person.gameStats || {}).reduce((a, s) => a + (Number(s.points) || 0), 0);
+      modalPhotos = Array.isArray(person.photos) ? person.photos.map(safeUrl).filter(Boolean) : [];
+      modalPhotoIdx = 0;
+      const b = ["bg-aurora", "bg-sunset", "bg-ocean", "bg-gold"].includes(person.banner) ? person.banner : "bg-aurora";
+      const ns = ["name-rainbow", "name-neon", "name-royal", ""].includes(person.nameStyle) ? person.nameStyle : "";
+      $("modal-banner").className = `h-32 ${b} relative p-4 flex justify-between items-start`;
+      $("modal-level-badge").textContent = `רמה ${getLevel(gPoints)} • ${gPoints} נק׳`;
+      $("modal-name").className = `text-2xl font-extrabold ${ns}`;
+      $("modal-name").textContent = person.name || "משתמש";
+      $("modal-tagline").textContent = person.tagline || "";
+      $("modal-meta").textContent = [person.gender, person.age ? `גיל ${person.age}` : "", person.location, person.distanceKm !== undefined ? `${person.distanceKm} ק״מ` : ""].filter(Boolean).join(" • ");
+      $("modal-looking-for").textContent = person.lookingFor ? `💘 מחפש/ת: ${person.lookingFor}` : "";
+      $("modal-relationship-goal").textContent = [person.goal, person.marital, person.children, person.height ? `${person.height} ס״מ` : ""].filter(Boolean).join(" • ");
+      $("modal-lifestyle").textContent = [person.job, person.zodiac].filter(Boolean).join(" • ");
+      $("modal-habits").textContent = [person.smoking, person.alcohol].filter(Boolean).join(" • ");
+      $("modal-pets-info").textContent = formatPetLine(person);
+      $("modal-night-info").textContent = [...(person.nightActivities || []), person.firstDate ? `דייט: ${person.firstDate}` : ""].filter(Boolean).join(" • ");
+      $("modal-education").textContent = person.education ? `השכלה: ${person.education}` : "";
+      $("modal-bio").textContent = person.bio || "";
+      $("modal-tags").innerHTML = [...(person.trips || []), ...(person.hobbies || [])].map((t) => `<span class="px-2.5 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30">${escapeHtml(t)}</span>`).join("");
+      $("modal-action-msg").textContent = "";
+      updateModalPhotoView();
+      const targetId = person.uid || person.id;
+      $("modal-follow-btn").textContent = (me.following || []).includes(targetId) ? "✓ עוקב" : "➕ עקוב";
+      $("modal-like-btn").onclick = () => { $("modal-action-msg").textContent = `שלחת לייק ל${person.name || "משתמש"} 👍`; };
+      $("modal-heart-btn").onclick = () => { $("modal-action-msg").textContent = `שלחת לב ל${person.name || "משתמש"} 💖`; };
+      $("modal-follow-btn").onclick = async () => {
+        if (!targetId || targetId === me.uid) return;
+        me.following = me.following || [];
+        me.following = me.following.includes(targetId) ? me.following.filter((x) => x !== targetId) : [...me.following, targetId];
+        localStorage.setItem("toplove_session", JSON.stringify(me));
+        try { if (db && me.uid) await setDoc(doc(db, "users", me.uid), { following: me.following }, { merge: true }); } catch {}
+        syncHeaderUserBadge(); openUserModal(person); renderRealUsers();
+      };
+      $("modal-dm-btn").onclick = async () => {
+        if (!targetId || targetId === me.uid || !me.uid) return;
+        const dmId = "dm_" + [me.uid, targetId].sort().join("_");
+        await ensureRoomInFirestore({ id: dmId, topic: `שיחה אישית עם ${person.name || "משתמש"}`, code: "" });
+        activeRoomId = dmId; joinedRoomId = dmId; $("user-modal").classList.add("hidden"); switchTab("chat"); renderRooms(); listenMsgs(dmId);
+      };
+      $("user-modal").classList.remove("hidden");
+    }
+    $("close-modal-btn").onclick = () => $("user-modal").classList.add("hidden");
+    $("modal-prev-photo").onclick = () => { if (modalPhotos.length) { modalPhotoIdx = (modalPhotoIdx - 1 + modalPhotos.length) % modalPhotos.length; updateModalPhotoView(); } };
+    $("modal-next-photo").onclick = () => { if (modalPhotos.length) { modalPhotoIdx = (modalPhotoIdx + 1) % modalPhotos.length; updateModalPhotoView(); } };
+
+    function syncHeaderUserBadge() {
+      $("user-badge").textContent = `${me.name || (me.email ? me.email.split("@")[0] : "משתמש")} • ${me.age || 18}`;
+      const av = safeUrl(me.avatar || (me.photos && me.photos[0]) || "");
+      $("header-avatar-slot").innerHTML = av ? `<img src="${escapeHtml(av)}" alt="" class="w-full h-full object-cover" />` : "👤";
+      $("following-count-badge").textContent = `עוקב אחרי ${(me.following || []).length} משתמשים`;
+    }
+    function computeProfileCompletion() {
+      const fields = [me.name, me.gender, me.location, me.goal, me.bio, me.tagline, me.job, me.education, me.trips.length, me.hobbies.length];
+      $("profile-completion-badge").textContent = `✨ השלמת פרופיל: ${Math.min(100, Math.round((fields.filter(Boolean).length / fields.length) * 100))}%`;
+    }
+    $("prof-fav-pet").onchange = () => $("prof-other-pet-wrap").classList.toggle("hidden", $("prof-fav-pet").value !== "אחר");
+    $("prof-avatar-file").onchange = (e) => {
+      Array.from(e.target.files || []).slice(0, 5).forEach((f) => {
+        if (!f.type.startsWith("image/") || f.size > 1500000) return;
+        const r = new FileReader();
+        r.onload = () => {
+          const url = safeUrl(r.result); if (!url) return;
+          me.photos = [...(me.photos || []), url].slice(0, 6);
+          me.avatar = me.photos[0]; me.hasCustomPhoto = true;
+          $("prof-avatar-preview").src = url; $("prof-avatar-preview").classList.remove("hidden"); $("prof-avatar-placeholder").classList.add("hidden");
+          $("prof-photos-thumbs").innerHTML = me.photos.map((p) => `<img src="${escapeHtml(p)}" alt="" class="w-12 h-12 rounded-xl object-cover border border-white/15" />`).join("");
+          syncHeaderUserBadge();
+        };
+        r.readAsDataURL(f);
+      });
+    };
+    function renderQuestionnaireOptions() {
+      $("trips-options").innerHTML = tripsChoices.map((x) => `<button type="button" data-trip="${escapeHtml(x)}" class="px-3 py-1.5 rounded-full text-xs border ${me.trips.includes(x) ? "bg-emerald-600 border-emerald-400" : "bg-slate-950 border-slate-700"}">${escapeHtml(x)}</button>`).join("");
+      $("trips-options").querySelectorAll("[data-trip]").forEach((b) => { b.onclick = () => { const v = b.dataset.trip; me.trips = me.trips.includes(v) ? me.trips.filter((i) => i !== v) : [...me.trips, v]; renderQuestionnaireOptions(); }; });
+      $("night-options").innerHTML = nightChoices.map((x) => `<button type="button" data-night="${escapeHtml(x)}" class="px-3 py-1.5 rounded-full text-xs border ${me.nightActivities.includes(x) ? "bg-purple-600 border-purple-400" : "bg-slate-950 border-slate-700"}">${escapeHtml(x)}</button>`).join("");
+      $("night-options").querySelectorAll("[data-night]").forEach((b) => { b.onclick = () => { const v = b.dataset.night; me.nightActivities = me.nightActivities.includes(v) ? me.nightActivities.filter((i) => i !== v) : [...me.nightActivities, v]; renderQuestionnaireOptions(); }; });
+      $("hobbies-options").innerHTML = hobbiesChoices.map((x) => `<button type="button" data-hobby="${escapeHtml(x)}" class="px-3 py-1.5 rounded-full text-xs border ${me.hobbies.includes(x) ? "bg-indigo-600 border-indigo-400" : "bg-slate-950 border-slate-700"}">${escapeHtml(x)}</button>`).join("");
+      $("hobbies-options").querySelectorAll("[data-hobby]").forEach((b) => { b.onclick = () => { const v = b.dataset.hobby; me.hobbies = me.hobbies.includes(v) ? me.hobbies.filter((i) => i !== v) : [...me.hobbies, v]; renderQuestionnaireOptions(); }; });
+    }
+    document.querySelectorAll(".style-pick-btn").forEach((b) => { b.onclick = () => { me.nameStyle = b.dataset.style; }; });
+    function applyProfileViewMode() {
+      syncHeaderUserBadge(); computeProfileCompletion();
+      const showSummary = Boolean(me.profileCompleted);
+      $("profile-summary-card").classList.toggle("hidden", !showSummary);
+      $("profile-form").classList.toggle("hidden", showSummary);
+      $("edit-profile-btn").classList.toggle("hidden", !showSummary);
+      if (showSummary) {
+        const b = ["bg-aurora", "bg-sunset", "bg-ocean", "bg-gold"].includes(me.banner) ? me.banner : "bg-aurora";
+        $("summary-banner").className = `h-36 ${b} p-5 flex items-start justify-between`;
+        $("summary-name").className = `text-2xl font-extrabold ${me.nameStyle || ""}`;
+        $("summary-name").textContent = me.name || "משתמש"; $("summary-tagline").textContent = me.tagline || "";
+        $("summary-age-gender-loc").textContent = [me.gender, me.age ? `גיל ${me.age}` : "", me.location].filter(Boolean).join(" • ");
+        $("summary-bio").textContent = me.bio || "";
+        $("summary-col-dating").innerHTML = `<div>💘 מחפש/ת: ${escapeHtml(me.lookingFor)}</div><div>🎯 מטרה: ${escapeHtml(me.goal)}</div><div>💍 מצב: ${escapeHtml(me.marital)}</div>`;
+        $("summary-col-lifestyle").innerHTML = `<div>💼 עיסוק: ${escapeHtml(me.job)}</div><div>🎓 השכלה: ${escapeHtml(me.education)}</div><div>✨ מזל: ${escapeHtml(me.zodiac)}</div>`;
+        $("summary-col-pets").textContent = formatPetLine(me);
+        $("summary-col-trips").innerHTML = (me.trips || []).map((t) => `<span class="px-2 py-0.5 rounded-full bg-emerald-500/20">${escapeHtml(t)}</span>`).join("");
+        $("summary-col-night").textContent = (me.nightActivities || []).join(" • ");
+        $("summary-col-extra").innerHTML = (me.hobbies || []).map((h) => `<span class="px-2 py-0.5 rounded-full bg-indigo-500/20">${escapeHtml(h)}</span>`).join("");
+      }
+    }
+    $("profile-form").onsubmit = async (e) => {
+      e.preventDefault();
+      const ageVal = Number($("prof-age").value) || me.age || 18;
+      if (ageVal < 18 || ageVal > 80) { $("profile-error").textContent = "גיל חייב להיות בין 18 ל-80."; $("profile-error").classList.remove("hidden"); return; }
+      $("profile-error").classList.add("hidden");
+      Object.assign(me, {
+        name: $("prof-name").value.trim().slice(0, 60) || me.name, nickname: $("prof-nickname").value.trim().slice(0, 40),
+        gender: $("prof-gender").value, lookingFor: $("prof-looking-for").value || "הכל", age: ageVal,
+        location: $("prof-location").value.trim().slice(0, 60), distanceKm: Math.max(0, Math.min(500, Number($("prof-distance").value) || 15)),
+        goal: $("prof-goal").value.trim().slice(0, 80), marital: $("prof-marital").value.trim().slice(0, 50),
+        children: $("prof-children").value.trim().slice(0, 50), height: $("prof-height").value.trim().slice(0, 20),
+        job: $("prof-job").value.trim().slice(0, 60), zodiac: $("prof-zodiac").value.trim().slice(0, 30),
+        smoking: $("prof-smoking").value.trim().slice(0, 40), alcohol: $("prof-alcohol").value.trim().slice(0, 40),
+        education: $("prof-education").value.trim().slice(0, 60), hasPets: $("prof-has-pets").value.trim().slice(0, 40),
+        favPet: $("prof-fav-pet").value, petName: $("prof-pet-name").value.trim().slice(0, 40),
+        otherPetText: $("prof-other-pet-text").value.trim().slice(0, 50), firstDate: $("prof-first-date").value.trim().slice(0, 80),
+        tagline: $("prof-tagline").value.trim().slice(0, 100), banner: $("prof-banner").value || "bg-aurora",
+        bio: $("prof-bio").value.trim().slice(0, 800), profileCompleted: true
+      });
+      localStorage.setItem("toplove_session", JSON.stringify(me));
+      $("save-feedback").classList.remove("opacity-0"); setTimeout(() => $("save-feedback").classList.add("opacity-0"), 1500);
+      try { if (db && me.uid) await setDoc(doc(db, "users", me.uid), { ...me, updatedAt: serverTimestamp() }, { merge: true }); } catch {}
+      applyProfileViewMode(); renderRealUsers();
+    };
+    $("edit-profile-btn").onclick = () => { me.profileCompleted = false; applyProfileViewMode(); };
+    function switchTab(t) {
+      document.querySelectorAll(".tab-btn").forEach((b) => { b.className = b.dataset.tab === t ? "tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold bg-pink-600 text-white" : "tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold glass text-slate-300"; });
+      document.querySelectorAll(".tab-content").forEach((c) => c.classList.add("hidden"));
+      $(`tab-${t}`).classList.remove("hidden");
+    }
+    $("user-profile-trigger").onclick = () => switchTab("profile");
+    document.querySelectorAll(".tab-btn").forEach((btn) => { btn.onclick = () => switchTab(btn.dataset.tab); });
+
+    async function ensureRoomInFirestore(room) {
+      if (!db || !room?.id) return;
+      try { await setDoc(doc(db, "rooms", room.id), { id: room.id, topic: String(room.topic || "").slice(0, 80), code: String(room.code || "").slice(0, 30), isDm: String(room.id).startsWith("dm_"), updatedAt: serverTimestamp() }, { merge: true }); } catch {}
+    }
+    function subscribeAllRooms() {
+      if (unsubRooms) { unsubRooms(); unsubRooms = null; }
+      if (!db) { renderRooms(); return; }
+      unsubRooms = onSnapshot(collection(db, "rooms"), (snap) => {
+        const byId = new Map(defaultRooms.map((r) => [r.id, { ...r, members: [] }]));
+        snap.docs.forEach((d) => { const rr = d.data(); byId.set(d.id, { id: d.id, topic: rr.topic || byId.get(d.id)?.topic || d.id, code: rr.code || "", members: byId.get(d.id)?.members || [] }); });
+        chatRooms = Array.from(byId.values()).filter((r) => !String(r.id).startsWith("dm_") || (me.uid && String(r.id).includes(me.uid)));
+        renderRooms();
+      });
+    }
+    function subscribeRealUsers() {
+      if (unsubUsers) { unsubUsers(); unsubUsers = null; }
+      if (!db) { renderRealUsers(); return; }
+      unsubUsers = onSnapshot(collection(db, "users"), (snap) => {
+        allUsers = snap.docs.map((d) => ({ id: d.id, ...d.data() })).filter((u) => (u.uid || u.id) !== me.uid);
+        renderRealUsers();
+      });
+    }
     function listenMsgs(roomId) {
       if (unsubMsgs) { unsubMsgs(); unsubMsgs = null; }
       if (!db) return;
       unsubMsgs = onSnapshot(query(collection(db, "rooms", roomId, "messages"), orderBy("createdAt", "asc")), (snap) => {
         const msgs = snap.docs.map((d) => d.data());
-        $("chat-messages").innerHTML = msgs.length ? msgs.map((m) => `<div class="bg-slate-800/90 px-3 py-2 rounded-xl text-xs"><strong class="text-pink-300">${escapeHtml(m.from || "משתמש")}:</strong> ${escapeHtml(m.text || "")}</div>`).join("") : `<p class="text-xs text-slate-400">אין עדיין הודעות.</p>`;
+        $("chat-messages").innerHTML = msgs.length ? msgs.map((m) => {
+          const aud = safeUrl(m.audioUrl || "");
+          return `<div class="bg-slate-800/90 px-3 py-2 rounded-xl text-xs space-y-1"><strong class="text-pink-300">${escapeHtml(m.from || "משתמש")}:</strong> ${escapeHtml(m.text || "")}${aud ? `<audio controls src="${escapeHtml(aud)}" class="w-full h-8 mt-1"></audio>` : ""}</div>`;
+        }).join("") : `<p class="text-xs text-slate-400">אין עדיין הודעות.</p>`;
       });
     }
-
     function renderRooms() {
       $("rooms-list").innerHTML = chatRooms.map((r) => `<div class="p-3 rounded-xl border text-xs flex items-center justify-between gap-2 ${joinedRoomId === r.id ? "bg-pink-600/25 border-pink-400" : "bg-slate-950/75 border-slate-800"}"><span class="font-bold truncate">${escapeHtml(r.topic)}</span><button type="button" data-enter-room="${escapeHtml(r.id)}" class="px-3 py-1.5 rounded-lg bg-pink-600 font-bold">${joinedRoomId === r.id ? "בתוך החדר" : "כנס"}</button></div>`).join("");
-      document.querySelectorAll("[data-enter-room]").forEach((btn) => { btn.onclick = () => { activeRoomId = btn.dataset.enterRoom; joinedRoomId = btn.dataset.enterRoom; renderRooms(); listenMsgs(activeRoomId); }; });
+      document.querySelectorAll("[data-enter-room]").forEach((btn) => {
+        btn.onclick = async () => {
+          const target = chatRooms.find((r) => r.id === btn.dataset.enterRoom); if (!target) return;
+          if (target.code) { const entered = prompt("הכנס קוד לחדר הפרטי:") || ""; if (entered !== target.code) return alert("קוד שגוי"); }
+          await ensureRoomInFirestore(target); activeRoomId = target.id; joinedRoomId = target.id; renderRooms(); listenMsgs(target.id);
+        };
+      });
       const cur = chatRooms.find((r) => r.id === activeRoomId) || chatRooms[0];
       $("active-room-title").textContent = cur.topic;
+      $("leave-room-btn").classList.toggle("hidden", joinedRoomId !== cur.id);
     }
-
+    $("create-room-form").onsubmit = async (e) => {
+      e.preventDefault();
+      const topic = $("new-room-topic").value.trim().slice(0, 80); if (!topic) return;
+      const code = $("new-room-code").value.trim().slice(0, 30);
+      const room = { id: "r-" + Date.now(), topic, code, members: [] };
+      $("new-room-topic").value = ""; $("new-room-code").value = "";
+      chatRooms = [room, ...chatRooms]; activeRoomId = room.id; joinedRoomId = room.id;
+      await ensureRoomInFirestore(room); renderRooms(); listenMsgs(room.id);
+    };
+    $("leave-room-btn").onclick = () => { if (unsubMsgs) { unsubMsgs(); unsubMsgs = null; } joinedRoomId = null; renderRooms(); };
     $("chat-form").onsubmit = async (e) => {
       e.preventDefault();
-      if (joinedRoomId !== activeRoomId || !db) return;
+      if (joinedRoomId !== activeRoomId) return alert("היכנס קודם לחדר");
       const txt = $("chat-input").value.trim().slice(0, 1000); if (!txt) return;
       $("chat-input").value = "";
-      await addDoc(collection(db, "rooms", activeRoomId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", text: txt, createdAt: serverTimestamp() });
+      if (db) await addDoc(collection(db, "rooms", activeRoomId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", text: txt, createdAt: serverTimestamp() });
+      else $("chat-messages").innerHTML += `<div class="bg-slate-800/90 px-3 py-2 rounded-xl text-xs"><strong class="text-pink-300">${escapeHtml(me.name || "משתמש")}:</strong> ${escapeHtml(txt)}</div>`;
     };
 
+    document.querySelectorAll(".game-tab-btn").forEach((b) => {
+      b.onclick = () => {
+        const g = b.dataset.game;
+        document.querySelectorAll(".game-tab-btn").forEach((x) => { x.className = x.dataset.game === g ? "game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-pink-600" : "game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300"; });
+        document.querySelectorAll(".game-panel").forEach((p) => p.classList.add("hidden"));
+        $(`game-${g}`).classList.remove("hidden"); renderGameStatsAndTop5(g);
+      };
+    });
+
+    let tttBoard = Array(9).fill(""), tttTurn = "X", tttMySym = "X", tttRoomIdx = 0;
+    const tttRooms = Array.from({ length: 100 }, (_, i) => `שולחן ${i + 1}`);
+    function checkTttWin(b) {
+      for (const [a, c, d] of [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]) if (b[a] && b[a] === b[c] && b[a] === b[d]) return b[a];
+      return b.every(Boolean) ? "DRAW" : "";
+    }
+    function renderTtt() {
+      $("ttt-p1-name").textContent = me.name || "שחקן 1"; $("ttt-p2-name").textContent = "יריב";
+      $("ttt-status").textContent = `${tttRooms[tttRoomIdx]} • תור: ${tttTurn === "X" ? "❌" : "⭕"}`;
+      $("ttt-board").innerHTML = tttBoard.map((v, idx) => `<button type="button" data-ttt-i="${idx}" class="h-20 rounded-2xl bg-slate-900 border border-slate-700 text-3xl font-black flex items-center justify-center">${v === "X" ? "❌" : v === "O" ? "⭕" : ""}</button>`).join("");
+      $("ttt-board").querySelectorAll("[data-ttt-i]").forEach((btn) => {
+        btn.onclick = async () => {
+          const i = Number(btn.dataset.tttI); if (tttBoard[i] || checkTttWin(tttBoard)) return;
+          tttBoard[i] = tttMySym;
+          const res = checkTttWin(tttBoard);
+          if (res === tttMySym) { $("ttt-status").textContent = "ניצחת! +25 נק׳"; await awardGameWin("ttt", 25); }
+          else if (res === "DRAW") { $("ttt-status").textContent = "תיקו! +10 נק׳"; await awardGameWin("ttt", 10); }
+          else { tttTurn = tttMySym === "X" ? "O" : "X"; }
+          renderTtt();
+        };
+      });
+      $("ttt-rooms-grid").innerHTML = tttRooms.map((r, i) => `<button type="button" data-tttr="${i}" class="p-1.5 rounded-lg text-[11px] border ${i === tttRoomIdx ? "bg-pink-600 border-pink-400" : "bg-slate-900 border-slate-800"}">${escapeHtml(r)}</button>`).join("");
+      $("ttt-rooms-grid").querySelectorAll("[data-tttr]").forEach((b) => { b.onclick = () => { tttRoomIdx = Number(b.dataset.tttr) || 0; tttBoard = Array(9).fill(""); renderTtt(); }; });
+    }
+    $("ttt-pick-x").onclick = () => { tttMySym = "X"; renderTtt(); };
+    $("ttt-pick-o").onclick = () => { tttMySym = "O"; renderTtt(); };
+    $("ttt-reset").onclick = () => { tttBoard = Array(9).fill(""); tttTurn = "X"; renderTtt(); };
+    $("ttt-add-room").onclick = () => { tttRooms.push(`שולחן ${tttRooms.length + 1}`); tttRoomIdx = tttRooms.length - 1; renderTtt(); };
+
+    const rpsMap = { rock: "🪨", paper: "📄", scissors: "✂️" };
+    let rpsRoomIdx = 0;
+    const rpsRooms = Array.from({ length: 100 }, (_, i) => `זירה ${i + 1}`);
+    function renderRps() {
+      $("rps-left-name").textContent = me.name || "אתה"; $("rps-right-name").textContent = rpsRooms[rpsRoomIdx];
+      $("rps-rooms-grid").innerHTML = rpsRooms.map((r, i) => `<button type="button" data-rpsr="${i}" class="p-1.5 rounded-lg text-[11px] border ${i === rpsRoomIdx ? "bg-pink-600 border-pink-400" : "bg-slate-900 border-slate-800"}">${escapeHtml(r)}</button>`).join("");
+      $("rps-rooms-grid").querySelectorAll("[data-rpsr]").forEach((b) => { b.onclick = () => { rpsRoomIdx = Number(b.dataset.rpsr) || 0; renderRps(); }; });
+    }
+    document.querySelectorAll(".rps-choice").forEach((b) => {
+      b.onclick = async () => {
+        const mine = b.dataset.rps, keys = ["rock", "paper", "scissors"], bot = keys[Math.floor(Math.random() * 3)];
+        $("rps-left-sign").textContent = rpsMap[mine]; $("rps-right-sign").textContent = rpsMap[bot];
+        if (mine === bot) { $("rps-result").textContent = "תיקו! +10 נק׳"; await awardGameWin("rps", 10); }
+        else if ((mine === "rock" && bot === "scissors") || (mine === "paper" && bot === "rock") || (mine === "scissors" && bot === "paper")) { $("rps-result").textContent = "ניצחת! +25 נק׳"; await awardGameWin("rps", 25); }
+        else { $("rps-result").textContent = "הפסדת בסיבוב +5 נק׳"; await awardGameLoss("rps", 5); }
+      };
+    });
+    $("rps-add-room").onclick = () => { rpsRooms.push(`זירה ${rpsRooms.length + 1}`); rpsRoomIdx = rpsRooms.length - 1; renderRps(); };
+
+    let memMode = "8x8", memCards = [], memOpen = [], memMatched = new Set(), memScore = 0;
+    const memEmojis = ["💖","🔥","⚡","🎯","🎲","🌙","☀️","🍀","🎵","💎","🚀","👑","🍕","🐱","🐶","🌸"];
+    function buildMemoryBoard() {
+      const size = memMode === "30x30" ? 30 : memMode === "10x10" ? 10 : 8, total = size * size, list = [];
+      for (let i = 0; i < total; i += 2) { const em = memEmojis[(i / 2) % memEmojis.length]; list.push(em, em); }
+      memCards = list.slice(0, total).sort(() => Math.random() - 0.5); memOpen = []; memMatched = new Set(); memScore = 0;
+      $("memory-status").textContent = `לוח ${memMode} • נקודות סיבוב: 0`;
+      $("memory-grid").style.gridTemplateColumns = `repeat(${size}, minmax(28px, 1fr))`;
+      $("memory-grid").innerHTML = memCards.map((_, idx) => `<button type="button" data-memi="${idx}" class="h-8 rounded-lg bg-slate-800 border border-slate-700 text-xs font-bold">❓</button>`).join("");
+      $("memory-grid").querySelectorAll("[data-memi]").forEach((btn) => {
+        btn.onclick = async () => {
+          const idx = Number(btn.dataset.memi);
+          if (memMatched.has(idx) || memOpen.includes(idx) || memOpen.length >= 2) return;
+          btn.textContent = memCards[idx]; memOpen.push(idx);
+          if (memOpen.length === 2) {
+            const [a, c] = memOpen;
+            if (memCards[a] === memCards[c]) {
+              memMatched.add(a); memMatched.add(c); memScore += 10; memOpen = [];
+              $("memory-status").textContent = `לוח ${memMode} • נקודות סיבוב: ${memScore}`;
+              await awardGameWin("memory", 10);
+            } else {
+              setTimeout(() => {
+                const ba = $("memory-grid").querySelector(`[data-memi="${a}"]`), bc = $("memory-grid").querySelector(`[data-memi="${c}"]`);
+                if (ba && !memMatched.has(a)) ba.textContent = "❓"; if (bc && !memMatched.has(c)) bc.textContent = "❓"; memOpen = [];
+              }, 500);
+            }
+          }
+        };
+      });
+    }
+    $("mem-create-room-form").onsubmit = (e) => { e.preventDefault(); memMode = $("mem-room-mode").value || "8x8"; buildMemoryBoard(); };
+    $("memory-reset").onclick = buildMemoryBoard;
+
+    let numSecret = Math.floor(Math.random() * 100) + 1, numMax = 1000, numGuesses = [];
+    $("num-toggle-secret").onclick = () => { $("num-secret-input").type = $("num-secret-input").type === "password" ? "text" : "password"; };
+    $("num-set-secret-btn").onclick = () => {
+      numMax = Math.max(10, Number($("num-room-max").value) || 1000);
+      const val = Number($("num-secret-input").value);
+      if (!val || val < 1 || val > numMax) return alert(`בחר מספר בין 1 ל-${numMax}`);
+      numSecret = val; numGuesses = []; $("num-secret-input").value = "";
+      $("num-secret-status").textContent = `מספר סודי נקבע (טווח 1–${numMax})`;
+    };
+    $("num-guess-btn").onclick = async () => {
+      const g = Number($("num-guess-input").value); if (!g) return;
+      $("num-guess-input").value = "";
+      const hint = g < numSecret ? "נמוך מדי ⬆️" : g > numSecret ? "גבוה מדי ⬇️" : "פגיעה בול! 🎯";
+      numGuesses.unshift(`${escapeHtml(me.name || "שחקן")}: ${g} (${hint})`);
+      $("num-guess-feedback").textContent = hint;
+      $("num-guesses-log").innerHTML = numGuesses.map((x) => `<div class="p-2 rounded-lg bg-slate-900 border border-slate-800">${x}</div>`).join("");
+      if (g === numSecret) { numSecret = Math.floor(Math.random() * numMax) + 1; await awardGameWin("number", 30); }
+    };
+    $("num-declare-winner-btn").onclick = async () => { await awardGameWin("number", 15); $("num-guess-feedback").textContent = "חושבו נקודות בונוס +15!"; };
+
+    let rrRoomIdx = 1, rrChamber = Math.floor(Math.random() * 6);
+    $("rr-add-room").onclick = () => { rrRoomIdx += 1; $("rr-status").textContent = `שולחן רולטה #${rrRoomIdx} מוכן`; };
+    $("rr-join-btn").onclick = async () => {
+      $("rr-gun-spinner").style.transform = `rotate(${(rrRoomIdx * 180) + 360}deg)`;
+      if (Math.floor(Math.random() * 6) === rrChamber) {
+        rrChamber = Math.floor(Math.random() * 6); me.rrRewards.goldBalls += 1; me.rrRewards.grandGifts += 1;
+        $("rr-confetti-banner").classList.remove("hidden"); setTimeout(() => $("rr-confetti-banner").classList.add("hidden"), 1800);
+        $("rr-status").textContent = "💥 פגיעה! זכית בכדור זהב ופרס על +35 נק׳"; await awardGameWin("roulette", 35);
+      } else {
+        me.rrRewards.magazines += 1; $("rr-status").textContent = "😅 לחיצה ריקה — שרדת! +10 נק׳"; await awardGameWin("roulette", 10);
+      }
+    };
+
+    function getFilteredUsers() {
+      const pool = [...allUsers, ...sampleCandidates], lf = $("filter-looking-for").value, dist = $("filter-distance").value;
+      const loc = $("filter-location").value.trim().toLowerCase(), minA = Number($("filter-min-age").value) || 18, maxA = Number($("filter-max-age").value) || 80;
+      return pool.filter((u) => {
+        const age = Number(u.age) || 25;
+        if (age < minA || age > maxA) return false;
+        if (loc && !String(u.location || "").toLowerCase().includes(loc)) return false;
+        if (dist !== "all" && Number(u.distanceKm || 0) > Number(dist)) return false;
+        if (lf === "preferred" && me.lookingFor && me.lookingFor !== "הכל") return u.gender === me.lookingFor;
+        return (lf === "preferred" || lf === "all") ? true : u.gender === lf;
+      });
+    }
+    function renderRealUsers() {
+      const pool = getFilteredUsers();
+      $("real-users-grid").innerHTML = pool.length ? pool.map((u) => `<div class="bg-slate-900/85 border border-slate-700 rounded-2xl p-4 space-y-2"><div class="font-bold text-sm">${escapeHtml(u.name || "משתמש")} • גיל ${Number(u.age) || 25}</div><div class="text-xs text-slate-300">${escapeHtml(u.location || "")} ${u.distanceKm !== undefined ? `• ${Number(u.distanceKm)} ק״מ` : ""}</div><button type="button" data-open-id="${escapeHtml(u.uid || u.id || "")}" class="px-3 py-1.5 rounded-lg bg-pink-600 text-xs font-bold">פתח כרטיס</button></div>`).join("") : `<p class="text-xs text-slate-400 col-span-full">אין פרופילים התואמים לסינון.</p>`;
+      document.querySelectorAll("[data-open-id]").forEach((b) => { b.onclick = () => { const f = pool.find((x) => (x.uid || x.id) === b.dataset.openId); if (f) openUserModal(f); }; });
+      $("match-deck-counter").textContent = `${pool.length} פרופילים`;
+      const cur = pool.length ? pool[deckIdx % pool.length] : null;
+      $("match-deck-card").innerHTML = cur ? `<div class="font-bold">${escapeHtml(cur.name)} • גיל ${Number(cur.age) || 25}</div><div class="text-xs text-slate-300">${escapeHtml(cur.tagline || "")}</div>` : `<div class="text-xs text-slate-400">אין כרטיסים להצגה</div>`;
+    }
+    ["filter-looking-for", "filter-distance", "filter-location", "filter-min-age", "filter-max-age"].forEach((id) => { $(id).addEventListener("input", renderRealUsers); $(id).addEventListener("change", renderRealUsers); });
+    $("deck-skip-btn").onclick = () => { deckIdx += 1; renderRealUsers(); };
+    $("deck-like-btn").onclick = () => { const pool = getFilteredUsers(), cur = pool[deckIdx % pool.length]; if (cur) openUserModal(cur); };
+    $("deck-follow-btn").onclick = async () => {
+      const pool = getFilteredUsers(), cur = pool[deckIdx % pool.length]; if (!cur) return;
+      const tid = cur.uid || cur.id; if (!tid || tid === me.uid) return;
+      me.following = me.following || []; if (!me.following.includes(tid)) me.following.push(tid);
+      localStorage.setItem("toplove_session", JSON.stringify(me));
+      try { if (db && me.uid) await setDoc(doc(db, "users", me.uid), { following: me.following }, { merge: true }); } catch {}
+      syncHeaderUserBadge();
+    };
+    $("toggle-password-btn").onclick = () => { $("auth-password").type = $("auth-password").type === "password" ? "text" : "password"; };
+
+    function openApp(session) {
+      Object.assign(me, session);
+      $("auth-section").classList.add("hidden"); $("app-section").classList.remove("hidden");
+      $("user-profile-trigger").classList.remove("hidden"); $("user-profile-trigger").classList.add("flex");
+      $("logout-btn").classList.remove("hidden");
+      syncHeaderUserBadge(); renderQuestionnaireOptions(); applyProfileViewMode();
+      renderGameStatsAndTop5("ttt"); renderTtt(); renderRps(); buildMemoryBoard();
+      subscribeAllRooms(); subscribeRealUsers(); renderRooms(); renderRealUsers();
+    }
     $("auth-form").onsubmit = async (e) => {
       e.preventDefault();
       const email = $("auth-email").value.trim().toLowerCase(), password = $("auth-password").value, age = Number($("auth-age").value), lookingFor = $("auth-looking-for").value;
       if (!age || age < 18 || age > 80) { $("auth-error").textContent = "גילאי 18 עד 80 בלבד."; $("auth-error").classList.remove("hidden"); return; }
+      $("auth-error").classList.add("hidden");
       let uid = "local_" + email.replace(/[^a-z0-9]/g, "_");
       if (hasRealFirebaseConfig && auth) {
         try { const c = await signInWithEmailAndPassword(auth, email, password); uid = c.user.uid; }
@@ -607,14 +1009,15 @@
       const session = { ...me, uid, email, name: email.split("@")[0], age, lookingFor };
       localStorage.setItem("toplove_session", JSON.stringify(session));
       try { if (db && uid) await setDoc(doc(db, "users", uid), { ...session, updatedAt: serverTimestamp() }, { merge: true }); } catch {}
-      Object.assign(me, session);
-      $("auth-section").classList.add("hidden"); $("app-section").classList.remove("hidden");
-      $("user-profile-trigger").classList.remove("hidden"); $("user-profile-trigger").classList.add("flex");
-      $("logout-btn").classList.remove("hidden");
-      syncHeaderUserBadge(); renderRooms();
+      openApp(session);
     };
-
-    $("logout-btn").onclick = async () => { try { if (auth) await signOut(auth); } catch {} localStorage.removeItem("toplove_session"); location.reload(); };
+    $("logout-btn").onclick = async () => {
+      try { if (unsubMsgs) unsubMsgs(); if (unsubRooms) unsubRooms(); if (unsubUsers) unsubUsers(); } catch {}
+      try { if (auth) await signOut(auth); } catch {}
+      localStorage.removeItem("toplove_session"); location.reload();
+    };
+    const savedSession = localStorage.getItem("toplove_session");
+    if (savedSession) { try { openApp(JSON.parse(savedSession)); } catch {} }
   </script>
 </body>
 </html>

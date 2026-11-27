@@ -85,17 +85,20 @@
 
         <div id="modal-gallery" class="flex gap-2 overflow-x-auto pb-1"></div>
 
-        <div class="text-xs text-slate-200 bg-slate-900/85 p-3.5 rounded-xl border border-slate-800 space-y-1">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-slate-200 bg-slate-900/85 p-3.5 rounded-xl border border-slate-800">
           <div id="modal-meta"></div>
           <div id="modal-looking-for" class="text-pink-200"></div>
+          <div id="modal-relationship-goal" class="text-emerald-200"></div>
+          <div id="modal-lifestyle"></div>
           <div id="modal-habits"></div>
           <div id="modal-pets-info" class="text-amber-200"></div>
+          <div id="modal-night-info" class="text-indigo-200"></div>
           <div id="modal-education"></div>
-          <div id="modal-bio" class="text-slate-300 pt-1"></div>
+          <div id="modal-bio" class="text-slate-300 pt-1 sm:col-span-2 border-t border-white/10"></div>
         </div>
 
         <div class="space-y-1.5">
-          <div class="text-xs font-bold text-pink-300">🎯 תחביבים ותחומי עניין:</div>
+          <div class="text-xs font-bold text-pink-300">🎯 תחביבים, טיולים ותחומי עניין:</div>
           <div id="modal-tags" class="flex flex-wrap gap-1.5 text-xs"></div>
         </div>
 
@@ -147,31 +150,36 @@
         <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
           <div>
             <h2 class="text-2xl font-bold">הפרופיל האישי שלי</h2>
-            <p class="text-xs text-slate-300 mt-1">כל השדות אופציונליים — בחר מה שמתאים לך ושמור</p>
+            <p class="text-xs text-slate-300 mt-1">כל השדות אופציונליים — מלא את כרטיסיות השאלון כדי להציג פרופיל מלא ומזמין</p>
           </div>
-          <button type="button" id="edit-profile-btn" class="hidden px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-600">
-            ✏️ ערוך פרופיל
-          </button>
+          <div class="flex items-center gap-2.5">
+            <span id="profile-completion-badge" class="text-xs px-3 py-1.5 rounded-full bg-pink-500/20 border border-pink-400/40 text-pink-200 font-bold">
+              ✨ השלמת פרופיל: 0%
+            </span>
+            <button type="button" id="edit-profile-btn" class="hidden px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-600">
+              ✏️ ערוך פרופיל
+            </button>
+          </div>
         </div>
 
-        <div id="profile-summary-card" class="hidden bg-slate-900/85 border border-pink-500/30 rounded-2xl overflow-hidden shadow-xl">
-          <div id="summary-banner" class="h-32 bg-aurora p-4 flex items-center justify-between">
+        <div id="profile-summary-card" class="hidden bg-slate-900/85 border border-pink-500/30 rounded-3xl overflow-hidden shadow-xl">
+          <div id="summary-banner" class="h-36 bg-aurora p-5 flex items-start justify-between">
             <span id="summary-level-badge" class="text-xs font-extrabold px-3.5 py-1 rounded-full bg-slate-950/80 border border-white/20"></span>
             <span id="summary-likes-badge" class="text-xs font-extrabold px-3.5 py-1 rounded-full bg-rose-500/25 border border-rose-300/40 text-rose-200"></span>
           </div>
-          <div class="p-6 -mt-14 space-y-6">
+          <div class="p-6 -mt-16 space-y-6">
             <div class="flex flex-col sm:flex-row items-center sm:items-end gap-5">
-              <img id="summary-avatar" src="https://api.dicebear.com/9.x/avataaars/svg?seed=TopLove" alt=""
-                class="w-36 h-36 rounded-2xl object-cover border-4 border-slate-900 bg-slate-800 shrink-0 shadow-lg cursor-pointer" />
+              <img id="summary-avatar" src="" alt=""
+                class="hidden w-36 h-36 rounded-2xl object-cover border-4 border-slate-900 bg-slate-800 shrink-0 shadow-lg cursor-pointer" />
               <div class="space-y-1.5 text-center sm:text-right flex-1">
-                <h3 id="summary-name" class="text-2xl font-extrabold"></h3>
+                <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                  <h3 id="summary-name" class="text-2xl font-extrabold"></h3>
+                  <span id="summary-nickname-pill" class="hidden text-xs px-2.5 py-0.5 rounded-full bg-pink-500/20 border border-pink-400/35 text-pink-200"></span>
+                </div>
                 <p id="summary-tagline" class="text-sm text-pink-200 font-medium"></p>
                 <p id="summary-age-gender-loc" class="text-xs text-indigo-200"></p>
-                <p id="summary-looking-for" class="text-xs text-pink-300 font-semibold"></p>
-                <p id="summary-habits" class="text-xs text-emerald-200"></p>
-                <p id="summary-pets" class="text-xs text-amber-200"></p>
-                <p id="summary-bio" class="text-sm text-slate-300 pt-1"></p>
-                <div class="flex justify-center sm:justify-start gap-2 pt-2">
+                <div id="summary-quick-pills" class="flex flex-wrap justify-center sm:justify-start gap-1.5 pt-1 text-[11px]"></div>
+                <div id="summary-photo-nav" class="hidden justify-center sm:justify-start gap-2 pt-2">
                   <button type="button" id="summary-prev-photo" class="px-3 py-1 rounded-lg text-xs bg-slate-800 hover:bg-slate-700 border border-slate-600">◀ תמונה קודמת</button>
                   <button type="button" id="summary-next-photo" class="px-3 py-1 rounded-lg text-xs bg-slate-800 hover:bg-slate-700 border border-slate-600">תמונה הבאה ▶</button>
                 </div>
@@ -180,23 +188,50 @@
 
             <div id="summary-photos-strip" class="flex gap-2.5 overflow-x-auto pb-1"></div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-white/10">
-              <div class="bg-slate-950/70 rounded-xl p-4 border border-slate-800 space-y-2">
-                <div class="text-xs font-bold text-indigo-300">🎯 תחביבים ותחומי עניין</div>
-                <div id="summary-hobbies" class="flex flex-wrap gap-1.5 text-xs"></div>
+            <div id="summary-about-box" class="bg-slate-950/75 rounded-2xl p-4 border border-white/10 space-y-1">
+              <div class="text-xs font-bold text-pink-300">💬 ספר על עצמך</div>
+              <p id="summary-bio" class="text-sm text-slate-200 leading-relaxed"></p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div class="bg-slate-950/70 rounded-2xl p-4 border border-pink-500/25 space-y-2">
+                <div class="text-xs font-bold text-pink-300">💘 היכרות והעדפות</div>
+                <div id="summary-col-dating" class="text-xs text-slate-200 space-y-1"></div>
               </div>
-              <div class="bg-slate-950/70 rounded-xl p-4 border border-slate-800 space-y-2">
-                <div class="text-xs font-bold text-emerald-300">🐾 בעלי חיים והשכלה</div>
-                <div id="summary-education" class="text-xs text-slate-200"></div>
+              <div class="bg-slate-950/70 rounded-2xl p-4 border border-cyan-500/25 space-y-2">
+                <div class="text-xs font-bold text-cyan-300">✨ אורח חיים והרגלים</div>
+                <div id="summary-col-lifestyle" class="text-xs text-slate-200 space-y-1"></div>
+              </div>
+              <div class="bg-slate-950/70 rounded-2xl p-4 border border-amber-500/25 space-y-2">
+                <div class="text-xs font-bold text-amber-300">🐾 בעלי חיים</div>
+                <div id="summary-col-pets" class="text-xs text-slate-200 space-y-1"></div>
+              </div>
+              <div class="bg-slate-950/70 rounded-2xl p-4 border border-emerald-500/25 space-y-2">
+                <div class="text-xs font-bold text-emerald-300">🚙 טיולים, ג׳יפים ורכבים</div>
+                <div id="summary-col-trips" class="flex flex-wrap gap-1.5 text-xs"></div>
+              </div>
+              <div class="bg-slate-950/70 rounded-2xl p-4 border border-purple-500/25 space-y-2">
+                <div class="text-xs font-bold text-purple-300">🌙 ערב, לילה ודייט ראשון</div>
+                <div id="summary-col-night" class="text-xs text-slate-200 space-y-1"></div>
+              </div>
+              <div class="bg-slate-950/70 rounded-2xl p-4 border border-indigo-500/25 space-y-2">
+                <div class="text-xs font-bold text-indigo-300">🎯 תחביבים ומוזיקה</div>
+                <div id="summary-col-extra" class="flex flex-wrap gap-1.5 text-xs"></div>
               </div>
             </div>
           </div>
         </div><form id="profile-form" class="space-y-6">
           <div class="bg-slate-900/75 p-5 rounded-2xl border border-slate-700 space-y-4">
+            <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
+              <h3 class="text-sm font-extrabold text-pink-300">📸 שלב 1: תמונות, מראה חיצוני של הכרטיס וכינוי</h3>
+              <span class="text-[11px] text-slate-400">אופציונלי</span>
+            </div>
+
             <div class="flex flex-col md:flex-row items-center gap-6">
               <div id="prof-avatar-frame" class="p-2 rounded-3xl bg-aurora shadow-lg shrink-0">
-                <img id="prof-avatar-preview" src="https://api.dicebear.com/9.x/avataaars/svg?seed=TopLove" alt=""
-                  class="w-28 h-28 rounded-2xl object-cover bg-slate-800" />
+                <div id="prof-avatar-placeholder" class="w-28 h-28 rounded-2xl bg-slate-800 flex items-center justify-center text-3xl">👤</div>
+                <img id="prof-avatar-preview" src="" alt=""
+                  class="hidden w-28 h-28 rounded-2xl object-cover bg-slate-800" />
               </div>
               <div class="w-full space-y-3">
                 <label class="block text-sm font-semibold text-pink-300">בחירת תמונות מהמכשיר (מחליף את תמונת ברירת המחדל מיידית)</label>
@@ -206,7 +241,7 @@
               </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3 border-t border-white/10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-3 border-t border-white/10">
               <div>
                 <label class="block text-xs text-slate-300 mb-1.5">רקע מעניין לפרופיל</label>
                 <select id="prof-banner" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs">
@@ -217,14 +252,19 @@
                 </select>
               </div>
               <div>
-                <label class="block text-xs text-slate-300 mb-1.5">כתובית מעניינת ליד השם (לא חובה)</label>
-                <input type="text" id="prof-tagline" placeholder="למשל: מחפשת אנרגיות טובות ✨"
+                <label class="block text-xs text-slate-300 mb-1.5">משפט פתיחה קצר ליד השם</label>
+                <input type="text" id="prof-tagline" placeholder="למשל: מחפש/ת אנרגיות טובות ✨"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1.5">מה הכינוי שלך?</label>
+                <input type="text" id="prof-nickname" placeholder="למשל: קפטן, נסיכה, ג׳יפאי..."
                   class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
               </div>
             </div>
 
             <div class="space-y-2 pt-2">
-              <label class="block text-xs text-slate-300">סגנון שם וכתוביות (רואים ישר איך זה נראה לפני שלוחצים):</label>
+              <label class="block text-xs text-slate-300">סגנון שם וכתוביות (תצוגה מקדימה מיידית):</label>
               <div id="name-style-cards" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 <button type="button" data-style="name-rainbow" class="style-pick-btn p-3 rounded-xl bg-slate-950 border border-pink-400 text-center">
                   <div class="font-extrabold text-sm name-rainbow">צבעוני קשת</div>
@@ -244,80 +284,152 @@
                 </button>
               </div>
             </div>
-          </div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3.5">
-            <div>
-              <label class="block text-xs text-slate-300 mb-1">שם משתמש</label>
-              <input type="text" id="prof-name" placeholder="שם משתמש"
-                class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm" />
+          </div><div class="bg-slate-900/75 p-5 rounded-2xl border border-indigo-500/25 space-y-4">
+            <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
+              <h3 class="text-sm font-extrabold text-indigo-300">🪪 שלב 2: פרטים בסיסיים, מטרת היכרות ומיקום</h3>
+              <span class="text-[11px] text-slate-400">אופציונלי</span>
             </div>
-            <div>
-              <label class="block text-xs text-slate-300 mb-1">אני</label>
-              <select id="prof-gender" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm">
-                <option value="">לא צוין</option>
-                <option value="גבר">גבר</option>
-                <option value="אישה">אישה</option>
-                <option value="אחר">אחר</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs text-slate-300 mb-1">את מי אתה / את מחפשת?</label>
-              <select id="prof-looking-for" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm">
-                <option value="אישה">אישה</option>
-                <option value="גבר">גבר</option>
-                <option value="אחר">אחר</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs text-slate-300 mb-1">גיל (18–80)</label>
-              <input type="number" id="prof-age" min="18" max="80" placeholder="גיל"
-                class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm" />
-            </div>
-            <div>
-              <label class="block text-xs text-slate-300 mb-1">מדינה / עיר</label>
-              <input type="text" id="prof-location" placeholder="למשל: כרמיאל"
-                class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm" />
-            </div>
-            <div>
-              <label class="block text-xs text-slate-300 mb-1">מרחק ממני (ק״מ)</label>
-              <input type="number" id="prof-distance" min="0" max="600" value="15"
-                class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm" />
-            </div>
-          </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-            <div>
-              <label class="block text-xs text-slate-300 mb-1">עישון (לא חובה)</label>
-              <select id="prof-smoking" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm">
-                <option value="">לא צוין</option>
-                <option value="לא מעשן/ת">לא מעשן/ת</option>
-                <option value="מעשן/ת לעיתים רחוקות">מעשן/ת לעיתים רחוקות</option>
-                <option value="מעשן/ת">מעשן/ת</option>
-                <option value="מעשן/ת תמיד / כל הזמן">מעשן/ת תמיד / כל הזמן</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs text-slate-300 mb-1">אלכוהול (לא חובה)</label>
-              <select id="prof-alcohol" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm">
-                <option value="">לא צוין</option>
-                <option value="אף פעם">אף פעם</option>
-                <option value="כמעט ולא">כמעט ולא</option>
-                <option value="מידי פעם">מידי פעם</option>
-                <option value="קבוע">קבוע</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs text-slate-300 mb-1">השכלה (לא חובה)</label>
-              <input type="text" id="prof-education" placeholder="למשל: תואר ראשון, הנדסאי..."
-                class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm" />
-            </div>
-          </div>
-
-          <div class="bg-slate-900/75 p-4 rounded-2xl border border-amber-500/25 space-y-3">
-            <div class="text-sm font-bold text-amber-300">🐾 בעלי חיים (שאלה נפרדת — אופציונלי)</div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
               <div>
-                <label class="block text-xs text-slate-300 mb-1">האם יש לך בעלי חיים או אין?</label>
-                <select id="prof-has-pets" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm">
+                <label class="block text-xs text-slate-300 mb-1">שם משתמש</label>
+                <input type="text" id="prof-name" placeholder="שם משתמש"
+                  class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">אני</label>
+                <select id="prof-gender" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm">
+                  <option value="">לא צוין</option>
+                  <option value="גבר">גבר</option>
+                  <option value="אישה">אישה</option>
+                  <option value="אחר">אחר</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">את מי אתה / את מחפשת?</label>
+                <select id="prof-looking-for" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm">
+                  <option value="אישה">אישה</option>
+                  <option value="גבר">גבר</option>
+                  <option value="אחר">אחר</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">גיל (18–80)</label>
+                <input type="number" id="prof-age" min="18" max="80" placeholder="גיל"
+                  class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">עיר / אזור בארץ</label>
+                <input type="text" id="prof-location" placeholder="למשל: כרמיאל, תל אביב או כל הארץ"
+                  class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">מרחק ממני (ק״מ)</label>
+                <input type="number" id="prof-distance" min="0" max="600" value="15"
+                  class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-2 border-t border-white/10">
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">💘 מה מחפש/ת באתר?</label>
+                <select id="prof-goal" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs">
+                  <option value="">לא צוין</option>
+                  <option value="קשר רציני וארוך טווח">💍 קשר רציני וארוך טווח</option>
+                  <option value="היכרות וזוגיות בכיף">❤️ היכרות וזוגיות בכיף</option>
+                  <option value="חברות, שיחות ויציאות">☕ חברות, שיחות ויציאות</option>
+                  <option value="זורם/ת לפי הכימיה">✨ זורם/ת לפי הכימיה</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">💑 מצב משפחתי</label>
+                <select id="prof-marital" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs">
+                  <option value="">לא צוין</option>
+                  <option value="רווק/ה">רווק/ה</option>
+                  <option value="גרוש/ה">גרוש/ה</option>
+                  <option value="אלמן/ה">אלמן/ה</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">👶 ילדים</label>
+                <select id="prof-children" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs">
+                  <option value="">לא צוין</option>
+                  <option value="אין ילדים">אין ילדים</option>
+                  <option value="יש ילדים">יש ילדים</option>
+                  <option value="רוצה ילדים בעתיד">רוצה ילדים בעתיד</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">📏 גובה (ס״מ)</label>
+                <input type="number" id="prof-height" min="130" max="225" placeholder="למשל: 175"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-slate-900/75 p-5 rounded-2xl border border-cyan-500/25 space-y-4">
+            <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
+              <h3 class="text-sm font-extrabold text-cyan-300">✨ שלב 3: אורח חיים, עבודה והרגלים</h3>
+              <span class="text-[11px] text-slate-400">אופציונלי</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">💼 תחום עיסוק / עבודה</label>
+                <input type="text" id="prof-job" placeholder="למשל: הייטק, עצמאי, רפואה..."
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">🎓 השכלה</label>
+                <input type="text" id="prof-education" placeholder="למשל: תואר ראשון, הנדסאי..."
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">🚬 עישון</label>
+                <select id="prof-smoking" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs">
+                  <option value="">לא צוין</option>
+                  <option value="לא מעשן/ת">לא מעשן/ת</option>
+                  <option value="מעשן/ת לעיתים רחוקות">מעשן/ת לעיתים רחוקות</option>
+                  <option value="מעשן/ת">מעשן/ת</option>
+                  <option value="מעשן/ת תמיד / כל הזמן">מעשן/ת תמיד / כל הזמן</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">🍷 אלכוהול</label>
+                <select id="prof-alcohol" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs">
+                  <option value="">לא צוין</option>
+                  <option value="אף פעם">אף פעם</option>
+                  <option value="כמעט ולא">כמעט ולא</option>
+                  <option value="מידי פעם">מידי פעם</option>
+                  <option value="קבוע">קבוע</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">♌ מזל אסטרולוגי</label>
+                <select id="prof-zodiac" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs">
+                  <option value="">לא צוין</option>
+                  <option value="טלה ♈">טלה ♈</option>
+                  <option value="שור ♉">שור ♉</option>
+                  <option value="תאומים ♊">תאומים ♊</option>
+                  <option value="סרטן ♋">סרטן ♋</option>
+                  <option value="אריה ♌">אריה ♌</option>
+                  <option value="בתולה ♍">בתולה ♍</option>
+                  <option value="מאזניים ♎">מאזניים ♎</option>
+                  <option value="עקרב ♏">עקרב ♏</option>
+                  <option value="קשת ♐">קשת ♐</option>
+                  <option value="גדי ♑">גדי ♑</option>
+                  <option value="דלי ♒">דלי ♒</option>
+                  <option value="דגים ♓">דגים ♓</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="bg-slate-900/75 p-5 rounded-2xl border border-amber-500/25 space-y-3">
+              <div class="text-sm font-extrabold text-amber-300 border-b border-white/10 pb-2">🐾 שלב 4: עמודת בעלי חיים</div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">יש בעלי חיים או אין?</label>
+                <select id="prof-has-pets" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs">
                   <option value="">לא צוין</option>
                   <option value="יש לי בעלי חיים">🐾 יש לי בעלי חיים</option>
                   <option value="אין לי בעלי חיים">🚫 אין לי בעלי חיים</option>
@@ -325,37 +437,65 @@
               </div>
               <div>
                 <label class="block text-xs text-slate-300 mb-1">איזה בעל חיים אתה יותר אוהב?</label>
-                <select id="prof-fav-pet" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm">
+                <select id="prof-fav-pet" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs">
                   <option value="">לא צוין</option>
                   <option value="חתול">🐱 חתול</option>
                   <option value="כלב">🐶 כלב</option>
                   <option value="אחר">✨ אחר</option>
                 </select>
               </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">מה השם של הכלב / החתול?</label>
+                <input type="text" id="prof-pet-name" placeholder="למשל: מוקה, לונה, רקס..."
+                  class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
+              </div>
+              <div id="prof-other-pet-wrap" class="hidden">
+                <label class="block text-xs text-amber-200 mb-1">איזה בעל חיים אחר?</label>
+                <input type="text" id="prof-other-pet-text" placeholder="למשל: ארנב, תוכי, סוס..."
+                  class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-amber-500/40 text-xs" />
+              </div>
             </div>
-            <div id="prof-other-pet-wrap" class="hidden">
-              <label class="block text-xs text-amber-200 mb-1">איזה בעל חיים? (לא חובה)</label>
-              <input type="text" id="prof-other-pet-text" placeholder="למשל: ארנב, תוכי, סוס, צב..."
-                class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-amber-500/40 text-sm" />
+
+            <div class="bg-slate-900/75 p-5 rounded-2xl border border-emerald-500/25 space-y-2.5">
+              <div class="text-sm font-extrabold text-emerald-300 border-b border-white/10 pb-2">🚙 שלב 5: עמודת טיולים, ג׳יפים ורכבים</div>
+              <div id="trips-options" class="flex flex-wrap gap-2"></div>
+            </div>
+
+            <div class="bg-slate-900/75 p-5 rounded-2xl border border-purple-500/25 space-y-3">
+              <div class="text-sm font-extrabold text-purple-300 border-b border-white/10 pb-2">🌙 שלב 6: ערב, לילה ודייט ראשון</div>
+              <div id="night-options" class="flex flex-wrap gap-2"></div>
+              <div class="pt-2 border-t border-white/10">
+                <label class="block text-xs text-slate-300 mb-1">🥂 רעיון לדייט ראשון מועדף:</label>
+                <select id="prof-first-date" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs">
+                  <option value="">לא צוין</option>
+                  <option value="קפה או יין מול הים">🌊 קפה או יין מול הים</option>
+                  <option value="טיול שקיעה או נסיעה ברכב">🚗 טיול שקיעה או נסיעה ברכב</option>
+                  <option value="ערב סרטים והתכרבלות בבית">🎬 ערב סרטים והתכרבלות בבית</option>
+                  <option value="מסעדה טובה ושיחה ארוכה">🍽️ מסעדה טובה ושיחה ארוכה</option>
+                </select>
+              </div>
             </div>
           </div>
 
-          <div class="bg-slate-900/70 p-4 rounded-2xl border border-indigo-500/25 space-y-2.5">
-            <label class="block text-sm font-bold text-indigo-300">🎯 תחביבים ומה אוהב/ת לעשות — סדרות, טיולים, טיולי שטח עם ג׳יפים, טיולי רכבים ועוד (לא חובה)</label>
+          <div class="bg-slate-900/75 p-5 rounded-2xl border border-indigo-500/25 space-y-3">
+            <div class="flex items-center justify-between border-b border-white/10 pb-2">
+              <h3 class="text-sm font-extrabold text-indigo-300">🎯 שלב 7: עמודת תחביבים ותחומי עניין נוספים</h3>
+              <span class="text-[11px] text-slate-400">בחר כמה שבא לך</span>
+            </div>
             <div id="hobbies-options" class="flex flex-wrap gap-2"></div>
           </div>
 
-          <div>
-            <label class="block text-xs text-slate-300 mb-1">ספר על עצמך (לא חובה)</label>
-            <textarea id="prof-bio" rows="2" placeholder="ספר/י על עצמך..."
-              class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm"></textarea>
+          <div class="bg-slate-900/75 p-5 rounded-2xl border border-pink-500/25 space-y-2">
+            <label class="block text-sm font-extrabold text-pink-300">✍️ שלב 8: ספר על עצמך (במילים שלך)</label>
+            <textarea id="prof-bio" rows="3" placeholder="ספר/י על עצמך, מה עושה לך טוב, ואיזה חיבור היית רוצה למצוא..."
+              class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-700 text-sm"></textarea>
           </div>
 
           <p id="profile-error" class="text-rose-400 text-xs hidden"></p>
           <div class="flex items-center justify-between">
-            <span id="save-feedback" class="text-emerald-400 text-sm opacity-0 transition-opacity">✓ נשמר והועבר לפרופיל!</span>
-            <button type="submit" class="px-7 py-3 rounded-xl font-semibold bg-gradient-to-l from-pink-600 to-indigo-600 shadow-lg">
-              שמור פרופיל
+            <span id="save-feedback" class="text-emerald-400 text-sm opacity-0 transition-opacity">✓ הפרופיל נשמר בהצלחה!</span>
+            <button type="submit" class="px-8 py-3.5 rounded-xl font-bold bg-gradient-to-l from-pink-600 to-indigo-600 shadow-lg hover:opacity-95">
+              💾 שמור והצג את הפרופיל שלי
             </button>
           </div>
         </form>
@@ -386,7 +526,7 @@
           </div>
         </div>
 
-        <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-4 grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+        <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
           <div>
             <label class="block text-slate-300 mb-1">העדפת חיפוש (את מי מחפשים):</label>
             <select id="filter-looking-for" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700">
@@ -398,9 +538,9 @@
             </select>
           </div>
           <div>
-            <label class="block text-slate-300 mb-1">מרחק ממני:</label>
+            <label class="block text-slate-300 mb-1">מיקום / מרחק:</label>
             <select id="filter-distance" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700">
-              <option value="all">כל הארץ</option>
+              <option value="all">כל הארץ (לפי מיקום)</option>
               <option value="10">קרוב אליי — עד 10 ק״מ</option>
               <option value="20">עד 20 ק״מ</option>
               <option value="30">עד 30 ק״מ</option>
@@ -410,6 +550,11 @@
               <option value="500">עד 500 ק״מ</option>
               <option value="600">עד 600 ק״מ</option>
             </select>
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1">חיפוש לפי עיר / אזור:</label>
+            <input type="text" id="filter-location" placeholder="למשל: תל אביב, חיפה, כרמיאל..."
+              class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700" />
           </div>
           <div>
             <label class="block text-slate-300 mb-1">גיל מינימום (18–80):</label>
@@ -762,8 +907,8 @@
         <div id="game-roulette" class="game-panel hidden max-w-6xl mx-auto glass rounded-2xl p-6 space-y-5">
           <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
             <div>
-              <h3 class="text-xl font-bold">🔫 רולטה רוסית — שולחן עגול של 6 מושבים (סיבוב אקדח אוטומטי)</h3>
-              <p class="text-xs text-slate-300">אנשים מצטרפים לשולחן העגול והמחשב מסובב לבד את האקדח שבמרכז כל כמה שניות ויורה על מי שהוא מכוון אליו עם קונפטי</p>
+              <h3 class="text-xl font-bold">🔫 רולטה רוסית — שולחן עגול של 6 מושבים (סיבוב אקדח אוטומטי אחת לחצי דקה לפחות)</h3>
+              <p class="text-xs text-slate-300">שולחן עגול עם אקדח במרכז שמסתובב לבד לפחות כל 30 שניות ויורה על מי שהוא מכוון אליו עם קונפטי</p>
             </div>
             <div class="flex flex-wrap items-center gap-2">
               <button type="button" id="rr-join-btn" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-pink-600 hover:bg-pink-500">כנס לשולחן</button>
@@ -785,10 +930,10 @@
               <div class="round-table-ring rounded-full w-64 h-64 mx-auto flex flex-col items-center justify-center p-4 text-center space-y-2 shadow-2xl">
                 <div id="rr-confetti-banner" class="hidden text-xs font-extrabold text-amber-300 animate-bounce">🎉🎊 בום קונפטי! 🎊🎉</div>
                 <div id="rr-gun-spinner" class="text-5xl transition-transform duration-500 select-none">🔫</div>
-                <div id="rr-aimed-label" class="text-xs font-bold text-pink-200">המחשב מסובב אוטומטית...</div>
+                <div id="rr-aimed-label" class="text-xs font-bold text-pink-200">האקדח במרכז ממתין...</div>
               </div>
 
-              <p id="rr-status" class="text-sm text-center text-pink-200 bg-slate-900 p-3 rounded-xl">לחץ "כנס לשולחן" — שחקנים מצטרפים והמחשב מסובב ויורה אוטומטית כל כמה שניות</p>
+              <p id="rr-status" class="text-sm text-center text-pink-200 bg-slate-900 p-3 rounded-xl">לחץ "כנס לשולחן" — האקדח מסובב לבד לפחות כל 30 שניות ויורה על מי שהוא מכוון אליו</p>
             </div>
 
             <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-3.5 flex flex-col justify-between space-y-2.5">
@@ -849,12 +994,29 @@
       return current;
     }
 
+    const tripsChoices = [
+      "🥾 טיולים בטבע",
+      "🚙 טיולי שטח עם ג׳יפים",
+      "🚗 טיולי רכבים ונסיעות",
+      "🏕️ קמפינג לילי",
+      "⛰️ מסלולי הליכה ונחלים",
+      "🌅 טיולי שקיעה וזריחה"
+    ];
+
+    const nightChoices = [
+      "🎬 לראות סרטים וסדרות",
+      "🛏️ לשכב ולהירגע יחד",
+      "🤗 להתחבק ולהתכרבל",
+      "🍷 יין / קפה של לילה",
+      "🎶 לשמוע מוזיקה רגועה",
+      "💬 שיחות עמוקות עד מאוחר"
+    ];
+
     const hobbiesChoices = [
-      "📺 לראות סדרות ובינג׳", "🎬 קולנוע וסרטים", "🥾 טיולים", "🚙 טיולי שטח עם ג׳יפים",
-      "🚗 טיולי רכבים ונסיעות", "🏕️ קמפינג בטבע", "🏋️ ספורט וכושר", "📷 צילום",
-      "🍳 בישול ואפייה", "🎮 גיימינג", "📚 קריאה", "💃 ריקוד",
-      "🎸 נגינה", "🎨 ציור ואמנות", "🚴 רכיבת אופניים", "🧘 יוגה ומדיטציה",
-      "✈️ נסיעות לחו״ל", "♟️ משחקי אסטרטגיה", "🎤 שירה וקריוקי", "🎶 הופעות ומוזיקה"
+      "📺 לראות סדרות ובינג׳", "🏋️ ספורט וכושר", "📷 צילום", "🍳 בישול ואפייה",
+      "🎮 גיימינג", "📚 קריאה", "💃 ריקוד", "🎸 נגינה",
+      "🎨 ציור ואמנות", "🚴 רכיבת אופניים", "🧘 יוגה ומדיטציה", "✈️ נסיעות לחו״ל",
+      "♟️ משחקי אסטרטגיה", "🎤 שירה וקריוקי", "🎶 הופעות ומוזיקה"
     ];let weekStartTs = Number(localStorage.getItem("toplove_week_start") || Date.now());
     if (!localStorage.getItem("toplove_week_start")) localStorage.setItem("toplove_week_start", String(weekStartTs));
 
@@ -876,14 +1038,7 @@
     }
     checkWeeklyAutoReset();
 
-    const sampleCandidates = [
-      { uid: "c-maya", name: "מאיה", gender: "אישה", lookingFor: "גבר", age: 27, location: "תל אביב", distanceKm: 12, tagline: "אוהבת סדרות וטיולי שטח 🚙", bio: "מחפשת חיבור אמיתי וצחוקים.", hobbies: ["📺 לראות סדרות ובינג׳", "🚙 טיולי שטח עם ג׳יפים", "🥾 טיולים"], hasPets: "יש לי בעלי חיים", favPet: "כלב", otherPetText: "", banner: "bg-sunset", nameStyle: "name-roseGold" },
-      { uid: "c-noa", name: "נועה", gender: "אישה", lookingFor: "גבר", age: 30, location: "חיפה", distanceKm: 18, tagline: "קפה, סרטים וטיולי רכבים 🚗", bio: "אוהבת לגלות מקומות חדשים.", hobbies: ["🎬 קולנוע וסרטים", "🚗 טיולי רכבים ונסיעות", "🎶 הופעות ומוזיקה"], hasPets: "יש לי בעלי חיים", favPet: "חתול", otherPetText: "", banner: "bg-aurora", nameStyle: "name-rainbow" },
-      { uid: "c-tamar", name: "תמר", gender: "אישה", lookingFor: "גבר", age: 25, location: "כרמיאל", distanceKm: 6, tagline: "טבע, קמפינג וסדרות מתח 🏕️", bio: "חובבת שטח ושקט טוב.", hobbies: ["🏕️ קמפינג בטבע", "📺 לראות סדרות ובינג׳", "🥾 טיולים"], hasPets: "אין לי בעלי חיים", favPet: "אחר", otherPetText: "ארנב", banner: "bg-emeraldLux", nameStyle: "name-neon" },
-      { uid: "c-daniel", name: "דניאל", gender: "גבר", lookingFor: "אישה", age: 29, location: "הרצליה", distanceKm: 14, tagline: "טיולי שטח עם ג׳יפים ומוזיקה 🚙", bio: "אוהב נסיעות, ים ושיחות עמוקות.", hobbies: ["🚙 טיולי שטח עם ג׳יפים", "🚗 טיולי רכבים ונסיעות", "🎸 נגינה"], hasPets: "יש לי בעלי חיים", favPet: "כלב", otherPetText: "", banner: "bg-royal", nameStyle: "name-rainbow" },
-      { uid: "c-omer", name: "עומר", gender: "גבר", lookingFor: "אישה", age: 32, location: "כרמיאל", distanceKm: 5, tagline: "סדרות, בישול וטיולים בצפון 🥾", bio: "איש של פשטות ואנרגיות טובות.", hobbies: ["📺 לראות סדרות ובינג׳", "🍳 בישול ואפייה", "🥾 טיולים"], hasPets: "אין לי בעלי חיים", favPet: "חתול", otherPetText: "", banner: "bg-sunset", nameStyle: "name-roseGold" },
-      { uid: "c-roni", name: "רוני", gender: "אישה", lookingFor: "גבר", age: 26, location: "רמת גן", distanceKm: 16, tagline: "טיולי רכבים, צילום וסדרות 📷", bio: "מחפשת בן זוג שכיף לטייל איתו.", hobbies: ["🚗 טיולי רכבים ונסיעות", "📷 צילום", "📺 לראות סדרות ובינג׳"], hasPets: "יש לי בעלי חיים", favPet: "כלב", otherPetText: "", banner: "bg-aurora", nameStyle: "name-rainbow" }
-    ];
+    const sampleCandidates = [];
 
     const gameNames = {
       ttt: "איקס עיגול", rps: "אבן נייר מספריים",
@@ -891,11 +1046,12 @@
     };
 
     const me = {
-      uid: "", email: "", name: "", gender: "", lookingFor: "אישה", age: 18,
-      location: "", distanceKm: 15, smoking: "", alcohol: "", education: "",
-      hasPets: "", favPet: "", otherPetText: "",
-      tagline: "", banner: "bg-aurora", nameStyle: "name-rainbow", bio: "",
-      hobbies: [], photos: [], following: [],
+      uid: "", email: "", name: "", nickname: "", gender: "", lookingFor: "אישה", age: 18,
+      location: "", distanceKm: 15, goal: "", marital: "", children: "", height: "",
+      job: "", smoking: "", alcohol: "", education: "", zodiac: "",
+      hasPets: "", favPet: "", petName: "", otherPetText: "",
+      firstDate: "", tagline: "", banner: "bg-aurora", nameStyle: "name-rainbow", bio: "",
+      trips: [], nightActivities: [], hobbies: [], photos: [], following: [],
       avatar: "", hasCustomPhoto: false, profileCompleted: false,
       rrRewards: { goldBalls: 0, magazines: 0, pistols: 0, grandGifts: 0 },
       gameStats: {
@@ -992,6 +1148,7 @@
         const icon = p.favPet === "חתול" ? "🐱" : p.favPet === "כלב" ? "🐶" : "✨";
         parts.push(`מעדיף/ה: ${icon} ${p.favPet}`);
       }
+      if (p.petName) parts.push(`שם: ${p.petName}`);
       return parts.length ? `🐾 ${parts.join(" • ")}` : "";
     }
 
@@ -1011,11 +1168,15 @@
       $("modal-level-badge").textContent = `רמה ${lvl} • ${gPoints} נק׳`;
       $("modal-name").className = `text-2xl font-extrabold ${person.nameStyle || ""}`;
       $("modal-name").textContent = person.name || "משתמש";
-      $("modal-tagline").textContent = person.tagline || "";
+      $("modal-tagline").textContent = [person.tagline || "", person.nickname ? `כינוי: ${person.nickname}` : ""].filter(Boolean).join(" • ");
       $("modal-meta").textContent = [person.gender ? `אני: ${person.gender}` : "", person.age ? `גיל ${person.age}` : "", person.location, person.distanceKm !== undefined ? `${person.distanceKm} ק״מ ממך` : ""].filter(Boolean).join(" • ");
       $("modal-looking-for").textContent = person.lookingFor ? `💘 מחפש/ת: ${person.lookingFor}` : "";
+      $("modal-relationship-goal").textContent = [person.goal, person.marital, person.children, person.height ? `${person.height} ס״מ` : ""].filter(Boolean).join(" • ");
+      $("modal-lifestyle").textContent = [person.job ? `💼 ${person.job}` : "", person.zodiac ? `♌ ${person.zodiac}` : ""].filter(Boolean).join(" • ");
       $("modal-habits").textContent = [person.smoking ? `🚬 ${person.smoking}` : "", person.alcohol ? `🍷 ${person.alcohol}` : ""].filter(Boolean).join(" • ");
       $("modal-pets-info").textContent = formatPetLine(person);
+      const nightArr = [...(person.nightActivities || []), person.firstDate ? `🥂 דייט ראשון: ${person.firstDate}` : ""].filter(Boolean);
+      $("modal-night-info").textContent = nightArr.length ? `🌙 ${nightArr.join(" • ")}` : "";
       $("modal-education").textContent = person.education ? `🎓 השכלה: ${person.education}` : "";
       $("modal-bio").textContent = person.bio || "";
       $("modal-action-msg").textContent = "";
@@ -1030,8 +1191,8 @@
         $("modal-gallery").innerHTML = `<span class="text-xs text-slate-400">לא הועלתה תמונה</span>`;
       }
 
-      const tags = person.hobbies || [];
-      $("modal-tags").innerHTML = tags.length ? tags.map((t) => `<span class="px-2.5 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30">${t}</span>`).join("") : `<span class="text-slate-400">לא נבחרו תחביבים</span>`;
+      const tags = [...(person.trips || []), ...(person.hobbies || [])];
+      $("modal-tags").innerHTML = tags.length ? tags.map((t) => `<span class="px-2.5 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30">${t}</span>`).join("") : `<span class="text-slate-400">לא נבחרו תחביבים או טיולים</span>`;
 
       const targetId = person.uid || person.id;
       $("modal-follow-btn").textContent = (me.following || []).includes(targetId) ? "✓ עוקב" : "➕ עקוב";
@@ -1078,7 +1239,26 @@
     }
     $("prof-fav-pet").onchange = syncOtherPetField;
 
+    function computeProfileCompletion() {
+      const checks = [
+        Boolean(me.name), Boolean(me.gender), Boolean(me.lookingFor), Boolean(me.location),
+        Boolean(me.goal), Boolean(me.marital), Boolean(me.children), Boolean(me.height),
+        Boolean(me.job), Boolean(me.education), Boolean(me.smoking), Boolean(me.alcohol),
+        Boolean(me.zodiac), Boolean(me.hasPets), Boolean(me.favPet), Boolean(me.bio),
+        (me.trips || []).length > 0, (me.nightActivities || []).length > 0, (me.hobbies || []).length > 0
+      ];
+      const filled = checks.filter(Boolean).length;
+      const pct = Math.round((filled / checks.length) * 100);
+      $("profile-completion-badge").textContent = `✨ השלמת פרופיל: ${pct}%`;
+    }
+
     function renderQuestionnaireOptions() {
+      $("trips-options").innerHTML = tripsChoices.map((item) => `<button type="button" data-trip="${item}" class="px-3 py-1.5 rounded-full text-xs border transition ${me.trips.includes(item) ? "bg-emerald-600 border-emerald-400 text-white" : "bg-slate-950 border-slate-700 text-slate-300"}">${item}</button>`).join("");
+      $("trips-options").querySelectorAll("[data-trip]").forEach((btn) => { btn.onclick = () => { const v = btn.dataset.trip; me.trips = me.trips.includes(v) ? me.trips.filter((x) => x !== v) : [...me.trips, v]; renderQuestionnaireOptions(); }; });
+
+      $("night-options").innerHTML = nightChoices.map((item) => `<button type="button" data-night="${item}" class="px-3 py-1.5 rounded-full text-xs border transition ${me.nightActivities.includes(item) ? "bg-purple-600 border-purple-400 text-white" : "bg-slate-950 border-slate-700 text-slate-300"}">${item}</button>`).join("");
+      $("night-options").querySelectorAll("[data-night]").forEach((btn) => { btn.onclick = () => { const v = btn.dataset.night; me.nightActivities = me.nightActivities.includes(v) ? me.nightActivities.filter((x) => x !== v) : [...me.nightActivities, v]; renderQuestionnaireOptions(); }; });
+
       $("hobbies-options").innerHTML = hobbiesChoices.map((item) => `<button type="button" data-hobby="${item}" class="px-3 py-1.5 rounded-full text-xs border transition ${me.hobbies.includes(item) ? "bg-indigo-600 border-indigo-400 text-white" : "bg-slate-950 border-slate-700 text-slate-300"}">${item}</button>`).join("");
       $("hobbies-options").querySelectorAll("[data-hobby]").forEach((btn) => { btn.onclick = () => { const v = btn.dataset.hobby; me.hobbies = me.hobbies.includes(v) ? me.hobbies.filter((x) => x !== v) : [...me.hobbies, v]; renderQuestionnaireOptions(); }; });
     }
@@ -1094,15 +1274,20 @@
     function renderPhotoThumbs() {
       $("prof-avatar-frame").className = `p-2 rounded-3xl ${me.banner || "bg-aurora"} shadow-lg shrink-0`;
       if (me.hasCustomPhoto && me.photos && me.photos.length) {
+        $("prof-avatar-placeholder").classList.add("hidden");
+        $("prof-avatar-preview").classList.remove("hidden");
         $("prof-avatar-preview").src = me.photos[0];
         $("prof-photos-thumbs").innerHTML = me.photos.map((src, idx) => `<img src="${src}" alt="" data-photo-idx="${idx}" class="w-14 h-14 rounded-xl object-cover border border-pink-400 cursor-pointer" />`).join("");
         document.querySelectorAll("[data-photo-idx]").forEach((img) => { img.onclick = () => { me.avatar = img.src; $("prof-avatar-preview").src = img.src; }; });
       } else {
+        $("prof-avatar-placeholder").classList.remove("hidden");
+        $("prof-avatar-preview").classList.add("hidden");
         $("prof-photos-thumbs").innerHTML = `<span class="text-xs text-slate-400">עדיין לא נבחרה תמונה מהמכשיר</span>`;
       }
     }
 
     function applyProfileViewMode() {
+      computeProfileCompletion();
       const showSummary = Boolean(me.profileCompleted);
       $("profile-summary-card").classList.toggle("hidden", !showSummary);
       $("profile-form").classList.toggle("hidden", showSummary);
@@ -1111,31 +1296,75 @@
         const gPoints = Object.values(me.gameStats || {}).reduce((acc, s) => acc + (Number(s.points) || 0), 0);
         const lvl = getLevel(gPoints);
         const photos = me.hasCustomPhoto && Array.isArray(me.photos) && me.photos.length ? me.photos : [];
-        $("summary-banner").className = `h-32 ${me.banner || "bg-aurora"} p-4 flex items-center justify-between`;
+        $("summary-banner").className = `h-36 ${me.banner || "bg-aurora"} p-5 flex items-start justify-between`;
         $("summary-level-badge").textContent = `רמה ${lvl} • ${gPoints} נק׳`;
         $("summary-likes-badge").textContent = `👥 עוקב אחרי ${(me.following || []).length}`;
 
         if (photos.length) {
           summaryPhotoIdx = summaryPhotoIdx % photos.length;
           $("summary-avatar").classList.remove("hidden");
+          $("summary-photo-nav").classList.remove("hidden");
+          $("summary-photo-nav").classList.add("flex");
           $("summary-avatar").src = photos[summaryPhotoIdx];
           $("summary-photos-strip").innerHTML = photos.map((src, i) => `<img src="${src}" alt="" data-sum-idx="${i}" class="w-16 h-16 rounded-xl object-cover border ${i === summaryPhotoIdx ? "border-pink-400" : "border-white/20"} shrink-0 cursor-pointer" />`).join("");
           document.querySelectorAll("[data-sum-idx]").forEach((img) => { img.onclick = () => { summaryPhotoIdx = Number(img.dataset.sumIdx); applyProfileViewMode(); }; });
         } else {
           $("summary-avatar").classList.add("hidden");
+          $("summary-photo-nav").classList.add("hidden");
+          $("summary-photo-nav").classList.remove("flex");
           $("summary-photos-strip").innerHTML = "";
         }
 
         $("summary-name").className = `text-2xl font-extrabold ${me.nameStyle || ""}`;
         $("summary-name").textContent = me.name || "משתמש";
+        if (me.nickname) {
+          $("summary-nickname-pill").classList.remove("hidden");
+          $("summary-nickname-pill").textContent = `🏷️ ${me.nickname}`;
+        } else {
+          $("summary-nickname-pill").classList.add("hidden");
+        }
         $("summary-tagline").textContent = me.tagline || "";
         $("summary-age-gender-loc").textContent = [me.gender ? `אני: ${me.gender}` : "", me.age ? `גיל ${me.age}` : "", me.location, me.distanceKm !== undefined ? `${me.distanceKm} ק״מ` : ""].filter(Boolean).join(" • ");
-        $("summary-looking-for").textContent = me.lookingFor ? `💘 מחפש/ת: ${me.lookingFor}` : "";
-        $("summary-habits").textContent = [me.smoking ? `🚬 ${me.smoking}` : "", me.alcohol ? `🍷 ${me.alcohol}` : ""].filter(Boolean).join(" • ");
-        $("summary-pets").textContent = formatPetLine(me);
-        $("summary-bio").textContent = me.bio || "";
-        $("summary-hobbies").innerHTML = me.hobbies.length ? me.hobbies.map((h) => `<span class="px-2.5 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30">${h}</span>`).join("") : `<span class="text-slate-400">לא נבחר</span>`;
-        $("summary-education").textContent = [formatPetLine(me), me.education ? `🎓 ${me.education}` : ""].filter(Boolean).join(" | ") || "לא צוין";
+
+        const quickPills = [
+          me.lookingFor ? `💘 מחפש/ת: ${me.lookingFor}` : "",
+          me.goal || "",
+          me.zodiac || "",
+          me.height ? `📏 ${me.height} ס״מ` : ""
+        ].filter(Boolean);
+        $("summary-quick-pills").innerHTML = quickPills.map((p) => `<span class="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-200">${p}</span>`).join("");
+
+        $("summary-bio").textContent = me.bio || "עדיין לא נכתב טקסט ב\"ספר על עצמך\".";
+
+        const datingLines = [
+          me.lookingFor ? `💘 מחפש/ת: ${me.lookingFor}` : "",
+          me.goal ? `🎯 מטרה: ${me.goal}` : "",
+          me.marital ? `💑 מצב משפחתי: ${me.marital}` : "",
+          me.children ? `👶 ילדים: ${me.children}` : ""
+        ].filter(Boolean);
+        $("summary-col-dating").innerHTML = datingLines.length ? datingLines.map((x) => `<div>${x}</div>`).join("") : `<span class="text-slate-400">לא צוין</span>`;
+
+        const lifeLines = [
+          me.job ? `💼 עיסוק: ${me.job}` : "",
+          me.education ? `🎓 השכלה: ${me.education}` : "",
+          me.smoking ? `🚬 עישון: ${me.smoking}` : "",
+          me.alcohol ? `🍷 אלכוהול: ${me.alcohol}` : "",
+          me.height ? `📏 גובה: ${me.height} ס״מ` : "",
+          me.zodiac ? `♌ מזל: ${me.zodiac}` : ""
+        ].filter(Boolean);
+        $("summary-col-lifestyle").innerHTML = lifeLines.length ? lifeLines.map((x) => `<div>${x}</div>`).join("") : `<span class="text-slate-400">לא צוין</span>`;
+
+        const petLine = formatPetLine(me);
+        $("summary-col-pets").innerHTML = petLine ? `<div>${petLine}</div>` : `<span class="text-slate-400">לא צוין</span>`;
+        $("summary-col-trips").innerHTML = me.trips.length ? me.trips.map((t) => `<span class="px-2 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30">${t}</span>`).join("") : `<span class="text-slate-400">לא נבחרו טיולים</span>`;
+
+        const nightLines = [
+          ...me.nightActivities.map((n) => `<div>• ${n}</div>`),
+          me.firstDate ? `<div class="text-pink-200 pt-1">🥂 דייט ראשון: ${me.firstDate}</div>` : ""
+        ].filter(Boolean);
+        $("summary-col-night").innerHTML = nightLines.length ? nightLines.join("") : `<span class="text-slate-400">לא נבחר</span>`;
+
+        $("summary-col-extra").innerHTML = me.hobbies.length ? me.hobbies.map((h) => `<span class="px-2 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30">${h}</span>`).join("") : `<span class="text-slate-400">לא נבחרו תחביבים</span>`;
       }
     }
 
@@ -1149,6 +1378,8 @@
 
     function openApp(session) {
       Object.assign(me, session);
+      me.trips = Array.isArray(session.trips) ? session.trips : [];
+      me.nightActivities = Array.isArray(session.nightActivities) ? session.nightActivities : [];
       me.hobbies = Array.isArray(session.hobbies) ? session.hobbies : [];
       me.photos = Array.isArray(session.photos) ? session.photos : [];
       me.following = Array.isArray(session.following) ? session.following : [];
@@ -1164,11 +1395,16 @@
       $("auth-section").classList.add("hidden"); $("app-section").classList.remove("hidden");
       $("user-badge").classList.remove("hidden"); $("logout-btn").classList.remove("hidden");
       $("user-badge").textContent = `${me.name || me.email.split("@")[0]} • ${me.age || 18}`;
-      $("prof-name").value = me.name || ""; $("prof-gender").value = me.gender || ""; $("prof-looking-for").value = me.lookingFor || "אישה";
+      $("prof-name").value = me.name || ""; $("prof-nickname").value = me.nickname || "";
+      $("prof-gender").value = me.gender || ""; $("prof-looking-for").value = me.lookingFor || "אישה";
       $("prof-age").value = me.age || 18; $("prof-location").value = me.location || ""; $("prof-distance").value = me.distanceKm ?? 15;
+      $("prof-goal").value = me.goal || ""; $("prof-marital").value = me.marital || "";
+      $("prof-children").value = me.children || ""; $("prof-height").value = me.height || "";
+      $("prof-job").value = me.job || ""; $("prof-zodiac").value = me.zodiac || "";
       $("prof-smoking").value = me.smoking || ""; $("prof-alcohol").value = me.alcohol || "";
       $("prof-education").value = me.education || ""; $("prof-has-pets").value = me.hasPets || "";
-      $("prof-fav-pet").value = me.favPet || ""; $("prof-other-pet-text").value = me.otherPetText || "";
+      $("prof-fav-pet").value = me.favPet || ""; $("prof-pet-name").value = me.petName || ""; $("prof-other-pet-text").value = me.otherPetText || "";
+      $("prof-first-date").value = me.firstDate || "";
       $("prof-tagline").value = me.tagline || ""; $("prof-banner").value = me.banner || "bg-aurora"; $("prof-bio").value = me.bio || "";
 
       syncOtherPetField(); syncStylePickUI(); renderRrRewardsUI(); renderGameStatsAndTop5(currentGameKey);
@@ -1185,10 +1421,11 @@
       $("auth-error").classList.add("hidden");
       const uid = "u_" + email.replace(/[^a-z0-9]/g, "_");
       const session = {
-        uid, email, name: email.split("@")[0] || "משתמש", gender: "", lookingFor, age, location: "ישראל", distanceKm: 10,
-        smoking: "", alcohol: "", education: "", hasPets: "", favPet: "", otherPetText: "",
+        uid, email, name: email.split("@")[0] || "משתמש", nickname: "", gender: "", lookingFor, age, location: "כל הארץ", distanceKm: 10,
+        goal: "", marital: "", children: "", height: "", job: "", smoking: "", alcohol: "", education: "", zodiac: "",
+        hasPets: "", favPet: "", petName: "", otherPetText: "", firstDate: "",
         tagline: "", banner: "bg-aurora", nameStyle: "name-rainbow", bio: "",
-        hobbies: [], photos: [], following: [], avatar: "", hasCustomPhoto: false, profileCompleted: false,
+        trips: [], nightActivities: [], hobbies: [], photos: [], following: [], avatar: "", hasCustomPhoto: false, profileCompleted: false,
         rrRewards: { goldBalls: 0, magazines: 0, pistols: 0, grandGifts: 0 },
         gameStats: {
           ttt: { points: 0, wins: 0, losses: 0, played: 0 },
@@ -1220,10 +1457,14 @@
       if (ageVal < 18 || ageVal > 80) { $("profile-error").textContent = "הגיל חייב להיות בין 18 ל-80."; $("profile-error").classList.remove("hidden"); return; }
       $("profile-error").classList.add("hidden");
       Object.assign(me, {
-        name: $("prof-name").value.trim() || me.name || "משתמש", gender: $("prof-gender").value, lookingFor: $("prof-looking-for").value || "אישה",
+        name: $("prof-name").value.trim() || me.name || "משתמש", nickname: $("prof-nickname").value.trim(),
+        gender: $("prof-gender").value, lookingFor: $("prof-looking-for").value || "אישה",
         age: ageVal, location: $("prof-location").value.trim(), distanceKm: Number($("prof-distance").value) || 0,
+        goal: $("prof-goal").value, marital: $("prof-marital").value, children: $("prof-children").value,
+        height: $("prof-height").value.trim(), job: $("prof-job").value.trim(), zodiac: $("prof-zodiac").value,
         smoking: $("prof-smoking").value, alcohol: $("prof-alcohol").value, education: $("prof-education").value.trim(),
-        hasPets: $("prof-has-pets").value, favPet: $("prof-fav-pet").value, otherPetText: $("prof-other-pet-text").value.trim(),
+        hasPets: $("prof-has-pets").value, favPet: $("prof-fav-pet").value, petName: $("prof-pet-name").value.trim(), otherPetText: $("prof-other-pet-text").value.trim(),
+        firstDate: $("prof-first-date").value,
         tagline: $("prof-tagline").value.trim(), banner: $("prof-banner").value, bio: $("prof-bio").value.trim(),
         avatar: (me.hasCustomPhoto && me.photos && me.photos[0]) ? me.photos[0] : "", profileCompleted: true
       });
@@ -1248,30 +1489,48 @@
       return sel;
     }
 
-    function renderMatchDeck(pool) {
+    function filterUsersPool(pool) {
       const targetGender = getPreferredGenderFilter();
-      const deckPool = targetGender && targetGender !== "all" ? pool.filter((u) => u.gender === targetGender) : pool;
-      if (!deckPool.length) {
+      const maxDist = $("filter-distance").value;
+      const locQuery = ($("filter-location").value || "").trim().toLowerCase();
+      const minAge = Number($("filter-min-age").value) || 18;
+      const maxAge = Number($("filter-max-age").value) || 80;
+      return pool.filter((u) => {
+        const uAge = Number(u.age) || 18;
+        const uDist = Number(u.distanceKm ?? 0);
+        const uLoc = String(u.location || "").toLowerCase();
+        const genderOk = !targetGender || targetGender === "all" || u.gender === targetGender;
+        const ageOk = uAge >= minAge && uAge <= maxAge;
+        const distOk = maxDist === "all" || uDist <= Number(maxDist);
+        const locOk = !locQuery || locQuery === "כל הארץ" || uLoc.includes(locQuery) || uLoc.includes("כל הארץ");
+        return genderOk && ageOk && distOk && locOk;
+      });
+    }
+
+    function renderMatchDeck(filteredPool) {
+      if (!filteredPool.length) {
         $("match-deck-counter").textContent = "0 פרופילים";
-        $("match-deck-card").innerHTML = `<p class="text-xs text-slate-400 text-center py-4">אין כרגע פרופילים מתאימים לבחירה הזו.</p>`;
+        $("match-deck-card").innerHTML = `<p class="text-xs text-slate-400 text-center py-4">אין כרגע משתמשים אמיתיים התואמים לטווח הגילאים והמיקום שנבחרו.</p>`;
         return;
       }
-      deckIdx = deckIdx % deckPool.length;
-      const cur = deckPool[deckIdx];
-      $("match-deck-counter").textContent = `פרופיל ${deckIdx + 1} מתוך ${deckPool.length} • מחפש/ת: ${targetGender === "all" ? "הכל" : targetGender}`;
+      deckIdx = deckIdx % filteredPool.length;
+      const cur = filteredPool[deckIdx];
+      const minAge = Number($("filter-min-age").value) || 18;
+      const maxAge = Number($("filter-max-age").value) || 80;
+      $("match-deck-counter").textContent = `פרופיל ${deckIdx + 1} מתוך ${filteredPool.length} • גילאים ${minAge}–${maxAge}`;
       const avBox = cur.avatar ? `<img src="${cur.avatar}" alt="" class="w-20 h-20 rounded-2xl object-cover border-2 border-pink-400 shrink-0" />`
         : `<div class="w-20 h-20 rounded-2xl bg-slate-800 border-2 border-pink-400 flex items-center justify-center text-3xl shrink-0">👤</div>`;
       $("match-deck-card").innerHTML = `<div class="flex flex-col sm:flex-row items-center gap-4">
         ${avBox}
         <div class="space-y-1 text-center sm:text-right flex-1">
           <div class="font-extrabold text-lg ${cur.nameStyle || ""}">${cur.name} • גיל ${cur.age || 25}</div>
-          <div class="text-xs text-pink-200">${cur.gender || ""} • ${cur.location || ""} • ${cur.distanceKm ?? 0} ק״מ</div>
+          <div class="text-xs text-pink-200">${cur.gender || ""} • ${cur.location || "כל הארץ"} • ${cur.distanceKm ?? 0} ק״מ</div>
           <div class="text-xs text-amber-200">${formatPetLine(cur)}</div>
           <div class="text-xs text-slate-300">${cur.bio || cur.tagline || ""}</div>
         </div>
       </div>`;
 
-      $("deck-skip-btn").onclick = () => { deckIdx = (deckIdx + 1) % deckPool.length; renderMatchDeck(pool); };
+      $("deck-skip-btn").onclick = () => { deckIdx = (deckIdx + 1) % filteredPool.length; renderMatchDeck(filteredPool); };
       $("deck-like-btn").onclick = async () => {
         const targetId = cur.uid || cur.id, dmId = "dm_" + [me.uid, targetId].sort().join("_");
         if (!chatRooms.some((r) => r.id === dmId)) chatRooms.unshift({ id: dmId, topic: `שיחה אישית עם ${cur.name}`, code: "", members: [me.uid, targetId] });
@@ -1281,20 +1540,15 @@
       $("deck-follow-btn").onclick = () => {
         const targetId = cur.uid || cur.id; me.following = me.following || [];
         if (!me.following.includes(targetId)) me.following.push(targetId);
-        deckIdx = (deckIdx + 1) % deckPool.length; renderMatchDeck(pool); renderRealUsers();
+        deckIdx = (deckIdx + 1) % filteredPool.length; renderMatchDeck(filteredPool); renderRealUsers();
       };
     }
 
     function renderRealUsers() {
       $("following-count-badge").textContent = `עוקב אחרי ${(me.following || []).length} משתמשים`;
-      const pool = getCombinedCandidates(), targetGender = getPreferredGenderFilter();
-      const maxDist = $("filter-distance").value, minAge = Number($("filter-min-age").value) || 18, maxAge = Number($("filter-max-age").value) || 80;
-      const filtered = pool.filter((u) => {
-        const uAge = Number(u.age) || 18, uDist = Number(u.distanceKm ?? 0);
-        const genderOk = !targetGender || targetGender === "all" || u.gender === targetGender;
-        return genderOk && uAge >= minAge && uAge <= maxAge && (maxDist === "all" || uDist <= Number(maxDist));
-      });
-      renderMatchDeck(pool);
+      const pool = getCombinedCandidates();
+      const filtered = filterUsersPool(pool);
+      renderMatchDeck(filtered);
 
       $("real-users-grid").innerHTML = filtered.length
         ? filtered.map((u, idx) => {
@@ -1311,10 +1565,10 @@
                     ${avHtml}
                     <div>
                       <div data-open-user="${uid}" class="font-bold text-sm cursor-pointer hover:underline ${u.nameStyle || ""}">${u.name || "משתמש"}</div>
-                      <div class="text-[11px] text-amber-300">רמה ${lvl} • ${u.age || 18} • ${u.distanceKm ?? 0} ק״מ</div>
+                      <div class="text-[11px] text-amber-300">רמה ${lvl} • גיל ${u.age || 18} • ${u.location || "כל הארץ"} • ${u.distanceKm ?? 0} ק״מ</div>
                     </div>
                   </div>
-                  <p class="text-xs text-slate-300">${u.tagline || u.bio || u.location || ""}</p>
+                  <p class="text-xs text-slate-300">${u.tagline || u.bio || ""}</p>
                 </div>
               </div>
               <div class="px-4 pb-4 flex gap-2">
@@ -1323,7 +1577,7 @@
               </div>
             </div>`;
           }).join("")
-        : `<p class="text-xs text-slate-400 col-span-full">אין משתמשים התואמים לסינון שנבחר.</p>`;
+        : `<p class="text-xs text-slate-400 col-span-full">אין משתמשים רשומים כרגע התואמים לסינון הגילאים והמיקום שנבחר.</p>`;
 
       document.querySelectorAll("[data-open-user]").forEach((el) => { el.onclick = () => { const f = pool.find((x) => (x.uid || x.id) === el.dataset.openUser); if (f) openUserModal(f); }; });
       document.querySelectorAll("[data-follow-user]").forEach((btn) => { btn.onclick = () => { const id = btn.dataset.followUser; me.following = me.following || []; me.following = me.following.includes(id) ? me.following.filter((x) => x !== id) : [...me.following, id]; renderRealUsers(); }; });
@@ -1338,9 +1592,10 @@
     }
 
     $("filter-looking-for").onchange = () => { deckIdx = 0; renderRealUsers(); };
-    $("filter-distance").onchange = renderRealUsers;
-    $("filter-min-age").oninput = renderRealUsers;
-    $("filter-max-age").oninput = renderRealUsers;
+    $("filter-distance").onchange = () => { deckIdx = 0; renderRealUsers(); };
+    $("filter-location").oninput = () => { deckIdx = 0; renderRealUsers(); };
+    $("filter-min-age").oninput = () => { deckIdx = 0; renderRealUsers(); };
+    $("filter-max-age").oninput = () => { deckIdx = 0; renderRealUsers(); };
 
     function subscribeUsers() {
       onSnapshot(collection(db, "users"), (snap) => {
@@ -1878,9 +2133,8 @@
 
     renderNumRooms(); renderActiveNumRoom();
 
-    const botPool = ["אורן", "ליאן", "איתי", "שיר", "יונתן", "הילה"];
     const rrTable = {
-      seats: Array.from({ length: 6 }, (_, i) => ({ seatNum: i + 1, name: null, isBot: false, alive: true })),
+      seats: Array.from({ length: 6 }, (_, i) => ({ seatNum: i + 1, name: null, alive: true })),
       chamberIndex: 0, bulletChamber: Math.floor(Math.random() * 6),
       aimedSeatIdx: 0, roundOver: false, chat: []
     };
@@ -1907,18 +2161,6 @@
       $("rr-aimed-label").textContent = `האקדח מכוון למושב #${rrTable.aimedSeatIdx + 1} (${rrTable.seats[rrTable.aimedSeatIdx]?.name || "פנוי"})`;
     }
 
-    function seedBotsToRrTable() {
-      let botIdx = 0;
-      for (const s of rrTable.seats) {
-        if (!s.name && botIdx < 3) {
-          s.name = `${botPool[botIdx % botPool.length]} (אורח)`;
-          s.isBot = true;
-          s.alive = true;
-          botIdx += 1;
-        }
-      }
-    }
-
     async function runAutoSpinAndFire() {
       if (!joinedRr) return;
       if (rrTable.roundOver) {
@@ -1928,15 +2170,12 @@
         rrTable.roundOver = false;
       }
 
-      const freeSeat = rrTable.seats.find((s) => !s.name);
-      if (freeSeat && Math.random() < 0.45) {
-        const used = new Set(rrTable.seats.map((x) => x.name).filter(Boolean));
-        const cand = botPool.map((n) => `${n} (אורח)`).find((n) => !used.has(n));
-        if (cand) { freeSeat.name = cand; freeSeat.isBot = true; freeSeat.alive = true; }
-      }
-
       const aliveIndices = rrTable.seats.map((s, idx) => (s.name && s.alive ? idx : -1)).filter((i) => i >= 0);
-      if (aliveIndices.length < 2) { renderRrTable(); return; }
+      if (aliveIndices.length < 2) {
+        $("rr-status").textContent = "ממתין לשחקן נוסף בשולחן העגול כדי להתחיל סיבוב...";
+        renderRrTable();
+        return;
+      }
 
       rrTable.aimedSeatIdx = aliveIndices[Math.floor(Math.random() * aliveIndices.length)];
       $("rr-gun-spinner").style.transform = `rotate(${(rrTable.aimedSeatIdx + 1) * 60 + Math.floor(Math.random() * 30)}deg)`;
@@ -1973,28 +2212,26 @@
 
     function startRrAutoLoop() {
       if (rrAutoTimer) clearInterval(rrAutoTimer);
-      rrAutoTimer = setInterval(runAutoSpinAndFire, 2800);
+      rrAutoTimer = setInterval(runAutoSpinAndFire, 30000);
     }
 
     $("rr-join-btn").onclick = () => {
       const myLabel = me.name || "שחקן", free = rrTable.seats.find((s) => !s.name);
       if (!rrTable.seats.some((s) => s.name === myLabel)) {
         if (!free) { alert("כל 6 המושבים בשולחן העגול תפוסים."); return; }
-        free.name = myLabel; free.isBot = false; free.alive = true;
+        free.name = myLabel; free.alive = true;
       }
-      seedBotsToRrTable();
       joinedRr = true; $("rr-leave-btn").classList.remove("hidden");
-      $("rr-status").textContent = "הצטרפת לשולחן העגול! המחשב מסובב ויורה אוטומטית כל כמה שניות...";
+      $("rr-status").textContent = "הצטרפת לשולחן העגול! המחשב מסובב ויורה אוטומטית כל 30 שניות לפחות...";
       renderRrTable(); startRrAutoLoop();
     };
 
     $("rr-leave-btn").onclick = () => {
       const myLabel = me.name || "שחקן";
-      rrTable.seats.forEach((s) => { if (s.name === myLabel) { s.name = null; s.isBot = false; s.alive = true; } });
+      rrTable.seats.forEach((s) => { if (s.name === myLabel) { s.name = null; s.alive = true; } });
       joinedRr = false; $("rr-leave-btn").classList.add("hidden");
       if (rrAutoTimer) { clearInterval(rrAutoTimer); rrAutoTimer = null; }
-      if (rrTable.seats.every((s) => !s.name || s.isBot)) {
-        rrTable.seats.forEach((s) => { s.name = null; s.isBot = false; s.alive = true; });
+      if (rrTable.seats.every((s) => !s.name)) {
         rrTable.chamberIndex = 0; rrTable.bulletChamber = Math.floor(Math.random() * 6);
         rrTable.aimedSeatIdx = 0; rrTable.roundOver = false; rrTable.chat = [];
       }

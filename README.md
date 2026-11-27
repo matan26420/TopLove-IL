@@ -50,7 +50,7 @@
       <span class="text-2xl">💜</span>
       <h1 class="text-2xl font-extrabold bg-gradient-to-l from-pink-400 to-indigo-400 bg-clip-text text-transparent">TopLove IL</h1>
       <span class="text-xs bg-emerald-500/20 border border-emerald-400/40 text-emerald-200 px-3 py-1 rounded-full">
-        חינם לגמרי • 18+
+        חינם לגמרי • 18–80
       </span>
     </div>
     <div class="flex flex-wrap items-center gap-2.5">
@@ -84,12 +84,13 @@
         <div class="text-xs text-slate-200 bg-slate-900/85 p-3.5 rounded-xl border border-slate-800 space-y-1">
           <div id="modal-meta"></div>
           <div id="modal-habits"></div>
+          <div id="modal-pets-info" class="text-amber-200"></div>
           <div id="modal-education"></div>
           <div id="modal-bio" class="text-slate-300 pt-1"></div>
         </div>
 
         <div class="space-y-1.5">
-          <div class="text-xs font-bold text-pink-300">✨ אוהב/ת לעשות ותחביבים:</div>
+          <div class="text-xs font-bold text-pink-300">🎯 תחביבים ותחומי עניין:</div>
           <div id="modal-tags" class="flex flex-wrap gap-1.5 text-xs"></div>
         </div>
 
@@ -154,6 +155,7 @@
                 <p id="summary-tagline" class="text-sm text-pink-200 font-medium"></p>
                 <p id="summary-age-gender-loc" class="text-xs text-indigo-200"></p>
                 <p id="summary-habits" class="text-xs text-emerald-200"></p>
+                <p id="summary-pets" class="text-xs text-amber-200"></p>
                 <p id="summary-bio" class="text-sm text-slate-300 pt-1"></p>
                 <div class="flex justify-center sm:justify-start gap-2 pt-2">
                   <button type="button" id="summary-prev-photo" class="px-3 py-1 rounded-lg text-xs bg-slate-800 hover:bg-slate-700 border border-slate-600">◀ תמונה קודמת</button>
@@ -164,17 +166,13 @@
 
             <div id="summary-photos-strip" class="flex gap-2.5 overflow-x-auto pb-1"></div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 border-t border-white/10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-white/10">
               <div class="bg-slate-950/70 rounded-xl p-4 border border-slate-800 space-y-2">
-                <div class="text-xs font-bold text-pink-300">✨ מה אני אוהב/ת לעשות</div>
-                <div id="summary-likes" class="flex flex-wrap gap-1.5 text-xs"></div>
-              </div>
-              <div class="bg-slate-950/70 rounded-xl p-4 border border-slate-800 space-y-2">
-                <div class="text-xs font-bold text-indigo-300">🎯 תחביבים</div>
+                <div class="text-xs font-bold text-indigo-300">🎯 תחביבים ותחומי עניין</div>
                 <div id="summary-hobbies" class="flex flex-wrap gap-1.5 text-xs"></div>
               </div>
               <div class="bg-slate-950/70 rounded-xl p-4 border border-slate-800 space-y-2">
-                <div class="text-xs font-bold text-emerald-300">🎓 השכלה ומיקום</div>
+                <div class="text-xs font-bold text-emerald-300">🐾 בעלי חיים והשכלה</div>
                 <div id="summary-education" class="text-xs text-slate-200"></div>
               </div>
             </div>
@@ -187,11 +185,9 @@
                   class="w-28 h-28 rounded-2xl object-cover bg-slate-800" />
               </div>
               <div class="w-full space-y-3">
-                <label class="block text-sm font-semibold text-pink-300">בחירת תמונות פרופיל (אפשר להעלות כמה תמונות)</label>
+                <label class="block text-sm font-semibold text-pink-300">בחירת תמונות מהמכשיר (מחליף את תמונת ברירת המחדל)</label>
                 <input type="file" id="prof-avatar-file" accept="image/*" multiple
-                  class="block w-full text-xs text-slate-300 file:ml-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-pink-600 file:text-white file:font-semibold" />
-                <input type="url" id="prof-avatar-url" placeholder="הוסף קישור לתמונה נוספת (https://...)" dir="ltr"
-                  class="w-full px-4 py-2 text-sm rounded-xl bg-slate-950 border border-slate-700 text-left" />
+                  class="block w-full text-xs text-slate-300 file:ml-3 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:bg-pink-600 hover:file:bg-pink-500 file:text-white file:font-bold cursor-pointer" />
                 <div id="prof-photos-thumbs" class="flex flex-wrap gap-2"></div>
               </div>
             </div>
@@ -294,13 +290,37 @@
             </div>
           </div>
 
-          <div class="bg-slate-900/70 p-4 rounded-2xl border border-slate-800 space-y-2.5">
-            <label class="block text-sm font-bold text-pink-300">מה אני אוהב/ת לעשות? (לא חובה)</label>
-            <div id="likes-options" class="flex flex-wrap gap-2"></div>
+          <div class="bg-slate-900/75 p-4 rounded-2xl border border-slate-800 space-y-3">
+            <div class="text-sm font-bold text-amber-300">🐾 בעלי חיים (אופציונלי)</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">האם יש לך בעלי חיים?</label>
+                <select id="prof-has-pets" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm">
+                  <option value="">לא צוין</option>
+                  <option value="יש לי בעלי חיים">יש לי בעלי חיים</option>
+                  <option value="אין לי בעלי חיים">אין לי בעלי חיים</option>
+                  <option value="יש לי ואני אוהב/ת גם עוד">יש לי ואני אוהב/ת גם עוד</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">איזה בעל חיים אתה יותר אוהב?</label>
+                <select id="prof-fav-pet" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm">
+                  <option value="">לא צוין</option>
+                  <option value="חתול">🐱 חתול</option>
+                  <option value="כלב">🐶 כלב</option>
+                  <option value="אחר">✨ אחר</option>
+                </select>
+              </div>
+            </div>
+            <div id="prof-other-pet-wrap" class="hidden">
+              <label class="block text-xs text-amber-200 mb-1">איזה בעל חיים? (לא חובה)</label>
+              <input type="text" id="prof-other-pet-text" placeholder="למשל: ארנב, תוכי, סוס, צב..."
+                class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-amber-500/40 text-sm" />
+            </div>
           </div>
 
           <div class="bg-slate-900/70 p-4 rounded-2xl border border-slate-800 space-y-2.5">
-            <label class="block text-sm font-bold text-indigo-300">תחביבים עם אימוג׳ים (מגוון רחב — לא חובה)</label>
+            <label class="block text-sm font-bold text-indigo-300">🎯 תחביבים — סדרות, סרטים, טיולים, מוזיקה ועוד (לא חובה)</label>
             <div id="hobbies-options" class="flex flex-wrap gap-2"></div>
           </div>
 
@@ -432,7 +452,7 @@
 
           <div class="bg-slate-950/75 rounded-xl p-3.5 border border-amber-400/25 space-y-2">
             <div class="flex flex-wrap items-center justify-between gap-2">
-              <div id="top5-title" class="text-xs font-extrabold text-amber-300">🏅 טופ-5 שחקנים במשחק (מי ששיחק לפחות משחק אחד)</div>
+              <div id="top5-title" class="text-xs font-extrabold text-amber-300">🏅 טופ-5 במשחק (מתוך רשימת הטופ-100 • נכנסים אחרי משחק אחד לפחות)</div>
               <span id="top100-count-badge" class="text-[11px] text-indigo-200">0 / 100 שחקנים מדורגים</span>
             </div>
             <div id="top5-board" class="grid grid-cols-1 sm:grid-cols-5 gap-2 text-xs"></div>
@@ -442,15 +462,16 @@
         <div class="flex flex-wrap gap-2 justify-center">
           <button type="button" data-game="ttt" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-pink-600">1. איקס עיגול (100+ חדרים)</button>
           <button type="button" data-game="rps" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">2. אבן נייר מספריים (100+ חדרים)</button>
-          <button type="button" data-game="memory" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">3. זיכרון (קל עד קשה + חדר אישי)</button>
+          <button type="button" data-game="memory" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">3. זיכרון (8×8, 10×10, 30×30)</button>
           <button type="button" data-game="number" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">4. ניחוש מספר (עד 50 בחדר)</button>
+          <button type="button" data-game="roulette" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">5. רולטה רוסית (6 מושבים)</button>
         </div>
 
         <div id="game-ttt" class="game-panel max-w-6xl mx-auto glass rounded-2xl p-6 space-y-5">
           <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
             <div>
               <h3 class="text-xl font-bold">❌⭕ איקס עיגול — 100 חדרים + יצירת חדרים</h3>
-              <p class="text-xs text-slate-300">בחירה חופשית של ❌ או ⭕ לשחקן הראשון • צ׳אט שולחן שמתאפס כשכולם יוצאים</p>
+              <p class="text-xs text-slate-300">בחירת ❌ או ⭕ לשחקן הראשון • צ׳אט + הקלטות קוליות שמתאפסות כשכולם יוצאים</p>
             </div>
             <div class="flex flex-wrap items-center gap-2">
               <span id="ttt-timer" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 border border-amber-400/40 text-amber-200">⏱️ 00:30</span>
@@ -460,7 +481,7 @@
             </div>
           </div>
 
-          <div id="ttt-rooms-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2 max-h-52 overflow-y-auto p-1"></div>
+          <div id="ttt-rooms-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2 max-h-48 overflow-y-auto p-1"></div>
 
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <div class="lg:col-span-2 bg-slate-950/75 border border-amber-500/25 rounded-2xl p-4 space-y-4">
@@ -487,7 +508,10 @@
             </div>
 
             <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-3.5 flex flex-col justify-between space-y-2.5">
-              <div class="text-xs font-bold text-pink-300 border-b border-white/10 pb-2">💬 צ׳אט שולחן איקס עיגול</div>
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-xs font-bold text-pink-300">💬 צ׳אט + הקלטות שולחן</span>
+                <button type="button" data-voice-target="ttt" class="room-voice-btn px-2.5 py-1 rounded-lg text-[11px] font-bold bg-amber-600">🎤 הקלט</button>
+              </div>
               <div id="ttt-room-chat-log" class="space-y-1.5 max-h-48 overflow-y-auto text-xs"></div>
               <form id="ttt-room-chat-form" class="flex gap-1.5">
                 <input type="text" id="ttt-room-chat-input" required placeholder="יאללה תורך / אני שם עיגול..."
@@ -500,7 +524,7 @@
           <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
             <div>
               <h3 class="text-xl font-bold">✂️ אבן נייר מספריים — 100 חדרים + יצירת חדרים</h3>
-              <p class="text-xs text-slate-300">כפתור כנס לשולחן / צא מהשולחן + צ׳אט פנימי שמתאפס כשכל השחקנים יוצאים</p>
+              <p class="text-xs text-slate-300">כפתור כנס לשולחן / צא מהשולחן + צ׳אט והקלטות שמתאפסות כשכולם יוצאים</p>
             </div>
             <div class="flex flex-wrap items-center gap-2">
               <span id="rps-timer" class="px-3 py-1 rounded-full text-xs font-bold bg-pink-500/20 border border-pink-400/40 text-pink-200">⏱️ 00:15</span>
@@ -510,7 +534,7 @@
             </div>
           </div>
 
-          <div id="rps-rooms-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2 max-h-52 overflow-y-auto p-1"></div>
+          <div id="rps-rooms-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2 max-h-48 overflow-y-auto p-1"></div>
 
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <div class="lg:col-span-2 bg-slate-950/75 border border-white/10 rounded-2xl p-4 space-y-4 text-center">
@@ -543,7 +567,10 @@
             </div>
 
             <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-3.5 flex flex-col justify-between space-y-2.5">
-              <div class="text-xs font-bold text-pink-300 border-b border-white/10 pb-2">💬 צ׳אט שולחן אבן נייר מספריים</div>
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-xs font-bold text-pink-300">💬 צ׳אט + הקלטות שולחן</span>
+                <button type="button" data-voice-target="rps" class="room-voice-btn px-2.5 py-1 rounded-lg text-[11px] font-bold bg-amber-600">🎤 הקלט</button>
+              </div>
               <div id="rps-room-chat-log" class="space-y-1.5 max-h-48 overflow-y-auto text-xs"></div>
               <form id="rps-room-chat-form" class="flex gap-1.5">
                 <input type="text" id="rps-room-chat-input" required placeholder="כתוב לשחקן שמולך..."
@@ -557,11 +584,11 @@
         <div id="game-memory" class="game-panel hidden max-w-6xl mx-auto glass rounded-2xl p-6 space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
             <div>
-              <h3 class="text-xl font-bold">💎 זיכרון — חדרים קלים עד קשים + חדר משלך</h3>
-              <p class="text-xs text-slate-300">הצטרף לחדר קיים או פתח חדר משלך + צ׳אט פנימי לשחקנים בחדר</p>
+              <h3 class="text-xl font-bold">💎 זיכרון — 8×8, 10×10 ו-30×30 + 6 מושבים בתורות</h3>
+              <p class="text-xs text-slate-300">הצליח במושב? ממשיך תור נוסף! טעה? התור עובר למושב הבא • אימוג׳ים גדולים וברורים</p>
             </div>
             <div class="flex flex-wrap items-center gap-2">
-              <span id="memory-timer" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 border border-emerald-400/40 text-emerald-200">⏱️ 02:00</span>
+              <span id="memory-timer" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 border border-emerald-400/40 text-emerald-200">⏱️ 03:00</span>
               <button type="button" id="memory-join-room" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-pink-600 hover:bg-pink-500">כנס לשולחן</button>
               <button type="button" id="memory-leave-room" class="hidden px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-rose-600 hover:bg-rose-500">צא מהשולחן</button>
               <button type="button" id="memory-reset" class="text-xs bg-indigo-600 px-3.5 py-1.5 rounded-xl font-semibold">ערבב לוח</button>
@@ -572,29 +599,34 @@
             <input type="text" id="mem-room-name" required placeholder="שם חדר הזיכרון שלך..."
               class="flex-1 px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-sm" />
             <select id="mem-room-mode" class="px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs">
-              <option value="easy">קל (4×4 • אימוג׳ים ברורים)</option>
-              <option value="medium">בינוני (6×4 • 12 זוגות)</option>
-              <option value="hard" selected>קשה (6×6 • פרצופים דומים מאוד)</option>
+              <option value="8x8" selected>8×8 (32 זוגות • אימוג׳ים גדולים)</option>
+              <option value="10x10">10×10 (50 זוגות • מאתגר)</option>
+              <option value="30x30">30×30 (450 זוגות • ענק)</option>
             </select>
             <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500">
               + פתח חדר משלי
             </button>
           </form>
 
-          <div id="memory-rooms-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 max-h-44 overflow-y-auto p-1"></div>
+          <div id="memory-rooms-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 max-h-40 overflow-y-auto p-1"></div>
 
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <div class="lg:col-span-2 space-y-3">
               <div id="memory-players-board" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 bg-slate-950/75 p-3 rounded-xl border border-white/10 text-xs"></div>
-              <div id="memory-grid" class="grid grid-cols-6 gap-2 max-w-xl mx-auto"></div>
+              <div class="overflow-x-auto max-h-[540px] bg-slate-950/60 p-3 rounded-2xl border border-slate-800">
+                <div id="memory-grid" class="grid gap-2 mx-auto"></div>
+              </div>
               <p id="memory-status" class="text-sm text-center text-pink-200">בחר חדר זיכרון ולחץ "כנס לשולחן"</p>
             </div>
 
             <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-3.5 flex flex-col justify-between space-y-2.5">
-              <div class="text-xs font-bold text-pink-300 border-b border-white/10 pb-2">💬 צ׳אט שולחן זיכרון</div>
-              <div id="mem-room-chat-log" class="space-y-1.5 max-h-48 overflow-y-auto text-xs"></div>
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-xs font-bold text-pink-300">💬 צ׳אט + הקלטות שולחן</span>
+                <button type="button" data-voice-target="mem" class="room-voice-btn px-2.5 py-1 rounded-lg text-[11px] font-bold bg-amber-600">🎤 הקלט</button>
+              </div>
+              <div id="mem-room-chat-log" class="space-y-1.5 max-h-56 overflow-y-auto text-xs"></div>
               <form id="mem-room-chat-form" class="flex gap-1.5">
-                <input type="text" id="mem-room-chat-input" required placeholder="כתוב לשחקנים בשולחן..."
+                <input type="text" id="mem-room-chat-input" required placeholder="וואלה פה אני נמצא..."
                   class="flex-1 px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
                 <button type="submit" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-pink-600">שלח</button>
               </form>
@@ -663,10 +695,65 @@
             </div>
 
             <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-3.5 flex flex-col justify-between space-y-2.5">
-              <div class="text-xs font-bold text-pink-300 border-b border-white/10 pb-2">💬 צ׳אט שולחן ניחוש מספר</div>
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-xs font-bold text-pink-300">💬 צ׳אט + הקלטות שולחן</span>
+                <button type="button" data-voice-target="num" class="room-voice-btn px-2.5 py-1 rounded-lg text-[11px] font-bold bg-amber-600">🎤 הקלט</button>
+              </div>
               <div id="num-room-chat-log" class="space-y-1.5 max-h-48 overflow-y-auto text-xs"></div>
               <form id="num-room-chat-form" class="flex gap-1.5">
                 <input type="text" id="num-room-chat-input" required placeholder="כתוב למשתתפים בחדר..."
+                  class="flex-1 px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
+                <button type="submit" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-pink-600">שלח</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div id="game-roulette" class="game-panel hidden max-w-6xl mx-auto glass rounded-2xl p-6 space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
+            <div>
+              <h3 class="text-xl font-bold">🔫 רולטה רוסית — שולחן עגול של 6 מושבים (6 כדורים)</h3>
+              <p class="text-xs text-slate-300">האקדח מסתובב אל המושב • מי שנורה חווה קונפטי ולא ממשיך עד סוף הסיבוב • השורד האחרון זוכה בכדור זהב ← מחסנית ← אקדח ← מתנה גדולה</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" id="rr-join-btn" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-pink-600 hover:bg-pink-500">כנס לשולחן</button>
+              <button type="button" id="rr-leave-btn" class="hidden px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-rose-600 hover:bg-rose-500">צא מהשולחן</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs bg-slate-950/75 p-3 rounded-xl border border-amber-400/25">
+            <div>🟡 כדורי זהב: <strong id="rr-gold-balls" class="text-amber-300">0</strong></div>
+            <div>🎞️ מחסניות: <strong id="rr-magazines" class="text-indigo-300">0</strong></div>
+            <div>🔫 אקדחים מוזהבים: <strong id="rr-pistols" class="text-pink-300">0</strong></div>
+            <div>🎁 מתנות גדולות: <strong id="rr-grand-gifts" class="text-emerald-300">0</strong></div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="lg:col-span-2 bg-slate-950/80 border border-amber-500/30 rounded-2xl p-5 space-y-4">
+              <div id="rr-seats-ring" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+
+              <div class="flex flex-col items-center justify-center py-4 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-3 relative overflow-hidden">
+                <div id="rr-confetti-banner" class="hidden text-sm font-extrabold text-amber-300 animate-bounce">🎉🎊 בום קונפטי! ירייה! 🎊🎉</div>
+                <div id="rr-gun-spinner" class="text-5xl transition-transform duration-500 select-none">🔫</div>
+                <div id="rr-aimed-label" class="text-xs font-bold text-pink-200">האקדח מכוון למושב #1</div>
+                <div class="flex flex-wrap gap-2.5 justify-center">
+                  <button type="button" id="rr-spin-btn" class="px-4 py-2 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-500">🔄 סובב אקדח</button>
+                  <button type="button" id="rr-pull-btn" class="px-5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500">💥 לחץ על ההדק</button>
+                  <button type="button" id="rr-new-round-btn" class="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500">🔁 סיבוב חדש</button>
+                </div>
+              </div>
+
+              <p id="rr-status" class="text-sm text-center text-pink-200 bg-slate-900 p-3 rounded-xl">בחר מושב ולחץ "כנס לשולחן"</p>
+            </div>
+
+            <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-3.5 flex flex-col justify-between space-y-2.5">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-xs font-bold text-pink-300">💬 צ׳אט + הקלטות שולחן</span>
+                <button type="button" data-voice-target="rr" class="room-voice-btn px-2.5 py-1 rounded-lg text-[11px] font-bold bg-amber-600">🎤 הקלט</button>
+              </div>
+              <div id="rr-room-chat-log" class="space-y-1.5 max-h-56 overflow-y-auto text-xs"></div>
+              <form id="rr-room-chat-form" class="flex gap-1.5">
+                <input type="text" id="rr-room-chat-input" required placeholder="כתוב לשולחן העגול..."
                   class="flex-1 px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
                 <button type="submit" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-pink-600">שלח</button>
               </form>
@@ -717,17 +804,12 @@
       return current;
     }
 
-    const likesChoices = [
-      "☕ לצאת לבתי קפה", "🎬 לראות סרטים וסדרות", "🤝 להכיר אנשים חדשים",
-      "🎶 מוזיקה חיה והופעות", "🍽️ אוכל טוב ומסעדות", "💬 שיחות עמוקות וצחוק",
-      "🌅 שקיעות וחוף הים", "🛍️ שופינג ואופנה", "🎲 משחקי חברה וערב חברים"
-    ];
-
     const hobbiesChoices = [
-      "🥾 טיולים", "🏋️ ספורט וכושר", "📷 צילום", "🍳 בישול ואפייה",
-      "🎮 גיימינג", "📚 קריאה", "💃 ריקוד", "🎸 נגינה", "🎨 ציור ואמנות",
-      "🚴 רכיבת אופניים", "🏕️ קמפינג", "🧘 יוגה ומדיטציה", "🐶 גידול חיות מחמד",
-      "✈️ נסיעות לחו״ל", "♟️ משחקי אסטרטגיה", "🌱 גינון", "🎤 שירה וקריוקי", "📸 עריכת וידאו"
+      "📺 לראות סדרות ובינג׳", "🎬 קולנוע וסרטים", "🥾 טיולים", "🏋️ ספורט וכושר",
+      "📷 צילום", "🍳 בישול ואפייה", "🎮 גיימינג", "📚 קריאה",
+      "💃 ריקוד", "🎸 נגינה", "🎨 ציור ואמנות", "🚴 רכיבת אופניים",
+      "🏕️ קמפינג", "🧘 יוגה ומדיטציה", "🐶 גידול חיות מחמד", "✈️ נסיעות לחו״ל",
+      "♟️ משחקי אסטרטגיה", "🌱 גינון", "🎤 שירה וקריוקי", "🎶 הופעות ומוזיקה"
     ];let weekStartTs = Number(localStorage.getItem("toplove_week_start") || Date.now());
     if (!localStorage.getItem("toplove_week_start")) localStorage.setItem("toplove_week_start", String(weekStartTs));
 
@@ -749,25 +831,30 @@
     }
     checkWeeklyAutoReset();
 
-    const gameNames = { ttt: "איקס עיגול", rps: "אבן נייר מספריים", memory: "משחק הזיכרון", number: "ניחוש מספר" };
+    const gameNames = {
+      ttt: "איקס עיגול", rps: "אבן נייר מספריים",
+      memory: "משחק הזיכרון", number: "ניחוש מספר", roulette: "רולטה רוסית"
+    };
 
     const me = {
       uid: "", email: "", name: "", gender: "", age: 18,
       location: "", distanceKm: 15, smoking: "", alcohol: "", education: "",
+      hasPets: "", favPet: "", otherPetText: "",
       tagline: "", banner: "bg-aurora", nameStyle: "name-rainbow", bio: "",
-      likes: [], hobbies: [], photos: [], following: [],
-      avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=TopLove",
-      profileCompleted: false,
+      hobbies: [], photos: [], following: [],
+      avatar: "", hasCustomPhoto: false, profileCompleted: false,
+      rrRewards: { goldBalls: 0, magazines: 0, pistols: 0, grandGifts: 0 },
       gameStats: {
         ttt: { points: 0, wins: 0, losses: 0, played: 0 },
         rps: { points: 0, wins: 0, losses: 0, played: 0 },
         memory: { points: 0, wins: 0, losses: 0, played: 0 },
-        number: { points: 0, wins: 0, losses: 0, played: 0 }
+        number: { points: 0, wins: 0, losses: 0, played: 0 },
+        roulette: { points: 0, wins: 0, losses: 0, played: 0 }
       }
     };
 
     let currentGameKey = "ttt";
-    const gameLeaderboards = { ttt: [], rps: [], memory: [], number: [] };
+    const gameLeaderboards = { ttt: [], rps: [], memory: [], number: [], roulette: [] };
 
     function upsertPlayerBoard(gameKey, playerName, st) {
       const playedCount = Number(st?.played || 0);
@@ -789,6 +876,7 @@
         if (gameKey === "ttt") return "🥇 זהב • איקס זהב";
         if (gameKey === "rps") return "🥇 זהב • אבן/נייר/מספריים זהב";
         if (gameKey === "number") return "🥇 זהב • מוח/משקפי/כובע בלשים זהב";
+        if (gameKey === "roulette") return "🥇 זהב • כדור זהב / מחסנית / אקדח";
         return "🥇 זהב • אלוף הזיכרון";
       }
       if (rankIdx === 1) return "🥈 כסף";
@@ -831,7 +919,7 @@
       me.gameStats[gameKey].wins += 1;
       me.gameStats[gameKey].points += pts;
       renderGameStatsAndTop5(gameKey);
-      try { if (me.uid) await setDoc(doc(db, "users", me.uid), { gameStats: me.gameStats }, { merge: true }); } catch {}
+      try { if (me.uid) await setDoc(doc(db, "users", me.uid), { gameStats: me.gameStats, rrRewards: me.rrRewards }, { merge: true }); } catch {}
     }
 
     async function awardGameLoss(gameKey, pts = 5) {
@@ -839,8 +927,16 @@
       me.gameStats[gameKey].losses += 1;
       me.gameStats[gameKey].points += pts;
       renderGameStatsAndTop5(gameKey);
-      try { if (me.uid) await setDoc(doc(db, "users", me.uid), { gameStats: me.gameStats }, { merge: true }); } catch {}
+      try { if (me.uid) await setDoc(doc(db, "users", me.uid), { gameStats: me.gameStats, rrRewards: me.rrRewards }, { merge: true }); } catch {}
     }let modalPhotos = [], modalPhotoIdx = 0;
+
+    function formatPetLine(p) {
+      const parts = [];
+      if (p.hasPets) parts.push(p.hasPets);
+      if (p.favPet === "אחר") parts.push(p.otherPetText ? `אוהב/ת: ${p.otherPetText}` : "אוהב/ת: אחר");
+      else if (p.favPet) parts.push(`אוהב/ת: ${p.favPet}`);
+      return parts.length ? `🐾 ${parts.join(" • ")}` : "";
+    }
 
     function updateModalPhotoView() {
       if (!modalPhotos.length) return;
@@ -851,7 +947,7 @@
     function openUserModal(person) {
       const gPoints = Object.values(person.gameStats || {}).reduce((acc, s) => acc + (Number(s.points) || 0), 0);
       const lvl = getLevel(gPoints);
-      modalPhotos = Array.isArray(person.photos) && person.photos.length ? person.photos : [person.avatar];
+      modalPhotos = Array.isArray(person.photos) && person.photos.length ? person.photos : [];
       modalPhotoIdx = 0;
 
       $("modal-banner").className = `h-32 ${person.banner || "bg-aurora"} relative p-4 flex justify-between items-start`;
@@ -861,16 +957,23 @@
       $("modal-tagline").textContent = person.tagline || "";
       $("modal-meta").textContent = [person.gender, person.age ? `גיל ${person.age}` : "", person.location, person.distanceKm !== undefined ? `${person.distanceKm} ק״מ ממך` : ""].filter(Boolean).join(" • ");
       $("modal-habits").textContent = [person.smoking ? `🚬 ${person.smoking}` : "", person.alcohol ? `🍷 ${person.alcohol}` : ""].filter(Boolean).join(" • ");
+      $("modal-pets-info").textContent = formatPetLine(person);
       $("modal-education").textContent = person.education ? `🎓 השכלה: ${person.education}` : "";
       $("modal-bio").textContent = person.bio || "";
       $("modal-action-msg").textContent = "";
 
-      $("modal-gallery").innerHTML = modalPhotos.map((src, i) => `<img src="${src}" alt="" class="w-16 h-16 rounded-xl object-cover border ${i === 0 ? "border-pink-400" : "border-white/20"} cursor-pointer shrink-0 modal-thumb" />`).join("");
-      document.querySelectorAll(".modal-thumb").forEach((img, i) => { img.onclick = () => { modalPhotoIdx = i; updateModalPhotoView(); }; });
-      updateModalPhotoView();
+      if (modalPhotos.length) {
+        $("modal-main-photo").classList.remove("hidden");
+        $("modal-gallery").innerHTML = modalPhotos.map((src, i) => `<img src="${src}" alt="" class="w-16 h-16 rounded-xl object-cover border ${i === 0 ? "border-pink-400" : "border-white/20"} cursor-pointer shrink-0 modal-thumb" />`).join("");
+        document.querySelectorAll(".modal-thumb").forEach((img, i) => { img.onclick = () => { modalPhotoIdx = i; updateModalPhotoView(); }; });
+        updateModalPhotoView();
+      } else {
+        $("modal-main-photo").classList.add("hidden");
+        $("modal-gallery").innerHTML = `<span class="text-xs text-slate-400">לא הועלתה תמונה</span>`;
+      }
 
-      const allTags = [...(person.likes || []), ...(person.hobbies || [])];
-      $("modal-tags").innerHTML = allTags.length ? allTags.map((t) => `<span class="px-2.5 py-1 rounded-full bg-pink-500/20 border border-pink-400/30">${t}</span>`).join("") : `<span class="text-slate-400">לא נבחרו תגיות</span>`;
+      const tags = person.hobbies || [];
+      $("modal-tags").innerHTML = tags.length ? tags.map((t) => `<span class="px-2.5 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30">${t}</span>`).join("") : `<span class="text-slate-400">לא נבחרו תחביבים</span>`;
 
       const targetId = person.uid || person.id;
       $("modal-follow-btn").textContent = (me.following || []).includes(targetId) ? "✓ עוקב" : "➕ עקוב";
@@ -878,14 +981,14 @@
       $("modal-like-btn").onclick = async () => {
         if (!targetId) return;
         const dmId = "dm_" + [me.uid, targetId].sort().join("_");
-        try { await addDoc(collection(db, "rooms", dmId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar, text: `👍 ${me.name || "משתמש"} סימן/ה לך לייק!`, createdAt: serverTimestamp() }); } catch {}
+        try { await addDoc(collection(db, "rooms", dmId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar || "", text: `👍 ${me.name || "משתמש"} סימן/ה לך לייק!`, createdAt: serverTimestamp() }); } catch {}
         $("modal-action-msg").textContent = `👍 נשלחה הודעה ל${person.name || "משתמש"}: סימנת לייק!`;
       };
 
       $("modal-heart-btn").onclick = async () => {
         if (!targetId) return;
         const dmId = "dm_" + [me.uid, targetId].sort().join("_");
-        try { await addDoc(collection(db, "rooms", dmId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar, text: `💖 ${me.name || "משתמש"} סימן/ה לך לב!`, createdAt: serverTimestamp() }); } catch {}
+        try { await addDoc(collection(db, "rooms", dmId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar || "", text: `💖 ${me.name || "משתמש"} סימן/ה לך לב!`, createdAt: serverTimestamp() }); } catch {}
         $("modal-action-msg").textContent = `💖 נשלחה הודעה ל${person.name || "משתמש"}: סימנת לב!`;
       };
 
@@ -912,9 +1015,12 @@
     $("close-modal-btn").onclick = () => $("user-modal").classList.add("hidden");
     $("summary-avatar").onclick = () => openUserModal(me);let summaryPhotoIdx = 0;
 
+    function syncOtherPetField() {
+      $("prof-other-pet-wrap").classList.toggle("hidden", $("prof-fav-pet").value !== "אחר");
+    }
+    $("prof-fav-pet").onchange = syncOtherPetField;
+
     function renderQuestionnaireOptions() {
-      $("likes-options").innerHTML = likesChoices.map((item) => `<button type="button" data-like="${item}" class="px-3 py-1.5 rounded-full text-xs border transition ${me.likes.includes(item) ? "bg-pink-600 border-pink-400 text-white" : "bg-slate-950 border-slate-700 text-slate-300"}">${item}</button>`).join("");
-      $("likes-options").querySelectorAll("[data-like]").forEach((btn) => { btn.onclick = () => { const v = btn.dataset.like; me.likes = me.likes.includes(v) ? me.likes.filter((x) => x !== v) : [...me.likes, v]; renderQuestionnaireOptions(); }; });
       $("hobbies-options").innerHTML = hobbiesChoices.map((item) => `<button type="button" data-hobby="${item}" class="px-3 py-1.5 rounded-full text-xs border transition ${me.hobbies.includes(item) ? "bg-indigo-600 border-indigo-400 text-white" : "bg-slate-950 border-slate-700 text-slate-300"}">${item}</button>`).join("");
       $("hobbies-options").querySelectorAll("[data-hobby]").forEach((btn) => { btn.onclick = () => { const v = btn.dataset.hobby; me.hobbies = me.hobbies.includes(v) ? me.hobbies.filter((x) => x !== v) : [...me.hobbies, v]; renderQuestionnaireOptions(); }; });
     }
@@ -928,11 +1034,14 @@
     document.querySelectorAll(".style-pick-btn").forEach((b) => { b.onclick = () => { me.nameStyle = b.dataset.style; syncStylePickUI(); }; });
 
     function renderPhotoThumbs() {
-      me.photos = Array.isArray(me.photos) && me.photos.length ? me.photos : [me.avatar];
-      $("prof-avatar-preview").src = me.photos[0];
       $("prof-avatar-frame").className = `p-2 rounded-3xl ${me.banner || "bg-aurora"} shadow-lg shrink-0`;
-      $("prof-photos-thumbs").innerHTML = me.photos.map((src, idx) => `<img src="${src}" alt="" data-photo-idx="${idx}" class="w-12 h-12 rounded-xl object-cover border border-white/25 cursor-pointer" />`).join("");
-      document.querySelectorAll("[data-photo-idx]").forEach((img) => { img.onclick = () => { me.avatar = img.src; $("prof-avatar-preview").src = img.src; }; });
+      if (me.hasCustomPhoto && me.photos && me.photos.length) {
+        $("prof-avatar-preview").src = me.photos[0];
+        $("prof-photos-thumbs").innerHTML = me.photos.map((src, idx) => `<img src="${src}" alt="" data-photo-idx="${idx}" class="w-14 h-14 rounded-xl object-cover border border-pink-400 cursor-pointer" />`).join("");
+        document.querySelectorAll("[data-photo-idx]").forEach((img) => { img.onclick = () => { me.avatar = img.src; $("prof-avatar-preview").src = img.src; }; });
+      } else {
+        $("prof-photos-thumbs").innerHTML = `<span class="text-xs text-slate-400">עדיין לא נבחרה תמונה מהמכשיר</span>`;
+      }
     }
 
     function applyProfileViewMode() {
@@ -943,23 +1052,31 @@
       if (showSummary) {
         const gPoints = Object.values(me.gameStats || {}).reduce((acc, s) => acc + (Number(s.points) || 0), 0);
         const lvl = getLevel(gPoints);
-        const photos = Array.isArray(me.photos) && me.photos.length ? me.photos : [me.avatar];
-        summaryPhotoIdx = summaryPhotoIdx % photos.length;
+        const photos = me.hasCustomPhoto && Array.isArray(me.photos) && me.photos.length ? me.photos : [];
         $("summary-banner").className = `h-32 ${me.banner || "bg-aurora"} p-4 flex items-center justify-between`;
         $("summary-level-badge").textContent = `רמה ${lvl} • ${gPoints} נק׳`;
         $("summary-likes-badge").textContent = `👥 עוקב אחרי ${(me.following || []).length}`;
-        $("summary-avatar").src = photos[summaryPhotoIdx];
+
+        if (photos.length) {
+          summaryPhotoIdx = summaryPhotoIdx % photos.length;
+          $("summary-avatar").classList.remove("hidden");
+          $("summary-avatar").src = photos[summaryPhotoIdx];
+          $("summary-photos-strip").innerHTML = photos.map((src, i) => `<img src="${src}" alt="" data-sum-idx="${i}" class="w-16 h-16 rounded-xl object-cover border ${i === summaryPhotoIdx ? "border-pink-400" : "border-white/20"} shrink-0 cursor-pointer" />`).join("");
+          document.querySelectorAll("[data-sum-idx]").forEach((img) => { img.onclick = () => { summaryPhotoIdx = Number(img.dataset.sumIdx); applyProfileViewMode(); }; });
+        } else {
+          $("summary-avatar").classList.add("hidden");
+          $("summary-photos-strip").innerHTML = "";
+        }
+
         $("summary-name").className = `text-2xl font-extrabold ${me.nameStyle || ""}`;
         $("summary-name").textContent = me.name || "משתמש";
         $("summary-tagline").textContent = me.tagline || "";
         $("summary-age-gender-loc").textContent = [me.gender, me.age ? `גיל ${me.age}` : "", me.location, me.distanceKm !== undefined ? `${me.distanceKm} ק״מ` : ""].filter(Boolean).join(" • ");
         $("summary-habits").textContent = [me.smoking ? `🚬 ${me.smoking}` : "", me.alcohol ? `🍷 ${me.alcohol}` : ""].filter(Boolean).join(" • ");
+        $("summary-pets").textContent = formatPetLine(me);
         $("summary-bio").textContent = me.bio || "";
-        $("summary-photos-strip").innerHTML = photos.map((src, i) => `<img src="${src}" alt="" data-sum-idx="${i}" class="w-16 h-16 rounded-xl object-cover border ${i === summaryPhotoIdx ? "border-pink-400" : "border-white/20"} shrink-0 cursor-pointer" />`).join("");
-        document.querySelectorAll("[data-sum-idx]").forEach((img) => { img.onclick = () => { summaryPhotoIdx = Number(img.dataset.sumIdx); applyProfileViewMode(); }; });
-        $("summary-likes").innerHTML = me.likes.length ? me.likes.map((l) => `<span class="px-2.5 py-1 rounded-full bg-pink-500/20 border border-pink-400/30">${l}</span>`).join("") : `<span class="text-slate-400">לא נבחר</span>`;
         $("summary-hobbies").innerHTML = me.hobbies.length ? me.hobbies.map((h) => `<span class="px-2.5 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30">${h}</span>`).join("") : `<span class="text-slate-400">לא נבחר</span>`;
-        $("summary-education").textContent = [me.education, me.location].filter(Boolean).join(" • ") || "לא צוין";
+        $("summary-education").textContent = [formatPetLine(me), me.education ? `🎓 ${me.education}` : ""].filter(Boolean).join(" | ") || "לא צוין";
       }
     }
 
@@ -973,15 +1090,16 @@
 
     function openApp(session) {
       Object.assign(me, session);
-      me.likes = Array.isArray(session.likes) ? session.likes : [];
       me.hobbies = Array.isArray(session.hobbies) ? session.hobbies : [];
-      me.photos = Array.isArray(session.photos) && session.photos.length ? session.photos : [session.avatar];
+      me.photos = Array.isArray(session.photos) ? session.photos : [];
       me.following = Array.isArray(session.following) ? session.following : [];
+      me.rrRewards = Object.assign({ goldBalls: 0, magazines: 0, pistols: 0, grandGifts: 0 }, session.rrRewards || {});
       me.gameStats = Object.assign({
         ttt: { points: 0, wins: 0, losses: 0, played: 0 },
         rps: { points: 0, wins: 0, losses: 0, played: 0 },
         memory: { points: 0, wins: 0, losses: 0, played: 0 },
-        number: { points: 0, wins: 0, losses: 0, played: 0 }
+        number: { points: 0, wins: 0, losses: 0, played: 0 },
+        roulette: { points: 0, wins: 0, losses: 0, played: 0 }
       }, session.gameStats || {});
 
       $("auth-section").classList.add("hidden"); $("app-section").classList.remove("hidden");
@@ -990,10 +1108,12 @@
       $("prof-name").value = me.name || ""; $("prof-gender").value = me.gender || ""; $("prof-age").value = me.age || 18;
       $("prof-location").value = me.location || ""; $("prof-distance").value = me.distanceKm ?? 15;
       $("prof-smoking").value = me.smoking || ""; $("prof-alcohol").value = me.alcohol || "";
-      $("prof-education").value = me.education || ""; $("prof-tagline").value = me.tagline || "";
-      $("prof-banner").value = me.banner || "bg-aurora"; $("prof-bio").value = me.bio || "";
+      $("prof-education").value = me.education || ""; $("prof-has-pets").value = me.hasPets || "";
+      $("prof-fav-pet").value = me.favPet || ""; $("prof-other-pet-text").value = me.otherPetText || "";
+      $("prof-tagline").value = me.tagline || ""; $("prof-banner").value = me.banner || "bg-aurora"; $("prof-bio").value = me.bio || "";
 
-      syncStylePickUI(); renderGameStatsAndTop5(currentGameKey); renderPhotoThumbs(); renderQuestionnaireOptions(); applyProfileViewMode();
+      syncOtherPetField(); syncStylePickUI(); renderRrRewardsUI(); renderGameStatsAndTop5(currentGameKey);
+      renderPhotoThumbs(); renderQuestionnaireOptions(); applyProfileViewMode();
       switchTab("profile"); renderRooms(); subscribeUsers();
     }
 
@@ -1005,12 +1125,19 @@
       if (!age || age < 18 || age > 80) { $("auth-error").textContent = "כניסה מותרת לגילאי 18 עד 80 בלבד."; $("auth-error").classList.remove("hidden"); return; }
       $("auth-error").classList.add("hidden");
       const uid = "u_" + email.replace(/[^a-z0-9]/g, "_");
-      const av = `https://api.dicebear.com/9.x/avataaars/svg?seed=${encodeURIComponent(uid)}`;
       const session = {
         uid, email, name: email.split("@")[0] || "משתמש", gender: "", age, location: "ישראל", distanceKm: 10,
-        smoking: "", alcohol: "", education: "", tagline: "", banner: "bg-aurora", nameStyle: "name-rainbow", bio: "",
-        likes: [], hobbies: [], photos: [av], following: [], avatar: av, profileCompleted: false,
-        gameStats: { ttt: { points: 0, wins: 0, losses: 0, played: 0 }, rps: { points: 0, wins: 0, losses: 0, played: 0 }, memory: { points: 0, wins: 0, losses: 0, played: 0 }, number: { points: 0, wins: 0, losses: 0, played: 0 } }
+        smoking: "", alcohol: "", education: "", hasPets: "", favPet: "", otherPetText: "",
+        tagline: "", banner: "bg-aurora", nameStyle: "name-rainbow", bio: "",
+        hobbies: [], photos: [], following: [], avatar: "", hasCustomPhoto: false, profileCompleted: false,
+        rrRewards: { goldBalls: 0, magazines: 0, pistols: 0, grandGifts: 0 },
+        gameStats: {
+          ttt: { points: 0, wins: 0, losses: 0, played: 0 },
+          rps: { points: 0, wins: 0, losses: 0, played: 0 },
+          memory: { points: 0, wins: 0, losses: 0, played: 0 },
+          number: { points: 0, wins: 0, losses: 0, played: 0 },
+          roulette: { points: 0, wins: 0, losses: 0, played: 0 }
+        }
       };
       localStorage.setItem("toplove_session", JSON.stringify(session));
       try { await setDoc(doc(db, "users", uid), { ...session, updatedAt: serverTimestamp() }, { merge: true }); } catch {}
@@ -1021,13 +1148,16 @@
     document.querySelectorAll(".tab-btn").forEach((btn) => { btn.onclick = () => switchTab(btn.dataset.tab); });
 
     $("prof-avatar-file").onchange = (e) => {
-      Array.from(e.target.files || []).forEach((f) => {
+      const files = Array.from(e.target.files || []);
+      if (!files.length) return;
+      me.photos = [];
+      me.hasCustomPhoto = true;
+      files.forEach((f) => {
         const rd = new FileReader();
         rd.onload = () => { me.photos.push(String(rd.result)); me.avatar = me.photos[0]; renderPhotoThumbs(); };
         rd.readAsDataURL(f);
       });
     };
-    $("prof-avatar-url").onchange = (e) => { const u = e.target.value.trim(); if (!u) return; me.photos = [...(me.photos || []), u]; me.avatar = me.photos[0]; e.target.value = ""; renderPhotoThumbs(); };
     $("prof-banner").onchange = (e) => { me.banner = e.target.value; renderPhotoThumbs(); };
 
     $("profile-form").onsubmit = async (e) => {
@@ -1039,8 +1169,9 @@
         name: $("prof-name").value.trim() || me.name || "משתמש", gender: $("prof-gender").value, age: ageVal,
         location: $("prof-location").value.trim(), distanceKm: Number($("prof-distance").value) || 0,
         smoking: $("prof-smoking").value, alcohol: $("prof-alcohol").value, education: $("prof-education").value.trim(),
+        hasPets: $("prof-has-pets").value, favPet: $("prof-fav-pet").value, otherPetText: $("prof-other-pet-text").value.trim(),
         tagline: $("prof-tagline").value.trim(), banner: $("prof-banner").value, bio: $("prof-bio").value.trim(),
-        avatar: (me.photos && me.photos[0]) || me.avatar, profileCompleted: true
+        avatar: (me.hasCustomPhoto && me.photos && me.photos[0]) ? me.photos[0] : "", profileCompleted: true
       });
       localStorage.setItem("toplove_session", JSON.stringify(me));
       $("user-badge").textContent = `${me.name} • ${me.age}`;
@@ -1061,12 +1192,14 @@
         ? filtered.map((u) => {
             const gPoints = Object.values(u.gameStats || {}).reduce((acc, s) => acc + (Number(s.points) || 0), 0);
             const lvl = getLevel(gPoints), isF = (me.following || []).includes(u.id);
+            const avHtml = u.avatar ? `<img src="${u.avatar}" alt="" data-open-user="${u.id}" class="w-14 h-14 rounded-xl object-cover border-2 border-slate-900 bg-slate-800 cursor-pointer shrink-0" />`
+              : `<div data-open-user="${u.id}" class="w-14 h-14 rounded-xl border-2 border-slate-900 bg-slate-800 flex items-center justify-center text-xl cursor-pointer shrink-0">👤</div>`;
             return `<div class="bg-slate-900/85 border border-slate-700 rounded-2xl overflow-hidden flex flex-col justify-between">
               <div>
                 <div class="h-14 ${u.banner || "bg-aurora"}"></div>
                 <div class="p-4 -mt-7 space-y-2">
                   <div class="flex items-end gap-3">
-                    <img src="${u.avatar || "https://api.dicebear.com/9.x/avataaars/svg?seed=" + u.id}" alt="" data-open-user="${u.id}" class="w-14 h-14 rounded-xl object-cover border-2 border-slate-900 bg-slate-800 cursor-pointer shrink-0" />
+                    ${avHtml}
                     <div>
                       <div data-open-user="${u.id}" class="font-bold text-sm cursor-pointer hover:underline ${u.nameStyle || ""}">${u.name || "משתמש"}</div>
                       <div class="text-[11px] text-amber-300">רמה ${lvl} • ${u.age || 18} • ${u.distanceKm ?? 0} ק״מ</div>
@@ -1103,7 +1236,7 @@
       onSnapshot(collection(db, "users"), (snap) => {
         allUsers = snap.docs.map((d) => ({ id: d.id, ...d.data() })).filter((u) => u.id !== me.uid);
         for (const u of allUsers) {
-          for (const gKey of ["ttt", "rps", "memory", "number"]) {
+          for (const gKey of ["ttt", "rps", "memory", "number", "roulette"]) {
             const st = u.gameStats?.[gKey];
             if (st && Number(st.played || 0) >= 1) upsertPlayerBoard(gKey, u.name || "משתמש", st);
           }
@@ -1132,10 +1265,12 @@
         $("chat-messages").innerHTML = msgs.length
           ? msgs.map((m) => {
               const sObj = allUsers.find((u) => u.uid === m.senderUid) || (m.senderUid === me.uid ? me : {});
-              const av = m.avatar || sObj.avatar || "https://api.dicebear.com/9.x/avataaars/svg?seed=TopLove";
+              const av = m.avatar || sObj.avatar || "";
+              const avBox = av ? `<img src="${av}" alt="" data-msg-user="${m.senderUid || ""}" class="w-9 h-9 rounded-full object-cover border border-pink-400 cursor-pointer shrink-0" />`
+                : `<div data-msg-user="${m.senderUid || ""}" class="w-9 h-9 rounded-full bg-slate-900 border border-pink-400 flex items-center justify-center text-sm cursor-pointer shrink-0">👤</div>`;
               const body = m.audioData ? `<audio controls src="${m.audioData}" class="w-full max-w-xs h-8 mt-1"></audio>` : `<div class="text-sm mt-0.5">${m.text || ""}</div>`;
               return `<div class="bg-slate-800/90 px-3 py-2 rounded-xl flex items-start gap-2.5">
-                <img src="${av}" alt="" data-msg-user="${m.senderUid || ""}" class="w-9 h-9 rounded-full object-cover border border-pink-400 cursor-pointer shrink-0" />
+                ${avBox}
                 <div class="flex-1 min-w-0">
                   <button type="button" data-msg-user="${m.senderUid || ""}" class="text-xs font-bold text-pink-300 hover:underline">${m.from || "משתמש"}</button>
                   ${body}
@@ -1191,7 +1326,7 @@
     $("invite-friend-btn").onclick = async () => {
       const cur = chatRooms.find((r) => r.id === activeRoomId); if (!cur) return;
       const friendName = prompt("הזן שם של חבר/ה להזמנה לחדר:") || ""; if (!friendName.trim()) return;
-      await addDoc(collection(db, "rooms", cur.id, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar, text: `📨 ${me.name || "משתמש"} הזמין/ה את ${friendName.trim()} לחדר "${cur.topic}"!`, createdAt: serverTimestamp() });
+      await addDoc(collection(db, "rooms", cur.id, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar || "", text: `📨 ${me.name || "משתמש"} הזמין/ה את ${friendName.trim()} לחדר "${cur.topic}"!`, createdAt: serverTimestamp() });
     };
 
     $("create-room-form").onsubmit = async (e) => {
@@ -1208,34 +1343,52 @@
       if (joinedRoomId !== activeRoomId) { alert('לחץ קודם על "כנס לחדר".'); return; }
       const txt = $("chat-input").value.trim(); if (!txt) return;
       $("chat-input").value = "";
-      await addDoc(collection(db, "rooms", activeRoomId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar, text: txt, createdAt: serverTimestamp() });
+      await addDoc(collection(db, "rooms", activeRoomId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar || "", text: txt, createdAt: serverTimestamp() });
     };
 
     let mediaRecorder = null, audioChunks = [];
-    $("record-voice-btn").onclick = async () => {
-      if (joinedRoomId !== activeRoomId) { alert('לחץ קודם על "כנס לחדר".'); return; }
+    async function toggleAudioRecord(onReadyAudioUrl, statusEl, btnEl) {
       if (mediaRecorder && mediaRecorder.state === "recording") {
-        mediaRecorder.stop(); $("record-voice-btn").textContent = "🎤 התחל הקלטה";
-        $("record-voice-btn").classList.replace("bg-rose-600", "bg-amber-600"); $("voice-status").textContent = "שולח הקלטה..."; return;
+        mediaRecorder.stop();
+        if (btnEl) { btnEl.textContent = "🎤 הקלט"; btnEl.classList.replace("bg-rose-600", "bg-amber-600"); }
+        if (statusEl) statusEl.textContent = "שולח הקלטה...";
+        return;
       }
-      if (!navigator.mediaDevices?.getUserMedia) { $("voice-status").textContent = "הדפדפן לא תומך בהקלטה קולית."; return; }
+      if (!navigator.mediaDevices?.getUserMedia) { if (statusEl) statusEl.textContent = "הדפדפן לא תומך בהקלטה קולית."; return; }
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         audioChunks = []; mediaRecorder = new MediaRecorder(stream);
         mediaRecorder.ondataavailable = (ev) => { if (ev.data.size > 0) audioChunks.push(ev.data); };
-        mediaRecorder.onstop = async () => {
+        mediaRecorder.onstop = () => {
           stream.getTracks().forEach((t) => t.stop());
           const rd = new FileReader();
           rd.onloadend = async () => {
-            await addDoc(collection(db, "rooms", activeRoomId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar, audioData: String(rd.result), createdAt: serverTimestamp() });
-            $("voice-status").textContent = "ההקלטה נשלחה לחדר!";
+            await onReadyAudioUrl(String(rd.result));
+            if (statusEl) statusEl.textContent = "ההקלטה נשלחה!";
           };
           rd.readAsDataURL(new Blob(audioChunks, { type: "audio/webm" }));
         };
-        mediaRecorder.start(); $("record-voice-btn").textContent = "⏹️ עצור ושלח הקלטה";
-        $("record-voice-btn").classList.replace("bg-amber-600", "bg-rose-600"); $("voice-status").textContent = "מקליט כעת...";
-      } catch { $("voice-status").textContent = "לא ניתנה הרשאה למיקרופון."; }
-    };const timerIntervals = {};
+        mediaRecorder.start();
+        if (btnEl) { btnEl.textContent = "⏹️ עצור"; btnEl.classList.replace("bg-amber-600", "bg-rose-600"); }
+        if (statusEl) statusEl.textContent = "מקליט כעת...";
+      } catch { if (statusEl) statusEl.textContent = "לא ניתנה הרשאה למיקרופון."; }
+    }
+
+    $("record-voice-btn").onclick = async () => {
+      if (joinedRoomId !== activeRoomId) { alert('לחץ קודם על "כנס לחדר".'); return; }
+      await toggleAudioRecord(async (url) => {
+        await addDoc(collection(db, "rooms", activeRoomId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar || "", audioData: url, createdAt: serverTimestamp() });
+      }, $("voice-status"), $("record-voice-btn"));
+    };
+
+    function renderRoomChatLog(elId, messages) {
+      $(elId).innerHTML = messages.length
+        ? messages.map((m) => {
+            const content = m.audioData ? `<audio controls src="${m.audioData}" class="w-full h-7 mt-1"></audio>` : `<span class="text-slate-200">${m.text || ""}</span>`;
+            return `<div class="px-2.5 py-1.5 rounded-lg bg-slate-950/90 border border-slate-800"><span class="font-bold text-pink-300">${m.from}:</span> ${content}</div>`;
+          }).join("")
+        : `<p class="text-slate-400">אין עדיין הודעות בשולחן.</p>`;
+    }const timerIntervals = {};
     function startCountdown(key, seconds, elId, onExpire) {
       if (timerIntervals[key]) clearInterval(timerIntervals[key]);
       let rem = seconds;
@@ -1253,15 +1406,10 @@
         renderGameStatsAndTop5(g);
         if (g === "ttt") startCountdown("ttt", 30, "ttt-timer");
         if (g === "rps") startCountdown("rps", 15, "rps-timer");
-        if (g === "memory") startCountdown("memory", 120, "memory-timer");
+        if (g === "memory") startCountdown("memory", 180, "memory-timer");
+        if (g === "roulette") renderRrTable();
       };
     });
-
-    function renderRoomChatLog(elId, messages) {
-      $(elId).innerHTML = messages.length
-        ? messages.map((m) => `<div class="px-2.5 py-1.5 rounded-lg bg-slate-950/90 border border-slate-800"><span class="font-bold text-pink-300">${m.from}:</span> <span class="text-slate-200">${m.text}</span></div>`).join("")
-        : `<p class="text-slate-400">אין עדיין הודעות בשולחן.</p>`;
-    }
 
     const tttRooms = Array.from({ length: 100 }, (_, i) => ({
       id: `ttt-room-${i + 1}`, num: i + 1, p1: null, p1Sym: "X", p2: null, p2Sym: "O",
@@ -1270,20 +1418,13 @@
     let selectedTttRoomId = tttRooms[0].id, joinedTttRoomId = null;
 
     function syncTttSymbolButtons() {
-      const r = tttRooms.find((x) => x.id === selectedTttRoomId);
-      const sym = r?.p1Sym || "X";
+      const r = tttRooms.find((x) => x.id === selectedTttRoomId), sym = r?.p1Sym || "X";
       $("ttt-pick-x").className = sym === "X" ? "px-3 py-1 rounded-lg bg-amber-600 font-bold" : "px-3 py-1 rounded-lg bg-slate-800 border border-slate-600 font-bold";
       $("ttt-pick-o").className = sym === "O" ? "px-3 py-1 rounded-lg bg-amber-600 font-bold" : "px-3 py-1 rounded-lg bg-slate-800 border border-slate-600 font-bold";
     }
 
-    $("ttt-pick-x").onclick = () => {
-      const r = tttRooms.find((x) => x.id === selectedTttRoomId); if (!r || r.p2) return;
-      r.p1Sym = "X"; r.p2Sym = "O"; syncTttSymbolButtons(); renderTttBoard();
-    };
-    $("ttt-pick-o").onclick = () => {
-      const r = tttRooms.find((x) => x.id === selectedTttRoomId); if (!r || r.p2) return;
-      r.p1Sym = "O"; r.p2Sym = "X"; syncTttSymbolButtons(); renderTttBoard();
-    };
+    $("ttt-pick-x").onclick = () => { const r = tttRooms.find((x) => x.id === selectedTttRoomId); if (!r || r.p2) return; r.p1Sym = "X"; r.p2Sym = "O"; syncTttSymbolButtons(); renderTttBoard(); };
+    $("ttt-pick-o").onclick = () => { const r = tttRooms.find((x) => x.id === selectedTttRoomId); if (!r || r.p2) return; r.p1Sym = "O"; r.p2Sym = "X"; syncTttSymbolButtons(); renderTttBoard(); };
 
     function renderTttRooms() {
       $("ttt-rooms-grid").innerHTML = tttRooms.map((r) => {
@@ -1298,34 +1439,23 @@
       const r = tttRooms.find((x) => x.id === selectedTttRoomId); if (!r) return;
       const myLabel = me.name || "שחקן";
       if (r.p1 !== myLabel && r.p2 !== myLabel) {
-        if (!r.p1) { r.p1 = myLabel; }
+        if (!r.p1) r.p1 = myLabel;
         else if (!r.p2) { r.p2 = myLabel; r.p2Sym = r.p1Sym === "X" ? "O" : "X"; }
         else { alert("השולחן מלא (2/2 שחקנים)."); return; }
       }
-      joinedTttRoomId = r.id;
-      $("ttt-leave-room").classList.remove("hidden");
-      startCountdown("ttt", 30, "ttt-timer");
-      renderTttRooms(); renderTttBoard();
+      joinedTttRoomId = r.id; $("ttt-leave-room").classList.remove("hidden"); startCountdown("ttt", 30, "ttt-timer"); renderTttRooms(); renderTttBoard();
     };
 
     $("ttt-leave-room").onclick = () => {
       const r = tttRooms.find((x) => x.id === joinedTttRoomId); if (!r) return;
       const myLabel = me.name || "שחקן";
-      if (r.p1 === myLabel) r.p1 = null;
-      if (r.p2 === myLabel) r.p2 = null;
-      joinedTttRoomId = null;
-      $("ttt-leave-room").classList.add("hidden");
-      if (!r.p1 && !r.p2) {
-        r.board = Array(9).fill(""); r.p1Sym = "X"; r.p2Sym = "O"; r.turn = "X"; r.scored = false; r.chat = [];
-      }
+      if (r.p1 === myLabel) r.p1 = null; if (r.p2 === myLabel) r.p2 = null;
+      joinedTttRoomId = null; $("ttt-leave-room").classList.add("hidden");
+      if (!r.p1 && !r.p2) { r.board = Array(9).fill(""); r.p1Sym = "X"; r.p2Sym = "O"; r.turn = "X"; r.scored = false; r.chat = []; }
       renderTttRooms(); renderTttBoard();
     };
 
-    $("ttt-add-room").onclick = () => {
-      const n = tttRooms.length + 1;
-      tttRooms.push({ id: `ttt-room-${n}`, num: n, p1: null, p1Sym: "X", p2: null, p2Sym: "O", board: Array(9).fill(""), turn: "X", scored: false, chat: [] });
-      renderTttRooms();
-    };
+    $("ttt-add-room").onclick = () => { const n = tttRooms.length + 1; tttRooms.push({ id: `ttt-room-${n}`, num: n, p1: null, p1Sym: "X", p2: null, p2Sym: "O", board: Array(9).fill(""), turn: "X", scored: false, chat: [] }); renderTttRooms(); };
 
     function checkTttWin(b) {
       const lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
@@ -1335,15 +1465,12 @@
 
     function renderTttBoard() {
       const r = tttRooms.find((x) => x.id === selectedTttRoomId) || tttRooms[0], board = r.board;
-      $("ttt-p1-sym-icon").textContent = r.p1Sym === "X" ? "❌" : "⭕";
-      $("ttt-p2-sym-icon").textContent = r.p2Sym === "X" ? "❌" : "⭕";
+      $("ttt-p1-sym-icon").textContent = r.p1Sym === "X" ? "❌" : "⭕"; $("ttt-p2-sym-icon").textContent = r.p2Sym === "X" ? "❌" : "⭕";
       $("ttt-p1-name").textContent = r.p1 ? `${r.p1} (${r.p1Sym === "X" ? "❌" : "⭕"})` : "מושב 1 פנוי";
       $("ttt-p2-name").textContent = r.p2 ? `${r.p2} (${r.p2Sym === "X" ? "❌" : "⭕"})` : "ממתין לכניסה...";
       renderRoomChatLog("ttt-room-chat-log", r.chat || []);
-
       const el = $("ttt-board"); el.innerHTML = "";
       const win = checkTttWin(board), canMove = Boolean(joinedTttRoomId === r.id && r.p1 && r.p2 && !win);
-
       board.forEach((cell, idx) => {
         const btn = document.createElement("button"); btn.type = "button"; btn.disabled = !canMove || Boolean(cell);
         btn.className = "aspect-square rounded-lg bg-amber-900/90 border border-amber-500/40 text-lg font-bold flex items-center justify-center disabled:opacity-60";
@@ -1353,18 +1480,13 @@
           board[idx] = r.turn;
           const res = checkTttWin(board);
           if (res && !r.scored) {
-            r.scored = true; const myLabel = me.name || "שחקן";
-            const winnerName = res === r.p1Sym ? r.p1 : r.p2;
-            if (res === "X" || res === "O") {
-              if (winnerName === myLabel) await awardGameWin("ttt", 25);
-              else await awardGameLoss("ttt", 5);
-            }
+            r.scored = true; const myLabel = me.name || "שחקן", winnerName = res === r.p1Sym ? r.p1 : r.p2;
+            if (res === "X" || res === "O") { if (winnerName === myLabel) await awardGameWin("ttt", 25); else await awardGameLoss("ttt", 5); }
           }
           r.turn = r.turn === "X" ? "O" : "X"; startCountdown("ttt", 30, "ttt-timer"); renderTttBoard(); renderTttRooms();
         };
         el.appendChild(btn);
       });
-
       if (!r.p1 && !r.p2) $("ttt-status").textContent = `שולחן #${r.num} פנוי — בחר סמל ולחץ "כנס לשולחן"`;
       else if (!r.p1 || !r.p2) $("ttt-status").textContent = `שולחן #${r.num} — ממתין לשחקן נוסף שיצטרף מולך`;
       else if (win === "DRAW") $("ttt-status").textContent = `תיקו בשולחן #${r.num}!`;
@@ -1373,11 +1495,9 @@
     }
 
     $("ttt-room-chat-form").onsubmit = (e) => {
-      e.preventDefault();
-      const r = tttRooms.find((x) => x.id === selectedTttRoomId); if (!r) return;
+      e.preventDefault(); const r = tttRooms.find((x) => x.id === selectedTttRoomId); if (!r) return;
       const txt = $("ttt-room-chat-input").value.trim(); if (!txt) return;
-      r.chat.push({ from: me.name || "שחקן", text: txt });
-      $("ttt-room-chat-input").value = ""; renderRoomChatLog("ttt-room-chat-log", r.chat);
+      r.chat.push({ from: me.name || "שחקן", text: txt }); $("ttt-room-chat-input").value = ""; renderRoomChatLog("ttt-room-chat-log", r.chat);
     };
 
     $("ttt-reset").onclick = () => { const r = tttRooms.find((x) => x.id === selectedTttRoomId); if (!r) return; r.board = Array(9).fill(""); r.turn = r.p1Sym; r.scored = false; startCountdown("ttt", 30, "ttt-timer"); renderTttBoard(); };
@@ -1424,8 +1544,7 @@
     }
 
     $("rps-room-chat-form").onsubmit = (e) => {
-      e.preventDefault();
-      const r = rpsRooms.find((x) => x.id === selectedRpsRoomId); if (!r) return;
+      e.preventDefault(); const r = rpsRooms.find((x) => x.id === selectedRpsRoomId); if (!r) return;
       const txt = $("rps-room-chat-input").value.trim(); if (!txt) return;
       r.chat.push({ from: me.name || "שחקן", text: txt }); $("rps-room-chat-input").value = ""; renderRoomChatLog("rps-room-chat-log", r.chat);
     };
@@ -1458,45 +1577,49 @@
     renderRpsRooms(); syncRpsRoomUI();
 
     const memRooms = [
-      { id: "mr-1", title: "חדר קל #1", mode: "easy", players: [], turnIdx: 0, chat: [] },
-      { id: "mr-2", title: "חדר קל #2", mode: "easy", players: [], turnIdx: 0, chat: [] },
-      { id: "mr-3", title: "חדר בינוני #3", mode: "medium", players: [], turnIdx: 0, chat: [] },
-      { id: "mr-4", title: "חדר קשה #4", mode: "hard", players: [], turnIdx: 0, chat: [] },
-      { id: "mr-5", title: "חדר קשה #5", mode: "hard", players: [], turnIdx: 0, chat: [] },
-      { id: "mr-6", title: "חדר מומחים #6", mode: "hard", players: [], turnIdx: 0, chat: [] }
+      { id: "mr-1", title: "זיכרון 8×8 #1", mode: "8x8", players: [], turnIdx: 0, chat: [] },
+      { id: "mr-2", title: "זיכרון 10×10 #2", mode: "10x10", players: [], turnIdx: 0, chat: [] },
+      { id: "mr-3", title: "זיכרון 30×30 #3", mode: "30x30", players: [], turnIdx: 0, chat: [] },
+      { id: "mr-4", title: "זיכרון 8×8 #4", mode: "8x8", players: [], turnIdx: 0, chat: [] }
     ];
-    let selectedMemRoomId = memRooms[0].id, joinedMemRoomId = null, currentMemMode = "hard";
-    const easyEmojis = ["🐶","🐱","🍕","🚗","⚽","🎸","☀️","🌈"];
-    const mediumEmojis = ["💜","🔥","⭐","🌹","💎","⚡","🎯","🍀","🦄","🍩","🌙","🎲"];
-    const hardEmojis = ["😀","😃","😄","😁","😆","😅","🙂","🙃","😉","😊","😇","🥰","😍","🤩","😘","😗","😚","😙"];
+    let selectedMemRoomId = memRooms[0].id, joinedMemRoomId = null, currentMemMode = "8x8";
+    const bigEmojiBank = [
+      "🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐨","🐯","🦁","🐮","🐷","🐸","🐵","🐔",
+      "🐧","🐦","🦅","🦆","🦉","🦇","🐺","🐗","🐴","🦄","🐝","🐛","🦋","🐌","🐞","🐢",
+      "🐍","🐙","🦑","🦐","🦀","🐡","🐠","🐟","🐬","🐳","🦈","🐊","🐅","🐆","🦓","🦍",
+      "🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🫐","🍈","🍒","🍑","🥭","🍍","🥥","🥝",
+      "🍅","🥑","🥦","🥬","🥒","🌶️","🌽","🥕","🧄","🧅","🥔","🥐","🍞","🥖","🥨","🧀",
+      "🍕","🍔","🍟","🌭","🍿","🥞","🧇","🥓","🍗","🍣","🍤","🍩","🍪","🎂","🍰","🧁",
+      "⚽","🏀","🏈","⚾","🎾","🏐","🏉","🎱","🏓","🏸","🥅","🥊","🥋","⛳","🏹","🎣",
+      "🚗","🚕","🚙","🚌","🏎️","🚓","🚑","🚒","🚜","🏍️","🛵","🚲","🛴","✈️","🚀","🛸",
+      "🎸","🎹","🥁","🎷","🎺","🎻","🎤","🎧","🎬","🎮","🎲","🎯","🎳","♟️","🧩","🧸",
+      "☀️","🌙","⭐","🌟","⚡","🔥","💧","🌈","❄️","🌸","🌻","🌹","🌷","🍀","🌵","🌴"
+    ];
     let memCards = [], memFlipped = [], memMatched = new Set();
 
-    function buildMemoryBoard(mode = "hard") {
+    function buildMemoryBoard(mode = "8x8") {
       currentMemMode = mode;
-      const pool = mode === "easy" ? easyEmojis : mode === "medium" ? mediumEmojis : hardEmojis;
-      memCards = [...pool, ...pool].sort(() => Math.random() - 0.5);
+      const cols = mode === "30x30" ? 30 : mode === "10x10" ? 10 : 8;
+      const totalCells = cols * cols, pairsCount = totalCells / 2;
+      const chosen = [];
+      for (let i = 0; i < pairsCount; i++) chosen.push(bigEmojiBank[i % bigEmojiBank.length]);
+      memCards = [...chosen, ...chosen].sort(() => Math.random() - 0.5);
       memFlipped = []; memMatched = new Set();
-      $("memory-grid").className = mode === "easy" ? "grid grid-cols-4 gap-2 max-w-md mx-auto" : "grid grid-cols-6 gap-2 max-w-xl mx-auto";
-      startCountdown("memory", mode === "easy" ? 90 : mode === "medium" ? 120 : 150, "memory-timer", () => { $("memory-status").textContent = "הזמן נגמר! לחץ 'ערבב לוח'."; });
+      $("memory-grid").style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
+      $("memory-grid").style.minWidth = mode === "30x30" ? "1180px" : mode === "10x10" ? "580px" : "480px";
+      startCountdown("memory", mode === "30x30" ? 600 : mode === "10x10" ? 300 : 180, "memory-timer", () => { $("memory-status").textContent = "הזמן נגמר! לחץ 'ערבב לוח'."; });
       renderMemoryGrid();
     }
 
     function renderMemRooms() {
-      const modeNames = { easy: "קל 4×4", medium: "בינוני 6×4", hard: "קשה 6×6" };
-      $("memory-rooms-grid").innerHTML = memRooms.map((r) => `<button type="button" data-mem-room="${r.id}" class="text-right p-2.5 rounded-xl border text-xs transition ${r.id === joinedMemRoomId ? "bg-emerald-600/25 border-emerald-400" : r.id === selectedMemRoomId ? "bg-pink-600/30 border-pink-400" : "bg-slate-900/80 border-slate-700"}"><div class="font-bold truncate">💎 ${r.title}</div><div class="text-[11px] text-slate-300">${modeNames[r.mode] || "קשה"} • ${r.players.length}/6</div></button>`).join("");
-      document.querySelectorAll("[data-mem-room]").forEach((b) => {
-        b.onclick = () => {
-          selectedMemRoomId = b.dataset.memRoom;
-          const r = memRooms.find((x) => x.id === selectedMemRoomId); if (!r) return;
-          buildMemoryBoard(r.mode); renderMemRooms(); renderMemPlayersBoard();
-        };
-      });
+      $("memory-rooms-grid").innerHTML = memRooms.map((r) => `<button type="button" data-mem-room="${r.id}" class="text-right p-2.5 rounded-xl border text-xs transition ${r.id === joinedMemRoomId ? "bg-emerald-600/25 border-emerald-400" : r.id === selectedMemRoomId ? "bg-pink-600/30 border-pink-400" : "bg-slate-900/80 border-slate-700"}"><div class="font-bold truncate">💎 ${r.title}</div><div class="text-[11px] text-slate-300">${r.mode} • ${r.players.length}/6 מושבים</div></button>`).join("");
+      document.querySelectorAll("[data-mem-room]").forEach((b) => { b.onclick = () => { selectedMemRoomId = b.dataset.memRoom; const r = memRooms.find((x) => x.id === selectedMemRoomId); if (!r) return; buildMemoryBoard(r.mode); renderMemRooms(); renderMemPlayersBoard(); }; });
     }
 
     $("memory-join-room").onclick = () => {
       const r = memRooms.find((x) => x.id === selectedMemRoomId); if (!r) return;
       const myLabel = me.name || "שחקן";
-      if (!r.players.some((p) => p.name === myLabel)) { if (r.players.length >= 6) { alert("החדר מלא (מקסימום 6 שחקנים)."); return; } r.players.push({ name: myLabel, score: 0 }); }
+      if (!r.players.some((p) => p.name === myLabel)) { if (r.players.length >= 6) { alert("כל 6 המושבים תפוסים."); return; } r.players.push({ name: myLabel, score: 0 }); }
       joinedMemRoomId = r.id; $("memory-leave-room").classList.remove("hidden"); buildMemoryBoard(r.mode); renderMemRooms(); renderMemPlayersBoard();
     };
 
@@ -1510,16 +1633,14 @@
     };
 
     $("mem-create-room-form").onsubmit = (e) => {
-      e.preventDefault();
-      const title = $("mem-room-name").value.trim(), mode = $("mem-room-mode").value; if (!title) return;
+      e.preventDefault(); const title = $("mem-room-name").value.trim(), mode = $("mem-room-mode").value; if (!title) return;
       const nr = { id: `mr-${Date.now()}`, title, mode, players: [{ name: me.name || "שחקן", score: 0 }], turnIdx: 0, chat: [] };
       memRooms.unshift(nr); selectedMemRoomId = nr.id; joinedMemRoomId = nr.id; $("mem-room-name").value = ""; $("memory-leave-room").classList.remove("hidden");
       buildMemoryBoard(mode); renderMemRooms(); renderMemPlayersBoard();
     };
 
     $("mem-room-chat-form").onsubmit = (e) => {
-      e.preventDefault();
-      const r = memRooms.find((x) => x.id === selectedMemRoomId); if (!r) return;
+      e.preventDefault(); const r = memRooms.find((x) => x.id === selectedMemRoomId); if (!r) return;
       const txt = $("mem-room-chat-input").value.trim(); if (!txt) return;
       r.chat.push({ from: me.name || "שחקן", text: txt }); $("mem-room-chat-input").value = ""; renderRoomChatLog("mem-room-chat-log", r.chat);
     };
@@ -1529,15 +1650,17 @@
       renderRoomChatLog("mem-room-chat-log", r.chat || []);
       $("memory-players-board").innerHTML = Array.from({ length: 6 }, (_, idx) => {
         const p = r.players[idx] || null, isTurn = r.players.length > 0 && (r.turnIdx % r.players.length) === idx && p;
-        return `<div class="p-2 rounded-lg border ${isTurn ? "bg-pink-600/25 border-pink-400" : "bg-slate-900 border-slate-800"}"><div class="font-bold truncate">${p ? p.name : `מושב ${idx + 1} פנוי`}</div><div class="text-amber-300">${p ? `${p.score} נק׳` : "פנוי"}</div></div>`;
+        return `<div class="p-2 rounded-lg border ${isTurn ? "bg-pink-600/25 border-pink-400" : "bg-slate-900 border-slate-800"}"><div class="font-bold truncate">${p ? `מושב ${idx + 1}: ${p.name}` : `מושב ${idx + 1} פנוי`}</div><div class="text-amber-300">${p ? `${p.score} נק׳ ${isTurn ? "• תורו" : ""}` : "פנוי"}</div></div>`;
       }).join("");
     }
 
     function renderMemoryGrid() {
       const g = $("memory-grid"); g.innerHTML = "";
+      const emojiSizeClass = currentMemMode === "30x30" ? "text-xl" : currentMemMode === "10x10" ? "text-2xl" : "text-3xl";
       memCards.forEach((sym, i) => {
         const show = memFlipped.includes(i) || memMatched.has(i), btn = document.createElement("button");
-        btn.type = "button"; btn.className = "aspect-square rounded-xl bg-slate-900 border border-slate-700 text-xl flex items-center justify-center hover:border-pink-400";
+        btn.type = "button";
+        btn.className = `aspect-square rounded-xl bg-slate-900 border border-slate-700 ${emojiSizeClass} flex items-center justify-center hover:border-pink-400 select-none`;
         btn.textContent = show ? sym : "❓";
         btn.onclick = async () => {
           if (show || memFlipped.length === 2) return;
@@ -1549,17 +1672,20 @@
               if (r && r.players.length) { const curP = r.players[r.turnIdx % r.players.length]; curP.score += 10; if (curP.name === (me.name || "שחקן")) await awardGameWin("memory", 10); }
               if (memMatched.size === memCards.length) $("memory-status").textContent = "כל הזוגות נמצאו! 🎉";
               renderMemPlayersBoard(); renderMemoryGrid();
-            } else setTimeout(() => { memFlipped = []; if (r && r.players.length) r.turnIdx = (r.turnIdx + 1) % r.players.length; renderMemPlayersBoard(); renderMemoryGrid(); }, 700);
+            } else {
+              setTimeout(() => { memFlipped = []; if (r && r.players.length) r.turnIdx = (r.turnIdx + 1) % r.players.length; renderMemPlayersBoard(); renderMemoryGrid(); }, 650);
+            }
           }
         };
         g.appendChild(btn);
       });
       const r = memRooms.find((x) => x.id === selectedMemRoomId) || memRooms[0];
-      $("memory-status").textContent = `${r.title} • ${r.players.length}/6 שחקנים`;
+      const activePlayer = r.players.length ? r.players[r.turnIdx % r.players.length]?.name : "";
+      $("memory-status").textContent = `${r.title} (${r.mode}) • ${r.players.length}/6 מושבים ${activePlayer ? `• תור: ${activePlayer}` : ""}`;
     }
 
     $("memory-reset").onclick = () => buildMemoryBoard(currentMemMode);
-    renderMemRooms(); renderMemPlayersBoard(); buildMemoryBoard("hard");let numRooms = [
+    renderMemRooms(); renderMemPlayersBoard(); buildMemoryBoard("8x8");let numRooms = [
       { id: "nr-1", name: "חדר ניחוש #1 (1–1,000)", maxNum: 1000, secret: null, players: [], guesses: [], chat: [] },
       { id: "nr-2", name: "חדר ניחוש #2 (1–1,000)", maxNum: 1000, secret: null, players: [], guesses: [], chat: [] },
       { id: "nr-3", name: "אתגר 1–1,500", maxNum: 1500, secret: null, players: [], guesses: [], chat: [] }
@@ -1588,8 +1714,7 @@
     };
 
     $("num-room-chat-form").onsubmit = (e) => {
-      e.preventDefault();
-      const r = numRooms.find((x) => x.id === selectedNumRoomId); if (!r) return;
+      e.preventDefault(); const r = numRooms.find((x) => x.id === selectedNumRoomId); if (!r) return;
       const txt = $("num-room-chat-input").value.trim(); if (!txt) return;
       r.chat.push({ from: me.name || "שחקן", text: txt }); $("num-room-chat-input").value = ""; renderRoomChatLog("num-room-chat-log", r.chat);
     };
@@ -1604,8 +1729,7 @@
     }
 
     $("num-create-room-form").onsubmit = (e) => {
-      e.preventDefault();
-      const name = $("num-room-name").value.trim(), maxNum = Math.max(10, Number($("num-room-max").value) || 1000); if (!name) return;
+      e.preventDefault(); const name = $("num-room-name").value.trim(), maxNum = Math.max(10, Number($("num-room-max").value) || 1000); if (!name) return;
       const myLabel = me.name || "שחקן", nr = { id: `nr-${Date.now()}`, name, maxNum, secret: null, players: [myLabel], guesses: [], chat: [] };
       numRooms.unshift(nr); selectedNumRoomId = nr.id; joinedNumRoomId = nr.id; $("num-room-name").value = ""; $("num-leave-room").classList.remove("hidden"); renderNumRooms(); renderActiveNumRoom();
     };
@@ -1633,29 +1757,144 @@
       const r = numRooms.find((x) => x.id === selectedNumRoomId) || numRooms[0];
       if (r.secret === null || !r.guesses.length) { $("num-guess-feedback").textContent = "יש לקבוע מספר סודי ולוודא שנשלחו ניחושים."; return; }
       const uniqueDiffs = [...new Set(r.guesses.map((g) => g.diff))].sort((a, b) => a - b);
-      const bestDiff = uniqueDiffs[0];
-      const secondDiff = uniqueDiffs[1];
-
+      const bestDiff = uniqueDiffs[0], secondDiff = uniqueDiffs[1];
       for (const g of r.guesses) {
         if (g.diff === bestDiff) g.awarded = bestDiff === 0 ? 5 : 3;
         else if (secondDiff !== undefined && g.diff === secondDiff) g.awarded = 2;
         else g.awarded = 1;
       }
-
-      const myLabel = me.name || "שחקן";
-      const myGuesses = r.guesses.filter((g) => g.player === myLabel);
-      if (myGuesses.length) {
-        const myPts = Math.max(...myGuesses.map((g) => g.awarded));
-        if (myPts >= 3) await awardGameWin("number", myPts);
-        else await awardGameLoss("number", myPts);
-      }
-
+      const myLabel = me.name || "שחקן", myGuesses = r.guesses.filter((g) => g.player === myLabel);
+      if (myGuesses.length) { const myPts = Math.max(...myGuesses.map((g) => g.awarded)); if (myPts >= 3) await awardGameWin("number", myPts); else await awardGameLoss("number", myPts); }
       const topWinners = r.guesses.filter((g) => g.diff === bestDiff).map((g) => g.player);
-      $("num-guess-feedback").textContent = `🏆 המספר הסודי היה ${r.secret}. הכי קרובים (מרחק ${bestDiff}): ${topWinners.join(", ")} — נקודות חולקו לכל המנחשים לפי קרבה ושוויון!`;
+      $("num-guess-feedback").textContent = `🏆 המספר הסודי היה ${r.secret}. הכי קרובים (מרחק ${bestDiff}): ${topWinners.join(", ")} — נקודות חולקו לכל המנחשים!`;
       renderActiveNumRoom();
     };
 
     renderNumRooms(); renderActiveNumRoom();
+
+    const rrTable = {
+      seats: Array.from({ length: 6 }, (_, i) => ({ seatNum: i + 1, name: null, alive: true })),
+      chamberIndex: 0, bulletChamber: Math.floor(Math.random() * 6),
+      aimedSeatIdx: 0, roundOver: false, chat: []
+    };
+    let joinedRr = false;
+
+    function renderRrRewardsUI() {
+      $("rr-gold-balls").textContent = String(me.rrRewards.goldBalls || 0);
+      $("rr-magazines").textContent = String(me.rrRewards.magazines || 0);
+      $("rr-pistols").textContent = String(me.rrRewards.pistols || 0);
+      $("rr-grand-gifts").textContent = String(me.rrRewards.grandGifts || 0);
+    }
+
+    function renderRrTable() {
+      renderRrRewardsUI();
+      renderRoomChatLog("rr-room-chat-log", rrTable.chat || []);
+      $("rr-seats-ring").innerHTML = rrTable.seats.map((s, idx) => {
+        const isAimed = idx === rrTable.aimedSeatIdx;
+        const badge = !s.name ? "מושב פנוי" : s.alive ? "💚 חי בסיבוב" : "🎊 נורה (קונפטי)";
+        return `<div class="p-3 rounded-xl border text-xs ${isAimed ? "bg-amber-500/20 border-amber-400" : !s.alive ? "bg-rose-950/50 border-rose-700/50 opacity-70" : "bg-slate-900 border-slate-700"}">
+          <div class="font-bold">מושב #${s.seatNum}: ${s.name || "ריק"}</div>
+          <div class="text-[11px] mt-0.5">${badge}</div>
+        </div>`;
+      }).join("");
+      $("rr-aimed-label").textContent = `האקדח מכוון למושב #${rrTable.aimedSeatIdx + 1} (${rrTable.seats[rrTable.aimedSeatIdx]?.name || "פנוי"})`;
+    }
+
+    $("rr-join-btn").onclick = () => {
+      const myLabel = me.name || "שחקן", free = rrTable.seats.find((s) => !s.name);
+      if (!rrTable.seats.some((s) => s.name === myLabel)) {
+        if (!free) { alert("כל 6 המושבים בשולחן העגול תפוסים."); return; }
+        free.name = myLabel; free.alive = true;
+      }
+      joinedRr = true; $("rr-leave-btn").classList.remove("hidden"); renderRrTable();
+    };
+
+    $("rr-leave-btn").onclick = () => {
+      const myLabel = me.name || "שחקן";
+      rrTable.seats.forEach((s) => { if (s.name === myLabel) { s.name = null; s.alive = true; } });
+      joinedRr = false; $("rr-leave-btn").classList.add("hidden");
+      if (rrTable.seats.every((s) => !s.name)) {
+        rrTable.chamberIndex = 0; rrTable.bulletChamber = Math.floor(Math.random() * 6);
+        rrTable.aimedSeatIdx = 0; rrTable.roundOver = false; rrTable.chat = [];
+      }
+      renderRrTable();
+    };
+
+    $("rr-spin-btn").onclick = () => {
+      if (!joinedRr) { alert('לחץ קודם על "כנס לשולחן".'); return; }
+      const aliveIndices = rrTable.seats.map((s, idx) => (s.name && s.alive ? idx : -1)).filter((i) => i >= 0);
+      if (!aliveIndices.length) return;
+      rrTable.aimedSeatIdx = aliveIndices[Math.floor(Math.random() * aliveIndices.length)];
+      rrTable.chamberIndex = Math.floor(Math.random() * 6);
+      $("rr-gun-spinner").style.transform = `rotate(${(rrTable.aimedSeatIdx + 1) * 60}deg)`;
+      $("rr-confetti-banner").classList.add("hidden");
+      $("rr-status").textContent = `האקדח הסתובב וכוון למושב #${rrTable.aimedSeatIdx + 1}!`;
+      renderRrTable();
+    };
+
+    $("rr-pull-btn").onclick = async () => {
+      if (!joinedRr || rrTable.roundOver) return;
+      const seat = rrTable.seats[rrTable.aimedSeatIdx];
+      if (!seat || !seat.name || !seat.alive) { $("rr-status").textContent = "בחר/סובב למושב פעיל שחי בסיבוב."; return; }
+
+      const isShot = rrTable.chamberIndex === rrTable.bulletChamber;
+      rrTable.chamberIndex = (rrTable.chamberIndex + 1) % 6;
+
+      if (isShot) {
+        seat.alive = false;
+        $("rr-confetti-banner").classList.remove("hidden");
+        $("rr-status").textContent = `🎉 בום קונפטי! האקדח ירה על ${seat.name} (מושב #${seat.seatNum}) — אינו ממשיך עד סוף הסיבוב!`;
+        if (seat.name === (me.name || "שחקן")) await awardGameLoss("roulette", 5);
+      } else {
+        $("rr-confetti-banner").classList.add("hidden");
+        $("rr-status").textContent = `😅 קליק! ${seat.name} (מושב #${seat.seatNum}) שרד את התא הזה!`;
+      }
+
+      const survivors = rrTable.seats.filter((s) => s.name && s.alive);
+      if (survivors.length === 1) {
+        rrTable.roundOver = true;
+        const winner = survivors[0];
+        $("rr-status").textContent = `🏆 ${winner.name} שרד/ה את כל הסיבוב וזכה/תה בכדור זהב!`;
+        if (winner.name === (me.name || "שחקן")) {
+          me.rrRewards.goldBalls += 1;
+          if (me.rrRewards.goldBalls % 3 === 0) me.rrRewards.magazines += 1;
+          if (me.rrRewards.magazines > 0 && me.rrRewards.magazines % 2 === 0) me.rrRewards.pistols += 1;
+          if (me.rrRewards.pistols > 0 && me.rrRewards.pistols % 2 === 0) me.rrRewards.grandGifts += 1;
+          await awardGameWin("roulette", 30);
+        }
+      }
+      renderRrTable();
+    };
+
+    $("rr-new-round-btn").onclick = () => {
+      rrTable.seats.forEach((s) => { if (s.name) s.alive = true; });
+      rrTable.chamberIndex = 0; rrTable.bulletChamber = Math.floor(Math.random() * 6);
+      rrTable.aimedSeatIdx = 0; rrTable.roundOver = false;
+      $("rr-confetti-banner").classList.add("hidden");
+      $("rr-status").textContent = "סיבוב חדש ברולטה הרוסית התחיל!";
+      renderRrTable();
+    };
+
+    $("rr-room-chat-form").onsubmit = (e) => {
+      e.preventDefault(); const txt = $("rr-room-chat-input").value.trim(); if (!txt) return;
+      rrTable.chat.push({ from: me.name || "שחקן", text: txt }); $("rr-room-chat-input").value = ""; renderRoomChatLog("rr-room-chat-log", rrTable.chat);
+    };
+
+    document.querySelectorAll(".room-voice-btn").forEach((btn) => {
+      btn.onclick = async () => {
+        const target = btn.dataset.voiceTarget;
+        await toggleAudioRecord(async (audioUrl) => {
+          const sender = me.name || "שחקן";
+          if (target === "ttt") { const r = tttRooms.find((x) => x.id === selectedTttRoomId); if (r) { r.chat.push({ from: sender, audioData: audioUrl }); renderRoomChatLog("ttt-room-chat-log", r.chat); } }
+          if (target === "rps") { const r = rpsRooms.find((x) => x.id === selectedRpsRoomId); if (r) { r.chat.push({ from: sender, audioData: audioUrl }); renderRoomChatLog("rps-room-chat-log", r.chat); } }
+          if (target === "mem") { const r = memRooms.find((x) => x.id === selectedMemRoomId); if (r) { r.chat.push({ from: sender, audioData: audioUrl }); renderRoomChatLog("mem-room-chat-log", r.chat); } }
+          if (target === "num") { const r = numRooms.find((x) => x.id === selectedNumRoomId); if (r) { r.chat.push({ from: sender, audioData: audioUrl }); renderRoomChatLog("num-room-chat-log", r.chat); } }
+          if (target === "rr") { rrTable.chat.push({ from: sender, audioData: audioUrl }); renderRoomChatLog("rr-room-chat-log", rrTable.chat); }
+        }, null, btn);
+      };
+    });
+
+    renderRrTable();
 
     const savedSession = localStorage.getItem("toplove_session");
     if (savedSession) { try { openApp(JSON.parse(savedSession)); } catch {} }

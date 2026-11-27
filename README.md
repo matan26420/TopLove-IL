@@ -57,11 +57,23 @@
         חינם לגמרי • 18–80
       </span>
     </div>
-    <div class="flex flex-wrap items-center gap-2.5">
-      <span id="weekly-reset-badge" class="text-xs bg-indigo-500/20 border border-indigo-400/40 text-indigo-200 px-3 py-1 rounded-full">
-        ⏳ איפוס שבועי אוטומטי: 7 ימים
-      </span>
-      <span id="user-badge" class="hidden text-sm text-slate-200 bg-slate-800 px-3 py-1 rounded-full"></span>
+
+    <div class="flex flex-wrap items-center gap-3">
+      <div class="flex flex-col items-center bg-indigo-500/15 border border-indigo-400/35 px-3.5 py-1.5 rounded-2xl">
+        <span id="weekly-reset-badge" class="text-[11px] font-bold text-indigo-200">
+          איפוס שבועי אוטומטי בעוד שבע ימים
+        </span>
+        <span id="weekly-countdown-timer" dir="ltr" class="text-xs font-mono font-extrabold text-amber-300 mt-0.5">
+          07d : 00h : 00m : 00s
+        </span>
+      </div>
+
+      <button id="user-profile-trigger" type="button" title="לחץ לכניסה לפרופיל האישי"
+        class="hidden items-center gap-2 text-sm text-slate-100 bg-slate-800/90 hover:bg-slate-700 border border-pink-400/40 px-3 py-1.5 rounded-full transition cursor-pointer">
+        <span id="header-avatar-slot" class="w-7 h-7 rounded-full bg-slate-900 border border-pink-400 flex items-center justify-center overflow-hidden text-xs shrink-0">👤</span>
+        <span id="user-badge" class="font-bold"></span>
+      </button>
+
       <button id="logout-btn" type="button" class="hidden bg-rose-600 hover:bg-rose-500 text-sm px-4 py-1.5 rounded-lg">התנתק</button>
     </div>
   </header><div id="user-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
@@ -142,11 +154,10 @@
 
     <section id="app-section" class="hidden space-y-6">
       <div class="flex flex-wrap gap-2.5 justify-center">
-        <button type="button" data-tab="profile" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold bg-pink-600 text-white">1. הפרופיל שלי</button>
-        <button type="button" data-tab="users" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold glass text-slate-300">2. משתמשים ודפדוף הכרויות 💘</button>
-        <button type="button" data-tab="chat" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold glass text-slate-300">3. חדרי שיחה 💬</button>
-        <button type="button" data-tab="games" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold glass text-slate-300">4. משחקים, טופ-100 וטופ-5 🎮</button>
-      </div><div id="tab-profile" class="tab-content max-w-6xl mx-auto glass rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+        <button type="button" data-tab="users" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold bg-pink-600 text-white">משתמשים ודפדוף הכרויות 💘</button>
+        <button type="button" data-tab="chat" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold glass text-slate-300">חדרי שיחה 💬</button>
+        <button type="button" data-tab="games" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold glass text-slate-300">משחקים, טופ-100 וטופ-5 🎮</button>
+      </div><div id="tab-profile" class="tab-content hidden max-w-6xl mx-auto glass rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
         <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
           <div>
             <h2 class="text-2xl font-bold">הפרופיל האישי שלי</h2>
@@ -499,7 +510,7 @@
             </button>
           </div>
         </form>
-      </div><div id="tab-users" class="tab-content hidden max-w-6xl mx-auto glass rounded-2xl p-6 space-y-6">
+      </div><div id="tab-users" class="tab-content max-w-6xl mx-auto glass rounded-2xl p-6 space-y-6">
         <div class="flex flex-wrap items-center justify-between gap-2">
           <h2 class="text-2xl font-bold">💘 דפדוף הכרויות, משתמשים והודעות אישיות</h2>
           <span id="following-count-badge" class="text-xs px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/40 text-indigo-200">
@@ -612,7 +623,7 @@
                 <button type="button" id="record-voice-btn" class="px-4 py-1.5 rounded-xl text-xs font-semibold bg-amber-600 hover:bg-amber-500">
                   🎤 התחל הקלטה
                 </button>
-                <span id="voice-status" class="text-xs text-slate-300">הודעות נשמרות בחדר ומתאפסות אוטומטית אחת לשבוע</span>
+                <span id="voice-status" class="text-xs text-slate-300">הודעות בחדרי שיחה מתאפסות אחת לשבוע • הודעות פרטיות נשמרות</span>
               </div>
 
               <form id="chat-form" class="flex gap-2">
@@ -659,7 +670,7 @@
           <button type="button" data-game="rps" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">2. אבן נייר מספריים (100+ חדרים)</button>
           <button type="button" data-game="memory" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">3. זיכרון (8×8, 10×10, 30×30)</button>
           <button type="button" data-game="number" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">4. ניחוש מספר (עד 50 בחדר)</button>
-          <button type="button" data-game="roulette" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">5. רולטה רוסית (שולחן עגול אוטומטי)</button>
+          <button type="button" data-game="roulette" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300">5. רולטה רוסית (חדרים מרובים + שולחן עגול)</button>
         </div>
 
         <div id="game-ttt" class="game-panel max-w-6xl mx-auto glass rounded-2xl p-6 space-y-5">
@@ -907,14 +918,17 @@
         <div id="game-roulette" class="game-panel hidden max-w-6xl mx-auto glass rounded-2xl p-6 space-y-5">
           <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
             <div>
-              <h3 class="text-xl font-bold">🔫 רולטה רוסית — שולחן עגול של 6 מושבים (סיבוב אקדח אוטומטי אחת לחצי דקה לפחות)</h3>
-              <p class="text-xs text-slate-300">שולחן עגול עם אקדח במרכז שמסתובב לבד לפחות כל 30 שניות ויורה על מי שהוא מכוון אליו עם קונפטי</p>
+              <h3 class="text-xl font-bold">🔫 רולטה רוסית — חדרים מרובים + שולחן עגול של 6 מושבים</h3>
+              <p class="text-xs text-slate-300">בחר חדר או צור חדר חדש • סיבוב אקדח אוטומטי אחת ל-30 שניות לפחות עם קונפטי</p>
             </div>
             <div class="flex flex-wrap items-center gap-2">
-              <button type="button" id="rr-join-btn" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-pink-600 hover:bg-pink-500">כנס לשולחן</button>
-              <button type="button" id="rr-leave-btn" class="hidden px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-rose-600 hover:bg-rose-500">צא מהשולחן</button>
+              <button type="button" id="rr-add-room" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500">+ צור חדר</button>
+              <button type="button" id="rr-join-btn" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-pink-600 hover:bg-pink-500">כנס לחדר</button>
+              <button type="button" id="rr-leave-btn" class="hidden px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-rose-600 hover:bg-rose-500">צא מהחדר</button>
             </div>
           </div>
+
+          <div id="rr-rooms-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2 max-h-44 overflow-y-auto p-1"></div>
 
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs bg-slate-950/75 p-3 rounded-xl border border-amber-400/25">
             <div>🟡 כדורי זהב: <strong id="rr-gold-balls" class="text-amber-300">0</strong></div>
@@ -933,7 +947,7 @@
                 <div id="rr-aimed-label" class="text-xs font-bold text-pink-200">האקדח במרכז ממתין...</div>
               </div>
 
-              <p id="rr-status" class="text-sm text-center text-pink-200 bg-slate-900 p-3 rounded-xl">לחץ "כנס לשולחן" — האקדח מסובב לבד לפחות כל 30 שניות ויורה על מי שהוא מכוון אליו</p>
+              <p id="rr-status" class="text-sm text-center text-pink-200 bg-slate-900 p-3 rounded-xl">בחר חדר ולחץ "כנס לחדר" — האקדח מסתובב לבד לפחות כל 30 שניות</p>
             </div>
 
             <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-3.5 flex flex-col justify-between space-y-2.5">
@@ -1020,23 +1034,39 @@
     ];let weekStartTs = Number(localStorage.getItem("toplove_week_start") || Date.now());
     if (!localStorage.getItem("toplove_week_start")) localStorage.setItem("toplove_week_start", String(weekStartTs));
 
-    async function checkWeeklyAutoReset() {
+    async function runWeeklyChatResetOnly() {
+      const nonPrivateRooms = chatRooms.filter((r) => !String(r.id || "").startsWith("dm_"));
+      for (const r of nonPrivateRooms) {
+        try {
+          const snap = await getDocs(collection(db, "rooms", r.id, "messages"));
+          for (const d of snap.docs) await deleteDoc(d.ref);
+        } catch {}
+      }
+    }
+
+    async function updateWeeklyCountdownAndReset() {
       const elapsed = Date.now() - weekStartTs;
-      const remDays = Math.max(0, Math.ceil((WEEK_MS - elapsed) / (24 * 60 * 60 * 1000)));
-      $("weekly-reset-badge").textContent = `⏳ איפוס שבועי אוטומטי בעוד: ${remDays} ימים`;
+      const remaining = Math.max(0, WEEK_MS - elapsed);
+
+      const days = Math.floor(remaining / (24 * 60 * 60 * 1000));
+      const hours = Math.floor((remaining % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+      const mins = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
+      const secs = Math.floor((remaining % (60 * 1000)) / 1000);
+
+      $("weekly-reset-badge").textContent = "איפוס שבועי אוטומטי בעוד שבע ימים";
+      $("weekly-countdown-timer").textContent =
+        `${String(days).padStart(2, "0")}d : ${String(hours).padStart(2, "0")}h : ${String(mins).padStart(2, "0")}m : ${String(secs).padStart(2, "0")}s`;
+
       if (elapsed >= WEEK_MS) {
         weekStartTs = Date.now();
         localStorage.setItem("toplove_week_start", String(weekStartTs));
-        for (const r of chatRooms) {
-          try {
-            const snap = await getDocs(collection(db, "rooms", r.id, "messages"));
-            for (const d of snap.docs) await deleteDoc(d.ref);
-          } catch {}
-        }
-        $("weekly-reset-badge").textContent = "⏳ איפוס שבועי אוטומטי בעוד: 7 ימים";
+        await runWeeklyChatResetOnly();
+        $("weekly-countdown-timer").textContent = "07d : 00h : 00m : 00s";
       }
     }
-    checkWeeklyAutoReset();
+
+    updateWeeklyCountdownAndReset();
+    setInterval(updateWeeklyCountdownAndReset, 1000);
 
     const sampleCandidates = [];
 
@@ -1234,6 +1264,18 @@
     $("close-modal-btn").onclick = () => $("user-modal").classList.add("hidden");
     $("summary-avatar").onclick = () => openUserModal(me);let summaryPhotoIdx = 0;
 
+    function syncHeaderUserBadge() {
+      const displayName = me.name || (me.email ? me.email.split("@")[0] : "משתמש");
+      const displayAge = me.age || 18;
+      $("user-badge").textContent = `${displayName} • ${displayAge}`;
+      const chosenAvatar = me.avatar || (Array.isArray(me.photos) && me.photos[0]) || "";
+      if (chosenAvatar) {
+        $("header-avatar-slot").innerHTML = `<img src="${chosenAvatar}" alt="" class="w-full h-full object-cover" />`;
+      } else {
+        $("header-avatar-slot").innerHTML = `👤`;
+      }
+    }
+
     function syncOtherPetField() {
       $("prof-other-pet-wrap").classList.toggle("hidden", $("prof-fav-pet").value !== "אחר");
     }
@@ -1278,16 +1320,18 @@
         $("prof-avatar-preview").classList.remove("hidden");
         $("prof-avatar-preview").src = me.photos[0];
         $("prof-photos-thumbs").innerHTML = me.photos.map((src, idx) => `<img src="${src}" alt="" data-photo-idx="${idx}" class="w-14 h-14 rounded-xl object-cover border border-pink-400 cursor-pointer" />`).join("");
-        document.querySelectorAll("[data-photo-idx]").forEach((img) => { img.onclick = () => { me.avatar = img.src; $("prof-avatar-preview").src = img.src; }; });
+        document.querySelectorAll("[data-photo-idx]").forEach((img) => { img.onclick = () => { me.avatar = img.src; $("prof-avatar-preview").src = img.src; syncHeaderUserBadge(); }; });
       } else {
         $("prof-avatar-placeholder").classList.remove("hidden");
         $("prof-avatar-preview").classList.add("hidden");
         $("prof-photos-thumbs").innerHTML = `<span class="text-xs text-slate-400">עדיין לא נבחרה תמונה מהמכשיר</span>`;
       }
+      syncHeaderUserBadge();
     }
 
     function applyProfileViewMode() {
       computeProfileCompletion();
+      syncHeaderUserBadge();
       const showSummary = Boolean(me.profileCompleted);
       $("profile-summary-card").classList.toggle("hidden", !showSummary);
       $("profile-form").classList.toggle("hidden", showSummary);
@@ -1376,6 +1420,10 @@
       $(`tab-${tabName}`).classList.remove("hidden");
     }
 
+    $("user-profile-trigger").onclick = () => {
+      switchTab("profile");
+    };
+
     function openApp(session) {
       Object.assign(me, session);
       me.trips = Array.isArray(session.trips) ? session.trips : [];
@@ -1393,8 +1441,10 @@
       }, session.gameStats || {});
 
       $("auth-section").classList.add("hidden"); $("app-section").classList.remove("hidden");
-      $("user-badge").classList.remove("hidden"); $("logout-btn").classList.remove("hidden");
-      $("user-badge").textContent = `${me.name || me.email.split("@")[0]} • ${me.age || 18}`;
+      $("user-profile-trigger").classList.remove("hidden"); $("user-profile-trigger").classList.add("flex");
+      $("logout-btn").classList.remove("hidden");
+      syncHeaderUserBadge();
+
       $("prof-name").value = me.name || ""; $("prof-nickname").value = me.nickname || "";
       $("prof-gender").value = me.gender || ""; $("prof-looking-for").value = me.lookingFor || "אישה";
       $("prof-age").value = me.age || 18; $("prof-location").value = me.location || ""; $("prof-distance").value = me.distanceKm ?? 15;
@@ -1409,7 +1459,7 @@
 
       syncOtherPetField(); syncStylePickUI(); renderRrRewardsUI(); renderGameStatsAndTop5(currentGameKey);
       renderPhotoThumbs(); renderQuestionnaireOptions(); applyProfileViewMode();
-      switchTab("profile"); renderRooms(); subscribeUsers();
+      switchTab("users"); renderRooms(); subscribeUsers();
     }
 
     $("toggle-password-btn").onclick = () => { $("auth-password").type = $("auth-password").type === "password" ? "text" : "password"; };
@@ -1469,7 +1519,7 @@
         avatar: (me.hasCustomPhoto && me.photos && me.photos[0]) ? me.photos[0] : "", profileCompleted: true
       });
       localStorage.setItem("toplove_session", JSON.stringify(me));
-      $("user-badge").textContent = `${me.name} • ${me.age}`;
+      syncHeaderUserBadge();
       try { await setDoc(doc(db, "users", me.uid), { ...me, updatedAt: serverTimestamp() }, { merge: true }); } catch {}
       applyProfileViewMode(); renderGameStatsAndTop5(currentGameKey); renderRealUsers();
       $("save-feedback").classList.remove("opacity-0"); setTimeout(() => $("save-feedback").classList.add("opacity-0"), 1500);
@@ -1649,11 +1699,11 @@
 
     function renderRooms() {
       $("rooms-list").innerHTML = chatRooms.map((r) => {
-        const count = (r.members || []).length, isJoined = joinedRoomId === r.id, isPriv = Boolean(r.code);
+        const count = (r.members || []).length, isJoined = joinedRoomId === r.id, isPriv = Boolean(r.code) || String(r.id).startsWith("dm_");
         return `<div class="p-3 rounded-xl border text-xs flex items-center justify-between gap-2 ${isJoined ? "bg-pink-600/25 border-pink-400" : "bg-slate-950/75 border-slate-800"}">
           <div class="min-w-0">
-            <div class="font-bold truncate">${isPriv ? "🔒" : "💬"} ${r.topic}</div>
-            <div class="text-[11px] text-slate-400">${count}/${MAX_ROOM_USERS} משתתפים ${isPriv ? "• חדר פרטי" : ""}</div>
+            <div class="font-bold truncate">${String(r.id).startsWith("dm_") ? "💌" : r.code ? "🔒" : "💬"} ${r.topic}</div>
+            <div class="text-[11px] text-slate-400">${count}/${MAX_ROOM_USERS} משתתפים ${String(r.id).startsWith("dm_") ? "• פרטי (נשמר)" : r.code ? "• חדר פרטי" : ""}</div>
           </div>
           <button type="button" data-enter-room="${r.id}" class="px-3 py-1.5 rounded-lg text-xs font-bold shrink-0 ${isJoined ? "bg-emerald-600" : "bg-pink-600 hover:bg-pink-500"}">${isJoined ? "בתוך החדר" : "כנס לחדר"}</button>
         </div>`;
@@ -1772,7 +1822,7 @@
         if (g === "ttt") startCountdown("ttt", 30, "ttt-timer");
         if (g === "rps") startCountdown("rps", 15, "rps-timer");
         if (g === "memory") startCountdown("memory", 180, "memory-timer");
-        if (g === "roulette") renderRrTable();
+        if (g === "roulette") { renderRrRooms(); renderRrTable(); }
       };
     });
 
@@ -1877,7 +1927,7 @@
     $("rps-join-room").onclick = () => {
       const r = rpsRooms.find((x) => x.id === selectedRpsRoomId); if (!r) return;
       const myLabel = me.name || "שחקן";
-      if (r.p1 !== myLabel && r.p2 !== myLabel) { if (!r.p1) r.p1 = myLabel; else if (!r.p2) r.p2 = myLabel; else { alert("השולחן מלא (2/2 שחקנים)."); return; } }
+      if (r.p1 !== myLabel && r.p2 !== myLabel) { if (!r.p1) r.p1 = myLabel; else if (!r.p2) { r.p2 = myLabel; } else { alert("השולחן מלא (2/2 שחקנים)."); return; } }
       joinedRpsRoomId = r.id; $("rps-leave-room").classList.remove("hidden"); startCountdown("rps", 15, "rps-timer"); renderRpsRooms(); syncRpsRoomUI();
     };
 
@@ -2133,12 +2183,21 @@
 
     renderNumRooms(); renderActiveNumRoom();
 
-    const rrTable = {
-      seats: Array.from({ length: 6 }, (_, i) => ({ seatNum: i + 1, name: null, alive: true })),
-      chamberIndex: 0, bulletChamber: Math.floor(Math.random() * 6),
-      aimedSeatIdx: 0, roundOver: false, chat: []
-    };
-    let joinedRr = false, rrAutoTimer = null;
+    const rrRooms = Array.from({ length: 20 }, (_, i) => ({
+      id: `rr-room-${i + 1}`,
+      num: i + 1,
+      seats: Array.from({ length: 6 }, (_, sIdx) => ({ seatNum: sIdx + 1, name: null, alive: true })),
+      chamberIndex: 0,
+      bulletChamber: Math.floor(Math.random() * 6),
+      aimedSeatIdx: 0,
+      roundOver: false,
+      chat: []
+    }));
+    let selectedRrRoomId = rrRooms[0].id, joinedRrRoomId = null, rrAutoTimer = null;
+
+    function getActiveRrRoom() {
+      return rrRooms.find((x) => x.id === selectedRrRoomId) || rrRooms[0];
+    }
 
     function renderRrRewardsUI() {
       $("rr-gold-balls").textContent = String(me.rrRewards.goldBalls || 0);
@@ -2147,58 +2206,94 @@
       $("rr-grand-gifts").textContent = String(me.rrRewards.grandGifts || 0);
     }
 
+    function renderRrRooms() {
+      $("rr-rooms-grid").innerHTML = rrRooms.map((r) => {
+        const count = r.seats.filter((s) => Boolean(s.name)).length;
+        const isSel = r.id === selectedRrRoomId;
+        const isIn = r.id === joinedRrRoomId;
+        const statusTxt = count === 0 ? "חדר פנוי" : `${count}/6 בשולחן`;
+        return `<button type="button" data-rr-room="${r.id}" class="text-right p-2 rounded-xl border text-[11px] transition ${isIn ? "bg-emerald-600/25 border-emerald-400" : isSel ? "bg-pink-600/30 border-pink-400" : "bg-slate-900/80 border-slate-700"}"><div class="font-bold">חדר #${r.num}</div><div class="text-slate-300 truncate">${statusTxt}</div></button>`;
+      }).join("");
+
+      document.querySelectorAll("[data-rr-room]").forEach((b) => {
+        b.onclick = () => {
+          selectedRrRoomId = b.dataset.rrRoom;
+          renderRrRooms();
+          renderRrTable();
+        };
+      });
+    }
+
+    $("rr-add-room").onclick = () => {
+      const n = rrRooms.length + 1;
+      rrRooms.push({
+        id: `rr-room-${n}`,
+        num: n,
+        seats: Array.from({ length: 6 }, (_, sIdx) => ({ seatNum: sIdx + 1, name: null, alive: true })),
+        chamberIndex: 0,
+        bulletChamber: Math.floor(Math.random() * 6),
+        aimedSeatIdx: 0,
+        roundOver: false,
+        chat: []
+      });
+      renderRrRooms();
+    };
+
     function renderRrTable() {
       renderRrRewardsUI();
-      renderRoomChatLog("rr-room-chat-log", rrTable.chat || []);
-      $("rr-seats-ring").innerHTML = rrTable.seats.map((s, idx) => {
-        const isAimed = idx === rrTable.aimedSeatIdx;
+      const r = getActiveRrRoom();
+      renderRoomChatLog("rr-room-chat-log", r.chat || []);
+      $("rr-seats-ring").innerHTML = r.seats.map((s, idx) => {
+        const isAimed = idx === r.aimedSeatIdx;
         const badge = !s.name ? "מושב פנוי" : s.alive ? "💚 חי בשולחן" : "🎊 נורה (קונפטי)";
         return `<div class="p-3 rounded-xl border text-xs ${isAimed ? "bg-amber-500/20 border-amber-400" : !s.alive ? "bg-rose-950/50 border-rose-700/50 opacity-70" : "bg-slate-900 border-slate-700"}">
           <div class="font-bold">מושב #${s.seatNum}: ${s.name || "ריק"}</div>
           <div class="text-[11px] mt-0.5">${badge}</div>
         </div>`;
       }).join("");
-      $("rr-aimed-label").textContent = `האקדח מכוון למושב #${rrTable.aimedSeatIdx + 1} (${rrTable.seats[rrTable.aimedSeatIdx]?.name || "פנוי"})`;
+      $("rr-aimed-label").textContent = `חדר #${r.num} • האקדח מכוון למושב #${r.aimedSeatIdx + 1} (${r.seats[r.aimedSeatIdx]?.name || "פנוי"})`;
     }
 
     async function runAutoSpinAndFire() {
-      if (!joinedRr) return;
-      if (rrTable.roundOver) {
-        rrTable.seats.forEach((s) => { if (s.name) s.alive = true; });
-        rrTable.chamberIndex = 0;
-        rrTable.bulletChamber = Math.floor(Math.random() * 6);
-        rrTable.roundOver = false;
+      const r = rrRooms.find((x) => x.id === joinedRrRoomId);
+      if (!r) return;
+
+      if (r.roundOver) {
+        r.seats.forEach((s) => { if (s.name) s.alive = true; });
+        r.chamberIndex = 0;
+        r.bulletChamber = Math.floor(Math.random() * 6);
+        r.roundOver = false;
       }
 
-      const aliveIndices = rrTable.seats.map((s, idx) => (s.name && s.alive ? idx : -1)).filter((i) => i >= 0);
+      const aliveIndices = r.seats.map((s, idx) => (s.name && s.alive ? idx : -1)).filter((i) => i >= 0);
       if (aliveIndices.length < 2) {
-        $("rr-status").textContent = "ממתין לשחקן נוסף בשולחן העגול כדי להתחיל סיבוב...";
+        $("rr-status").textContent = `חדר #${r.num}: ממתין לשחקן נוסף בשולחן העגול כדי להתחיל סיבוב...`;
         renderRrTable();
         return;
       }
 
-      rrTable.aimedSeatIdx = aliveIndices[Math.floor(Math.random() * aliveIndices.length)];
-      $("rr-gun-spinner").style.transform = `rotate(${(rrTable.aimedSeatIdx + 1) * 60 + Math.floor(Math.random() * 30)}deg)`;
+      r.aimedSeatIdx = aliveIndices[Math.floor(Math.random() * aliveIndices.length)];
+      $("rr-gun-spinner").style.transform = `rotate(${(r.aimedSeatIdx + 1) * 60 + Math.floor(Math.random() * 30)}deg)`;
 
-      const targetSeat = rrTable.seats[rrTable.aimedSeatIdx];
-      const shotFired = rrTable.chamberIndex === rrTable.bulletChamber;
-      rrTable.chamberIndex = (rrTable.chamberIndex + 1) % 6;
+      const targetSeat = r.seats[r.aimedSeatIdx];
+      const shotFired = r.chamberIndex === r.bulletChamber;
+      r.chamberIndex = (r.chamberIndex + 1) % 6;
 
       if (shotFired) {
         targetSeat.alive = false;
         $("rr-confetti-banner").classList.remove("hidden");
-        $("rr-status").textContent = `🎉 בום קונפטי! האקדח ירה אוטומטית על ${targetSeat.name} (מושב #${targetSeat.seatNum}) — אינו ממשיך עד סוף הסיבוב!`;
+        $("rr-status").textContent = `🎉 בום קונפטי בחדר #${r.num}! האקדח ירה אוטומטית על ${targetSeat.name} (מושב #${targetSeat.seatNum})!`;
         if (targetSeat.name === (me.name || "שחקן")) await awardGameLoss("roulette", 5);
       } else {
         $("rr-confetti-banner").classList.add("hidden");
-        $("rr-status").textContent = `🎲 האקדח כוון אוטומטית למושב #${targetSeat.seatNum} (${targetSeat.name}) — כדור סרק, ממשיכים!`;
+        $("rr-status").textContent = `🎲 חדר #${r.num}: האקדח כוון אוטומטית למושב #${targetSeat.seatNum} (${targetSeat.name}) — כדור סרק, ממשיכים!`;
       }
 
-      const survivors = rrTable.seats.filter((s) => s.name && s.alive);
+      const survivors = r.seats.filter((s) => s.name && s.alive);
       if (survivors.length === 1) {
-        rrTable.roundOver = true;
+        r.roundOver = true;
         const winner = survivors[0];
-        $("rr-status").textContent = `🏆 ${winner.name} שרד/ה את כל הסיבוב וזכה/תה בכדור זהב!`;
+        $("rr-status").textContent = `🏆 חדר #${r.num}: ${winner.name} שרד/ה את כל הסיבוב וזכה/תה בכדור זהב!`;
         if (winner.name === (me.name || "שחקן")) {
           me.rrRewards.goldBalls += 1;
           if (me.rrRewards.goldBalls % 3 === 0) me.rrRewards.magazines += 1;
@@ -2207,6 +2302,7 @@
           await awardGameWin("roulette", 30);
         }
       }
+      renderRrRooms();
       renderRrTable();
     }
 
@@ -2216,33 +2312,40 @@
     }
 
     $("rr-join-btn").onclick = () => {
-      const myLabel = me.name || "שחקן", free = rrTable.seats.find((s) => !s.name);
-      if (!rrTable.seats.some((s) => s.name === myLabel)) {
-        if (!free) { alert("כל 6 המושבים בשולחן העגול תפוסים."); return; }
+      const r = getActiveRrRoom();
+      const myLabel = me.name || "שחקן";
+      const free = r.seats.find((s) => !s.name);
+      if (!r.seats.some((s) => s.name === myLabel)) {
+        if (!free) { alert("כל 6 המושבים בחדר הזה תפוסים."); return; }
         free.name = myLabel; free.alive = true;
       }
-      joinedRr = true; $("rr-leave-btn").classList.remove("hidden");
-      $("rr-status").textContent = "הצטרפת לשולחן העגול! המחשב מסובב ויורה אוטומטית כל 30 שניות לפחות...";
-      renderRrTable(); startRrAutoLoop();
+      joinedRrRoomId = r.id;
+      $("rr-leave-btn").classList.remove("hidden");
+      $("rr-status").textContent = `הצטרפת לחדר #${r.num}! האקדח מסובב ויורה אוטומטית כל 30 שניות לפחות...`;
+      renderRrRooms(); renderRrTable(); startRrAutoLoop();
     };
 
     $("rr-leave-btn").onclick = () => {
+      const r = rrRooms.find((x) => x.id === joinedRrRoomId) || getActiveRrRoom();
       const myLabel = me.name || "שחקן";
-      rrTable.seats.forEach((s) => { if (s.name === myLabel) { s.name = null; s.alive = true; } });
-      joinedRr = false; $("rr-leave-btn").classList.add("hidden");
+      r.seats.forEach((s) => { if (s.name === myLabel) { s.name = null; s.alive = true; } });
+      joinedRrRoomId = null;
+      $("rr-leave-btn").classList.add("hidden");
       if (rrAutoTimer) { clearInterval(rrAutoTimer); rrAutoTimer = null; }
-      if (rrTable.seats.every((s) => !s.name)) {
-        rrTable.chamberIndex = 0; rrTable.bulletChamber = Math.floor(Math.random() * 6);
-        rrTable.aimedSeatIdx = 0; rrTable.roundOver = false; rrTable.chat = [];
+      if (r.seats.every((s) => !s.name)) {
+        r.chamberIndex = 0; r.bulletChamber = Math.floor(Math.random() * 6);
+        r.aimedSeatIdx = 0; r.roundOver = false; r.chat = [];
       }
       $("rr-confetti-banner").classList.add("hidden");
-      $("rr-status").textContent = "יצאת מהשולחן העגול.";
-      renderRrTable();
+      $("rr-status").textContent = `יצאת מחדר #${r.num}.`;
+      renderRrRooms(); renderRrTable();
     };
 
     $("rr-room-chat-form").onsubmit = (e) => {
-      e.preventDefault(); const txt = $("rr-room-chat-input").value.trim(); if (!txt) return;
-      rrTable.chat.push({ from: me.name || "שחקן", text: txt }); $("rr-room-chat-input").value = ""; renderRoomChatLog("rr-room-chat-log", rrTable.chat);
+      e.preventDefault();
+      const r = getActiveRrRoom();
+      const txt = $("rr-room-chat-input").value.trim(); if (!txt) return;
+      r.chat.push({ from: me.name || "שחקן", text: txt }); $("rr-room-chat-input").value = ""; renderRoomChatLog("rr-room-chat-log", r.chat);
     };
 
     document.querySelectorAll(".room-voice-btn").forEach((btn) => {
@@ -2254,12 +2357,12 @@
           if (target === "rps") { const r = rpsRooms.find((x) => x.id === selectedRpsRoomId); if (r) { r.chat.push({ from: sender, audioData: audioUrl }); renderRoomChatLog("rps-room-chat-log", r.chat); } }
           if (target === "mem") { const r = memRooms.find((x) => x.id === selectedMemRoomId); if (r) { r.chat.push({ from: sender, audioData: audioUrl }); renderRoomChatLog("mem-room-chat-log", r.chat); } }
           if (target === "num") { const r = numRooms.find((x) => x.id === selectedNumRoomId); if (r) { r.chat.push({ from: sender, audioData: audioUrl }); renderRoomChatLog("num-room-chat-log", r.chat); } }
-          if (target === "rr") { rrTable.chat.push({ from: sender, audioData: audioUrl }); renderRoomChatLog("rr-room-chat-log", rrTable.chat); }
+          if (target === "rr") { const r = getActiveRrRoom(); r.chat.push({ from: sender, audioData: audioUrl }); renderRoomChatLog("rr-room-chat-log", r.chat); }
         }, null, btn);
       };
     });
 
-    renderRrTable();
+    renderRrRooms(); renderRrTable();
 
     const savedSession = localStorage.getItem("toplove_session");
     if (savedSession) { try { openApp(JSON.parse(savedSession)); } catch {} }

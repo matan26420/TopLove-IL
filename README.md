@@ -596,7 +596,7 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
           <div class="space-y-2">
-            <h3 class="text-sm font-bold text-slate-200">🗂️ חדרי שיחה</h3>
+            <h3 class="text-sm font-bold text-slate-200">🗂️ חדרי שיחה ושיחות</h3>
             <div id="rooms-list" class="space-y-2 max-h-[440px] overflow-y-auto"></div>
           </div>
 
@@ -623,7 +623,7 @@
                 <button type="button" id="record-voice-btn" class="px-4 py-1.5 rounded-xl text-xs font-semibold bg-amber-600 hover:bg-amber-500">
                   🎤 התחל הקלטה
                 </button>
-                <span id="voice-status" class="text-xs text-slate-300">הודעות בחדרי שיחה מתאפסות אחת לשבוע • הודעות פרטיות נשמרות</span>
+                <span id="voice-status" class="text-xs text-slate-300">כל השיחות נשמרות ב-Firestore • איפוס שבועי רק לחדרי שיחה כלליים</span>
               </div>
 
               <form id="chat-form" class="flex gap-2">
@@ -1230,6 +1230,7 @@
       $("modal-like-btn").onclick = async () => {
         if (!targetId) return;
         const dmId = "dm_" + [me.uid, targetId].sort().join("_");
+        await ensureRoomInFirestore({ id: dmId, topic: `שיחה אישית עם ${person.name || "משתמש"}`, code: "" });
         try { await addDoc(collection(db, "rooms", dmId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar || "", text: `👍 ${me.name || "משתמש"} סימן/ה לך לייק!`, createdAt: serverTimestamp() }); } catch {}
         $("modal-action-msg").textContent = `👍 נשלחה הודעה ל${person.name || "משתמש"}: סימנת לייק!`;
       };
@@ -1237,22 +1238,24 @@
       $("modal-heart-btn").onclick = async () => {
         if (!targetId) return;
         const dmId = "dm_" + [me.uid, targetId].sort().join("_");
+        await ensureRoomInFirestore({ id: dmId, topic: `שיחה אישית עם ${person.name || "משתמש"}`, code: "" });
         try { await addDoc(collection(db, "rooms", dmId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar || "", text: `💖 ${me.name || "משתמש"} סימן/ה לך לב!`, createdAt: serverTimestamp() }); } catch {}
         $("modal-action-msg").textContent = `💖 נשלחה הודעה ל${person.name || "משתמש"}: סימנת לב!`;
       };
 
-      $("modal-follow-btn").onclick = () => {
+      $("modal-follow-btn").onclick = async () => {
         if (!targetId || targetId === me.uid) return;
         me.following = me.following || [];
         me.following = me.following.includes(targetId) ? me.following.filter((x) => x !== targetId) : [...me.following, targetId];
         localStorage.setItem("toplove_session", JSON.stringify(me));
+        try { if (me.uid) await setDoc(doc(db, "users", me.uid), { following: me.following }, { merge: true }); } catch {}
         openUserModal(person); renderRealUsers();
       };
 
-      $("modal-dm-btn").onclick = () => {
+      $("modal-dm-btn").onclick = async () => {
         if (!targetId || targetId === me.uid) return;
         const dmId = "dm_" + [me.uid, targetId].sort().join("_");
-        if (!chatRooms.some((r) => r.id === dmId)) chatRooms.unshift({ id: dmId, topic: `שיחה אישית עם ${person.name || "משתמש"}`, code: "", members: [me.uid, targetId] });
+        await ensureRoomInFirestore({ id: dmId, topic: `שיחה אישית עם ${person.name || "משתמש"}`, code: "" });
         activeRoomId = dmId; joinedRoomId = dmId; $("user-modal").classList.add("hidden"); switchTab("chat"); renderRooms();
       };
 
@@ -1459,7 +1462,7 @@
 
       syncOtherPetField(); syncStylePickUI(); renderRrRewardsUI(); renderGameStatsAndTop5(currentGameKey);
       renderPhotoThumbs(); renderQuestionnaireOptions(); applyProfileViewMode();
-      switchTab("users"); renderRooms(); subscribeUsers();
+      switchTab("users"); subscribeAllRooms(); renderRooms(); subscribeUsers();
     }
 
     $("toggle-password-btn").onclick = () => { $("auth-password").type = $("auth-password").type === "password" ? "text" : "password"; };
@@ -1583,13 +1586,15 @@
       $("deck-skip-btn").onclick = () => { deckIdx = (deckIdx + 1) % filteredPool.length; renderMatchDeck(filteredPool); };
       $("deck-like-btn").onclick = async () => {
         const targetId = cur.uid || cur.id, dmId = "dm_" + [me.uid, targetId].sort().join("_");
-        if (!chatRooms.some((r) => r.id === dmId)) chatRooms.unshift({ id: dmId, topic: `שיחה אישית עם ${cur.name}`, code: "", members: [me.uid, targetId] });
+        await ensureRoomInFirestore({ id: dmId, topic: `שיחה אישית עם ${cur.name}`, code: "" });
         try { await addDoc(collection(db, "rooms", dmId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar || "", text: `💖 ${me.name || "משתמש"} שלח/ה לך לב והודעה בדפדוף ההכרויות!`, createdAt: serverTimestamp() }); } catch {}
         activeRoomId = dmId; joinedRoomId = dmId; switchTab("chat"); renderRooms();
       };
-      $("deck-follow-btn").onclick = () => {
+      $("deck-follow-btn").onclick = async () => {
         const targetId = cur.uid || cur.id; me.following = me.following || [];
         if (!me.following.includes(targetId)) me.following.push(targetId);
+        localStorage.setItem("toplove_session", JSON.stringify(me));
+        try { if (me.uid) await setDoc(doc(db, "users", me.uid), { following: me.following }, { merge: true }); } catch {}
         deckIdx = (deckIdx + 1) % filteredPool.length; renderMatchDeck(filteredPool); renderRealUsers();
       };
     }
@@ -1630,12 +1635,12 @@
         : `<p class="text-xs text-slate-400 col-span-full">אין משתמשים רשומים כרגע התואמים לסינון הגילאים והמיקום שנבחר.</p>`;
 
       document.querySelectorAll("[data-open-user]").forEach((el) => { el.onclick = () => { const f = pool.find((x) => (x.uid || x.id) === el.dataset.openUser); if (f) openUserModal(f); }; });
-      document.querySelectorAll("[data-follow-user]").forEach((btn) => { btn.onclick = () => { const id = btn.dataset.followUser; me.following = me.following || []; me.following = me.following.includes(id) ? me.following.filter((x) => x !== id) : [...me.following, id]; renderRealUsers(); }; });
+      document.querySelectorAll("[data-follow-user]").forEach((btn) => { btn.onclick = async () => { const id = btn.dataset.followUser; me.following = me.following || []; me.following = me.following.includes(id) ? me.following.filter((x) => x !== id) : [...me.following, id]; localStorage.setItem("toplove_session", JSON.stringify(me)); try { if (me.uid) await setDoc(doc(db, "users", me.uid), { following: me.following }, { merge: true }); } catch {} renderRealUsers(); }; });
       document.querySelectorAll("[data-dm-user]").forEach((btn) => {
-        btn.onclick = () => {
+        btn.onclick = async () => {
           const other = pool.find((x) => (x.uid || x.id) === btn.dataset.dmUser); if (!other) return;
           const otherId = other.uid || other.id, dmId = "dm_" + [me.uid, otherId].sort().join("_");
-          if (!chatRooms.some((r) => r.id === dmId)) chatRooms.unshift({ id: dmId, topic: `שיחה אישית עם ${other.name || "משתמש"}`, code: "", members: [me.uid, otherId] });
+          await ensureRoomInFirestore({ id: dmId, topic: `שיחה אישית עם ${other.name || "משתמש"}`, code: "" });
           activeRoomId = dmId; joinedRoomId = dmId; switchTab("chat"); renderRooms();
         };
       });
@@ -1658,7 +1663,7 @@
         }
         renderGameStatsAndTop5(currentGameKey); renderRealUsers();
       });
-    }const chatRooms = [
+    }const defaultRooms = [
       { id: "r-general", topic: "כללי וצ׳אט פתוח", code: "", members: [] },
       { id: "r-music", topic: "מוזיקה, פלייליסטים והופעות", code: "", members: [] },
       { id: "r-movies", topic: "סרטים, סדרות ואנימה", code: "", members: [] },
@@ -1670,7 +1675,44 @@
       { id: "r-humor", topic: "בדיחות, ממים וצחוקים", code: "", members: [] },
       { id: "r-night", topic: "ציפורי לילה ושיחות מאוחרות", code: "", members: [] }
     ];
-    let activeRoomId = chatRooms[0].id, joinedRoomId = null, unsubMsgs = null;
+    let chatRooms = [...defaultRooms];
+    let activeRoomId = defaultRooms[0].id, joinedRoomId = null, unsubMsgs = null, unsubRooms = null;
+
+    async function ensureRoomInFirestore(room) {
+      try {
+        await setDoc(doc(db, "rooms", room.id), {
+          id: room.id,
+          topic: room.topic,
+          code: room.code || "",
+          isDm: String(room.id).startsWith("dm_"),
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+      } catch {}
+    }
+
+    function subscribeAllRooms() {
+      if (unsubRooms) { unsubRooms(); unsubRooms = null; }
+      unsubRooms = onSnapshot(collection(db, "rooms"), (snap) => {
+        const remoteRooms = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        const byId = new Map();
+        for (const dr of defaultRooms) byId.set(dr.id, { ...dr, members: [] });
+        for (const rr of remoteRooms) {
+          const prev = byId.get(rr.id);
+          byId.set(rr.id, {
+            id: rr.id,
+            topic: rr.topic || prev?.topic || rr.id,
+            code: rr.code || "",
+            members: prev?.members || []
+          });
+        }
+        chatRooms = Array.from(byId.values()).filter((r) => {
+          if (!String(r.id).startsWith("dm_")) return true;
+          return !me.uid || String(r.id).includes(me.uid);
+        });
+        if (!chatRooms.some((r) => r.id === activeRoomId)) activeRoomId = chatRooms[0]?.id || "r-general";
+        renderRooms();
+      });
+    }
 
     function listenMsgs(roomId) {
       if (unsubMsgs) { unsubMsgs(); unsubMsgs = null; }
@@ -1710,7 +1752,7 @@
       }).join("");
 
       document.querySelectorAll("[data-enter-room]").forEach((btn) => {
-        btn.onclick = () => {
+        btn.onclick = async () => {
           const target = chatRooms.find((r) => r.id === btn.dataset.enterRoom); if (!target) return;
           if (target.code && !(target.members || []).includes(me.uid)) {
             const entered = prompt("זהו חדר פרטי. הזן את קוד החדר:") || "";
@@ -1721,6 +1763,7 @@
             if (target.members.length >= MAX_ROOM_USERS) { alert(`החדר מלא (מקסימום ${MAX_ROOM_USERS} משתתפים).`); return; }
             target.members.push(me.uid);
           }
+          await ensureRoomInFirestore(target);
           activeRoomId = target.id; joinedRoomId = target.id; renderRooms();
         };
       });
@@ -1740,6 +1783,7 @@
 
     $("invite-friend-btn").onclick = async () => {
       const cur = chatRooms.find((r) => r.id === activeRoomId); if (!cur) return;
+      await ensureRoomInFirestore(cur);
       const friendName = prompt("הזן שם של חבר/ה להזמנה לחדר:") || ""; if (!friendName.trim()) return;
       await addDoc(collection(db, "rooms", cur.id, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar || "", text: `📨 ${me.name || "משתמש"} הזמין/ה את ${friendName.trim()} לחדר "${cur.topic}"!`, createdAt: serverTimestamp() });
     };
@@ -1748,8 +1792,8 @@
       e.preventDefault();
       const topic = $("new-room-topic").value.trim(), code = $("new-room-code").value.trim(); if (!topic) return;
       const room = { id: `r-${Date.now()}`, topic, code, members: [me.uid] };
-      chatRooms.unshift(room); activeRoomId = room.id; joinedRoomId = room.id; $("new-room-topic").value = ""; $("new-room-code").value = "";
-      try { await setDoc(doc(db, "rooms", room.id), { id: room.id, topic: room.topic, createdAt: serverTimestamp() }, { merge: true }); } catch {}
+      await ensureRoomInFirestore(room);
+      activeRoomId = room.id; joinedRoomId = room.id; $("new-room-topic").value = ""; $("new-room-code").value = "";
       renderRooms();
     };
 
@@ -1757,6 +1801,8 @@
       e.preventDefault();
       if (joinedRoomId !== activeRoomId) { alert('לחץ קודם על "כנס לחדר".'); return; }
       const txt = $("chat-input").value.trim(); if (!txt) return;
+      const cur = chatRooms.find((r) => r.id === activeRoomId);
+      if (cur) await ensureRoomInFirestore(cur);
       $("chat-input").value = "";
       await addDoc(collection(db, "rooms", activeRoomId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar || "", text: txt, createdAt: serverTimestamp() });
     };
@@ -1791,6 +1837,8 @@
 
     $("record-voice-btn").onclick = async () => {
       if (joinedRoomId !== activeRoomId) { alert('לחץ קודם על "כנס לחדר".'); return; }
+      const cur = chatRooms.find((r) => r.id === activeRoomId);
+      if (cur) await ensureRoomInFirestore(cur);
       await toggleAudioRecord(async (url) => {
         await addDoc(collection(db, "rooms", activeRoomId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", avatar: me.avatar || "", audioData: url, createdAt: serverTimestamp() });
       }, $("voice-status"), $("record-voice-btn"));

@@ -4,8 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TopLove</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
+  <script src="https://cdn.tailwindcss.com"></script><style>
     body {
       background: radial-gradient(circle at top right, #3b0764, #0f172a 55%, #020617);
       color: #f8fafc;
@@ -39,6 +38,7 @@
         </div>
       </div>
       <div class="flex items-center gap-2.5">
+        <span id="likes-received-badge" class="px-3 py-1.5 rounded-2xl bg-pink-500/20 border border-pink-400/30 text-xs font-bold text-pink-200">💖 לייקים שקיבלתי: 0</span>
         <button id="user-profile-trigger" type="button" class="hidden items-center gap-2.5 px-3 py-1.5 rounded-2xl bg-slate-900/90 border border-white/15">
           <div id="header-avatar-slot" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center overflow-hidden text-sm">👤</div>
           <span id="user-badge" class="text-xs font-bold text-pink-200"></span>
@@ -139,7 +139,7 @@
               <img id="prof-avatar-preview" src="" alt="" class="hidden w-20 h-20 rounded-2xl object-cover" />
             </div>
             <div class="space-y-2 flex-1 min-w-[200px]">
-              <label class="block text-xs text-slate-300">תמונות מהמכשיר</label>
+              <label class="block text-xs text-slate-300">תמונות מהמכשיר (ניתן לבחור כמה תמונות)</label>
               <input id="prof-avatar-file" type="file" accept="image/*" multiple class="text-xs text-slate-300" />
               <div id="prof-photos-thumbs" class="flex flex-wrap gap-2"></div>
             </div>
@@ -157,76 +157,77 @@
               <option value="גבר">מחפש/ת גבר</option>
               <option value="הכל">מחפש/ת הכל</option>
             </select>
-            <input id="prof-age" type="number" min="18" max="80" placeholder="גיל" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
+            <input id="prof-age" type="number" min="18" max="80" placeholder="גיל (18–80)" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
             <input id="prof-location" type="text" placeholder="עיר / אזור" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
-            <input id="prof-distance" type="number" min="0" max="500" placeholder="מרחק (ק״מ)" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
-            <input id="prof-goal" type="text" placeholder="מטרת היכרות" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
-            <input id="prof-marital" type="text" placeholder="מצב משפחתי" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
-          </div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
-            <input id="prof-children" type="text" placeholder="ילדים" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
-            <input id="prof-height" type="text" placeholder="גובה (ס״מ)" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
-            <input id="prof-job" type="text" placeholder="עיסוק" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
-            <input id="prof-zodiac" type="text" placeholder="מזל" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
-            <input id="prof-smoking" type="text" placeholder="עישון" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
-            <input id="prof-alcohol" type="text" placeholder="אלכוהול" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
-            <input id="prof-education" type="text" placeholder="השכלה" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
-            <input id="prof-has-pets" type="text" placeholder="חיות מחמד" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
-            <select id="prof-fav-pet" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700">
-              <option value="">חית מחמד מועדפת</option>
-              <option value="כלב">כלב</option>
-              <option value="חתול">חתול</option>
-              <option value="אחר">אחר</option>
-            </select>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
-            <input id="prof-pet-name" type="text" placeholder="שם חיית המחמד" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
-            <div id="prof-other-pet-wrap" class="hidden">
-              <input id="prof-other-pet-text" type="text" placeholder="פרט חיית מחמד אחרת..." class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
+          </div><div class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 space-y-4 text-xs">
+            <div class="font-bold text-pink-300">שאלון פתיחת משתמש ופרטים נוספים</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <input id="prof-goal" type="text" placeholder="מטרת היכרות" class="px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700" />
+              <input id="prof-marital" type="text" placeholder="מצב משפחתי" class="px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700" />
+              <input id="prof-children" type="text" placeholder="ילדים" class="px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700" />
+              <input id="prof-height" type="text" placeholder="גובה (ס״מ)" class="px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700" />
+              <input id="prof-job" type="text" placeholder="עיסוק" class="px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700" />
+              <input id="prof-education" type="text" placeholder="השכלה" class="px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700" />
             </div>
-            <input id="prof-first-date" type="text" placeholder="דייט ראשון" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
-            <input id="prof-tagline" type="text" placeholder="משפט פתיחה" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700" />
-            <select id="prof-banner" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700">
-              <option value="bg-aurora">רקע אורורה</option>
-              <option value="bg-sunset">רקע שקיעה</option>
-              <option value="bg-ocean">רקע אוקיינוס</option>
-              <option value="bg-gold">רקע זהב</option>
-            </select>
-          </div>
-          <div class="flex flex-wrap gap-2 text-xs">
-            <button type="button" data-style="name-rainbow" class="style-pick-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-pink-400 font-bold name-rainbow">קשת</button>
-            <button type="button" data-style="name-neon" class="style-pick-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 font-bold name-neon">ניאון</button>
-            <button type="button" data-style="name-royal" class="style-pick-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 font-bold name-royal">מלכותי</button>
-          </div>
-          <textarea id="prof-bio" rows="3" placeholder="ספר/י על עצמך..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs"></textarea>
-          <div class="space-y-2 text-xs">
-            <div class="font-bold text-emerald-300">טיולים</div>
-            <div id="trips-options" class="flex flex-wrap gap-1.5"></div>
-            <div class="font-bold text-purple-300">בילוי לילי</div>
-            <div id="night-options" class="flex flex-wrap gap-1.5"></div>
-            <div class="font-bold text-indigo-300">תחביבים ואימוג׳י</div>
-            <div id="hobbies-options" class="flex flex-wrap gap-1.5"></div>
+            <div class="space-y-2">
+              <div class="font-bold text-amber-300">מזל</div>
+              <div id="zodiac-options" class="flex flex-wrap gap-1.5"></div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <select id="prof-fav-pet" class="px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700">
+                <option value="">בעלי חיים: בחר אפשרות</option>
+                <option value="כלב">🐶 כלב</option>
+                <option value="חתול">🐱 חתול</option>
+                <option value="אין">🚫 אין</option>
+              </select>
+              <div id="prof-pet-name-wrap" class="hidden">
+                <input id="prof-pet-name" type="text" placeholder="שם של הכלב או החתול" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700" />
+              </div>
+              <input id="prof-first-date" type="text" placeholder="דייט ראשון" class="px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700" />
+            </div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <input id="prof-smoking" type="text" placeholder="עישון" class="px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700" />
+              <input id="prof-alcohol" type="text" placeholder="אלכוהול" class="px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700" />
+              <input id="prof-tagline" type="text" placeholder="משפט פתיחה" class="px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700" />
+              <select id="prof-banner" class="px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700">
+                <option value="bg-aurora">רקע אורורה</option>
+                <option value="bg-sunset">רקע שקיעה</option>
+                <option value="bg-ocean">רקע אוקיינוס</option>
+                <option value="bg-gold">רקע זהב</option>
+              </select>
+              <div class="flex flex-wrap gap-2 items-center">
+                <button type="button" data-style="name-rainbow" class="style-pick-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-pink-400 font-bold name-rainbow">קשת</button>
+                <button type="button" data-style="name-neon" class="style-pick-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 font-bold name-neon">ניאון</button>
+                <button type="button" data-style="name-royal" class="style-pick-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 font-bold name-royal">מלכותי</button>
+              </div>
+            </div>
+            <textarea id="prof-bio" rows="3" placeholder="ספר/י על עצמך..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs"></textarea>
+            <div class="space-y-2">
+              <div class="font-bold text-emerald-300">טיולים — איפה בארץ ועם מה מטיילים</div>
+              <div id="trips-options" class="flex flex-wrap gap-1.5"></div>
+            </div>
+            <div class="space-y-2">
+              <div class="font-bold text-purple-300">בילוי לילי</div>
+              <div id="night-options" class="flex flex-wrap gap-1.5"></div>
+            </div>
+            <div class="space-y-2">
+              <div class="font-bold text-indigo-300">תחביבים</div>
+              <div id="hobbies-options" class="flex flex-wrap gap-1.5"></div>
+            </div>
           </div>
           <button type="submit" class="px-6 py-3 rounded-xl bg-pink-600 text-sm font-extrabold">שמור פרופיל</button>
         </form>
       </div><div id="tab-users" class="tab-content hidden space-y-6">
         <div class="glass rounded-3xl p-5 space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-2">
-            <h2 class="text-lg font-extrabold">סינון ודפדוף פרופילים</h2>
+            <h2 class="text-lg font-extrabold">דפדוף קלפים והיכרויות</h2>
             <span id="following-count-badge" class="text-xs px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-200">עוקב אחרי 0 משתמשים</span>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-xs">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
             <select id="filter-looking-for" class="px-3 py-2 rounded-xl bg-slate-950 border border-slate-700">
               <option value="preferred">לפי ההעדפה שלי</option>
               <option value="all">הכל</option>
               <option value="אישה">אישה</option>
               <option value="גבר">גבר</option>
-            </select>
-            <select id="filter-distance" class="px-3 py-2 rounded-xl bg-slate-950 border border-slate-700">
-              <option value="all">כל מרחק</option>
-              <option value="10">עד 10 ק״מ</option>
-              <option value="25">עד 25 ק״מ</option>
-              <option value="50">עד 50 ק״מ</option>
-              <option value="100">עד 100 ק״מ</option>
             </select>
             <input id="filter-location" type="text" placeholder="עיר / אזור / כל הארץ" class="px-3 py-2 rounded-xl bg-slate-950 border border-slate-700" />
             <input id="filter-min-age" type="number" min="18" max="80" value="18" class="px-3 py-2 rounded-xl bg-slate-950 border border-slate-700" />
@@ -234,14 +235,18 @@
           </div>
           <div class="border-t border-white/10 pt-4 space-y-3">
             <div class="flex items-center justify-between text-xs text-slate-300">
-              <span class="font-bold text-pink-300">כרטיס הכרות מהיר</span>
+              <span class="font-bold text-pink-300">כרטיס הכרות (משוך ימינה לעניין / שמאלה ללא מעוניין)</span>
               <span id="match-deck-counter">0 פרופילים</span>
             </div>
-            <div id="match-deck-card" class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800"></div>
-            <div class="flex flex-wrap gap-2">
-              <button id="deck-skip-btn" type="button" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-800">⏭️ דלג</button>
-              <button id="deck-like-btn" type="button" class="px-4 py-2 rounded-xl text-xs font-bold bg-pink-600">💖 לב והודעה</button>
-              <button id="deck-follow-btn" type="button" class="px-4 py-2 rounded-xl text-xs font-bold bg-indigo-600">➕ עקוב</button>
+            <div id="match-deck-card" class="p-4 rounded-2xl bg-slate-950/85 border border-slate-800 space-y-3"></div>
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <button id="deck-skip-btn" type="button" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-800">⬅️ לא מעוניין (שמאלה)</button>
+              <div class="flex flex-wrap gap-2">
+                <button id="deck-like-btn" type="button" class="px-4 py-2 rounded-xl text-xs font-bold bg-pink-600">💖 אהבתי</button>
+                <button id="deck-super-like-btn" type="button" class="px-4 py-2 rounded-xl text-xs font-bold bg-amber-600">💘 אהבתי מאוד</button>
+                <button id="deck-dm-btn" type="button" class="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600">💬 שלח הודעה</button>
+              </div>
+              <button id="deck-follow-btn" type="button" class="px-4 py-2 rounded-xl text-xs font-bold bg-indigo-600">מעוניין (ימינה) ➡️</button>
             </div>
           </div>
         </div>
@@ -249,7 +254,10 @@
       </div><div id="tab-chat" class="tab-content hidden">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
           <div class="lg:col-span-4 glass rounded-3xl p-4 space-y-4">
-            <h2 class="text-base font-extrabold">חדרי שיחה (עד 50–60 משתתפים • איפוס שבועי)</h2>
+            <div class="flex items-center justify-between gap-2">
+              <h2 class="text-base font-extrabold">חדרי שיחה</h2>
+              <span id="weekly-reset-timer" class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-200">איפוס שבועי: 7 ימים ו-0 שעות</span>
+            </div>
             <form id="create-room-form" class="space-y-2">
               <input id="new-room-topic" type="text" placeholder="נושא חדר חדש..." class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
               <input id="new-room-code" type="text" placeholder="קוד לחדר פרטי (אופציונלי)" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
@@ -318,6 +326,7 @@
               <button id="ttt-add-room" type="button" class="px-3 py-1.5 rounded-lg bg-indigo-600 font-bold">+ חדר</button>
             </div>
           </div>
+          <div id="ttt-outcome-banner" class="hidden p-3 rounded-2xl text-center text-base font-black"></div>
           <div id="ttt-status" class="text-xs text-pink-200 font-semibold"></div>
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
             <div class="lg:col-span-5 space-y-3">
@@ -329,7 +338,7 @@
             </div>
             <div class="lg:col-span-7 space-y-3">
               <div id="ttt-rooms-grid" class="grid grid-cols-3 sm:grid-cols-5 gap-1.5 max-h-44 overflow-y-auto"></div>
-              <div id="ttt-room-chat-log" class="space-y-1.5 max-h-32 overflow-y-auto text-xs"></div>
+              <div id="ttt-room-chat-log" class="space-y-1.5 max-h-36 overflow-y-auto text-xs bg-slate-950/60 p-2.5 rounded-2xl border border-slate-800"></div>
               <form id="ttt-room-chat-form" class="flex gap-2">
                 <input id="ttt-room-chat-input" type="text" placeholder="הודעה לחדר..." class="flex-1 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
                 <button type="button" data-voice-target="ttt" class="room-voice-btn px-3 py-2 rounded-xl bg-amber-600 text-xs font-bold">🎤</button>
@@ -370,7 +379,7 @@
             <button type="button" data-rps="scissors" class="rps-choice px-4 py-2.5 rounded-xl bg-slate-800 text-sm font-bold">✂️ מספריים</button>
           </div>
           <div id="rps-rooms-grid" class="grid grid-cols-3 sm:grid-cols-6 gap-1.5 max-h-36 overflow-y-auto"></div>
-          <div id="rps-room-chat-log" class="space-y-1.5 max-h-28 overflow-y-auto text-xs"></div>
+          <div id="rps-room-chat-log" class="space-y-1.5 max-h-32 overflow-y-auto text-xs bg-slate-950/60 p-2.5 rounded-2xl border border-slate-800"></div>
           <form id="rps-room-chat-form" class="flex gap-2">
             <input id="rps-room-chat-input" type="text" placeholder="הודעה לחדר..." class="flex-1 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
             <button type="button" data-voice-target="rps" class="room-voice-btn px-3 py-2 rounded-xl bg-amber-600 text-xs font-bold">🎤</button>
@@ -401,7 +410,7 @@
           </form>
           <div id="memory-players-board" class="grid grid-cols-2 sm:grid-cols-6 gap-2 text-xs"></div>
           <div class="overflow-x-auto pb-2"><div id="memory-grid" class="grid gap-1.5"></div></div>
-          <div id="mem-room-chat-log" class="space-y-1.5 max-h-28 overflow-y-auto text-xs"></div>
+          <div id="mem-room-chat-log" class="space-y-1.5 max-h-32 overflow-y-auto text-xs bg-slate-950/60 p-2.5 rounded-2xl border border-slate-800"></div>
           <form id="mem-room-chat-form" class="flex gap-2">
             <input id="mem-room-chat-input" type="text" placeholder="הודעה לחדר..." class="flex-1 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
             <button type="button" data-voice-target="mem" class="room-voice-btn px-3 py-2 rounded-xl bg-amber-600 text-xs font-bold">🎤</button>
@@ -441,7 +450,7 @@
             </div>
           </div>
           <div id="num-guesses-log" class="space-y-1.5 max-h-40 overflow-y-auto text-xs"></div>
-          <div id="num-room-chat-log" class="space-y-1.5 max-h-28 overflow-y-auto text-xs"></div>
+          <div id="num-room-chat-log" class="space-y-1.5 max-h-32 overflow-y-auto text-xs bg-slate-950/60 p-2.5 rounded-2xl border border-slate-800"></div>
           <form id="num-room-chat-form" class="flex gap-2">
             <input id="num-room-chat-input" type="text" placeholder="הודעה לחדר..." class="flex-1 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
             <button type="button" data-voice-target="num" class="room-voice-btn px-3 py-2 rounded-xl bg-amber-600 text-xs font-bold">🎤</button>
@@ -470,7 +479,7 @@
           <div id="rr-status" class="text-xs text-pink-200 font-semibold"></div>
           <div id="rr-seats-ring" class="grid grid-cols-2 sm:grid-cols-3 gap-2"></div>
           <div id="rr-rooms-grid" class="grid grid-cols-4 sm:grid-cols-10 gap-1.5 max-h-36 overflow-y-auto"></div>
-          <div id="rr-room-chat-log" class="space-y-1.5 max-h-28 overflow-y-auto text-xs"></div>
+          <div id="rr-room-chat-log" class="space-y-1.5 max-h-32 overflow-y-auto text-xs bg-slate-950/60 p-2.5 rounded-2xl border border-slate-800"></div>
           <form id="rr-room-chat-form" class="flex gap-2">
             <input id="rr-room-chat-input" type="text" placeholder="הודעה לחדר..." class="flex-1 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs" />
             <button type="button" data-voice-target="rr" class="room-voice-btn px-3 py-2 rounded-xl bg-amber-600 text-xs font-bold">🎤</button>
@@ -517,19 +526,22 @@
     </div>
   </div><script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import { getFirestore, collection, doc, setDoc, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyDU1U8pC_xrEh6Kl0yyn4p20w5jzW7bWgI",
+      authDomain: "toplove-il.firebaseapp.com",
+      projectId: "toplove-il",
+      storageBucket: "toplove-il.firebasestorage.app",
+      messagingSenderId: "143390156671",
+      appId: "1:143390156671:web:f7b74f1d5d815277f75c4a",
+      measurementId: "G-VNTDRK1SVV"
     };
     const hasRealFirebaseConfig = Boolean(firebaseConfig.apiKey && !firebaseConfig.apiKey.startsWith("YOUR_"));
     const fbApp = hasRealFirebaseConfig ? initializeApp(firebaseConfig) : null;
+    const analytics = fbApp ? getAnalytics(fbApp) : null;
     const auth = fbApp ? getAuth(fbApp) : null;
     const db = fbApp ? getFirestore(fbApp) : null;
     const $ = (id) => document.getElementById(id);
@@ -540,23 +552,23 @@
     function safeUrl(url) {
       const s = String(url ?? "").trim();
       return (s.startsWith("data:image/") || s.startsWith("data:audio/") || s.startsWith("https://") || s.startsWith("http://")) ? s : "";
-    }
-
-    const gameNames = { ttt: "איקס עיגול", rps: "אבן נייר מספריים", memory: "משחק זיכרון", number: "ניחוש מספר", roulette: "רולטה רוסית" };
-    const tripsChoices = ["🏖️ ים המלח", "🌴 אילת", "⛰️ צפון וגולן", "🏛️ ירושלים", "🌲 טבע ומסלולים", "✈️ חו״ל"];
-    const nightChoices = ["🍹 בר / פאב", "🎤 הופעה חיה", "🎬 קולנוע", "🍽️ ארוחת ערב", "🛋️ ישיבה בבית", "💃 ריקודים"];
-    const hobbiesChoices = ["🎵 מוזיקה", "🍳 בישול", "📚 קריאה", "🏋️ כושר", "📷 צילום", "🗺️ טיולים", "🎮 גיימינג", "☕ קפה", "🐶 כלבים", "🐱 חתולים"];
+    }const gameNames = { ttt: "איקס עיגול", rps: "אבן נייר מספריים", memory: "משחק זיכרון", number: "ניחוש מספר", roulette: "רולטה רוסית" };
+    const zodiacChoices = ["♈ טלה", "♉ שור", "♊ תאומים", "♋ סרטן", "♌ אריה", "♍ בתולה", "♎ מאזניים", "♏ עקרב", "♐ קשת", "♑ גדי", "♒ דלי", "♓ דגים"];
+    const tripsChoices = ["צפון — ג׳יפ", "צפון — רכב", "צפון — ברגל", "צפון — אופניים", "מרכז — קורקינט", "מרכז — סקייטבורד", "דרום — ג׳יפ", "דרום — ברגל", "ים המלח — רכב", "אילת — אופניים", "ירושלים — ברגל", "טבע ומסלולים"];
+    const nightChoices = ["בר / פאב", "הופעה חיה", "קולנוע", "ארוחת ערב", "ישיבה בבית", "ריקודים", "קפה לילי", "מועדון", "חוף הים בלילה"];
+    const hobbiesChoices = ["מוזיקה", "בישול", "אפייה", "קריאה", "כושר", "צילום", "טיולים", "משחקים", "קפה", "ריקוד", "ציור", "כתיבה", "נגינה", "יוגה", "ריצה", "שחייה", "קולנוע", "סדרות", "התנדבות", "גינון"];
     const gameLeaderboards = { ttt: [], rps: [], memory: [], number: [], roulette: [] };
-    let allUsers = [];
+    let allUsers = [], likesReceived = 0;
 
     let me = {
       uid: "", email: "", name: "", nickname: "", gender: "", lookingFor: "אישה",
-      age: 18, location: "", distanceKm: 15, goal: "", marital: "", children: "",
+      age: 18, location: "", goal: "", marital: "", children: "",
       height: "", job: "", smoking: "", alcohol: "", education: "", zodiac: "",
-      hasPets: "", favPet: "", petName: "", otherPetText: "", firstDate: "",
+      favPet: "", petName: "", firstDate: "",
       tagline: "", banner: "bg-aurora", nameStyle: "name-rainbow", bio: "",
       trips: [], nightActivities: [], hobbies: [], photos: [], following: [],
       avatar: "", hasCustomPhoto: false, profileCompleted: false,
+      lockedIdentity: false,
       rrRewards: { goldBalls: 0, magazines: 0, pistols: 0, grandGifts: 0 },
       gameStats: {
         ttt: { points: 0, wins: 0, losses: 0, played: 0 },
@@ -566,7 +578,7 @@
         roulette: { points: 0, wins: 0, losses: 0, played: 0 }
       }
     };let currentGameKey = "ttt", deckIdx = 0, modalPhotos = [], modalPhotoIdx = 0;
-    const chatTopics = ["✈️ טיולים", "🛫 טיסות לחו״ל", "🍳 אוכל ובישולים", "🐶 שמות לכלבים", "🐱 חיות מחמד", "☕ קפה ושיחות", "🎮 גיימינג", "🎬 קולנוע", "🏋️ כושר", "🎵 מוזיקה"];
+    const chatTopics = ["טיולים", "טיסות לחו״ל", "אוכל ובישולים", "שמות לכלבים", "חיות מחמד", "קפה ושיחות", "גיימינג", "קולנוע", "כושר", "מוזיקה"];
     const defaultRooms = Array.from({ length: 100 }, (_, i) => ({
       id: `r-${i + 1}`,
       topic: `${chatTopics[i % chatTopics.length]} #${i + 1}`,
@@ -577,10 +589,17 @@
     }));
     const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
     let lastWeeklyReset = Number(localStorage.getItem("toplove_week_reset") || Date.now());
-    if (Date.now() - lastWeeklyReset >= WEEK_MS) {
-      lastWeeklyReset = Date.now();
-      localStorage.setItem("toplove_week_reset", String(lastWeeklyReset));
-      defaultRooms.forEach((r) => { r.messages = []; });
+    function checkWeeklyReset() {
+      if (Date.now() - lastWeeklyReset >= WEEK_MS) {
+        lastWeeklyReset = Date.now();
+        localStorage.setItem("toplove_week_reset", String(lastWeeklyReset));
+        chatRooms.forEach((r) => { r.messages = []; });
+        renderLocalRoomMsgs(chatRooms.find((r) => r.id === activeRoomId));
+      }
+      const rem = Math.max(0, WEEK_MS - (Date.now() - lastWeeklyReset));
+      const days = Math.floor(rem / (24 * 60 * 60 * 1000));
+      const hours = Math.floor((rem % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+      if ($("weekly-reset-timer")) $("weekly-reset-timer").textContent = `איפוס שבועי: ${days} ימים ו-${hours} שעות לאחור`;
     }
     let chatRooms = [...defaultRooms], activeRoomId = defaultRooms[0].id, joinedRoomId = null, unsubMsgs = null, unsubRooms = null, unsubUsers = null;
 
@@ -624,14 +643,10 @@
       me.gameStats[gameKey].played += 1; me.gameStats[gameKey].losses += 1; me.gameStats[gameKey].points += pts;
       renderGameStatsAndTop5(gameKey);
       try { if (db && me.uid) await setDoc(doc(db, "users", me.uid), { gameStats: me.gameStats, rrRewards: me.rrRewards }, { merge: true }); } catch {}
-    }
-    function formatPetLine(p) {
-      const parts = [];
-      if (p.hasPets) parts.push(escapeHtml(p.hasPets));
-      if (p.favPet === "אחר") parts.push(p.otherPetText ? `מעדיף/ה: ${escapeHtml(p.otherPetText)}` : "מעדיף/ה: אחר");
-      else if (p.favPet) parts.push(`מעדיף/ה: ${escapeHtml(p.favPet)}`);
-      if (p.petName) parts.push(`שם: ${escapeHtml(p.petName)}`);
-      return parts.length ? `🐾 ${parts.join(" • ")}` : "";
+    }function formatPetLine(p) {
+      if (!p.favPet || p.favPet === "אין") return p.favPet === "אין" ? "🚫 אין בעלי חיים" : "";
+      const icon = p.favPet === "כלב" ? "🐶" : "🐱";
+      return `🐾 ${icon} ${escapeHtml(p.favPet)}${p.petName ? ` — שם: ${escapeHtml(p.petName)}` : ""}`;
     }
     function updateModalPhotoView() {
       if (!modalPhotos.length) { $("modal-main-photo").classList.add("hidden"); $("modal-gallery").innerHTML = ""; return; }
@@ -643,6 +658,7 @@
     function openUserModal(person) {
       const gPoints = Object.values(person.gameStats || {}).reduce((a, s) => a + (Number(s.points) || 0), 0);
       modalPhotos = Array.isArray(person.photos) ? person.photos.map(safeUrl).filter(Boolean) : [];
+      if (!modalPhotos.length && safeUrl(person.avatar)) modalPhotos = [safeUrl(person.avatar)];
       modalPhotoIdx = 0;
       const b = ["bg-aurora", "bg-sunset", "bg-ocean", "bg-gold"].includes(person.banner) ? person.banner : "bg-aurora";
       const ns = ["name-rainbow", "name-neon", "name-royal", ""].includes(person.nameStyle) ? person.nameStyle : "";
@@ -651,7 +667,7 @@
       $("modal-name").className = `text-2xl font-extrabold ${ns}`;
       $("modal-name").textContent = person.name || "משתמש";
       $("modal-tagline").textContent = person.tagline || "";
-      $("modal-meta").textContent = [person.gender, person.age ? `גיל ${person.age}` : "", person.location, person.distanceKm !== undefined ? `${person.distanceKm} ק״מ` : ""].filter(Boolean).join(" • ");
+      $("modal-meta").textContent = [person.gender, person.age ? `גיל ${person.age}` : "", person.location, person.zodiac].filter(Boolean).join(" • ");
       $("modal-looking-for").textContent = person.lookingFor ? `💘 מחפש/ת: ${person.lookingFor}` : "";
       $("modal-relationship-goal").textContent = [person.goal, person.marital, person.children, person.height ? `${person.height} ס״מ` : ""].filter(Boolean).join(" • ");
       $("modal-lifestyle").textContent = [person.job, person.zodiac].filter(Boolean).join(" • ");
@@ -665,8 +681,8 @@
       updateModalPhotoView();
       const targetId = person.uid || person.id;
       $("modal-follow-btn").textContent = (me.following || []).includes(targetId) ? "✓ עוקב" : "➕ עקוב";
-      $("modal-like-btn").onclick = () => { $("modal-action-msg").textContent = `שלחת לייק ל${person.name || "משתמש"} 👍`; };
-      $("modal-heart-btn").onclick = () => { $("modal-action-msg").textContent = `שלחת לב ל${person.name || "משתמש"} 💖 — אפשר לפתוח הודעה אישית.`; };
+      $("modal-like-btn").onclick = () => { likesReceived += 1; syncHeaderUserBadge(); $("modal-action-msg").textContent = `שלחת לייק ל${person.name || "משתמש"} 👍`; };
+      $("modal-heart-btn").onclick = () => { likesReceived += 1; syncHeaderUserBadge(); $("modal-action-msg").textContent = `שלחת לב ל${person.name || "משתמש"} 💖 — אפשר לפתוח הודעה אישית.`; };
       $("modal-follow-btn").onclick = async () => {
         if (!targetId || targetId === me.uid) return;
         me.following = me.following || [];
@@ -685,28 +701,40 @@
     }
     $("close-modal-btn").onclick = () => $("user-modal").classList.add("hidden");
     $("modal-prev-photo").onclick = () => { if (modalPhotos.length) { modalPhotoIdx = (modalPhotoIdx - 1 + modalPhotos.length) % modalPhotos.length; updateModalPhotoView(); } };
-    $("modal-next-photo").onclick = () => { if (modalPhotos.length) { modalPhotoIdx = (modalPhotoIdx + 1) % modalPhotos.length; updateModalPhotoView(); } };
-
-    function syncHeaderUserBadge() {
+    $("modal-next-photo").onclick = () => { if (modalPhotos.length) { modalPhotoIdx = (modalPhotoIdx + 1) % modalPhotos.length; updateModalPhotoView(); } };function syncHeaderUserBadge() {
       $("user-badge").textContent = `${me.name || (me.email ? me.email.split("@")[0] : "משתמש")} • ${me.age || 18}`;
       const av = safeUrl(me.avatar || (me.photos && me.photos[0]) || "");
       $("header-avatar-slot").innerHTML = av ? `<img src="${escapeHtml(av)}" alt="" class="w-full h-full object-cover" />` : "👤";
       $("following-count-badge").textContent = `עוקב אחרי ${(me.following || []).length} משתמשים`;
+      $("likes-received-badge").textContent = `💖 לייקים שקיבלתי: ${likesReceived}`;
+    }
+    function applyIdentityLocks() {
+      const locked = Boolean(me.lockedIdentity);
+      ["prof-name", "prof-gender", "prof-looking-for", "prof-age"].forEach((id) => {
+        const el = $(id);
+        el.disabled = locked;
+        el.classList.toggle("opacity-60", locked);
+        el.classList.toggle("cursor-not-allowed", locked);
+      });
     }
     function computeProfileCompletion() {
       const fields = [me.name, me.gender, me.location, me.goal, me.bio, me.tagline, me.job, me.education, me.trips.length, me.hobbies.length];
       $("profile-completion-badge").textContent = `✨ השלמת פרופיל: ${Math.min(100, Math.round((fields.filter(Boolean).length / fields.length) * 100))}%`;
     }
-    $("prof-fav-pet").onchange = () => $("prof-other-pet-wrap").classList.toggle("hidden", $("prof-fav-pet").value !== "אחר");
+    function syncPetNameInput() {
+      const v = $("prof-fav-pet").value;
+      $("prof-pet-name-wrap").classList.toggle("hidden", v !== "כלב" && v !== "חתול");
+    }
+    $("prof-fav-pet").onchange = syncPetNameInput;
     $("prof-avatar-file").onchange = (e) => {
-      Array.from(e.target.files || []).slice(0, 5).forEach((f) => {
+      Array.from(e.target.files || []).forEach((f) => {
         if (!f.type.startsWith("image/") || f.size > 1500000) return;
         const r = new FileReader();
         r.onload = () => {
           const url = safeUrl(r.result); if (!url) return;
-          me.photos = [...(me.photos || []), url].slice(0, 6);
+          me.photos = [...(me.photos || []), url];
           me.avatar = me.photos[0]; me.hasCustomPhoto = true;
-          $("prof-avatar-preview").src = url; $("prof-avatar-preview").classList.remove("hidden"); $("prof-avatar-placeholder").classList.add("hidden");
+          $("prof-avatar-preview").src = me.avatar; $("prof-avatar-preview").classList.remove("hidden"); $("prof-avatar-placeholder").classList.add("hidden");
           $("prof-photos-thumbs").innerHTML = me.photos.map((p) => `<img src="${escapeHtml(p)}" alt="" class="w-12 h-12 rounded-xl object-cover border border-white/15" />`).join("");
           syncHeaderUserBadge();
         };
@@ -714,6 +742,8 @@
       });
     };
     function renderQuestionnaireOptions() {
+      $("zodiac-options").innerHTML = zodiacChoices.map((x) => `<button type="button" data-zodiac="${escapeHtml(x)}" class="px-3 py-1.5 rounded-full text-xs border ${me.zodiac === x ? "bg-amber-600 border-amber-400 font-bold" : "bg-slate-950 border-slate-700"}">${escapeHtml(x)}</button>`).join("");
+      $("zodiac-options").querySelectorAll("[data-zodiac]").forEach((b) => { b.onclick = () => { me.zodiac = b.dataset.zodiac; renderQuestionnaireOptions(); }; });
       $("trips-options").innerHTML = tripsChoices.map((x) => `<button type="button" data-trip="${escapeHtml(x)}" class="px-3 py-1.5 rounded-full text-xs border ${me.trips.includes(x) ? "bg-emerald-600 border-emerald-400" : "bg-slate-950 border-slate-700"}">${escapeHtml(x)}</button>`).join("");
       $("trips-options").querySelectorAll("[data-trip]").forEach((b) => { b.onclick = () => { const v = b.dataset.trip; me.trips = me.trips.includes(v) ? me.trips.filter((i) => i !== v) : [...me.trips, v]; renderQuestionnaireOptions(); }; });
       $("night-options").innerHTML = nightChoices.map((x) => `<button type="button" data-night="${escapeHtml(x)}" class="px-3 py-1.5 rounded-full text-xs border ${me.nightActivities.includes(x) ? "bg-purple-600 border-purple-400" : "bg-slate-950 border-slate-700"}">${escapeHtml(x)}</button>`).join("");
@@ -723,7 +753,7 @@
     }
     document.querySelectorAll(".style-pick-btn").forEach((b) => { b.onclick = () => { me.nameStyle = b.dataset.style; }; });
     function applyProfileViewMode() {
-      syncHeaderUserBadge(); computeProfileCompletion();
+      syncHeaderUserBadge(); computeProfileCompletion(); applyIdentityLocks(); syncPetNameInput();
       const showSummary = Boolean(me.profileCompleted);
       $("profile-summary-card").classList.toggle("hidden", !showSummary);
       $("profile-form").classList.toggle("hidden", showSummary);
@@ -731,9 +761,10 @@
       if (showSummary) {
         const b = ["bg-aurora", "bg-sunset", "bg-ocean", "bg-gold"].includes(me.banner) ? me.banner : "bg-aurora";
         $("summary-banner").className = `h-36 ${b} p-5 flex items-start justify-between`;
+        $("summary-likes-badge").textContent = `💖 ${likesReceived} לייקים`;
         $("summary-name").className = `text-2xl font-extrabold ${me.nameStyle || ""}`;
         $("summary-name").textContent = me.name || "משתמש"; $("summary-tagline").textContent = me.tagline || "";
-        $("summary-age-gender-loc").textContent = [me.gender, me.age ? `גיל ${me.age}` : "", me.location].filter(Boolean).join(" • ");
+        $("summary-age-gender-loc").textContent = [me.gender, me.age ? `גיל ${me.age}` : "", me.location, me.zodiac].filter(Boolean).join(" • ");
         $("summary-bio").textContent = me.bio || "";
         $("summary-col-dating").innerHTML = `<div>💘 מחפש/ת: ${escapeHtml(me.lookingFor)}</div><div>🎯 מטרה: ${escapeHtml(me.goal)}</div><div>💍 מצב: ${escapeHtml(me.marital)}</div>`;
         $("summary-col-lifestyle").innerHTML = `<div>💼 עיסוק: ${escapeHtml(me.job)}</div><div>🎓 השכלה: ${escapeHtml(me.education)}</div><div>✨ מזל: ${escapeHtml(me.zodiac)}</div>`;
@@ -745,22 +776,24 @@
     }
     $("profile-form").onsubmit = async (e) => {
       e.preventDefault();
-      const ageVal = Number($("prof-age").value) || me.age || 18;
+      const ageVal = me.lockedIdentity ? (me.age || 18) : (Number($("prof-age").value) || me.age || 18);
       if (ageVal < 18 || ageVal > 80) { $("profile-error").textContent = "גיל חייב להיות בין 18 ל-80."; $("profile-error").classList.remove("hidden"); return; }
       $("profile-error").classList.add("hidden");
       Object.assign(me, {
-        name: $("prof-name").value.trim().slice(0, 60) || me.name, nickname: $("prof-nickname").value.trim().slice(0, 40),
-        gender: $("prof-gender").value, lookingFor: $("prof-looking-for").value || "הכל", age: ageVal,
-        location: $("prof-location").value.trim().slice(0, 60), distanceKm: Math.max(0, Math.min(500, Number($("prof-distance").value) || 15)),
+        name: me.lockedIdentity ? me.name : ($("prof-name").value.trim().slice(0, 60) || me.name),
+        nickname: $("prof-nickname").value.trim().slice(0, 40),
+        gender: me.lockedIdentity ? me.gender : $("prof-gender").value,
+        lookingFor: me.lockedIdentity ? me.lookingFor : ($("prof-looking-for").value || "הכל"),
+        age: ageVal,
+        location: $("prof-location").value.trim().slice(0, 60),
         goal: $("prof-goal").value.trim().slice(0, 80), marital: $("prof-marital").value.trim().slice(0, 50),
         children: $("prof-children").value.trim().slice(0, 50), height: $("prof-height").value.trim().slice(0, 20),
-        job: $("prof-job").value.trim().slice(0, 60), zodiac: $("prof-zodiac").value.trim().slice(0, 30),
-        smoking: $("prof-smoking").value.trim().slice(0, 40), alcohol: $("prof-alcohol").value.trim().slice(0, 40),
-        education: $("prof-education").value.trim().slice(0, 60), hasPets: $("prof-has-pets").value.trim().slice(0, 40),
-        favPet: $("prof-fav-pet").value, petName: $("prof-pet-name").value.trim().slice(0, 40),
-        otherPetText: $("prof-other-pet-text").value.trim().slice(0, 50), firstDate: $("prof-first-date").value.trim().slice(0, 80),
-        tagline: $("prof-tagline").value.trim().slice(0, 100), banner: $("prof-banner").value || "bg-aurora",
-        bio: $("prof-bio").value.trim().slice(0, 800), profileCompleted: true
+        job: $("prof-job").value.trim().slice(0, 60), smoking: $("prof-smoking").value.trim().slice(0, 40),
+        alcohol: $("prof-alcohol").value.trim().slice(0, 40), education: $("prof-education").value.trim().slice(0, 60),
+        favPet: $("prof-fav-pet").value, petName: ($("prof-fav-pet").value === "כלב" || $("prof-fav-pet").value === "חתול") ? $("prof-pet-name").value.trim().slice(0, 40) : "",
+        firstDate: $("prof-first-date").value.trim().slice(0, 80), tagline: $("prof-tagline").value.trim().slice(0, 100),
+        banner: $("prof-banner").value || "bg-aurora", bio: $("prof-bio").value.trim().slice(0, 800),
+        profileCompleted: true, lockedIdentity: true
       });
       localStorage.setItem("toplove_session", JSON.stringify(me));
       $("save-feedback").classList.remove("opacity-0"); setTimeout(() => $("save-feedback").classList.add("opacity-0"), 1500);
@@ -774,9 +807,7 @@
       $(`tab-${t}`).classList.remove("hidden");
     }
     $("user-profile-trigger").onclick = () => switchTab("profile");
-    document.querySelectorAll(".tab-btn").forEach((btn) => { btn.onclick = () => switchTab(btn.dataset.tab); });
-
-    async function ensureRoomInFirestore(room) {
+    document.querySelectorAll(".tab-btn").forEach((btn) => { btn.onclick = () => switchTab(btn.dataset.tab); });async function ensureRoomInFirestore(room) {
       if (!db || !room?.id) return;
       try { await setDoc(doc(db, "rooms", room.id), { id: room.id, topic: String(room.topic || "").slice(0, 80), code: String(room.code || "").slice(0, 30), maxUsers: Number(room.maxUsers) || 50, isDm: String(room.id).startsWith("dm_"), updatedAt: serverTimestamp() }, { merge: true }); } catch {}
     }
@@ -821,6 +852,7 @@
       });
     }
     function renderRooms() {
+      checkWeeklyReset();
       $("rooms-list").innerHTML = chatRooms.slice(0, 100).map((r) => `<div class="p-3 rounded-xl border text-xs flex items-center justify-between gap-2 ${joinedRoomId === r.id ? "bg-pink-600/25 border-pink-400" : "bg-slate-950/75 border-slate-800"}"><div class="truncate"><div class="font-bold truncate">${escapeHtml(r.topic)}</div><div class="text-[11px] text-slate-400">${(r.members || []).length} / ${r.maxUsers || 50} משתתפים${r.code ? " • 🔒" : ""}</div></div><button type="button" data-enter-room="${escapeHtml(r.id)}" class="px-3 py-1.5 rounded-lg bg-pink-600 font-bold shrink-0">${joinedRoomId === r.id ? "בתוך החדר" : "כנס"}</button></div>`).join("");
       document.querySelectorAll("[data-enter-room]").forEach((btn) => {
         btn.onclick = async () => {
@@ -900,17 +932,38 @@
         if (db) await addDoc(collection(db, "rooms", activeRoomId, "messages"), { senderUid: me.uid, from: me.name || "משתמש", text: "הקלטה קולית 🎤", audioUrl, createdAt: serverTimestamp() });
       });
     };
+    function findUserByName(name) {
+      return allUsers.find((u) => (u.name || "") === name) || null;
+    }
+    function renderWhatsAppRoomChat(containerId, items) {
+      const myAv = safeUrl(me.avatar || (me.photos && me.photos[0]) || "");
+      $(containerId).innerHTML = (items || []).map((m) => {
+        const sender = typeof m === "string" ? "משתמש" : (m.from || "משתמש");
+        const text = typeof m === "string" ? m : (m.text || "");
+        const audioUrl = typeof m === "string" ? "" : safeUrl(m.audioUrl || "");
+        const matchedUser = findUserByName(sender);
+        const av = sender === (me.name || "משתמש") ? myAv : safeUrl(matchedUser?.avatar || (matchedUser?.photos && matchedUser.photos[0]) || "");
+        const isMe = sender === (me.name || "משתמש");
+        return `<div class="flex items-start gap-2 ${isMe ? "justify-end" : "justify-start"}"><button type="button" data-open-sender="${escapeHtml(sender)}" class="w-8 h-8 rounded-full bg-slate-800 border border-white/15 overflow-hidden flex items-center justify-center shrink-0 text-xs">${av ? `<img src="${escapeHtml(av)}" alt="" class="w-full h-full object-cover" />` : "👤"}</button><div class="max-w-[78%] px-3 py-2 rounded-2xl ${isMe ? "bg-emerald-700/70 text-white" : "bg-slate-800 text-slate-100"}"><button type="button" data-open-sender="${escapeHtml(sender)}" class="font-bold text-[11px] text-pink-300 hover:underline block text-right">${escapeHtml(sender)}</button><div class="text-xs">${escapeHtml(text)}</div>${audioUrl ? `<audio controls src="${escapeHtml(audioUrl)}" class="w-full h-7 mt-1"></audio>` : ""}</div></div>`;
+      }).join("");
+      $(containerId).querySelectorAll("[data-open-sender]").forEach((btn) => {
+        btn.onclick = () => {
+          const person = findUserByName(btn.dataset.openSender);
+          if (person) openUserModal(person);
+        };
+      });
+    }
     document.querySelectorAll(".room-voice-btn").forEach((btn) => {
       btn.onclick = () => {
         const target = btn.dataset.voiceTarget;
         toggleVoiceRecording((audioUrl) => {
           const logId = target === "ttt" ? "ttt-room-chat-log" : target === "rps" ? "rps-room-chat-log" : target === "mem" ? "mem-room-chat-log" : target === "num" ? "num-room-chat-log" : "rr-room-chat-log";
-          $(logId).innerHTML += `<div class="p-2 rounded-lg bg-slate-900 border border-slate-800"><strong>${escapeHtml(me.name || "משתמש")}:</strong> 🎤 <audio controls src="${escapeHtml(audioUrl)}" class="h-7 align-middle"></audio></div>`;
+          const rm = target === "ttt" ? tttRooms[tttRoomIdx] : target === "rps" ? rpsRooms[rpsRoomIdx] : target === "mem" ? memRooms[memRoomIdx] : target === "num" ? numRooms[numRoomIdx] : rrRooms[rrRoomIdx];
+          rm.chat.push({ from: me.name || "משתמש", text: "הקלטה קולית 🎤", audioUrl });
+          renderWhatsAppRoomChat(logId, rm.chat);
         });
       };
-    });
-
-    document.querySelectorAll(".game-tab-btn").forEach((b) => {
+    });document.querySelectorAll(".game-tab-btn").forEach((b) => {
       b.onclick = () => {
         const g = b.dataset.game;
         document.querySelectorAll(".game-tab-btn").forEach((x) => { x.className = x.dataset.game === g ? "game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-pink-600" : "game-tab-btn px-4 py-2 rounded-xl text-xs font-semibold glass text-slate-300"; });
@@ -925,13 +978,25 @@
       for (const [a, c, d] of [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]) if (b[a] && b[a] === b[c] && b[a] === b[d]) return b[a];
       return b.every(Boolean) ? "DRAW" : "";
     }
+    function showTttOutcome(msg, isWin) {
+      const banner = $("ttt-outcome-banner");
+      banner.textContent = msg;
+      banner.className = `p-3 rounded-2xl text-center text-base font-black border ${isWin ? "bg-emerald-500/20 border-emerald-400 text-emerald-200" : "bg-rose-500/20 border-rose-400 text-rose-200"}`;
+      banner.classList.remove("hidden");
+      setTimeout(() => {
+        banner.classList.add("hidden");
+        tttBoard = Array(9).fill("");
+        tttTurn = "X";
+        renderTtt();
+      }, 1500);
+    }
     function renderTtt() {
       const rm = tttRooms[tttRoomIdx];
       $("ttt-p1-name").textContent = tttJoined ? (me.name || "אתה") : "ממתין";
       $("ttt-p2-name").textContent = tttOpponent ? "שחקן נוסף" : "ממתין לשחקן";
       $("ttt-join-room").classList.toggle("hidden", tttJoined);
       $("ttt-leave-room").classList.toggle("hidden", !tttJoined);
-      $("ttt-status").textContent = !tttJoined ? `${rm.name} — לחץ "כנס לחדר" כדי להצטרף` : (!tttOpponent ? `${rm.name} — ממתין לשחקן אחר שיצטרף לפני תחילת המשחק` : `${rm.name} • תור: ${tttTurn === "X" ? "❌" : "⭕"}`);
+      $("ttt-status").textContent = !tttJoined ? `${rm.name} — לחץ "כנס לחדר" כדי להצטרף` : (!tttOpponent ? `${rm.name} — ממתין לשחקן נוסף שיצטרף לפני תחילת המשחק` : `${rm.name} • תור: ${tttTurn === "X" ? "❌" : "⭕"}`);
       $("ttt-board").innerHTML = tttBoard.map((v, idx) => `<button type="button" data-ttt-i="${idx}" class="h-20 rounded-2xl bg-slate-900 border border-slate-700 text-3xl font-black flex items-center justify-center">${v === "X" ? "❌" : v === "O" ? "⭕" : ""}</button>`).join("");
       $("ttt-board").querySelectorAll("[data-ttt-i]").forEach((btn) => {
         btn.onclick = async () => {
@@ -939,15 +1004,27 @@
           const i = Number(btn.dataset.tttI); if (tttBoard[i] || checkTttWin(tttBoard)) return;
           tttBoard[i] = tttMySym;
           const res = checkTttWin(tttBoard);
-          if (res === tttMySym) { $("ttt-status").textContent = "ניצחת! +25 נק׳"; await awardGameWin("ttt", 25); }
-          else if (res === "DRAW") { $("ttt-status").textContent = "תיקו! +10 נק׳"; await awardGameWin("ttt", 10); }
-          else { tttTurn = tttMySym === "X" ? "O" : "X"; }
-          renderTtt();
+          if (res === tttMySym) {
+            await awardGameWin("ttt", 25);
+            showTttOutcome("ניצחון! מנקה שולחן ומתחיל מחדש", true);
+          } else if (res === "DRAW") {
+            await awardGameWin("ttt", 10);
+            showTttOutcome("תיקו — מנקה שולחן ומתחיל מחדש", false);
+          } else if (res) {
+            const oppSym = tttMySym === "X" ? "O" : "X";
+            if (res === oppSym) {
+              await awardGameLoss("ttt", 5);
+              showTttOutcome("הפסד — מנקה שולחן ומתחיל מחדש", false);
+            }
+          } else {
+            tttTurn = tttMySym === "X" ? "O" : "X";
+            renderTtt();
+          }
         };
       });
       $("ttt-rooms-grid").innerHTML = tttRooms.map((r, i) => `<button type="button" data-tttr="${i}" class="p-1.5 rounded-lg text-[11px] border ${i === tttRoomIdx ? "bg-pink-600 border-pink-400" : "bg-slate-900 border-slate-800"}">${escapeHtml(r.name)}</button>`).join("");
       $("ttt-rooms-grid").querySelectorAll("[data-tttr]").forEach((b) => { b.onclick = () => { tttRoomIdx = Number(b.dataset.tttr) || 0; tttBoard = Array(9).fill(""); renderTtt(); }; });
-      $("ttt-room-chat-log").innerHTML = rm.chat.map((c) => `<div class="p-1.5 rounded-lg bg-slate-900/90">${escapeHtml(c)}</div>`).join("");
+      renderWhatsAppRoomChat("ttt-room-chat-log", rm.chat);
     }
     $("ttt-join-room").onclick = () => { tttJoined = true; tttOpponent = true; renderTtt(); };
     $("ttt-leave-room").onclick = () => { tttJoined = false; tttOpponent = false; tttBoard = Array(9).fill(""); tttRooms[tttRoomIdx].chat = []; renderTtt(); };
@@ -955,7 +1032,7 @@
     $("ttt-pick-o").onclick = () => { tttMySym = "O"; renderTtt(); };
     $("ttt-reset").onclick = () => { tttBoard = Array(9).fill(""); tttTurn = "X"; renderTtt(); };
     $("ttt-add-room").onclick = () => { tttRooms.push({ name: `חדר איקס עיגול ${tttRooms.length + 1}`, players: [me.name || "אתה"], chat: [] }); tttRoomIdx = tttRooms.length - 1; tttJoined = true; tttOpponent = false; renderTtt(); };
-    $("ttt-room-chat-form").onsubmit = (e) => { e.preventDefault(); const t = $("ttt-room-chat-input").value.trim().slice(0, 400); if (!t) return; $("ttt-room-chat-input").value = ""; tttRooms[tttRoomIdx].chat.push(`${me.name || "שחקן"}: ${t}`); renderTtt(); };
+    $("ttt-room-chat-form").onsubmit = (e) => { e.preventDefault(); const t = $("ttt-room-chat-input").value.trim().slice(0, 400); if (!t) return; $("ttt-room-chat-input").value = ""; tttRooms[tttRoomIdx].chat.push({ from: me.name || "שחקן", text: t }); renderTtt(); };
 
     const rpsMap = { rock: "🪨", paper: "📄", scissors: "✂️" };
     let rpsRoomIdx = 0, rpsJoined = false, rpsOpponent = false;
@@ -969,7 +1046,7 @@
       $("rps-round-phase").textContent = !rpsJoined ? `${rm.name} — לחץ "כנס לחדר"` : (!rpsOpponent ? "ממתין לשחקן נוסף שיצטרף" : `${rm.name} — מוכן למשחק`);
       $("rps-rooms-grid").innerHTML = rpsRooms.map((r, i) => `<button type="button" data-rpsr="${i}" class="p-1.5 rounded-lg text-[11px] border ${i === rpsRoomIdx ? "bg-pink-600 border-pink-400" : "bg-slate-900 border-slate-800"}">${escapeHtml(r.name)}</button>`).join("");
       $("rps-rooms-grid").querySelectorAll("[data-rpsr]").forEach((b) => { b.onclick = () => { rpsRoomIdx = Number(b.dataset.rpsr) || 0; renderRps(); }; });
-      $("rps-room-chat-log").innerHTML = rm.chat.map((c) => `<div class="p-1.5 rounded-lg bg-slate-900/90">${escapeHtml(c)}</div>`).join("");
+      renderWhatsAppRoomChat("rps-room-chat-log", rm.chat);
     }
     $("rps-join-room").onclick = () => { rpsJoined = true; rpsOpponent = true; renderRps(); };
     $("rps-leave-room").onclick = () => { rpsJoined = false; rpsOpponent = false; rpsRooms[rpsRoomIdx].chat = []; renderRps(); };
@@ -979,12 +1056,12 @@
         const mine = b.dataset.rps, keys = ["rock", "paper", "scissors"], bot = keys[Math.floor(Math.random() * 3)];
         $("rps-left-sign").textContent = rpsMap[mine]; $("rps-right-sign").textContent = rpsMap[bot];
         if (mine === bot) { $("rps-result").textContent = "תיקו! +10 נק׳"; await awardGameWin("rps", 10); }
-        else if ((mine === "rock" && bot === "scissors") || (mine === "paper" && bot === "rock") || (mine === "scissors" && bot === "paper")) { $("rps-result").textContent = "ניצחת! +25 נק׳"; await awardGameWin("rps", 25); }
-        else { $("rps-result").textContent = "הפסדת בסיבוב +5 נק׳"; await awardGameLoss("rps", 5); }
+        else if ((mine === "rock" && bot === "scissors") || (mine === "paper" && bot === "rock") || (mine === "scissors" && bot === "paper")) { $("rps-result").textContent = "ניצחון! +25 נק׳"; await awardGameWin("rps", 25); }
+        else { $("rps-result").textContent = "הפסד בסיבוב +5 נק׳"; await awardGameLoss("rps", 5); }
       };
     });
     $("rps-add-room").onclick = () => { rpsRooms.push({ name: `חדר אבן נייר מספריים ${rpsRooms.length + 1}`, chat: [] }); rpsRoomIdx = rpsRooms.length - 1; rpsJoined = true; rpsOpponent = false; renderRps(); };
-    $("rps-room-chat-form").onsubmit = (e) => { e.preventDefault(); const t = $("rps-room-chat-input").value.trim().slice(0, 400); if (!t) return; $("rps-room-chat-input").value = ""; rpsRooms[rpsRoomIdx].chat.push(`${me.name || "שחקן"}: ${t}`); renderRps(); };
+    $("rps-room-chat-form").onsubmit = (e) => { e.preventDefault(); const t = $("rps-room-chat-input").value.trim().slice(0, 400); if (!t) return; $("rps-room-chat-input").value = ""; rpsRooms[rpsRoomIdx].chat.push({ from: me.name || "שחקן", text: t }); renderRps(); };
 
     let memMode = "6x6", memCards = [], memOpen = [], memMatched = new Set(), memPlayers = ["שחקן 1", "שחקן 2", "שחקן 3", "שחקן 4", "שחקן 5", "שחקן 6"], memTurnIdx = 0, memJoined = false, memRoomIdx = 0;
     const memRooms = Array.from({ length: 20 }, (_, i) => ({ name: `חדר זיכרון ${i + 1}`, mode: i % 5 === 0 ? "6x6" : i % 5 === 1 ? "10x10" : i % 5 === 2 ? "20x20" : i % 5 === 3 ? "30x30" : "50x50", chat: [] }));
@@ -1029,13 +1106,13 @@
     function renderMemRooms() {
       $("memory-rooms-grid").innerHTML = memRooms.map((r, i) => `<button type="button" data-memr="${i}" class="p-1.5 rounded-lg text-[11px] border ${i === memRoomIdx ? "bg-pink-600 border-pink-400" : "bg-slate-900 border-slate-800"}">${escapeHtml(r.name)} (${r.mode})</button>`).join("");
       $("memory-rooms-grid").querySelectorAll("[data-memr]").forEach((b) => { b.onclick = () => { memRoomIdx = Number(b.dataset.memr) || 0; memMode = memRooms[memRoomIdx].mode; renderMemRooms(); buildMemoryBoard(); }; });
-      $("mem-room-chat-log").innerHTML = memRooms[memRoomIdx].chat.map((c) => `<div class="p-1.5 rounded-lg bg-slate-900/90">${escapeHtml(c)}</div>`).join("");
+      renderWhatsAppRoomChat("mem-room-chat-log", memRooms[memRoomIdx].chat);
     }
     $("memory-join-room").onclick = () => { memJoined = true; $("memory-join-room").classList.add("hidden"); $("memory-leave-room").classList.remove("hidden"); };
     $("memory-leave-room").onclick = () => { memJoined = false; memRooms[memRoomIdx].chat = []; $("memory-leave-room").classList.add("hidden"); $("memory-join-room").classList.remove("hidden"); renderMemRooms(); };
     $("mem-create-room-form").onsubmit = (e) => { e.preventDefault(); const nm = $("mem-room-name").value.trim().slice(0, 40) || `חדר זיכרון ${memRooms.length + 1}`; memMode = $("mem-room-mode").value || "6x6"; memRooms.push({ name: nm, mode: memMode, chat: [] }); memRoomIdx = memRooms.length - 1; $("mem-room-name").value = ""; renderMemRooms(); buildMemoryBoard(); };
     $("memory-reset").onclick = buildMemoryBoard;
-    $("mem-room-chat-form").onsubmit = (e) => { e.preventDefault(); const t = $("mem-room-chat-input").value.trim().slice(0, 400); if (!t) return; $("mem-room-chat-input").value = ""; memRooms[memRoomIdx].chat.push(`${me.name || "שחקן"}: ${t}`); renderMemRooms(); };
+    $("mem-room-chat-form").onsubmit = (e) => { e.preventDefault(); const t = $("mem-room-chat-input").value.trim().slice(0, 400); if (!t) return; $("mem-room-chat-input").value = ""; memRooms[memRoomIdx].chat.push({ from: me.name || "שחקן", text: t }); renderMemRooms(); };
 
     const numRanges = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
     const numRooms = Array.from({ length: 20 }, (_, i) => ({ name: `חדר ניחושים 1–${numRanges[i % numRanges.length]} #${i + 1}`, max: numRanges[i % numRanges.length], members: [], chat: [] }));
@@ -1046,7 +1123,7 @@
       $("num-room-cap").textContent = `${(rm.members || []).length} / 10+`;
       $("num-rooms-list").innerHTML = numRooms.map((r, i) => `<button type="button" data-numr="${i}" class="p-1.5 rounded-lg text-[11px] border ${i === numRoomIdx ? "bg-pink-600 border-pink-400" : "bg-slate-900 border-slate-800"}">${escapeHtml(r.name)}</button>`).join("");
       $("num-rooms-list").querySelectorAll("[data-numr]").forEach((b) => { b.onclick = () => { numRoomIdx = Number(b.dataset.numr) || 0; numSecret = Math.floor(Math.random() * numRooms[numRoomIdx].max) + 1; numGuesses = []; renderNumRooms(); }; });
-      $("num-room-chat-log").innerHTML = rm.chat.map((c) => `<div class="p-1.5 rounded-lg bg-slate-900/90">${escapeHtml(c)}</div>`).join("");
+      renderWhatsAppRoomChat("num-room-chat-log", rm.chat);
     }
     $("num-join-room").onclick = () => { numJoined = true; const rm = numRooms[numRoomIdx]; if (!rm.members.includes(me.uid || "me")) rm.members.push(me.uid || "me"); $("num-join-room").classList.add("hidden"); $("num-leave-room").classList.remove("hidden"); renderNumRooms(); };
     $("num-leave-room").onclick = () => { numJoined = false; const rm = numRooms[numRoomIdx]; rm.members = rm.members.filter((x) => x !== (me.uid || "me")); if (!rm.members.length) rm.chat = []; $("num-leave-room").classList.add("hidden"); $("num-join-room").classList.remove("hidden"); renderNumRooms(); };
@@ -1063,7 +1140,7 @@
       if (g === numSecret) { numSecret = Math.floor(Math.random() * numRooms[numRoomIdx].max) + 1; await awardGameWin("number", 30); }
     };
     $("num-declare-winner-btn").onclick = async () => { await awardGameWin("number", 15); $("num-guess-feedback").textContent = "חושבו נקודות בונוס +15!"; };
-    $("num-room-chat-form").onsubmit = (e) => { e.preventDefault(); const t = $("num-room-chat-input").value.trim().slice(0, 400); if (!t) return; $("num-room-chat-input").value = ""; numRooms[numRoomIdx].chat.push(`${me.name || "שחקן"}: ${t}`); renderNumRooms(); };
+    $("num-room-chat-form").onsubmit = (e) => { e.preventDefault(); const t = $("num-room-chat-input").value.trim().slice(0, 400); if (!t) return; $("num-room-chat-input").value = ""; numRooms[numRoomIdx].chat.push({ from: me.name || "שחקן", text: t }); renderNumRooms(); };
 
     const rrRooms = Array.from({ length: 20 }, (_, i) => ({ name: `שולחן רולטה ${i + 1}`, seats: ["מושב 1", "מושב 2", "מושב 3", "מושב 4", "מושב 5", "מושב 6"], alive: [true, true, true, true, true, true], chat: [] }));
     let rrRoomIdx = 0, rrChamber = Math.floor(Math.random() * 6), rrTargetIdx = 1, rrJoined = false;
@@ -1097,44 +1174,64 @@
       });
       $("rr-rooms-grid").innerHTML = rrRooms.map((r, i) => `<button type="button" data-rrr="${i}" class="p-1.5 rounded-lg text-[11px] border ${i === rrRoomIdx ? "bg-pink-600 border-pink-400" : "bg-slate-900 border-slate-800"}">${escapeHtml(r.name)}</button>`).join("");
       $("rr-rooms-grid").querySelectorAll("[data-rrr]").forEach((b) => { b.onclick = () => { rrRoomIdx = Number(b.dataset.rrr) || 0; renderRoulette(); }; });
-      $("rr-room-chat-log").innerHTML = rm.chat.map((c) => `<div class="p-1.5 rounded-lg bg-slate-900/90">${escapeHtml(c)}</div>`).join("");
+      renderWhatsAppRoomChat("rr-room-chat-log", rm.chat);
       if (aliveCount === 1) $("rr-status").textContent = `🏆 נשאר שחקן אחד — ${rm.seats[rm.alive.indexOf(true)]} המנצח!`;
     }
     $("rr-join-btn").onclick = () => { rrJoined = true; $("rr-join-btn").classList.add("hidden"); $("rr-leave-btn").classList.remove("hidden"); $("rr-status").textContent = "נכנסת לשולחן העגול — בחר משתמש לירי"; };
     $("rr-leave-btn").onclick = () => { rrJoined = false; rrRooms[rrRoomIdx].chat = []; $("rr-leave-btn").classList.add("hidden"); $("rr-join-btn").classList.remove("hidden"); renderRoulette(); };
     $("rr-add-room").onclick = () => { rrRooms.push({ name: `שולחן רולטה ${rrRooms.length + 1}`, seats: ["מושב 1", "מושב 2", "מושב 3", "מושב 4", "מושב 5", "מושב 6"], alive: [true, true, true, true, true, true], chat: [] }); rrRoomIdx = rrRooms.length - 1; renderRoulette(); };
-    $("rr-room-chat-form").onsubmit = (e) => { e.preventDefault(); const t = $("rr-room-chat-input").value.trim().slice(0, 400); if (!t) return; $("rr-room-chat-input").value = ""; rrRooms[rrRoomIdx].chat.push(`${me.name || "שחקן"}: ${t}`); renderRoulette(); };
+    $("rr-room-chat-form").onsubmit = (e) => { e.preventDefault(); const t = $("rr-room-chat-input").value.trim().slice(0, 400); if (!t) return; $("rr-room-chat-input").value = ""; rrRooms[rrRoomIdx].chat.push({ from: me.name || "שחקן", text: t }); renderRoulette(); };
 
     function getFilteredUsers() {
-      const lf = $("filter-looking-for").value, dist = $("filter-distance").value;
+      const lf = $("filter-looking-for").value;
       const loc = $("filter-location").value.trim().toLowerCase(), minA = Number($("filter-min-age").value) || 18, maxA = Number($("filter-max-age").value) || 80;
       return allUsers.filter((u) => {
         const age = Number(u.age) || 25;
         if (age < minA || age > maxA) return false;
         if (loc && !String(u.location || "").toLowerCase().includes(loc)) return false;
-        if (dist !== "all" && Number(u.distanceKm || 0) > Number(dist)) return false;
         if (lf === "preferred" && me.lookingFor && me.lookingFor !== "הכל") return u.gender === me.lookingFor;
         return (lf === "preferred" || lf === "all") ? true : u.gender === lf;
       });
     }
+    let deckPhotoIdx = 0, touchStartX = 0;
     function renderRealUsers() {
       const pool = getFilteredUsers();
-      $("real-users-grid").innerHTML = pool.length ? pool.map((u) => `<div class="bg-slate-900/85 border border-slate-700 rounded-2xl p-4 space-y-2"><div class="font-bold text-sm">${escapeHtml(u.name || "משתמש")} • גיל ${Number(u.age) || 25}</div><div class="text-xs text-slate-300">${escapeHtml(u.location || "")} ${u.distanceKm !== undefined ? `• ${Number(u.distanceKm)} ק״מ` : ""}</div><button type="button" data-open-id="${escapeHtml(u.uid || u.id || "")}" class="px-3 py-1.5 rounded-lg bg-pink-600 text-xs font-bold">פתח כרטיס</button></div>`).join("") : `<p class="text-xs text-slate-400 col-span-full">אין פרופילים רשומים התואמים לסינון כרגע.</p>`;
+      $("real-users-grid").innerHTML = pool.length ? pool.map((u) => `<div class="bg-slate-900/85 border border-slate-700 rounded-2xl p-4 space-y-2"><div class="font-bold text-sm">${escapeHtml(u.name || "משתמש")} • גיל ${Number(u.age) || 25}</div><div class="text-xs text-slate-300">${escapeHtml(u.location || "")}</div><button type="button" data-open-id="${escapeHtml(u.uid || u.id || "")}" class="px-3 py-1.5 rounded-lg bg-pink-600 text-xs font-bold">פתח כרטיס</button></div>`).join("") : `<p class="text-xs text-slate-400 col-span-full">אין פרופילים רשומים התואמים לסינון כרגע.</p>`;
       document.querySelectorAll("[data-open-id]").forEach((b) => { b.onclick = () => { const f = pool.find((x) => (x.uid || x.id) === b.dataset.openId); if (f) openUserModal(f); }; });
       $("match-deck-counter").textContent = `${pool.length} פרופילים`;
       const cur = pool.length ? pool[deckIdx % pool.length] : null;
-      $("match-deck-card").innerHTML = cur ? `<div class="font-bold">${escapeHtml(cur.name)} • גיל ${Number(cur.age) || 25}</div><div class="text-xs text-slate-300">${escapeHtml(cur.tagline || "")}</div>` : `<div class="text-xs text-slate-400">אין כרטיסים להצגה</div>`;
+      if (!cur) {
+        $("match-deck-card").innerHTML = `<div class="text-xs text-slate-400">אין כרטיסים להצגה</div>`;
+        return;
+      }
+      const photos = Array.isArray(cur.photos) ? cur.photos.map(safeUrl).filter(Boolean) : [];
+      if (!photos.length && safeUrl(cur.avatar)) photos.push(safeUrl(cur.avatar));
+      const activePhoto = photos.length ? photos[deckPhotoIdx % photos.length] : "";
+      $("match-deck-card").innerHTML = `<div class="relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800"><div class="p-4 space-y-2">${activePhoto ? `<img src="${escapeHtml(activePhoto)}" alt="" class="w-full h-56 object-cover rounded-xl" />` : `<div class="w-full h-36 rounded-xl bg-slate-800 flex items-center justify-center text-4xl">👤</div>`}<div class="flex items-center justify-between gap-2">${photos.length > 1 ? `<button type="button" id="deck-prev-photo" class="px-3 py-1 rounded-lg bg-slate-800 text-xs">◀ תמונה</button><span class="text-[11px] text-slate-400">${(deckPhotoIdx % photos.length) + 1} / ${photos.length}</span><button type="button" id="deck-next-photo" class="px-3 py-1 rounded-lg bg-slate-800 text-xs">תמונה ▶</button>` : `<span></span>`}</div><div class="font-bold text-base">${escapeHtml(cur.name)} • גיל ${Number(cur.age) || 25}</div><div class="text-xs text-slate-300">${escapeHtml(cur.location || "")} ${cur.zodiac ? `• ${escapeHtml(cur.zodiac)}` : ""}</div><div class="text-xs text-pink-200">${escapeHtml(cur.tagline || "")}</div><div class="pt-2 flex flex-wrap gap-2 justify-center bg-slate-950/90 p-2.5 rounded-xl border border-white/10"><button type="button" id="card-inline-like" class="px-3 py-1.5 rounded-lg bg-pink-600 text-xs font-bold">💖 אהבתי</button><button type="button" id="card-inline-super" class="px-3 py-1.5 rounded-lg bg-amber-600 text-xs font-bold">💘 אהבתי מאוד</button><button type="button" id="card-inline-dm" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-xs font-bold">💬 שלח הודעה</button></div></div></div>`;
+      if ($("deck-prev-photo")) $("deck-prev-photo").onclick = () => { deckPhotoIdx = (deckPhotoIdx - 1 + photos.length) % photos.length; renderRealUsers(); };
+      if ($("deck-next-photo")) $("deck-next-photo").onclick = () => { deckPhotoIdx = (deckPhotoIdx + 1) % photos.length; renderRealUsers(); };
+      if ($("card-inline-like")) $("card-inline-like").onclick = () => { likesReceived += 1; syncHeaderUserBadge(); openUserModal(cur); };
+      if ($("card-inline-super")) $("card-inline-super").onclick = () => { likesReceived += 1; syncHeaderUserBadge(); openUserModal(cur); };
+      if ($("card-inline-dm")) $("card-inline-dm").onclick = () => openUserModal(cur);
     }
-    ["filter-looking-for", "filter-distance", "filter-location", "filter-min-age", "filter-max-age"].forEach((id) => { $(id).addEventListener("input", renderRealUsers); $(id).addEventListener("change", renderRealUsers); });
-    $("deck-skip-btn").onclick = () => { deckIdx += 1; renderRealUsers(); };
-    $("deck-like-btn").onclick = () => { const pool = getFilteredUsers(), cur = pool[deckIdx % pool.length]; if (cur) openUserModal(cur); };
+    $("match-deck-card").addEventListener("touchstart", (e) => { touchStartX = e.touches[0].clientX; });
+    $("match-deck-card").addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (dx > 60) $("deck-follow-btn").click();
+      else if (dx < -60) $("deck-skip-btn").click();
+    });
+    ["filter-looking-for", "filter-location", "filter-min-age", "filter-max-age"].forEach((id) => { $(id).addEventListener("input", renderRealUsers); $(id).addEventListener("change", renderRealUsers); });
+    $("deck-skip-btn").onclick = () => { deckIdx += 1; deckPhotoIdx = 0; renderRealUsers(); };
+    $("deck-like-btn").onclick = () => { const pool = getFilteredUsers(), cur = pool[deckIdx % pool.length]; if (cur) { likesReceived += 1; syncHeaderUserBadge(); openUserModal(cur); } };
+    $("deck-super-like-btn").onclick = () => { const pool = getFilteredUsers(), cur = pool[deckIdx % pool.length]; if (cur) { likesReceived += 1; syncHeaderUserBadge(); openUserModal(cur); } };
+    $("deck-dm-btn").onclick = () => { const pool = getFilteredUsers(), cur = pool[deckIdx % pool.length]; if (cur) openUserModal(cur); };
     $("deck-follow-btn").onclick = async () => {
       const pool = getFilteredUsers(), cur = pool[deckIdx % pool.length]; if (!cur) return;
       const tid = cur.uid || cur.id; if (!tid || tid === me.uid) return;
       me.following = me.following || []; if (!me.following.includes(tid)) me.following.push(tid);
       localStorage.setItem("toplove_session", JSON.stringify(me));
       try { if (db && me.uid) await setDoc(doc(db, "users", me.uid), { following: me.following }, { merge: true }); } catch {}
-      syncHeaderUserBadge();
+      syncHeaderUserBadge(); deckIdx += 1; deckPhotoIdx = 0; renderRealUsers();
     };
     $("toggle-password-btn").onclick = () => { $("auth-password").type = $("auth-password").type === "password" ? "text" : "password"; };
 
@@ -1143,6 +1240,7 @@
       $("auth-section").classList.add("hidden"); $("app-section").classList.remove("hidden");
       $("user-profile-trigger").classList.remove("hidden"); $("user-profile-trigger").classList.add("flex");
       $("logout-btn").classList.remove("hidden");
+      checkWeeklyReset();
       syncHeaderUserBadge(); renderQuestionnaireOptions(); applyProfileViewMode();
       renderGameStatsAndTop5("ttt"); renderTtt(); renderRps(); buildMemoryBoard(); renderMemRooms(); renderNumRooms(); renderRoulette();
       subscribeAllRooms(); subscribeRealUsers(); renderRooms(); renderRealUsers();
@@ -1157,7 +1255,7 @@
         try { const c = await signInWithEmailAndPassword(auth, email, password); uid = c.user.uid; }
         catch { const c = await createUserWithEmailAndPassword(auth, email, password); uid = c.user.uid; }
       }
-      const session = { ...me, uid, email, name: email.split("@")[0], age, lookingFor };
+      const session = { ...me, uid, email, name: email.split("@")[0], age, lookingFor, lockedIdentity: true };
       localStorage.setItem("toplove_session", JSON.stringify(session));
       try { if (db && uid) await setDoc(doc(db, "users", uid), { ...session, updatedAt: serverTimestamp() }, { merge: true }); } catch {}
       openApp(session);
